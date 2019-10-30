@@ -292,7 +292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7303d0062cf8120468284f25c74cb556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DataSources: []
+  DataSources:
+  - {fileID: 11400000, guid: 245befa92a4419f43b40e04d0116f24b, type: 2}
+  - {fileID: 11400000, guid: 91cbc605b764bfd4f994d599fc293207, type: 2}
 --- !u!114 &498627633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,9 +308,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToPool:
-  - name: Cube
+  - name: Skunks
     prefab: {fileID: 7684207003447971234, guid: b73c8af88ab8f374a96de7b35e018451,
       type: 3}
+    poolSize: 25
+  - name: Rats
+    prefab: {fileID: 459978146194664460, guid: 11fc081286d6dd04e8c25e3c7a4e67cd, type: 3}
     poolSize: 25
 --- !u!1 &679767949
 GameObject:

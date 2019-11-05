@@ -71,6 +71,29 @@ public class ObjectPoolManager : MonoBehaviour, IGameModule
         return ret;
     }
 
+    public List<GameObject> GetActiveObjects(string poolName)
+    {
+        List<GameObject> retList = new List<GameObject>();
+
+        List<GameObject> pooledObjects = _objectPoolByName[poolName];
+        foreach (GameObject go in pooledObjects)
+        {
+            if (go == null)
+            {
+                Debug.LogError("Pooled Object is NULL");
+                continue;
+            }
+
+            if (go.activeInHierarchy)
+            {
+                retList.Add(go);
+            }
+
+        }
+
+        return retList;
+    }
+
     private GameObject GetNextObject(string poolName)
     {
         List<GameObject> pooledObjects = _objectPoolByName[poolName];

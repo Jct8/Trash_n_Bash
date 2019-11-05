@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public IEnumerator DeathAnimation()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.0f);
         _Killed?.Invoke();
         _IsDead = false;
         yield return null;

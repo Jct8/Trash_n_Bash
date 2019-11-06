@@ -26,11 +26,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public void Initialize(WayPointManager.Path path, Action Recycle)
     {
         _Path = path;
-        _Agent = GetComponent<NavMeshAgent>();
         _Killed += Recycle;
         _DataLoader = ServiceLocator.Get<DataLoader>();
         _EnemyData = _DataLoader.GetDataSourceById(_DataSource) as JsonDataSource;
         _IsDead = false;
+        _Agent = GetComponent<NavMeshAgent>();
 
         _Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
         _Attack = System.Convert.ToSingle(_EnemyData.DataDictionary["Attack"]);
@@ -40,7 +40,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         _FullHealth = _Health;
     }
-
     
     void Update()
     {

@@ -295,6 +295,7 @@ MonoBehaviour:
   DataSources:
   - {fileID: 11400000, guid: 245befa92a4419f43b40e04d0116f24b, type: 2}
   - {fileID: 11400000, guid: 91cbc605b764bfd4f994d599fc293207, type: 2}
+  - {fileID: 11400000, guid: 2c1662dfd4677cc498a7143bd796f004, type: 2}
 --- !u!114 &498627633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +316,10 @@ MonoBehaviour:
   - name: Rats
     prefab: {fileID: 459978146194664460, guid: 11fc081286d6dd04e8c25e3c7a4e67cd, type: 3}
     poolSize: 25
+  - name: Bullet
+    prefab: {fileID: 7466416969426066422, guid: bbd04011c182cd24a85fa465ce3a8dc5,
+      type: 3}
+    poolSize: 100
 --- !u!1 &679767949
 GameObject:
   m_ObjectHideFlags: 0

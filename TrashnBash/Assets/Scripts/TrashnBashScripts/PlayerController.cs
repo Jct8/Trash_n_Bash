@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, ICharacterAction
     private float jumpSpeed = 5.0f;
     private float gravity = 20.0f;
     private float attackRange = 10;
-    public bool isGrounded = true;
+    //public bool isGrounded = true;
 
     private void Awake()
     {
@@ -28,11 +28,11 @@ public class PlayerController : MonoBehaviour, ICharacterAction
         var vertical = Input.GetAxis("Vertical");
         Vector3 move = new Vector3(horizontal, 0, vertical); ;
 
-        if (Input.GetButtonDown("Jump") )
-        {
-            move.y = jumpSpeed;
-            isGrounded = false;
-        }
+        //if (Input.GetButtonDown("Jump") )
+        //{
+        //    move.y = jumpSpeed;
+        //    isGrounded = false;
+        //}
 
         move.y -= gravity * Time.deltaTime;
         controller.Move(move * Time.deltaTime * moveSpeed);

@@ -65,6 +65,7 @@ public class EnemySpawner : MonoBehaviour
             _enemy.SetActive(true);
             OnRecycle = () => Recycle(_enemy);
             _enemy.GetComponent<Enemy>().Initialize(_path, OnRecycle);
+            _enemy.GetComponent<Enemy>().Alive();
             _activeEnemies.Add(_enemy);
         }
     }

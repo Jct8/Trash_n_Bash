@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _FullHealth: 0
+  _CurrentWayPoint: 0
   _DataSource: Rats
   _Name: 
   _Attack: 0

@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         var _damageable = collision.gameObject.GetComponent<ICharacterAction>();
-        if(_damageable != null && collision.gameObject == gameObject.CompareTag("Enemy"))
+        if(_damageable != null && collision.gameObject.CompareTag("Enemy"))
         {
             _damageable.TakeDamage(_damage);
             _action?.Invoke();

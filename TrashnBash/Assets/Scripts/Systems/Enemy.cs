@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private WayPointManager.Path _Path;
 
     public float _FullHealth;
-    private int _CurrentWayPoint = 0;
+    public int _CurrentWayPoint = 0;
     private bool _IsDead = false;
 
     public string _DataSource;
@@ -62,12 +62,19 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
     }
 
+    public void Alive()
+    {
+        _IsDead = false;
+        _CurrentWayPoint = 0;
+        _FullHealth = _Health;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
     public void TakeDamage(float Dmg)
     {
-        _Health -= Dmg;
-        if(_Health <= 0.0f)
+        _FullHealth -= Dmg;
+        if(_FullHealth <= 0.0f)
         {
-            _CurrentWayPoint = 0;
             _IsDead = true;
             StartCoroutine("DeathAnimation");
         }
@@ -82,7 +89,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         yield return new WaitForSeconds(1.0f);
         _Killed?.Invoke();
-        _IsDead = false;
         yield return null;
     }
 

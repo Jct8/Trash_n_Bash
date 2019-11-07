@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, ICharacterAction
 {
     private CharacterController controller;
-
+	//Jimmy is genius
     [SerializeField]
     private float moveSpeed = 100;
     [SerializeField]

@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ObjectPoolTest.unity
     guid: 9291cbc058e96d04cae06e25c7b97439
   - enabled: 1
-    path: Assets/Scenes/NetworkManager.unity
-    guid: e332e8b678e9b0247b485e34de74dc9a
-  - enabled: 1
-    path: Assets/Scenes/AudioManager.unity
-    guid: 5380a9b6b84c49548ae1e195e05c3135
+    path: Assets/Scenes/PlayerTestScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

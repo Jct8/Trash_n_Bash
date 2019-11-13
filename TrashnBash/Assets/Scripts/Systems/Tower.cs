@@ -74,7 +74,7 @@ public class Tower : MonoBehaviour
         _bulletGO.GetComponent<Bullet>().Initialize(_target,_damage,_speed, _action);
         var rb = _bulletGO.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
-        rb.AddForce(_firePoint.up * _speed, ForceMode.Force);
+        rb.AddForce(_firePoint.up * _speed*5.0f, ForceMode.Force);
     }
 
     public void Recycle(GameObject obj)

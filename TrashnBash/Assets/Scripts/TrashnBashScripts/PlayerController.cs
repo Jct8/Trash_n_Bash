@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, ICharacterAction
     private float moveSpeed = 100;
     [SerializeField]
     private float turnSpeed = 5f;
-    private float jumpSpeed = 5.0f;
+    //private float jumpSpeed = 5.0f;
     private float gravity = 20.0f;
     private float attackRange = 10;
     //public bool isGrounded = true;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour, ICharacterAction
         }
     }
 
-    public void TakeDamage(float Dmg)
+    public void TakeDamage(float Dmg, bool isHero)
     {
         throw new System.NotImplementedException();
     }
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour, ICharacterAction
         {
             if (Vector2.Distance(transform.position , go.transform.position) < attackRange)
             {
-				go.GetComponent<Enemy>().TakeDamage(dmg);
+				go.GetComponent<Enemy>().TakeDamage(dmg, true);
             }
         }
 

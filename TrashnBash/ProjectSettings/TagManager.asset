@@ -7,6 +7,7 @@ TagManager:
   - Services
   - Ground
   - Enemy
+  - Tower
   layers:
   - Default
   - TransparentFX

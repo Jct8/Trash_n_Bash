@@ -177,6 +177,7 @@ MonoBehaviour:
   _speed: 0
   _health: 0
   _attackRate: 0
+  _FullHealth: 0
 --- !u!1 &7940001824949302396
 GameObject:
   m_ObjectHideFlags: 0

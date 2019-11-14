@@ -163,7 +163,30 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public void Attack(float Dmg)
     {
-        throw new NotImplementedException();
+        GameObject _player = GameObject.FindGameObjectWithTag("Player");
+        GameObject _tower = GameObject.FindGameObjectWithTag("Tower");
+        if(FrontAttack(_player.transform))
+        {
+            _player.GetComponent<Player>().TakeDamage(Dmg, false);
+        }
+        else if(FrontAttack(_tower.transform))
+        {
+            _tower.GetComponent<Tower>().TakeDamage(Dmg);
+        }
+    }
+
+    bool FrontAttack(Transform target)
+    {
+        Vector3 Coneforward = transform.TransformDirection(Vector3.forward);
+        Vector3 ConeToTarget = target.position - transform.position;
+        float angle = Vector3.Dot(Coneforward, ConeToTarget);
+
+        if (angle > 0.5f && angle < 1.5f)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public IEnumerator DeathAnimation()

@@ -12,12 +12,31 @@ public class Player : MonoBehaviour, ICharacterAction
     public float poisonTotalTime = 2.0f;
     public float poisonTickTime = 3.0f;
 
+
+    public const string DAMAGE_KEY = "Damage";
+    public const string HEALTH_KEY = "Health";
+
     private float maxHealth = 100.0f;
 
     void Start()
     {
         maxHealth = health;
+        //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
+        //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
     }
+
+    public void Initialize(float dmg, float hp)
+    {
+        attack = dmg;
+        health = hp;
+        maxHealth = health;
+    }
+
+    //public void SaveData(float dmg, float hp)
+    //{
+    //    PlayerPrefs.SetFloat(DAMAGE_KEY, dmg);
+    //    PlayerPrefs.SetFloat(HEALTH_KEY, hp);
+    //}
 
     public void TakeDamage(float damage, bool isHero)
     {

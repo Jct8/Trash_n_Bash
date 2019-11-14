@@ -23,6 +23,7 @@ public class Tower : MonoBehaviour
     public float _health;
     public float _attackRate;
 
+    public float _FullHealth;
     private float _shotTime;
 
     private void Awake()
@@ -35,12 +36,17 @@ public class Tower : MonoBehaviour
         _health = System.Convert.ToSingle(_towerData.DataDictionary["Health"]);
         _attackRate = System.Convert.ToSingle(_towerData.DataDictionary["AttackRate"]);
         _range = System.Convert.ToSingle(_towerData.DataDictionary["Range"]);
-
+        _FullHealth = _health;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
-    public void Initialize()
+    public void Initialize(float damage, float speed, float health, float attackR, float range)
     {
-
+        _damage = damage;
+        _speed = speed;
+        _health = health;
+        _attackRate = attackR;
+        _range = range;
+        _FullHealth = _health;
     }
 
     void Update()
@@ -76,6 +82,15 @@ public class Tower : MonoBehaviour
         var rb = _bulletGO.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.AddForce(_firePoint.up * _speed*5.0f, ForceMode.Force);
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        _FullHealth -= dmg;
+        if(_FullHealth <= 0.0f)
+        {
+            Destroy(this);
+        }
     }
 
     public void Recycle(GameObject obj)

@@ -139,7 +139,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (poisonCurrentDuration < Time.time)
         {
             poisonCurrentDuration = Time.time + poisonTickTime;
-            TakeDamage(poisonDamage);
+            TakeDamage(poisonDamage, true);
         }
         if (poisonTotalTime < Time.time)
         {

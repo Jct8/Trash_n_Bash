@@ -31,6 +31,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    private float poisonDamage = 0.0f;
+    private bool isPoisoned = false;
+    private float poisonTotalTime = 0.0f;
+    private float poisonTickTime = 0.0f;
+    private float poisonCurrentDuration = 0.0f;
+
     public void Initialize(WayPointManager.Path path, Action Recycle)
     {
         _Path = path;
@@ -57,6 +63,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         if (!_IsDead)
         {
+            if (isPoisoned)
+            {
+                CheckPoison();
+            }
+
             //UpdateAnimation();
             Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
             _Agent.SetDestination(_Desination.position);
@@ -118,8 +129,36 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if(_FullHealth <= 0.0f)
         {
             _IsDead = true;
+            isPoisoned = false;
             StartCoroutine("DeathAnimation");
         }
+    }
+
+    private void CheckPoison()
+    {
+        if (poisonCurrentDuration < Time.time)
+        {
+            poisonCurrentDuration = Time.time + poisonTickTime;
+            TakeDamage(poisonDamage);
+        }
+        if (poisonTotalTime < Time.time)
+        {
+            isPoisoned = false;
+            return;
+        }
+    }
+
+    public void SetPoison(float damage,float tickTime, float totalTime)
+    {
+        if (isPoisoned)
+        {
+            return;
+        }
+        poisonDamage = damage;
+        poisonTickTime = tickTime;
+        poisonCurrentDuration = Time.time;
+        poisonTotalTime = Time.time + totalTime;
+        isPoisoned = true;
     }
 
     public void Attack(float Dmg)

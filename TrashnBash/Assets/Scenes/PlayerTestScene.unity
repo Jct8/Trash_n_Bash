@@ -298,7 +298,7 @@ Transform:
   m_GameObject: {fileID: 876633111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -379,8 +379,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21431558, y: 0.008790743, z: -0.0019288966, w: 0.9767231}
-  m_LocalPosition: {x: -0.034654044, y: 3.2740579, z: -6.7023015}
+  m_LocalRotation: {x: 0.13418588, y: 0.77394676, z: -0.17494838, w: 0.59362763}
+  m_LocalPosition: {x: -7.1542263, y: 3.2646286, z: -1.2717483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -457,6 +457,41 @@ PrefabInstance:
         type: 3}
       propertyPath: isGrounded
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068936087325926489, guid: 4b55ee7e66b11aa4082cc078b02e7dad,
+        type: 3}
+      propertyPath: minMoveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068936087325926489, guid: 4b55ee7e66b11aa4082cc078b02e7dad,
+        type: 3}
+      propertyPath: maxMoveSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068936087325926489, guid: 4b55ee7e66b11aa4082cc078b02e7dad,
+        type: 3}
+      propertyPath: acceleration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068936087325926489, guid: 4b55ee7e66b11aa4082cc078b02e7dad,
+        type: 3}
+      propertyPath: turnSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068936087325926489, guid: 4b55ee7e66b11aa4082cc078b02e7dad,
+        type: 3}
+      propertyPath: deAcceleration
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068936087325926489, guid: 4b55ee7e66b11aa4082cc078b02e7dad,
+        type: 3}
+      propertyPath: deacceleration
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068936087325926490, guid: 4b55ee7e66b11aa4082cc078b02e7dad,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b55ee7e66b11aa4082cc078b02e7dad, type: 3}

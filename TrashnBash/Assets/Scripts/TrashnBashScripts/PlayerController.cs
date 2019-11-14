@@ -1,81 +1,82 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour, ICharacterAction
+[RequireComponent(typeof(CharacterController)),RequireComponent(typeof(Player))]
+public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
-	//Jimmy is genius
+    private Player player;
+    private Camera camera;
+
     [SerializeField]
-    private float moveSpeed = 100;
+    private float moveSpeed = 10.0f;
     [SerializeField]
-    private float turnSpeed = 5f;
-    //private float jumpSpeed = 5.0f;
-    private float gravity = 20.0f;
-    private float attackRange = 10;
-    //public bool isGrounded = true;
+    private float minMoveSpeed = 10.0f;
+    [SerializeField]
+    private float maxMoveSpeed = 50.0f;
+    [SerializeField]
+    private float turnSpeed = 5.0f;
+    [SerializeField]
+    private float acceleration = 5f;
+    [SerializeField]
+    private float deacceleration = 5f;
+
+    public bool HoldShiftForAcceleration = false;
 
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        player = gameObject.GetComponent<Player>();
+        camera = Camera.main;
     }
 
     private void Update()
     {
-
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
-        Vector3 move = new Vector3(horizontal, 0, vertical); ;
 
-        //if (Input.GetButtonDown("Jump") )
-        //{
-        //    move.y = jumpSpeed;
-        //    isGrounded = false;
-        //}
+        Vector3 forward = camera.transform.forward;
+        Vector3 right = camera.transform.right;
 
-        move.y -= gravity * Time.deltaTime;
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 move = forward * vertical + right * horizontal;
+
+        if (move.magnitude >0 && moveSpeed < maxMoveSpeed && !HoldShiftForAcceleration)
+        {
+            moveSpeed += (acceleration * Time.deltaTime);
+        }
+        else if(move.magnitude > 0 && moveSpeed < maxMoveSpeed 
+            && HoldShiftForAcceleration && Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed += (acceleration * Time.deltaTime);
+        }
+        else if( moveSpeed > minMoveSpeed )
+        {
+            moveSpeed -= (deacceleration * Time.deltaTime);
+        }
         controller.Move(move * Time.deltaTime * moveSpeed);
 
-        var movement = new Vector3(horizontal, 0, vertical);
-        if (movement.magnitude > 0)
+        if (move.magnitude > 0)
         {
-            Quaternion newDirection = Quaternion.LookRotation(movement);
+            Quaternion newDirection = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, newDirection, Time.deltaTime * turnSpeed);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Attack(20);
+            player.Attack();
         }
-    }
 
-    public void TakeDamage(float Dmg, bool isHero)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Attack(float dmg)
-    {
-        List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Rats");
-
-        foreach (var go in gameObjects)
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (Vector2.Distance(transform.position , go.transform.position) < attackRange)
-            {
-				go.GetComponent<Enemy>().TakeDamage(dmg, true);
-            }
+            player.PoisonAttack();
         }
-
     }
 
-    public void UpdateAnimation()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IEnumerator DeathAnimation()
-    {
-        throw new System.NotImplementedException();
-    }
+   
 }

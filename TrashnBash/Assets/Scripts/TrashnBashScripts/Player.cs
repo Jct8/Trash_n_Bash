@@ -19,7 +19,7 @@ public class Player : MonoBehaviour, ICharacterAction
         maxHealth = health;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isHero)
     {
         health -= damage;
     }
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, ICharacterAction
             float angle = Vector3.Angle(transform.forward, direction);
             if (Mathf.Abs(angle) < attackAngleRange && distance< attackRange)
             {
-                go.GetComponent<Enemy>().TakeDamage(attack);
+                go.GetComponent<Enemy>().TakeDamage(attack, true);
             }
         }
         foreach (var go in gameObjectsSkunks)
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour, ICharacterAction
             float angle = Vector3.Angle(transform.forward, direction);
             if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
             {
-                go.GetComponent<Enemy>().TakeDamage(attack);
+                go.GetComponent<Enemy>().TakeDamage(attack, true);
             }
         }
 

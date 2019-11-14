@@ -83,11 +83,12 @@ public class GameLoader : AsyncLoader
     {
         // Setup Core Systems
         Debug.Log("Loading Core Systems");
-        //for(int i = 0; i < ; i++)
-        //{
-        //    _coreLoadCurrentStep += 1.0f;
-        //    yield return null;
-        //}
+
+        GameObject gameManagerGO = new GameObject("GameManager");
+        gameManagerGO.transform.SetParent(systemsParent);
+        var gameManagerComp = gameManagerGO.AddComponent<GameManager>();
+        ServiceLocator.Register<GameManager>(gameManagerComp.Initialize());
+
         yield return null;
     }
 

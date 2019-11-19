@@ -397,7 +397,7 @@ MonoBehaviour:
     type: 3}
   _numberOfWave: 25
   _enemiesPerWave: 1
-  _secondBetweenWave: 3
+  _secondBetweenWave: 8
   _secondStartDelay: 10
   _currentWave: 0
   _activeEnemies: []
@@ -2269,7 +2269,7 @@ MonoBehaviour:
     type: 3}
   _numberOfWave: 25
   _enemiesPerWave: 1
-  _secondBetweenWave: 3
+  _secondBetweenWave: 8
   _secondStartDelay: 10
   _currentWave: 0
   _activeEnemies: []

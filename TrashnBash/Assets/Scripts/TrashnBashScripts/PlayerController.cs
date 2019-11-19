@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            player.Attack();
+            StartCoroutine(player.Attack());
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1))

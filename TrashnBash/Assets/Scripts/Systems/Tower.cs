@@ -89,7 +89,7 @@ public class Tower : MonoBehaviour
         _FullHealth -= dmg;
         if(_FullHealth <= 0.0f)
         {
-            Destroy(this);
+            return;
         }
     }
 

@@ -41,6 +41,8 @@ public class Player : MonoBehaviour, ICharacterAction
     public void TakeDamage(float damage, bool isHero)
     {
         health -= damage;
+        Debug.Log("Player Took " + damage + " damage");
+
     }
 
     public IEnumerator Attack()

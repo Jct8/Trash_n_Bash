@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public float _Speed;
     public float _Health;
     public float _Money;
+    public float enemyAttackRange = 2.0f ;
 
     public float _Stop = 0.0f;
     
@@ -99,9 +100,13 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 if (_Detect == Detect.Attack)
                 {
                     _Agent.SetDestination(_Player.transform.position);
-                    if ((Vector3.Distance(transform.position, _Player.transform.position) <= 100.0f))
+                    Vector3 newtarget = _Player.transform.position;
+                    newtarget.y = transform.position.y;
+                    transform.LookAt(newtarget);
+                    if ((Vector3.Distance(transform.position, _Player.transform.position) <= enemyAttackRange))
                     {
-                        _Agent.speed = _Stop;
+                        //_Agent.speed = _Stop;
+                        _Agent.isStopped = true;
                         if (_AttackCoolTime <= 0.0f)
                         {
                             StartCoroutine("Attack");
@@ -110,7 +115,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     }
                     else
                     {
-                        _Agent.speed = _Speed;
+                        //_Agent.speed = _Speed;
+                        _Agent.isStopped = false;
                     }
                 }
             }
@@ -137,7 +143,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public void Detection()
     {
-        if ((_Detect != Detect.Attack || _Detect != Detect.Detected) && 
+        if (_Order == Order.Fight) //Justin : added to follow and attack player without stopping
+        {
+            _Detect = Detect.Attack;
+        }
+        else if ((_Detect != Detect.Attack || _Detect != Detect.Detected) && 
             Vector3.Distance(_Path.WayPoints[2].transform.position, transform.position) < 200.0f)
         {
             _Detect = Detect.Detected;
@@ -161,6 +171,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public void TakeDamage(float Dmg, bool isHero)
     {
         _FullHealth -= Dmg;
+        Debug.Log("Enemy Took "+Dmg +" damage");
 
         if (_Detect == Detect.Detected && isHero == true)
         {

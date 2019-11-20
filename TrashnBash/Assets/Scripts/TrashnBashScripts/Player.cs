@@ -43,7 +43,7 @@ public class Player : MonoBehaviour, ICharacterAction
         health -= damage;
     }
 
-    public void Attack(float damage = 10.0f)
+    public IEnumerator Attack()
     {
         List<GameObject> gameObjectsRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Rats");
         List<GameObject> gameObjectsSkunks = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Skunks");
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 go.GetComponent<Enemy>().TakeDamage(attack, true);
             }
         }
-
+        yield return null;
     }
 
     public void PoisonAttack()

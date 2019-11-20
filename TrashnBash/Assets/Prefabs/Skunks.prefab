@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5810351844380109000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7277505014096918709}
+  - component: {fileID: 3638858951658228414}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7277505014096918709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810351844380109000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.431}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3590927991496638128}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3638858951658228414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810351844380109000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bc46f1dc9fc0643aa9fe7148ced5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmo: 1
+  gizmoShape: 0
+  gizmoColour: 1
+  gizmoRadius: 0.75
+  gizmoScale: {x: 0, y: 0, z: 0}
 --- !u!1 &7684207003447971234
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +61,6 @@ GameObject:
   - component: {fileID: 4753218864361666991}
   - component: {fileID: 8061765875304171797}
   - component: {fileID: -4178026341819312236}
-  - component: {fileID: 7953072026754215163}
   - component: {fileID: 5644733425841983137}
   - component: {fileID: 7488807499955724928}
   m_Layer: 0
@@ -33,7 +80,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7277505014096918709}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,20 +159,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7953072026754215163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7684207003447971234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690f2e1dbde8bc140ba9f001687c4cef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shouldRecycle: 1
-  delay: 10
 --- !u!114 &5644733425841983137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,14 +171,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45583728f95d9a1448daa7a8bf96b065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Player: {fileID: 0}
+  _Rigid: {fileID: 0}
   _FullHealth: 0
   _CurrentWayPoint: 0
+  _AttackCoolTime: 0
   _DataSource: Skunks
   _Name: 
   _Attack: 0
-  _Speed: 0
+  _Speed: 2
   _Health: 0
   _Money: 0
+  _Stop: 0
 --- !u!195 &7488807499955724928
 NavMeshAgent:
   m_ObjectHideFlags: 0

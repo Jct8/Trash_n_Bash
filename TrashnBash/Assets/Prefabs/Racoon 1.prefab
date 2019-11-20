@@ -163,6 +163,8 @@ MonoBehaviour:
   turnSpeed: 5
   acceleration: 5
   deacceleration: 5
+  gravity: 1
+  burstSpeed: 45
   HoldShiftForAcceleration: 0
 --- !u!54 &5068936087325926490
 Rigidbody:

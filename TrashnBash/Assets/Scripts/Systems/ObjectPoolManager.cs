@@ -94,6 +94,12 @@ public class ObjectPoolManager : MonoBehaviour, IGameModule
         return retList;
     }
 
+    public List<string> GetKeys()
+    {
+        List<string> keyList = new List<string>(this._objectPoolByName.Keys);
+        return keyList;
+    }
+
     private GameObject GetNextObject(string poolName)
     {
         List<GameObject> pooledObjects = _objectPoolByName[poolName];

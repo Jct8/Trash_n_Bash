@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  attack: 20
+  attack: 1
   attackRange: 2
   attackAngleRange: 45
   poisonDamage: 1

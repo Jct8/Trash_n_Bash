@@ -19,18 +19,26 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private bool _IsDead = false;
     public Detect _Detect { get; set; }
     public Order _Order { get; set; }
-    public float _AttackCoolTime;
 
     public string _DataSource;
-    public string _Name;
-    public float _Attack;
-    public float _Speed;
-    public float _Health;
-    public float _Money;
-    public float enemyAttackRange = 2.0f ;
 
-    public float _Stop = 0.0f;
-    
+    [SerializeField]
+    private string _Name;
+    [SerializeField]
+    private float _Attack;
+    [SerializeField]
+    private float _Health;
+    [SerializeField]
+    private float _Money;
+    [SerializeField]
+    private float _Speed;
+    [SerializeField]
+    private float _AttackCoolTime = 3.0f;
+    private float _enemyAttackRange = 2.0f;
+    private float _EndDistance = 2.0f;
+    private float _InsideofRange = 200.0f;
+    private float _MaximumAngle = 90.0f;
+    private float _MaximumDistance = 50.0f;
     private void Start()
     {
         _Player = GameObject.FindGameObjectWithTag("Player");
@@ -56,7 +64,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Attack = System.Convert.ToSingle(_EnemyData.DataDictionary["Attack"]);
         _Health = System.Convert.ToSingle(_EnemyData.DataDictionary["Health"]);
         _Money = System.Convert.ToSingle(_EnemyData.DataDictionary["Money"]);
-        _Agent.speed = _Speed;
         _FullHealth = _Health;
         _Rigid = gameObject.GetComponent<Rigidbody>();
     }
@@ -78,11 +85,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
             if(_Order == Order.Tower)
             {
                 _Agent.SetDestination(_Desination.position);
-                if ((Vector3.Distance(transform.position, _Desination.position) < 2.0f) && (_Detect == Detect.Detected || _Detect == Detect.None))
+                if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
                 {
                     if (_CurrentWayPoint == 2)
                     {
-                        _Agent.speed = _Stop;
+                        _Agent.isStopped = true;
                         if (_AttackCoolTime <= 0.0f)
                         {
                             StartCoroutine("Attack");
@@ -103,9 +110,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     Vector3 newtarget = _Player.transform.position;
                     newtarget.y = transform.position.y;
                     transform.LookAt(newtarget);
-                    if ((Vector3.Distance(transform.position, _Player.transform.position) <= enemyAttackRange))
+                    if ((Vector3.Distance(transform.position, _Player.transform.position) <= _enemyAttackRange))
                     {
-                        //_Agent.speed = _Stop;
                         _Agent.isStopped = true;
                         if (_AttackCoolTime <= 0.0f)
                         {
@@ -115,17 +121,16 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     }
                     else
                     {
-                        //_Agent.speed = _Speed;
                         _Agent.isStopped = false;
                     }
                 }
             }
             else if(_Order == Order.Back)
             {
-                _Agent.speed = _Speed;
+                _Agent.isStopped = false;
                 _Desination = _Path.WayPoints[0];
                 _Agent.SetDestination(_Desination.position);
-                if((Vector3.Distance(transform.position, _Desination.position) < 2.0f))
+                if((Vector3.Distance(transform.position, _Desination.position) < _EndDistance))
                 {
                     _Killed?.Invoke();
                 }
@@ -148,7 +153,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Detect = Detect.Attack;
         }
         else if ((_Detect != Detect.Attack || _Detect != Detect.Detected) && 
-            Vector3.Distance(_Path.WayPoints[2].transform.position, transform.position) < 200.0f)
+            Vector3.Distance(_Path.WayPoints[2].transform.position, transform.position) < _InsideofRange)
         {
             _Detect = Detect.Detected;
         }
@@ -227,7 +232,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         else if(FrontAttack(_tower.transform))
         {
-            _tower.GetComponent<Tower>().TakeDamage(_Attack/2.0f);
+            _tower.GetComponent<Tower>().TakeDamage(_Attack / 2.0f);
         }
         yield return new WaitForSeconds(0.5f);
         if(_Order != Order.Fight)
@@ -244,7 +249,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         ConeToTarget.Normalize();
         float _Distance = Vector3.Distance(transform.position, target.transform.position);
 
-        if ((Vector3.Angle(ConeToTarget,Coneforward) < 90)&&(_Distance <= 100))
+        if ((Vector3.Angle(ConeToTarget,Coneforward) < _MaximumAngle)&&(_Distance <= _MaximumDistance))
         {
             return true;
         }

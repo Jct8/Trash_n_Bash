@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     private float acceleration = 5f;
     [SerializeField]
     private float deacceleration = 5f;
+    [SerializeField]
+    private float gravity = 1.0f;
+    [SerializeField]
+    private float burstSpeed = 40.0f;
+
 
     public bool HoldShiftForAcceleration = false;
 
@@ -46,6 +51,11 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = forward * vertical + right * horizontal;
 
+        if (move.magnitude == 0.0f)
+        {
+            moveSpeed = minMoveSpeed + burstSpeed;
+        }
+
         if (move.magnitude >0 && moveSpeed < maxMoveSpeed && !HoldShiftForAcceleration)
         {
             moveSpeed += (acceleration * Time.deltaTime);
@@ -59,7 +69,6 @@ public class PlayerController : MonoBehaviour
         {
             moveSpeed -= (deacceleration * Time.deltaTime);
         }
-        controller.Move(move * Time.deltaTime * moveSpeed);
 
         if (move.magnitude > 0)
         {
@@ -67,9 +76,13 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, newDirection, Time.deltaTime * turnSpeed);
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        move.y -= gravity;
+        
+        controller.Move(move * Time.deltaTime * moveSpeed);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
         {
-            player.Attack();
+            StartCoroutine(player.Attack());
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1))

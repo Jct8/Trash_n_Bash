@@ -8,3 +8,10 @@ public enum Detect
     Detected,
     Attack
 }
+
+public enum Order
+{
+    Tower,
+    Fight,
+    Back
+}

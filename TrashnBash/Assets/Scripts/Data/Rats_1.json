@@ -1,7 +1,6 @@
 {
-  "Name": "Rats",
+  "Name": "Rats_1",
   "Attack": 1.0,
   "Health": 5.0,
-  "Speed": 3.0,
   "Money": 5.0
 }

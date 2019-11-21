@@ -309,12 +309,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToPool:
-  - name: Skunks
-    prefab: {fileID: 7684207003447971234, guid: b73c8af88ab8f374a96de7b35e018451,
+  - name: Skunks_1
+    prefab: {fileID: 5110960924001791372, guid: e776da64559f14f488b335a399426ea3,
       type: 3}
     poolSize: 25
-  - name: Rats
-    prefab: {fileID: 459978146194664460, guid: 11fc081286d6dd04e8c25e3c7a4e67cd, type: 3}
+  - name: Rats_1
+    prefab: {fileID: 6876065404672406170, guid: bc53838e0830dae489d9ea831ce6bd08,
+      type: 3}
     poolSize: 25
   - name: Bullet
     prefab: {fileID: 7466416969426066422, guid: bbd04011c182cd24a85fa465ce3a8dc5,

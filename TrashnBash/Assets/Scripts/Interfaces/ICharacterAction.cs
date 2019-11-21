@@ -5,7 +5,7 @@ using UnityEngine;
 public interface ICharacterAction
 {
     void TakeDamage(float Dmg, bool isHero);
-    void Attack(float Dmg);
+    IEnumerator Attack();
     void UpdateAnimation();
     IEnumerator DeathAnimation();
 }

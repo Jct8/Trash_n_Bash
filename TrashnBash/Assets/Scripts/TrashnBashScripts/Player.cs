@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, ICharacterAction
 {
     public float health = 100.0f;
-    public float attack = 20.0f;
+    public float attack = 1.0f;
     public float attackRange = 20.0f;
     public float attackAngleRange = 45.0f;
     public float poisonDamage = 2.0f;

@@ -3,6 +3,6 @@
   "Damage": 5.0,
   "Health": 100.0,
   "Speed": 350.0,
-  "Range": 15.0,
+  "Range": 250.0,
   "AttackRate": 0.6
 }

@@ -22,9 +22,9 @@ public class Tower : MonoBehaviour
     public float _speed;
     public float _health;
     public float _attackRate;
-
     public float _FullHealth;
-    private float _shotTime;
+    public float _shotTime;
+    public float _PercentageOfHealth = 100.0f;
 
     private void Awake()
     {
@@ -51,16 +51,14 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
-        return;
         if(_target == null)
         {
             return;
         }
-
         Vector3 _direction = _target.position - transform.position;
         Quaternion _lookRotation = Quaternion.LookRotation(_direction);
         Vector3 _rotation = _lookRotation.eulerAngles;
-        _partToRotate.rotation = Quaternion.Euler(0.0f, _rotation.y, 0.0f);
+        _partToRotate.rotation = Quaternion.Euler(_rotation.x + 10.0f, _rotation.y, _rotation.z);
 
         if(_shotTime <= 0.0f)
         {
@@ -81,13 +79,14 @@ public class Tower : MonoBehaviour
         _bulletGO.GetComponent<Bullet>().Initialize(_target,_damage,_speed, _action);
         var rb = _bulletGO.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
-        rb.AddForce(_firePoint.up * _speed*5.0f, ForceMode.Force);
+        rb.AddForce(_firePoint.up * _speed * 3.0f, ForceMode.Force);
     }
 
     public void TakeDamage(float dmg)
     {
         _FullHealth -= dmg;
-        if(_FullHealth <= 0.0f)
+        _PercentageOfHealth = (100.0f / _health) * _FullHealth;
+        if (_PercentageOfHealth <= 0.0f)
         {
             return;
         }

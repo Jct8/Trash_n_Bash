@@ -47,28 +47,20 @@ public class Player : MonoBehaviour, ICharacterAction
 
     public IEnumerator Attack()
     {
-        List<GameObject> gameObjectsRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Rats");
-        List<GameObject> gameObjectsSkunks = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Skunks");
-
-        //Justin - TODO:Find a better method.
-        foreach (var go in gameObjectsRats)
+        ////Justin - TODO:Find a better method.
+        List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
+        foreach (var enemy in ListOfEnemies)
         {
-            Vector3 direction = (go.transform.position - transform.position );
-            float distance = Vector2.Distance(transform.position, go.transform.position);
-            float angle = Vector3.Angle(transform.forward, direction);
-            if (Mathf.Abs(angle) < attackAngleRange && distance< attackRange)
+            List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+            foreach (var go in gameObjects)
             {
-                go.GetComponent<Enemy>().TakeDamage(attack, true);
-            }
-        }
-        foreach (var go in gameObjectsSkunks)
-        {
-            Vector3 direction = (go.transform.position - transform.position);
-            float distance = Vector2.Distance(transform.position, go.transform.position);
-            float angle = Vector3.Angle(transform.forward, direction);
-            if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
-            {
-                go.GetComponent<Enemy>().TakeDamage(attack, true);
+                Vector3 direction = (go.transform.position - transform.position);
+                float distance = Vector2.Distance(transform.position, go.transform.position);
+                float angle = Vector3.Angle(transform.forward, direction);
+                if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+                {
+                    go.GetComponent<Enemy>().TakeDamage(attack, true);
+                }
             }
         }
         yield return null;
@@ -76,31 +68,22 @@ public class Player : MonoBehaviour, ICharacterAction
 
     public void PoisonAttack()
     {
-        List<GameObject> gameObjectsRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Rats");
-        List<GameObject> gameObjectsSkunks = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Skunks");
-
-        //Justin - TODO:Find a better method.
-        foreach (var go in gameObjectsRats)
+        ////Justin - TODO:Find a better method.
+        List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
+        foreach (var enemy in ListOfEnemies)
         {
-            Vector3 direction = (go.transform.position - transform.position);
-            float distance = Vector2.Distance(transform.position, go.transform.position);
-            float angle = Vector3.Angle(transform.forward, direction);
-            if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+            List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+            foreach (var go in gameObjects)
             {
-                go.GetComponent<Enemy>().SetPoison(poisonDamage,poisonTickTime,poisonTotalTime);
+                Vector3 direction = (go.transform.position - transform.position);
+                float distance = Vector2.Distance(transform.position, go.transform.position);
+                float angle = Vector3.Angle(transform.forward, direction);
+                if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+                {
+                    go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+                }
             }
         }
-        foreach (var go in gameObjectsSkunks)
-        {
-            Vector3 direction = (go.transform.position - transform.position);
-            float distance = Vector2.Distance(transform.position, go.transform.position);
-            float angle = Vector3.Angle(transform.forward, direction);
-            if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
-            {
-                go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
-            }
-        }
-
     }
 
     public void UpdateAnimation()

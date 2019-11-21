@@ -9,16 +9,9 @@ public class LevelManager : MonoBehaviour
     public GameObject _PlayerInstance;
     public GameObject _TowerInstance;
 
-    public float _SavedDamage;
-    public float _SavedHealth;
-
-    public float _SavedTowerDamage;
-    public float _SavedTowerSpeed;
-    public float _SavedTowerHealth;
-    public float _SavedTowerAttackRate;
-    public float _SavedTowerRange;
     public int _Level;
-    //public float _Money;
+    public float _Money;
+    public int _Score;
 
     private void Awake()
     {
@@ -30,38 +23,24 @@ public class LevelManager : MonoBehaviour
 
     public void ClearLevel()
     {
-        SavePlayerData();
+        SaveData();
         ResetLevel();
         _Level++;
     }
 
     public void ResetLevel()
     {
-
-        _PlayerInstance = GameObject.FindGameObjectWithTag("Player");
-        _TowerInstance = GameObject.FindGameObjectWithTag("Tower");
-        if(SceneManager.GetActiveScene().buildIndex >= 3)
-        {
-            _TowerInstance.GetComponent<Tower>().Initialize(_SavedTowerDamage, _SavedTowerSpeed, _SavedTowerHealth, _SavedTowerAttackRate, _SavedTowerRange);
-            _PlayerInstance.GetComponent<Player>().Initialize(_SavedDamage, _SavedHealth);
-        }
+        return;
     }
 
-    public void SavePlayerData()
+    public void SaveData()
     {
-        _SavedDamage = ServiceLocator.Get<Player>().attack;
-        _SavedHealth = ServiceLocator.Get<Player>().health;
-
-        _SavedTowerDamage = ServiceLocator.Get<Tower>()._damage;
-        _SavedTowerSpeed = ServiceLocator.Get<Tower>()._speed;
-        _SavedTowerHealth = ServiceLocator.Get<Tower>()._health;
-        _SavedTowerAttackRate = ServiceLocator.Get<Tower>()._attackRate;
-        _SavedTowerRange = ServiceLocator.Get<Tower>()._range;
+        return;
 
     }
 
-    public void LoadPlayerData()
+    public void LoadData()
     {
-
+        return;
     }
 }

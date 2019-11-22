@@ -51,6 +51,7 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
+        return;
         if(_target == null)
         {
             return;

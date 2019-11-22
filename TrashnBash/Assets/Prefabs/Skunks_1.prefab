@@ -102,17 +102,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Player: {fileID: 0}
   _Rigid: {fileID: 0}
-  _FullHealth: 0
+  _FullHealth: 30
   _CurrentWayPoint: 0
-  _AttackCoolTime: 0
   _DataSource: Skunks_1
   _Name: 
   _Attack: 0
-  _Speed: 5
   _Health: 0
   _Money: 0
-  enemyAttackRange: 2
-  _Stop: 0
+  _Speed: 5
+  _AttackCoolTime: 0
 --- !u!1 &5724958519810931571
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public float poisonDamage = 2.0f;
     public float poisonTotalTime = 2.0f;
     public float poisonTickTime = 3.0f;
+    public float initialPoisonAttackDamage = 10.0f;
 
 
     public const string DAMAGE_KEY = "Damage";
@@ -80,6 +81,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 float angle = Vector3.Angle(transform.forward, direction);
                 if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
                 {
+                    go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage,true);
                     go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
                 }
             }

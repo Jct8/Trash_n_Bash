@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float burstSpeed = 40.0f;
 
+    private bool _isTargetLockedOn = false;
+    private GameObject lockedOnEnemyGO = null;
 
     public bool HoldShiftForAcceleration = false;
 
@@ -37,6 +39,51 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
+    {
+        CalculateMovement();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(player.Attack());
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            player.PoisonAttack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (_isTargetLockedOn)
+            {
+                GameObject prevTarget = lockedOnEnemyGO;
+                CheckTargetLockedOn();
+
+                if (prevTarget == lockedOnEnemyGO)
+                {
+                    _isTargetLockedOn = false;
+                    lockedOnEnemyGO = null;
+                }
+                else
+                {
+                    lockedOnEnemyGO = prevTarget;
+                }
+            }
+            else
+            {
+                CheckTargetLockedOn();
+                if (lockedOnEnemyGO)
+                    _isTargetLockedOn = true;
+                else
+                    _isTargetLockedOn = false;
+            }
+        }
+
+        ActivateTargetLockedOn();
+
+    }
+
+    public void CalculateMovement()
     {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
@@ -56,16 +103,16 @@ public class PlayerController : MonoBehaviour
             moveSpeed = minMoveSpeed + burstSpeed;
         }
 
-        if (move.magnitude >0 && moveSpeed < maxMoveSpeed && !HoldShiftForAcceleration)
+        if (move.magnitude > 0 && moveSpeed < maxMoveSpeed && !HoldShiftForAcceleration)
         {
             moveSpeed += (acceleration * Time.deltaTime);
         }
-        else if(move.magnitude > 0 && moveSpeed < maxMoveSpeed 
+        else if (move.magnitude > 0 && moveSpeed < maxMoveSpeed
             && HoldShiftForAcceleration && Input.GetKey(KeyCode.LeftShift))
         {
             moveSpeed += (acceleration * Time.deltaTime);
         }
-        else if( moveSpeed > minMoveSpeed )
+        else if (moveSpeed > minMoveSpeed)
         {
             moveSpeed -= (deacceleration * Time.deltaTime);
         }
@@ -77,19 +124,39 @@ public class PlayerController : MonoBehaviour
         }
 
         move.y -= gravity;
-        
+
         controller.Move(move * Time.deltaTime * moveSpeed);
+    }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
+    public void ActivateTargetLockedOn()
+    {
+        if (_isTargetLockedOn && lockedOnEnemyGO)
         {
-            StartCoroutine(player.Attack());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            player.PoisonAttack();
+            if (lockedOnEnemyGO.activeInHierarchy)
+            {
+                Vector3 targetDirection = lockedOnEnemyGO.transform.position;
+                targetDirection.y = transform.position.y;
+                transform.LookAt(targetDirection);
+            }
+            else
+            {
+                _isTargetLockedOn = false;
+                lockedOnEnemyGO = null;
+            }
         }
     }
 
-   
+    public void CheckTargetLockedOn()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.gameObject.CompareTag("Enemy"))
+                lockedOnEnemyGO = hit.transform.gameObject;
+            else
+                lockedOnEnemyGO = null;
+        }
+    }
+    
 }

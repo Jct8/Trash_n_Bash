@@ -40,7 +40,7 @@ public class DataLoader : MonoBehaviour, IGameModule
             yield return source.LoadAsync();
             source.IsLoaded = true;
             LoadedDataSources.Add(source.Id, source);
-            Debug.Log("Loaded Source: " + source.Id);
+            //Debug.Log("Loaded Source: " + source.Id);
         }
 
         yield return null;

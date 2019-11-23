@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if(gameObject == null)
+        if (gameObject == null)
         {
             Debug.Log("Failed to find it, since it doesn't exist!");
         }

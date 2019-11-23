@@ -11,16 +11,16 @@ public class Player : MonoBehaviour, ICharacterAction
     public float poisonDamage = 2.0f;
     public float poisonTotalTime = 2.0f;
     public float poisonTickTime = 3.0f;
-
+    public float initialPoisonAttackDamage = 10.0f;
 
     public const string DAMAGE_KEY = "Damage";
     public const string HEALTH_KEY = "Health";
 
-    private float maxHealth = 100.0f;
+    private float _maxHealth = 100.0f;
 
     void Start()
     {
-        maxHealth = health;
+        _maxHealth = health;
         //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
         //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
     }
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour, ICharacterAction
     {
         attack = dmg;
         health = hp;
-        maxHealth = health;
+        _maxHealth = health;
     }
 
     //public void SaveData(float dmg, float hp)
@@ -80,6 +80,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 float angle = Vector3.Angle(transform.forward, direction);
                 if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
                 {
+                    go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage,true);
                     go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
                 }
             }

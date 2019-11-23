@@ -66,12 +66,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  attack: 20
+  attack: 2
   attackRange: 2
   attackAngleRange: 45
-  poisonDamage: 1
-  poisonTotalTime: 10
-  poisonTickTime: 2
+  poisonDamage: 5
+  poisonTotalTime: 3
+  poisonTickTime: 1
+  initialPoisonAttackDamage: 10
 --- !u!114 &1011058151224188264
 MonoBehaviour:
   m_ObjectHideFlags: 0

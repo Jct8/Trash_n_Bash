@@ -6,15 +6,18 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, ICharacterAction
 {
-    public Action _Killed;
-    public GameObject _Player;
-    public Rigidbody _Rigid;
+    public Action killed;
+    public Rigidbody rigid;
+
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
     private NavMeshAgent _Agent;
     private WayPointManager.Path _Path;
 
-    public float _FullHealth;
+    public GameObject player;
+    private GameObject _targetIndicator;
+
+    public float fullHealth;
     public int _CurrentWayPoint = 0;
     private bool _IsDead = false;
     public Detect _Detect { get; set; }
@@ -39,50 +42,52 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _InsideofRange = 200.0f;
     private float _MaximumAngle = 90.0f;
     private float _MaximumDistance = 50.0f;
+    private float _poisonDamage = 0.0f;
+    private float _poisonTotalTime = 0.0f;
+    private float _poisonTickTime = 0.0f;
+    private float _poisonCurrentDuration = 0.0f;
+    private bool _isPoisoned = false;
+
     private void Start()
     {
-        _Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
-
-    private float poisonDamage = 0.0f;
-    private bool isPoisoned = false;
-    private float poisonTotalTime = 0.0f;
-    private float poisonTickTime = 0.0f;
-    private float poisonCurrentDuration = 0.0f;
 
     public void Initialize(WayPointManager.Path path, Action Recycle)
     {
         _Path = path;
-        _Killed += Recycle;
+        killed += Recycle;
         _DataLoader = ServiceLocator.Get<DataLoader>();
         _EnemyData = _DataLoader.GetDataSourceById(_DataSource) as JsonDataSource;
-        _IsDead = false;
-        _Agent = GetComponent<NavMeshAgent>();
         _Detect = Detect.None;
         _Order = Order.Tower;
         _Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
         _Attack = System.Convert.ToSingle(_EnemyData.DataDictionary["Attack"]);
         _Health = System.Convert.ToSingle(_EnemyData.DataDictionary["Health"]);
         _Money = System.Convert.ToSingle(_EnemyData.DataDictionary["Money"]);
-        _FullHealth = _Health;
-        _Rigid = gameObject.GetComponent<Rigidbody>();
+        _Agent = GetComponent<NavMeshAgent>();
+        _IsDead = false;
+        fullHealth = _Health;
+        rigid = gameObject.GetComponent<Rigidbody>();
+        _targetIndicator = transform.Find("TargetIndicator").gameObject;
+        gameObject.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
     }
-    
+
     void Update()
     {
-        if(_Player == null)
-            _Player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
 
         if (!_IsDead)
         {
-            if (isPoisoned)
+            if (_isPoisoned)
             {
                 CheckPoison();
             }
 
             //UpdateAnimation();
             Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
-            if(_Order == Order.Tower)
+            if (_Order == Order.Tower)
             {
                 _Agent.SetDestination(_Desination.position);
                 if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
@@ -102,15 +107,15 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     }
                 }
             }
-            else if(_Order == Order.Fight)
+            else if (_Order == Order.Fight)
             {
                 if (_Detect == Detect.Attack)
                 {
-                    _Agent.SetDestination(_Player.transform.position);
-                    Vector3 newtarget = _Player.transform.position;
+                    _Agent.SetDestination(player.transform.position);
+                    Vector3 newtarget = player.transform.position;
                     newtarget.y = transform.position.y;
                     transform.LookAt(newtarget);
-                    if ((Vector3.Distance(transform.position, _Player.transform.position) <= _enemyAttackRange))
+                    if ((Vector3.Distance(transform.position, player.transform.position) <= _enemyAttackRange))
                     {
                         _Agent.isStopped = true;
                         if (_AttackCoolTime <= 0.0f)
@@ -125,22 +130,22 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     }
                 }
             }
-            else if(_Order == Order.Back)
+            else if (_Order == Order.Back)
             {
                 _Agent.isStopped = false;
                 _Desination = _Path.WayPoints[0];
                 _Agent.SetDestination(_Desination.position);
-                if((Vector3.Distance(transform.position, _Desination.position) < _EndDistance))
+                if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance))
                 {
-                    _Killed?.Invoke();
+                    killed?.Invoke();
                 }
             }
             Detection();
-            _Rigid.velocity = Vector3.zero;
+            rigid.velocity = Vector3.zero;
         }
         else
         {
-            _Rigid.velocity = Vector3.zero;
+            rigid.velocity = Vector3.zero;
         }
 
         _AttackCoolTime -= Time.deltaTime;
@@ -152,7 +157,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         {
             _Detect = Detect.Attack;
         }
-        else if ((_Detect != Detect.Attack || _Detect != Detect.Detected) && 
+        else if ((_Detect != Detect.Attack || _Detect != Detect.Detected) &&
             Vector3.Distance(_Path.WayPoints[2].transform.position, transform.position) < _InsideofRange)
         {
             _Detect = Detect.Detected;
@@ -169,14 +174,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Detect = Detect.None;
         _Order = Order.Tower;
         _CurrentWayPoint = 0;
-        _FullHealth = _Health;
-        _Rigid.velocity = Vector3.zero;
+        fullHealth = _Health;
+        rigid.velocity = Vector3.zero;
     }
 
     public void TakeDamage(float Dmg, bool isHero)
     {
-        _FullHealth -= Dmg;
-        Debug.Log("Enemy Took "+Dmg +" damage");
+        fullHealth -= Dmg;
+        Debug.Log("Enemy Took " + Dmg + " damage");
 
         if (_Detect == Detect.Detected && isHero == true)
         {
@@ -186,39 +191,39 @@ public class Enemy : MonoBehaviour, ICharacterAction
         else
             _Detect = Detect.Detected;
 
-        if(_FullHealth <= 0.0f)
+        if (fullHealth <= 0.0f)
         {
             _IsDead = true;
-            isPoisoned = false;
+            _isPoisoned = false;
             StartCoroutine("DeathAnimation");
         }
     }
 
     private void CheckPoison()
     {
-        if (poisonCurrentDuration < Time.time)
+        if (_poisonCurrentDuration < Time.time)
         {
-            poisonCurrentDuration = Time.time + poisonTickTime;
-            TakeDamage(poisonDamage, true);
+            _poisonCurrentDuration = Time.time + _poisonTickTime;
+            TakeDamage(_poisonDamage, true);
         }
-        if (poisonTotalTime < Time.time)
+        if (_poisonTotalTime < Time.time)
         {
-            isPoisoned = false;
+            _isPoisoned = false;
             return;
         }
     }
 
-    public void SetPoison(float damage,float tickTime, float totalTime)
+    public void SetPoison(float damage, float tickTime, float totalTime)
     {
-        if (isPoisoned)
+        if (_isPoisoned)
         {
             return;
         }
-        poisonDamage = damage;
-        poisonTickTime = tickTime;
-        poisonCurrentDuration = Time.time;
-        poisonTotalTime = Time.time + totalTime;
-        isPoisoned = true;
+        _poisonDamage = damage;
+        _poisonTickTime = tickTime;
+        _poisonCurrentDuration = Time.time;
+        _poisonTotalTime = Time.time + totalTime;
+        _isPoisoned = true;
     }
 
     public IEnumerator Attack()
@@ -226,16 +231,16 @@ public class Enemy : MonoBehaviour, ICharacterAction
         GameObject _player = GameObject.FindGameObjectWithTag("Player");
         GameObject _tower = GameObject.FindGameObjectWithTag("Tower");
         yield return new WaitForSeconds(3.0f);
-        if(FrontAttack(_player.transform))
+        if (FrontAttack(_player.transform))
         {
             _player.GetComponent<Player>().TakeDamage(_Attack, false);
         }
-        else if(FrontAttack(_tower.transform))
+        else if (FrontAttack(_tower.transform))
         {
             _tower.GetComponent<Tower>().TakeDamage(_Attack / 2.0f);
         }
         yield return new WaitForSeconds(0.5f);
-        if(_Order != Order.Fight)
+        if (_Order != Order.Fight)
         {
             _Order = Order.Back;
         }
@@ -249,7 +254,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         ConeToTarget.Normalize();
         float _Distance = Vector3.Distance(transform.position, target.transform.position);
 
-        if ((Vector3.Angle(ConeToTarget,Coneforward) < _MaximumAngle)&&(_Distance <= _MaximumDistance))
+        if ((Vector3.Angle(ConeToTarget, Coneforward) < _MaximumAngle) && (_Distance <= _MaximumDistance))
         {
             return true;
         }
@@ -257,10 +262,15 @@ public class Enemy : MonoBehaviour, ICharacterAction
         return false;
     }
 
+    public void SwitchOnTargetIndicator(bool turnOn)
+    {
+        _targetIndicator.SetActive(turnOn);
+    }
+
     public IEnumerator DeathAnimation()
     {
         yield return new WaitForSeconds(1.0f);
-        _Killed?.Invoke();
+        killed?.Invoke();
         yield return null;
     }
 

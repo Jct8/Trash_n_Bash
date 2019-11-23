@@ -14,7 +14,7 @@ static public class ServiceLocator
 		}
 		else
 		{
-			Debug.Log("Registering " + typeof(T));
+			//Debug.Log("Registering " + typeof(T));
 			m_systems.Add(typeof(T), target);
 		}
 		return (T)target;

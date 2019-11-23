@@ -5,26 +5,26 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    private Transform _target;
-    public Transform _partToRotate;
-    public GameObject _bulletPrefeb;
-    public Transform _firePoint;
+    public Transform partToRotate;
+    public GameObject bulletPrefeb;
+    public Transform firePoint;
 
+    private Transform _target;
     private DataLoader _dataLoader;
     private JsonDataSource _towerData;
 
     private Action _action;
 
-    public string _dataSourceId = "Tower";
-    public string _name;
-    public float _range;
-    public float _damage;
-    public float _speed;
-    public float _health;
-    public float _attackRate;
-    public float _FullHealth;
-    public float _shotTime;
-    public float _PercentageOfHealth = 100.0f;
+    [SerializeField] private string _dataSourceId = "Tower";
+    [SerializeField] private string _name;
+    [SerializeField] private float _range;
+    [SerializeField] private float _damage;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _health;
+    [SerializeField] private float _attackRate;
+    [SerializeField] private float _FullHealth;
+    [SerializeField] private float _shotTime;
+    [SerializeField] private float _PercentageOfHealth = 100.0f;
 
     private void Awake()
     {
@@ -51,6 +51,7 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
+        return;
         if(_target == null)
         {
             return;
@@ -58,7 +59,7 @@ public class Tower : MonoBehaviour
         Vector3 _direction = _target.position - transform.position;
         Quaternion _lookRotation = Quaternion.LookRotation(_direction);
         Vector3 _rotation = _lookRotation.eulerAngles;
-        _partToRotate.rotation = Quaternion.Euler(_rotation.x + 10.0f, _rotation.y, _rotation.z);
+        partToRotate.rotation = Quaternion.Euler(_rotation.x + 10.0f, _rotation.y, _rotation.z);
 
         if(_shotTime <= 0.0f)
         {
@@ -71,15 +72,15 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        GameObject _bulletGO = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool(_bulletPrefeb.name);
-        _bulletGO.transform.position = _firePoint.transform.position;
-        _bulletGO.transform.rotation = _firePoint.transform.rotation;
+        GameObject _bulletGO = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool(bulletPrefeb.name);
+        _bulletGO.transform.position = firePoint.transform.position;
+        _bulletGO.transform.rotation = firePoint.transform.rotation;
         _bulletGO.SetActive(true);
         _action = () => Recycle(_bulletGO);
         _bulletGO.GetComponent<Bullet>().Initialize(_target,_damage,_speed, _action);
         var rb = _bulletGO.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
-        rb.AddForce(_firePoint.up * _speed * 3.0f, ForceMode.Force);
+        rb.AddForce(firePoint.up * _speed * 3.0f, ForceMode.Force);
     }
 
     public void TakeDamage(float dmg)

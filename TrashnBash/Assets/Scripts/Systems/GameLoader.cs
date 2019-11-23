@@ -15,7 +15,7 @@ public class GameLoader : AsyncLoader
 
     protected override void Awake()
     {
-        Debug.Log("GameLoader Starting");
+        //Debug.Log("GameLoader Starting");
 
         // Saftey check
         if (_instance != null && _instance != this)
@@ -76,13 +76,13 @@ public class GameLoader : AsyncLoader
     {
         base.ProgressUpdated(percentComplete);
         loadingScreen.UpdateLoadingBar(percentComplete);
-        Debug.Log("Progress: " + percentComplete * 100.0f);
+        //Debug.Log("Progress: " + percentComplete * 100.0f);
     }
 
     private IEnumerator IntializeCoreSystems(Transform systemsParent)
     {
         // Setup Core Systems
-        Debug.Log("Loading Core Systems");
+        //Debug.Log("Loading Core Systems");
 
         GameObject gameManagerGO = new GameObject("GameManager");
         gameManagerGO.transform.SetParent(systemsParent);
@@ -95,7 +95,7 @@ public class GameLoader : AsyncLoader
     private IEnumerator InitializeModularSystems(Transform systemsParent)
     {
         // Setup Additional Systems as needed
-        Debug.Log("Loading Modular Systems");
+        //Debug.Log("Loading Modular Systems");
         foreach(var module in gameModules)
         {
             if(module is IGameModule)
@@ -108,13 +108,13 @@ public class GameLoader : AsyncLoader
 
     private void OnComplete()
     {
-        Debug.Log("GameLoader Completed");
+        //Debug.Log("GameLoader Completed");
         StartCoroutine(LoadInitialScene(_sceneIndex));
     }
 
     private IEnumerator LoadInitialScene(int index)
     {
-        Debug.Log("GameLoader Starting Scene Load");
+        //Debug.Log("GameLoader Starting Scene Load");
         var loadOp = SceneManager.LoadSceneAsync(index);
         
         loadingScreen.UpdateLoadingStep("Loading Scene: " + index.ToString());

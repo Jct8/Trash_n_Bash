@@ -20,7 +20,7 @@ public class ObjectPoolManager : MonoBehaviour, IGameModule
 
     public IEnumerator LoadModule()
     {
-        Debug.Log("Initializing ObjectPool");
+        //Debug.Log("Initializing ObjectPool");
         InitializePool();
         yield return new WaitUntil(() => { return IsInitialized; });
 

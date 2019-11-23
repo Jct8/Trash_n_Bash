@@ -5,9 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController)),RequireComponent(typeof(Player))]
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController controller;
-    private Player player;
-    private Camera camera;
+    private CharacterController _controller;
+    private Player _player;
+    private Camera _mainCamera;
+    private GameObject _lockedOnEnemyGO = null;
 
     [SerializeField]
     private float moveSpeed = 10.0f;
@@ -27,15 +28,12 @@ public class PlayerController : MonoBehaviour
     private float burstSpeed = 40.0f;
 
     private bool _isTargetLockedOn = false;
-    private GameObject lockedOnEnemyGO = null;
-
-    public bool HoldShiftForAcceleration = false;
 
     private void Awake()
     {
-        controller = gameObject.GetComponent<CharacterController>();
-        player = gameObject.GetComponent<Player>();
-        camera = Camera.main;
+        _controller = gameObject.GetComponent<CharacterController>();
+        _player = gameObject.GetComponent<Player>();
+        _mainCamera = Camera.main;
     }
 
     private void Update()
@@ -44,36 +42,42 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(player.Attack());
+            StartCoroutine(_player.Attack());
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            player.PoisonAttack();
+            _player.PoisonAttack();
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (_isTargetLockedOn)
             {
-                GameObject prevTarget = lockedOnEnemyGO;
+                GameObject prevTarget = _lockedOnEnemyGO;
                 CheckTargetLockedOn();
 
-                if (prevTarget == lockedOnEnemyGO)
+                if (prevTarget == _lockedOnEnemyGO)
                 {
+                    //Deselect
                     _isTargetLockedOn = false;
-                    lockedOnEnemyGO = null;
+                    _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                    _lockedOnEnemyGO = null;
                 }
                 else
                 {
-                    lockedOnEnemyGO = prevTarget;
+                    _lockedOnEnemyGO = prevTarget;
                 }
             }
             else
             {
                 CheckTargetLockedOn();
-                if (lockedOnEnemyGO)
+                if (_lockedOnEnemyGO)
+                {
+                    //Select
                     _isTargetLockedOn = true;
+                    _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
+                }
                 else
                     _isTargetLockedOn = false;
             }
@@ -88,8 +92,8 @@ public class PlayerController : MonoBehaviour
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
 
-        Vector3 forward = camera.transform.forward;
-        Vector3 right = camera.transform.right;
+        Vector3 forward = _mainCamera.transform.forward;
+        Vector3 right = _mainCamera.transform.right;
 
         forward.y = 0f;
         right.y = 0f;
@@ -103,12 +107,7 @@ public class PlayerController : MonoBehaviour
             moveSpeed = minMoveSpeed + burstSpeed;
         }
 
-        if (move.magnitude > 0 && moveSpeed < maxMoveSpeed && !HoldShiftForAcceleration)
-        {
-            moveSpeed += (acceleration * Time.deltaTime);
-        }
-        else if (move.magnitude > 0 && moveSpeed < maxMoveSpeed
-            && HoldShiftForAcceleration && Input.GetKey(KeyCode.LeftShift))
+        if (move.magnitude > 0 && moveSpeed < maxMoveSpeed)
         {
             moveSpeed += (acceleration * Time.deltaTime);
         }
@@ -125,23 +124,25 @@ public class PlayerController : MonoBehaviour
 
         move.y -= gravity;
 
-        controller.Move(move * Time.deltaTime * moveSpeed);
+        _controller.Move(move * Time.deltaTime * moveSpeed);
     }
 
     public void ActivateTargetLockedOn()
     {
-        if (_isTargetLockedOn && lockedOnEnemyGO)
+        if (_isTargetLockedOn && _lockedOnEnemyGO)
         {
-            if (lockedOnEnemyGO.activeInHierarchy)
+            if (_lockedOnEnemyGO.activeInHierarchy)
             {
-                Vector3 targetDirection = lockedOnEnemyGO.transform.position;
+                Vector3 targetDirection = _lockedOnEnemyGO.transform.position;
                 targetDirection.y = transform.position.y;
                 transform.LookAt(targetDirection);
             }
             else
             {
+                //Deselect
+                _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
                 _isTargetLockedOn = false;
-                lockedOnEnemyGO = null;
+                _lockedOnEnemyGO = null;
             }
         }
     }
@@ -153,9 +154,9 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.transform.gameObject.CompareTag("Enemy"))
-                lockedOnEnemyGO = hit.transform.gameObject;
+                _lockedOnEnemyGO = hit.transform.gameObject;
             else
-                lockedOnEnemyGO = null;
+                _lockedOnEnemyGO = null;
         }
     }
     

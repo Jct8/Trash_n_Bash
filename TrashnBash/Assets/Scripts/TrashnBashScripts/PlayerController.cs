@@ -10,22 +10,18 @@ public class PlayerController : MonoBehaviour
     private Camera _mainCamera;
     private GameObject _lockedOnEnemyGO = null;
 
-    [SerializeField]
-    private float moveSpeed = 10.0f;
-    [SerializeField]
-    private float minMoveSpeed = 10.0f;
-    [SerializeField]
-    private float maxMoveSpeed = 50.0f;
-    [SerializeField]
-    private float turnSpeed = 5.0f;
-    [SerializeField]
-    private float acceleration = 5f;
-    [SerializeField]
-    private float deacceleration = 5f;
-    [SerializeField]
-    private float gravity = 1.0f;
-    [SerializeField]
-    private float burstSpeed = 40.0f;
+    [SerializeField] private float moveSpeed = 10.0f;
+    [SerializeField] private float minMoveSpeed = 10.0f;
+    [SerializeField] private float maxMoveSpeed = 50.0f;
+    [SerializeField] private float turnSpeed = 5.0f;
+    [SerializeField] private float acceleration = 5f;
+    [SerializeField] private float deacceleration = 5f;
+    [SerializeField] private float gravity = 1.0f;
+    [SerializeField] private float burstSpeed = 40.0f;
+
+    [SerializeField] private KeyCode _AttackButton = KeyCode.Space;
+    [SerializeField] private KeyCode _PoisonAttackButton = KeyCode.E;
+    [SerializeField] private KeyCode _LockTargetButton = KeyCode.Mouse0;
 
     private bool _isTargetLockedOn = false;
 
@@ -40,17 +36,17 @@ public class PlayerController : MonoBehaviour
     {
         CalculateMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(_AttackButton))
         {
             StartCoroutine(_player.Attack());
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(_PoisonAttackButton))
         {
             _player.PoisonAttack();
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(_LockTargetButton))
         {
             if (_isTargetLockedOn)
             {

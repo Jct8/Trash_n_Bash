@@ -15,16 +15,15 @@ public class Tower : MonoBehaviour
 
     private Action _action;
 
-    [SerializeField] private string _dataSourceId = "Tower";
-    [SerializeField] private string _name;
-    [SerializeField] private float _range;
-    [SerializeField] private float _damage;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _health;
-    [SerializeField] private float _attackRate;
-    [SerializeField] private float _FullHealth;
-    [SerializeField] private float _shotTime;
-    [SerializeField] private float _PercentageOfHealth = 100.0f;
+    public string _dataSourceId = "Tower";
+    public string _name;
+    public float _range;
+    public float _damage;
+    public float _speed;
+    public float _health;
+    public float _attackRate;
+    public float _FullHealth;
+    public float _shotTime;
 
     private void Awake()
     {
@@ -86,8 +85,9 @@ public class Tower : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         _FullHealth -= dmg;
-        _PercentageOfHealth = (100.0f / _health) * _FullHealth;
-        if (_PercentageOfHealth <= 0.0f)
+        Debug.Log("Taken damage: " + dmg);
+        ServiceLocator.Get<UIManager>().UpdateTowerHealth(_FullHealth);
+        if (_FullHealth <= 0.0f)
         {
             return;
         }

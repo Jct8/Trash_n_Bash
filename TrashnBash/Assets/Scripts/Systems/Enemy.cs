@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, ICharacterAction
 {
     public Action killed;
     public Rigidbody rigid;
+
+    [Header("Unity Stuff")]
+    public Image healthBar;
 
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
@@ -68,6 +72,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Agent = GetComponent<NavMeshAgent>();
         _IsDead = false;
         fullHealth = _Health;
+        healthBar.fillAmount = fullHealth / _Health;
         rigid = gameObject.GetComponent<Rigidbody>();
         _targetIndicator = transform.Find("TargetIndicator").gameObject;
         gameObject.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
@@ -175,6 +180,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Order = Order.Tower;
         _CurrentWayPoint = 0;
         fullHealth = _Health;
+        healthBar.fillAmount = fullHealth / _Health;
         rigid.velocity = Vector3.zero;
     }
 
@@ -182,7 +188,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         fullHealth -= Dmg;
         Debug.Log("Enemy Took " + Dmg + " damage");
-
+        healthBar.fillAmount = fullHealth / _Health;
         if (_Detect == Detect.Detected && isHero == true)
         {
             _Detect = Detect.Attack;
@@ -237,7 +243,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         else if (FrontAttack(_tower.transform))
         {
-            _tower.GetComponent<Tower>().TakeDamage(_Attack / 2.0f);
+            if(this._Name == "Skunks_1")
+                _tower.GetComponent<Tower>().TakeDamage(3.0f);
+            else if(this._Name == "Rats_1")
+                _tower.GetComponent<Tower>().TakeDamage(1.0f);
         }
         yield return new WaitForSeconds(0.5f);
         if (_Order != Order.Fight)

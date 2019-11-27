@@ -263,6 +263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneIndexToLoad: 1
   loadingScreen: {fileID: 1289506453}
+  _UIPrefeb: {fileID: 6670158105797579109, guid: 245b064f6d9f9c14cb6a6e8d5f867f03,
+    type: 3}
   gameModules:
   - {fileID: 498627632}
   - {fileID: 498627633}

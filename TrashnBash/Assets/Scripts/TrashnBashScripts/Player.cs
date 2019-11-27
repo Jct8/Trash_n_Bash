@@ -42,7 +42,7 @@ public class Player : MonoBehaviour, ICharacterAction
     {
         health -= damage;
         Debug.Log("Player Took " + damage + " damage");
-
+        ServiceLocator.Get<UIManager>().UpdatePlayerHealth(health);
     }
 
     public IEnumerator Attack()

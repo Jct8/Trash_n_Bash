@@ -8,9 +8,8 @@ public class GameLoader : AsyncLoader
     public int sceneIndexToLoad = 1;
     public LoadingScreen loadingScreen = null;
     private static int _sceneIndex = 1;
-    private static GameLoader _instance; // The only singleton you should have.
-
-    // All of the components that implement the IGameModule interface.
+    private static GameLoader _instance;
+    public GameObject _UIPrefeb;
     public List<Component> gameModules = new List<Component>();
 
     protected override void Awake()
@@ -83,6 +82,13 @@ public class GameLoader : AsyncLoader
     {
         // Setup Core Systems
         //Debug.Log("Loading Core Systems");
+
+        GameObject _UIInstance = GameObject.Instantiate(_UIPrefeb);
+        _UIInstance.transform.SetParent(systemsParent);
+        _UIInstance.SetActive(false);
+        DontDestroyOnLoad(_UIInstance);
+        UIManager UIManagerComp = _UIInstance.GetComponent<UIManager>();
+        ServiceLocator.Register<UIManager>(UIManagerComp.Initialize());
 
         GameObject gameManagerGO = new GameObject("GameManager");
         gameManagerGO.transform.SetParent(systemsParent);

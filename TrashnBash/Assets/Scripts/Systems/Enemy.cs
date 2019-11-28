@@ -99,7 +99,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 {
                     if (_CurrentWayPoint == 2)
                     {
-                        _Agent.isStopped = true;
                         if (_AttackCoolTime <= 0.0f)
                         {
                             StartCoroutine("Attack");
@@ -122,7 +121,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     transform.LookAt(newtarget);
                     if ((Vector3.Distance(transform.position, player.transform.position) <= _enemyAttackRange))
                     {
-                        _Agent.isStopped = true;
                         if (_AttackCoolTime <= 0.0f)
                         {
                             StartCoroutine("Attack");
@@ -234,6 +232,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public IEnumerator Attack()
     {
+        _Agent.isStopped = true;
         GameObject _player = GameObject.FindGameObjectWithTag("Player");
         GameObject _tower = GameObject.FindGameObjectWithTag("Tower");
         yield return new WaitForSeconds(3.0f);

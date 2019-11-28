@@ -10,6 +10,7 @@ public class GameLoader : AsyncLoader
     private static int _sceneIndex = 1;
     private static GameLoader _instance;
     public GameObject _UIPrefeb;
+    public GameObject audioPrefeb;
     public List<Component> gameModules = new List<Component>();
 
     protected override void Awake()
@@ -89,6 +90,13 @@ public class GameLoader : AsyncLoader
         DontDestroyOnLoad(_UIInstance);
         UIManager UIManagerComp = _UIInstance.GetComponent<UIManager>();
         ServiceLocator.Register<UIManager>(UIManagerComp.Initialize());
+
+        GameObject _AudioInstance = GameObject.Instantiate(audioPrefeb);
+        _AudioInstance.transform.SetParent(systemsParent);
+        _AudioInstance.SetActive(false);
+        DontDestroyOnLoad(_UIInstance);
+        AudioManager AudioManagerComp = _AudioInstance.GetComponent<AudioManager>();
+        ServiceLocator.Register<AudioManager>(AudioManagerComp);
 
         GameObject gameManagerGO = new GameObject("GameManager");
         gameManagerGO.transform.SetParent(systemsParent);

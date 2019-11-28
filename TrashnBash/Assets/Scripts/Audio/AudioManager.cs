@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource sfxSource;
 
-    private void Start()
+    private void Awake()
     {
         // Loop the background music
         musicSource.loop = true;

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameState _GameState;
-    public GameObject _AudioInstance;
     public GameObject _LevelInstance;
     public GameObject _Player;
     public GameObject _Tower;
@@ -28,12 +27,6 @@ public class GameManager : MonoBehaviour
 
     public GameManager Initialize()
     {
-        _AudioInstance = new GameObject("AudioManager");
-        _AudioInstance.SetActive(false);
-        DontDestroyOnLoad(_AudioInstance);
-        AudioManager _AudioComp = _AudioInstance.GetComponent<AudioManager>();
-        ServiceLocator.Register<AudioManager>(_AudioComp);
-
         _LevelInstance = new GameObject("LevelManager");
         _LevelInstance.SetActive(false);
         DontDestroyOnLoad(_LevelInstance);
@@ -54,11 +47,11 @@ public class GameManager : MonoBehaviour
             case GameState.GamePlay:
                 if (!_Start)
                 {
-                    _AudioInstance.SetActive(true);
                     _LevelInstance.SetActive(true);
                     _LevelInstance.GetComponent<LevelManager>().ResetLevel();
                     ServiceLocator.Get<UIManager>().gameObject.SetActive(true);
                     ServiceLocator.Get<UIManager>().StartCoroutine("Reset");
+                    ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
                     _level = 1;
                     _Start = true;
                 }

@@ -715,6 +715,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7466416969426066422, guid: bbd04011c182cd24a85fa465ce3a8dc5,
         type: 3}
+    - target: {fileID: 7747634888746512579, guid: d0a9fcdf559c7844a99164abd7aeb437,
+        type: 3}
+      propertyPath: partToRotate
+      value: 
+      objectReference: {fileID: 686692036}
+    - target: {fileID: 7747634888746512579, guid: d0a9fcdf559c7844a99164abd7aeb437,
+        type: 3}
+      propertyPath: bulletPrefeb
+      value: 
+      objectReference: {fileID: 7466416969426066422, guid: bbd04011c182cd24a85fa465ce3a8dc5,
+        type: 3}
+    - target: {fileID: 7747634888746512579, guid: d0a9fcdf559c7844a99164abd7aeb437,
+        type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 686692035}
     - target: {fileID: 4011998712625654520, guid: d0a9fcdf559c7844a99164abd7aeb437,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -742,6 +758,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0a9fcdf559c7844a99164abd7aeb437, type: 3}
+--- !u!4 &686692035 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3585084762118417815, guid: d0a9fcdf559c7844a99164abd7aeb437,
+    type: 3}
+  m_PrefabInstance: {fileID: 686692034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &686692036 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 744479145971346679, guid: d0a9fcdf559c7844a99164abd7aeb437,
+    type: 3}
+  m_PrefabInstance: {fileID: 686692034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &739327337
 GameObject:
   m_ObjectHideFlags: 0

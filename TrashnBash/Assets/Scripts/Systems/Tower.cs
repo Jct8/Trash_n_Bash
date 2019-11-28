@@ -24,6 +24,7 @@ public class Tower : MonoBehaviour
     public float _attackRate;
     public float _FullHealth;
     public float _shotTime;
+    public bool isShooting = true;
 
     private void Awake()
     {
@@ -50,7 +51,10 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
-        return;
+        if (!isShooting)
+        {
+            return;
+        }
         if(_target == null)
         {
             return;

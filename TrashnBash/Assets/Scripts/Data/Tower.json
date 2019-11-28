@@ -2,7 +2,7 @@
   "Name": "Tower",
   "Damage": 5.0,
   "Health": 100.0,
-  "Speed": 350.0,
-  "Range": 250.0,
+  "Speed": 500.0,
+  "Range": 10.0,
   "AttackRate": 0.6
 }

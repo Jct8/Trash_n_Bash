@@ -87,14 +87,14 @@ public class GameLoader : AsyncLoader
         GameObject _UIInstance = GameObject.Instantiate(_UIPrefeb);
         _UIInstance.transform.SetParent(systemsParent);
         _UIInstance.SetActive(false);
-        DontDestroyOnLoad(_UIInstance);
+        //DontDestroyOnLoad(_UIInstance);
         UIManager UIManagerComp = _UIInstance.GetComponent<UIManager>();
         ServiceLocator.Register<UIManager>(UIManagerComp.Initialize());
 
         GameObject _AudioInstance = GameObject.Instantiate(audioPrefeb);
         _AudioInstance.transform.SetParent(systemsParent);
         _AudioInstance.SetActive(false);
-        DontDestroyOnLoad(_UIInstance);
+        //DontDestroyOnLoad(_UIInstance);
         AudioManager AudioManagerComp = _AudioInstance.GetComponent<AudioManager>();
         ServiceLocator.Register<AudioManager>(AudioManagerComp);
 

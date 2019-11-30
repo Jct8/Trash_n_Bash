@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICharacterAction
 {
-    public float health = 100.0f;
-    public float attack = 1.0f;
-    public float attackRange = 20.0f;
-    public float attackAngleRange = 45.0f;
-    public float poisonDamage = 2.0f;
-    public float poisonTotalTime = 2.0f;
-    public float poisonTickTime = 3.0f;
-    public float initialPoisonAttackDamage = 10.0f;
+    [SerializeField] private float health = 100.0f;
+    [SerializeField] private float attack = 1.0f;
+    [SerializeField] private float attackRange = 20.0f;
+    [SerializeField] private float attackAngleRange = 45.0f;
+    [SerializeField] private float poisonDamage = 10.0f;
+    [SerializeField] private float poisonTotalTime = 3.0f;
+    [SerializeField] private float poisonTickTime = 1.0f;
+    [SerializeField] private float initialPoisonAttackDamage = 10.0f;
+    [SerializeField] private float ultimateRange = 30.0f;
+    [SerializeField] private float ultimateDamage = 25.0f ;
+    [SerializeField] private float ultimateTickDamage = 5.0f;
+    [SerializeField] private float ultimateTotalTime = 3.0f;
+    [SerializeField] private float ultimateTickTime = 1.0f;
+    [SerializeField] private float ultimateChargeTime = 3.0f;
 
     public const string DAMAGE_KEY = "Damage";
     public const string HEALTH_KEY = "Health";
 
     private float _maxHealth = 100.0f;
+    private float _ultimateCharge = 0.0f;
+    private UIManager uiManager;
 
     void Start()
     {
         _maxHealth = health;
+        InvokeRepeating("IncrementUltCharge", 10.0f, ultimateChargeTime);
+        uiManager = ServiceLocator.Get<UIManager>();
         //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
         //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
     }
@@ -41,8 +51,21 @@ public class Player : MonoBehaviour, ICharacterAction
     public void TakeDamage(float damage, bool isHero)
     {
         health -= damage;
-        Debug.Log("Player Took " + damage + " damage");
+        //Debug.Log("Player Took " + damage + " damage");
         ServiceLocator.Get<UIManager>().UpdatePlayerHealth(health);
+    }
+
+    public float UltimateCharge { get { return _ultimateCharge; } private set { } }
+    public float Health { get { return health; } private set { } }
+
+    public void IncrementUltCharge()
+    {
+        _ultimateCharge++;
+        if (_ultimateCharge>=100.0f)
+        {
+            _ultimateCharge = 100.0f;
+        }
+        uiManager.UpdateUltimatePercentage(_ultimateCharge);
     }
 
     public IEnumerator Attack()
@@ -82,6 +105,28 @@ public class Player : MonoBehaviour, ICharacterAction
                 {
                     go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage,true);
                     go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+                }
+            }
+        }
+    }
+
+    public void UltimateAttack()
+    {
+        if (_ultimateCharge != 100.0f)
+            return;
+        ////Justin - TODO:Find a better method.
+        _ultimateCharge = 0.0f;
+        List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
+        foreach (var enemy in ListOfEnemies)
+        {
+            List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+            foreach (var go in gameObjects)
+            {
+                float distance = Vector2.Distance(transform.position, go.transform.position);
+                if (distance < ultimateRange)
+                {
+                    go.GetComponent<Enemy>().TakeDamage(ultimateDamage, true);
+                    go.GetComponent<Enemy>().SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
                 }
             }
         }

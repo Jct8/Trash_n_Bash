@@ -89,7 +89,7 @@ public class Tower : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         _FullHealth -= dmg;
-        Debug.Log("Taken damage: " + dmg);
+        //Debug.Log("Taken damage: " + dmg);
         ServiceLocator.Get<UIManager>().UpdateTowerHealth(_FullHealth);
         if (_FullHealth <= 0.0f)
         {

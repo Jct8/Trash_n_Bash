@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _AttackButton = KeyCode.Space;
     [SerializeField] private KeyCode _PoisonAttackButton = KeyCode.E;
     [SerializeField] private KeyCode _LockTargetButton = KeyCode.Mouse0;
+    [SerializeField] private KeyCode _UltimateButton = KeyCode.Q;
 
     private bool _isTargetLockedOn = false;
 
@@ -77,6 +78,11 @@ public class PlayerController : MonoBehaviour
                 else
                     _isTargetLockedOn = false;
             }
+        }
+
+        if (Input.GetKeyDown(_UltimateButton))
+        {
+            _player.UltimateAttack();
         }
 
         ActivateTargetLockedOn();

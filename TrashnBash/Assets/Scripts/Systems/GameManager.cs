@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        if (_Player.GetComponent<Player>().health <= 0.0f || _Tower.GetComponent<Tower>()._FullHealth <= 0.0f)
+                        if (_Player.GetComponent<Player>().Health <= 0.0f || _Tower.GetComponent<Tower>()._FullHealth <= 0.0f)
                         {
                             _GameState = GameState.GameOver;
                         }

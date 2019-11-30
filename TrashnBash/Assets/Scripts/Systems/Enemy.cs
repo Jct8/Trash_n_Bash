@@ -185,7 +185,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public void TakeDamage(float Dmg, bool isHero)
     {
         fullHealth -= Dmg;
-        Debug.Log("Enemy Took " + Dmg + " damage");
+        //Debug.Log("Enemy Took " + Dmg + " damage");
         healthBar.fillAmount = fullHealth / _Health;
         if (_Detect == Detect.Detected && isHero == true)
         {
@@ -197,6 +197,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         if (fullHealth <= 0.0f)
         {
+            if(!_IsDead)
+                player.GetComponent<Player>().IncrementUltCharge();
             _IsDead = true;
             _isPoisoned = false;
             StartCoroutine("DeathAnimation");

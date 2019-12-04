@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 563957458}
   m_Layer: 0
   m_Name: Skunks
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2234,7 +2234,7 @@ GameObject:
   - component: {fileID: 1990679502}
   m_Layer: 0
   m_Name: Rats
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

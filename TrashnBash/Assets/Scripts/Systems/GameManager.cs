@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public int _level;
     private bool _Start = false;
+    
     public enum GameState
     {
         Loader,
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
                     ServiceLocator.Get<UIManager>().gameObject.SetActive(true);
                     ServiceLocator.Get<UIManager>().StartCoroutine("Reset");
                     ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
-                    _level = 1;
+                    _level++;
                     _Start = true;
                 }
                 else
@@ -69,7 +70,16 @@ public class GameManager : MonoBehaviour
                             _GameState = GameState.GameOver;
                         }
                     }
-
+                    //if(ServiceLocator.Get<UIManager>().waveTimerBar.value == 0.0f)
+                    //{
+                    //    GameObject[] spawers = GameObject.FindGameObjectsWithTag("Spawner");
+                    //    foreach(GameObject spawn in spawers)
+                    //    {
+                    //        spawn.GetComponent<EnemySpawner>()._currentWave = 0;
+                    //        spawn.GetComponent<EnemySpawner>().StartCoroutine("StartSpawner");
+                    //    }
+                    //    _Start = false;
+                    //}
                 }
                 break;
             case GameState.GameOver:

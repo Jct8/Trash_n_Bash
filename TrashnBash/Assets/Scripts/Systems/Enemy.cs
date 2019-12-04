@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _EndDistance = 2.0f;
     private float _InsideofRange = 200.0f;
     private float _MaximumAngle = 90.0f;
-    private float _MaximumDistance = 50.0f;
+    private float _MaximumDistance = 3.0f;
     private float _poisonDamage = 0.0f;
     private float _poisonTotalTime = 0.0f;
     private float _poisonTickTime = 0.0f;
@@ -241,6 +241,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (FrontAttack(_player.transform))
         {
             _player.GetComponent<Player>().TakeDamage(_Attack, false);
+            ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
         else if (FrontAttack(_tower.transform))
         {

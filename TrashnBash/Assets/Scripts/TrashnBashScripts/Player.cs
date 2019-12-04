@@ -23,7 +23,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public const string HEALTH_KEY = "Health";
 
     private float _maxHealth = 100.0f;
-    private float _ultimateCharge = 0.0f;
+    public float _ultimateCharge = 0.0f;
     private UIManager uiManager;
 
     void Start()
@@ -103,7 +103,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 float angle = Vector3.Angle(transform.forward, direction);
                 if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
                 {
-                    go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage,true);
+                    go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage,true); // ERROR : Null Reference Excption
                     go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
                 }
             }

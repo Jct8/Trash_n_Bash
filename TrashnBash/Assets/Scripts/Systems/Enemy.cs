@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _EndDistance = 2.0f;
     private float _InsideofRange = 200.0f;
     private float _MaximumAngle = 90.0f;
-    private float _MaximumDistance = 3.0f;
+    private float _MaximumDistance = 5.0f;
     private float _poisonDamage = 0.0f;
     private float _poisonTotalTime = 0.0f;
     private float _poisonTickTime = 0.0f;
@@ -250,6 +250,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             else if(this._Name == "Rats_1")
                 _tower.GetComponent<Tower>().TakeDamage(1.0f);
         }
+        Debug.Log(_tower.GetComponent<Tower>()._FullHealth);
         yield return new WaitForSeconds(0.5f);
         if (_Order != Order.Fight)
         {

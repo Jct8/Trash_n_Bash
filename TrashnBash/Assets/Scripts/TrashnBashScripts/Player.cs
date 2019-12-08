@@ -72,6 +72,9 @@ public class Player : MonoBehaviour, ICharacterAction
     {
         ////Justin - TODO:Find a better method.
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
+        float closestDistance = Mathf.Infinity;
+        GameObject closestEnemy = null;
+
         foreach (var enemy in ListOfEnemies)
         {
             List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
@@ -79,13 +82,22 @@ public class Player : MonoBehaviour, ICharacterAction
             {
                 Vector3 direction = (go.transform.position - transform.position);
                 float distance = Vector2.Distance(transform.position, go.transform.position);
-                float angle = Vector3.Angle(transform.forward, direction);
-                if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+                //float angle = Vector3.Angle(transform.forward, direction);
+                //if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+                //{
+                //    go.GetComponent<Enemy>().TakeDamage(attack, true);
+                //    gameObject.GetComponent<PlayerController>().SwitchAutoLock(go);
+                //}
+                if (distance < closestDistance && distance < attackRange)
                 {
-                    go.GetComponent<Enemy>().TakeDamage(attack, true);
+                    closestDistance = distance;
+                    closestEnemy = go;
                 }
             }
         }
+        closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true);
+        if (closestEnemy)
+            gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
         yield return null;
     }
 

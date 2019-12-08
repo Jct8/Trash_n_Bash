@@ -6,14 +6,14 @@ public class Player : MonoBehaviour, ICharacterAction
 {
     [SerializeField] private float health = 100.0f;
     [SerializeField] private float attack = 1.0f;
-    [SerializeField] private float attackRange = 20.0f;
+    [SerializeField] public float attackRange = 20.0f;
     [SerializeField] private float attackAngleRange = 45.0f;
     [SerializeField] private float poisonDamage = 10.0f;
     [SerializeField] private float poisonTotalTime = 3.0f;
     [SerializeField] private float poisonTickTime = 1.0f;
     [SerializeField] private float initialPoisonAttackDamage = 10.0f;
     [SerializeField] private float ultimateRange = 30.0f;
-    [SerializeField] private float ultimateDamage = 25.0f ;
+    [SerializeField] private float ultimateDamage = 25.0f;
     [SerializeField] private float ultimateTickDamage = 5.0f;
     [SerializeField] private float ultimateTotalTime = 3.0f;
     [SerializeField] private float ultimateTickTime = 1.0f;
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public void IncrementUltCharge()
     {
         _ultimateCharge++;
-        if (_ultimateCharge>=100.0f)
+        if (_ultimateCharge >= 100.0f)
         {
             _ultimateCharge = 100.0f;
         }
@@ -103,7 +103,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 float angle = Vector3.Angle(transform.forward, direction);
                 if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
                 {
-                    go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage,true); // ERROR : Null Reference Excption
+                    go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true); // ERROR : Null Reference Excption
                     go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
                 }
             }
@@ -130,6 +130,24 @@ public class Player : MonoBehaviour, ICharacterAction
                 }
             }
         }
+    }
+
+    public GameObject DetectBarricade()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+
+        foreach (var go in hitColliders)
+        {
+            Vector3 direction = (go.transform.position - transform.position);
+            float distance = Vector2.Distance(transform.position, go.transform.position);
+            float angle = Vector3.Angle(transform.forward, direction);
+            if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange && go.CompareTag("Barricade"))
+            {
+                return go.gameObject;
+            }
+
+        }
+        return null;
     }
 
     public void UpdateAnimation()

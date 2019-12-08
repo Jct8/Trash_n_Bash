@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController)),RequireComponent(typeof(Player))]
+[RequireComponent(typeof(CharacterController)), RequireComponent(typeof(Player))]
 public class PlayerController : MonoBehaviour
 {
     private CharacterController _controller;
     private Player _player;
     private Camera _mainCamera;
     private GameObject _lockedOnEnemyGO = null;
+    private GameObject _Barricade = null;
+    private GameObject _RepairBarricade = null;
 
     [SerializeField] private float moveSpeed = 10.0f;
     [SerializeField] private float minMoveSpeed = 10.0f;
@@ -23,8 +25,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _PoisonAttackButton = KeyCode.E;
     [SerializeField] private KeyCode _LockTargetButton = KeyCode.Mouse0;
     [SerializeField] private KeyCode _UltimateButton = KeyCode.Q;
+    [SerializeField] private KeyCode _PickUpButton = KeyCode.F;
+    [SerializeField] private KeyCode _RepairButton = KeyCode.R;
 
     private bool _isTargetLockedOn = false;
+    private bool _isHoldingItem = false;
+    private bool _isRepairing = false;
+    private bool _CanMove = true;
 
     private void Awake()
     {
@@ -36,6 +43,47 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         CalculateMovement();
+
+        if (_isRepairing)
+        {
+            _isRepairing = _RepairBarricade.GetComponent<Barricade>().CheckRepairValid(transform);
+        }
+
+        if (Input.GetKeyDown(_PickUpButton))
+        {
+            if (!_isHoldingItem)
+            {
+                _Barricade = _player.DetectBarricade();
+                if (_Barricade == null)
+                    _isHoldingItem = false;
+                else if (_Barricade.GetComponent<Barricade>().CanBePickedUp())
+                {
+                    _Barricade.GetComponent<Barricade>().PickUp(gameObject);
+                    _isHoldingItem = true;
+                }
+            }
+            else
+            {
+                StartCoroutine(PlaceBarricade());
+            }
+
+        }
+
+        if (_isHoldingItem)
+            return;
+
+        if (Input.GetKeyDown(_RepairButton))
+        {
+            _RepairBarricade = _player.DetectBarricade();
+            if (_RepairBarricade == null)
+                _isHoldingItem = false;
+            else
+            {
+                _isRepairing = true;
+                _RepairBarricade.GetComponent<Barricade>().inRangeRepair  = true;
+                StartCoroutine(_RepairBarricade.GetComponent<Barricade>().Repair());
+            }
+        }
 
         if (Input.GetKeyDown(_AttackButton))
         {
@@ -91,6 +139,8 @@ public class PlayerController : MonoBehaviour
 
     public void CalculateMovement()
     {
+        if (!_CanMove)
+            return;
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
 
@@ -161,5 +211,21 @@ public class PlayerController : MonoBehaviour
                 _lockedOnEnemyGO = null;
         }
     }
-    
+
+    public IEnumerator PlaceBarricade()
+    {
+        _CanMove = false;
+        yield return new WaitForSeconds(_Barricade.GetComponent<Barricade>()._barricadeBuildTime);
+        _Barricade.GetComponent<Barricade>().PlaceBarricade();
+        _Barricade = null;
+        _isHoldingItem = false;
+        _CanMove = true;
+    }
+
+    public CharacterController GetController()
+    {
+        return _controller;
+    }
+
+
 }

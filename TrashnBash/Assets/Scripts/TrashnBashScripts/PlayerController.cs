@@ -212,6 +212,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SwitchAutoLock(GameObject enemy)
+    {
+        _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+
+        _lockedOnEnemyGO = enemy;
+        _isTargetLockedOn = true;
+        _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
+    }
+
     public IEnumerator PlaceBarricade()
     {
         _CanMove = false;

@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public GameObject player;
     private GameObject _targetIndicator;
-
+    private GameObject _ObjectofBarricade;
     public float fullHealth;
     public int _CurrentWayPoint = 0;
     private bool _IsDead = false;
@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
     }
 
     public void Initialize(WayPointManager.Path path, Action Recycle)
@@ -82,6 +83,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
+        if (_ObjectofBarricade == null)
+            _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
 
         if (!_IsDead)
         {
@@ -109,6 +112,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     {
                         _CurrentWayPoint++;
                     }
+                }
+                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 4.0f)
+                {
+                    _Order = Order.Barricade;
                 }
             }
             else if (_Order == Order.Fight)
@@ -142,6 +149,22 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 {
                     killed?.Invoke();
                 }
+            }
+            else if (_Order == Order.Barricade)
+            {
+                _Agent.SetDestination(_ObjectofBarricade.transform.position);
+                Vector3 targetToBarricade = _ObjectofBarricade.transform.position;
+                targetToBarricade.y = transform.position.y;
+                transform.LookAt(_ObjectofBarricade.transform);
+                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 1.5f)
+                {
+                    if (_AttackCoolTime <= 0.0f)
+                    {
+                        StartCoroutine("Attack");
+                        _AttackCoolTime = 3.0f;
+                    }
+                }
+
             }
             Detection();
             rigid.velocity = Vector3.zero;
@@ -185,7 +208,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public void TakeDamage(float Dmg, bool isHero)
     {
         fullHealth -= Dmg;
-        //Debug.Log("Enemy Took " + Dmg + " damage");
         healthBar.fillAmount = fullHealth / _Health;
         if (_Detect == Detect.Detected && isHero == true)
         {
@@ -237,6 +259,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Agent.isStopped = true;
         GameObject _player = GameObject.FindGameObjectWithTag("Player");
         GameObject _tower = GameObject.FindGameObjectWithTag("Tower");
+        _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade"); 
         yield return new WaitForSeconds(3.0f);
         if (FrontAttack(_player.transform))
         {
@@ -250,6 +273,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
             else if(this._Name == "Rats_1")
                 _tower.GetComponent<Tower>().TakeDamage(1.0f);
         }
+        else
+        {
+            if(_Order == Order.Barricade)
+            {
+                //_ObjectofBarricade.GetComponent<Tower>().TakeDamage(1.0f);
+            }
+        }
+
         Debug.Log(_tower.GetComponent<Tower>()._FullHealth);
         yield return new WaitForSeconds(0.5f);
         if (_Order != Order.Fight)
@@ -281,6 +312,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public IEnumerator DeathAnimation()
     {
+        _AttackCoolTime = 3.0f;
         yield return new WaitForSeconds(1.0f);
         killed?.Invoke();
         yield return null;

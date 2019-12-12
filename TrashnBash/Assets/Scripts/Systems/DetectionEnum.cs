@@ -11,6 +11,7 @@ public enum Detect
 
 public enum Order
 {
+    Barricade,
     Tower,
     Fight,
     Back

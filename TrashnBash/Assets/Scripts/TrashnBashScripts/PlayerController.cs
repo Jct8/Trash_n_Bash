@@ -27,11 +27,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _UltimateButton = KeyCode.Q;
     [SerializeField] private KeyCode _PickUpButton = KeyCode.F;
     [SerializeField] private KeyCode _RepairButton = KeyCode.R;
+    [SerializeField] private KeyCode _ReleaseLockButton = KeyCode.LeftShift;
 
     private bool _isTargetLockedOn = false;
     private bool _isHoldingItem = false;
     private bool _isRepairing = false;
     private bool _CanMove = true;
+
+    #region Unity Functions
 
     private void Awake()
     {
@@ -133,9 +136,23 @@ public class PlayerController : MonoBehaviour
             _player.UltimateAttack();
         }
 
+        if (Input.GetKeyDown(_ReleaseLockButton))
+        {
+            if (_isTargetLockedOn)
+            {
+                //Deselect
+                _isTargetLockedOn = false;
+                _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                _lockedOnEnemyGO = null;
+            }
+        }
         ActivateTargetLockedOn();
 
     }
+
+    #endregion
+
+    #region Actions
 
     public void CalculateMovement()
     {
@@ -179,6 +196,20 @@ public class PlayerController : MonoBehaviour
         _controller.Move(move * Time.deltaTime * moveSpeed);
     }
 
+    public IEnumerator PlaceBarricade()
+    {
+        _CanMove = false;
+        yield return new WaitForSeconds(_Barricade.GetComponent<Barricade>()._barricadeBuildTime);
+        _Barricade.GetComponent<Barricade>().PlaceBarricade();
+        _Barricade = null;
+        _isHoldingItem = false;
+        _CanMove = true;
+    }
+
+    #endregion
+
+    #region Target Lock on
+
     public void ActivateTargetLockedOn()
     {
         if (_isTargetLockedOn && _lockedOnEnemyGO)
@@ -221,14 +252,13 @@ public class PlayerController : MonoBehaviour
         _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
     }
 
-    public IEnumerator PlaceBarricade()
+    #endregion
+
+    #region Getters
+
+    public GameObject GetLockedOnTarget()
     {
-        _CanMove = false;
-        yield return new WaitForSeconds(_Barricade.GetComponent<Barricade>()._barricadeBuildTime);
-        _Barricade.GetComponent<Barricade>().PlaceBarricade();
-        _Barricade = null;
-        _isHoldingItem = false;
-        _CanMove = true;
+        return _lockedOnEnemyGO;
     }
 
     public CharacterController GetController()
@@ -236,5 +266,6 @@ public class PlayerController : MonoBehaviour
         return _controller;
     }
 
+    #endregion
 
 }

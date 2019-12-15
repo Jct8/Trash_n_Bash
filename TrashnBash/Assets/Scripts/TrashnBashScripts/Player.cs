@@ -71,39 +71,59 @@ public class Player : MonoBehaviour, ICharacterAction
     public IEnumerator Attack()
     {
         ////Justin - TODO:Find a better method.
+
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
         float closestDistance = Mathf.Infinity;
         GameObject closestEnemy = null;
 
-        foreach (var enemy in ListOfEnemies)
+        GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
+
+        if (target == null)
         {
-            List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
-            foreach (var go in gameObjects)
+            foreach (var enemy in ListOfEnemies)
             {
-                Vector3 direction = (go.transform.position - transform.position);
-                float distance = Vector2.Distance(transform.position, go.transform.position);
-                //float angle = Vector3.Angle(transform.forward, direction);
-                //if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
-                //{
-                //    go.GetComponent<Enemy>().TakeDamage(attack, true);
-                //    gameObject.GetComponent<PlayerController>().SwitchAutoLock(go);
-                //}
-                if (distance < closestDistance && distance < attackRange)
+                List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+                foreach (var go in gameObjects)
                 {
-                    closestDistance = distance;
-                    closestEnemy = go;
+                    Vector3 direction = (go.transform.position - transform.position);
+                    float distance = Vector2.Distance(transform.position, go.transform.position);
+                    //float angle = Vector3.Angle(transform.forward, direction);
+                    //if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+                    //{
+                    //    go.GetComponent<Enemy>().TakeDamage(attack, true);
+                    //    gameObject.GetComponent<PlayerController>().SwitchAutoLock(go);
+                    //}
+                    if (distance < closestDistance && distance < attackRange)
+                    {
+                        closestDistance = distance;
+                        closestEnemy = go;
+                    }
                 }
             }
         }
-        closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true);
+        else
+            closestEnemy = target;
+
         if (closestEnemy)
+        {
+            closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true);
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
+        }
         yield return null;
     }
 
     public void PoisonAttack()
     {
         ////Justin - TODO:Find a better method.
+        GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
+
+        if (target)
+        {
+            target.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
+            target.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+            return;
+        }
+
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
         foreach (var enemy in ListOfEnemies)
         {

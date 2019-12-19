@@ -73,6 +73,13 @@ MonoBehaviour:
   poisonTotalTime: 3
   poisonTickTime: 1
   initialPoisonAttackDamage: 10
+  ultimateRange: 30
+  ultimateDamage: 25
+  ultimateTickDamage: 5
+  ultimateTotalTime: 3
+  ultimateTickTime: 1
+  ultimateChargeTime: 3
+  _ultimateCharge: 0
 --- !u!114 &1011058151224188264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +100,13 @@ MonoBehaviour:
   deacceleration: 100
   gravity: 1
   burstSpeed: 45
-  HoldShiftForAcceleration: 0
+  _AttackButton: 32
+  _PoisonAttackButton: 101
+  _LockTargetButton: 323
+  _UltimateButton: 113
+  _PickUpButton: 102
+  _RepairButton: 114
+  _ReleaseLockButton: 304
 --- !u!54 &2115016952094743300
 Rigidbody:
   m_ObjectHideFlags: 0

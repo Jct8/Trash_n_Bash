@@ -70,25 +70,18 @@ public class GameManager : MonoBehaviour
                             _GameState = GameState.GameOver;
                         }
                     }
-                    //if(ServiceLocator.Get<UIManager>().waveTimerBar.value == 0.0f)
-                    //{
-                    //    GameObject[] spawers = GameObject.FindGameObjectsWithTag("Spawner");
-                    //    foreach(GameObject spawn in spawers)
-                    //    {
-                    //        spawn.GetComponent<EnemySpawner>()._currentWave = 0;
-                    //        spawn.GetComponent<EnemySpawner>().StartCoroutine("StartSpawner");
-                    //    }
-                    //    _Start = false;
-                    //}
                 }
                 break;
             case GameState.GameOver:
+                StartCoroutine("SetGameOver");
                 break;
         }
     }
 
-    public void SetGameOver()
+    public IEnumerator SetGameOver()
     {
-
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene(4);
+        yield return null;
     }
 }

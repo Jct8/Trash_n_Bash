@@ -18,10 +18,12 @@ public class UIManager : MonoBehaviour
     public GameObject PresentTextrue;
     public Texture BasicTexture;
     public Texture SickTexture;
+    public Texture PowerFulTexture;
 
     private float _TowerHP;
     private float fullEnergy = 100.0f;
     private float fullWaves = 25.0f;
+    private bool IsPower = false;
 
     public UIManager Initialize()
     {
@@ -41,6 +43,7 @@ public class UIManager : MonoBehaviour
 
         waveTimerBar.value = fullWaves;
         AnimationTexture.SetBool("IsHit", false);
+        AnimationTexture.SetFloat("Energy", 0.0f);
         UpdatePlayerHealth(player.GetComponent<Player>().Health);
         UpdateTowerHealth(tower.GetComponent<Tower>()._FullHealth);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
@@ -73,15 +76,31 @@ public class UIManager : MonoBehaviour
     {
         ultimateChargePercentage.text = curr.ToString() + " %";
         EnergyBar.fillAmount = player.GetComponent<Player>()._ultimateCharge / fullEnergy;
+
+        if(curr>= 80.0f)
+        {
+            IsPower = true;
+            PresentTextrue.GetComponent<RawImage>().texture = PowerFulTexture;
+        }
+        else
+        {
+            IsPower = false;
+            PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
+        }
+
+        AnimationTexture.SetFloat("Energy", curr);
     }
 
     public IEnumerator HitAnimation()
     {
-        AnimationTexture.SetBool("IsHit", true);
-        PresentTextrue.GetComponent<RawImage>().texture = SickTexture;
-        yield return new WaitForSeconds(1.0f);
-        PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
-        AnimationTexture.SetBool("IsHit", false);
+        if(!IsPower)
+        {
+            AnimationTexture.SetBool("IsHit", true);
+            PresentTextrue.GetComponent<RawImage>().texture = SickTexture;
+            yield return new WaitForSeconds(1.0f);
+            PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
+            AnimationTexture.SetBool("IsHit", false);
+        }
         yield return null;
     }
 }

@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private bool _IsDead = false;
     public Detect _Detect { get; set; }
     public Order _Order { get; set; }
+    public bool _isDetected = false;
 
     public string _DataSource;
 
@@ -42,10 +43,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField]
     private float _AttackCoolTime = 3.0f;
     private float _enemyAttackRange = 2.0f;
-    private float _EndDistance = 2.0f;
+    private float _EndDistance = 3.0f;
     private float _InsideofRange = 200.0f;
-    private float _MaximumAngle = 90.0f;
-    private float _MaximumDistance = 5.0f;
+    private float _MaximumAngle = 45.0f;
+    private float _MaximumDistance = 7.0f;
     private float _poisonDamage = 0.0f;
     private float _poisonTotalTime = 0.0f;
     private float _poisonTickTime = 0.0f;
@@ -77,6 +78,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         rigid = gameObject.GetComponent<Rigidbody>();
         _targetIndicator = transform.Find("TargetIndicator").gameObject;
         gameObject.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+        _isDetected = false;
     }
 
     void Update()
@@ -113,7 +115,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
                         _CurrentWayPoint++;
                     }
                 }
-                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 4.0f)
+                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 4.0f
+                    && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true)
                 {
                     _Order = Order.Barricade;
                 }
@@ -160,7 +163,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 {
                     if (_AttackCoolTime <= 0.0f)
                     {
-                        StartCoroutine("Attack");
+                        BarricadeAttack();
                         _AttackCoolTime = 3.0f;
                     }
                 }
@@ -196,6 +199,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public void Alive()
     {
+        _Agent.isStopped = false;
         _IsDead = false;
         _Detect = Detect.None;
         _Order = Order.Tower;
@@ -203,6 +207,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         fullHealth = _Health;
         healthBar.fillAmount = fullHealth / _Health;
         rigid.velocity = Vector3.zero;
+        _isDetected = false;
     }
 
     public void TakeDamage(float Dmg, bool isHero)
@@ -211,19 +216,32 @@ public class Enemy : MonoBehaviour, ICharacterAction
         healthBar.fillAmount = fullHealth / _Health;
         if (_Detect == Detect.Detected && isHero == true)
         {
-            _Detect = Detect.Attack;
-            _Order = Order.Fight;
+            GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in list)
+            {
+                if(enemy.GetComponent<Enemy>()._Order == Order.Fight)
+                {
+                    _isDetected = false;
+                    break;
+                }
+                else
+                {
+                    _isDetected = true;
+                }
+            }
+            if(_isDetected)
+                _Order = Order.Fight;
         }
         else
             _Detect = Detect.Detected;
 
         if (fullHealth <= 0.0f)
         {
-            if(!_IsDead)
+            StartCoroutine("DeathAnimation");
+            if (!_IsDead)
                 player.GetComponent<Player>().IncrementUltCharge();
             _IsDead = true;
             _isPoisoned = false;
-            StartCoroutine("DeathAnimation");
         }
     }
 
@@ -254,35 +272,39 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _isPoisoned = true;
     }
 
+    public void BarricadeAttack()
+    {
+        _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
+        _Agent.isStopped = true;
+        if(_ObjectofBarricade.GetComponent<Barricade>().isAlive == true)
+        {
+            _ObjectofBarricade?.GetComponent<Barricade>().TakeDamage(1.0f);
+        }
+        else
+        {
+            _Order = Order.Tower;
+            _Agent.isStopped = false;
+        }
+    }
+
     public IEnumerator Attack()
     {
         _Agent.isStopped = true;
         GameObject _player = GameObject.FindGameObjectWithTag("Player");
         GameObject _tower = GameObject.FindGameObjectWithTag("Tower");
-        _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade"); 
         yield return new WaitForSeconds(3.0f);
-        if (FrontAttack(_player.transform))
+        if (FrontAttack(_tower.transform))
         {
-            _player.GetComponent<Player>().TakeDamage(_Attack, false);
-            ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
-        }
-        else if (FrontAttack(_tower.transform))
-        {
-            if(this._Name == "Skunks_1")
+            if (this._Name == "Skunks_1")
                 _tower.GetComponent<Tower>().TakeDamage(3.0f);
             else if(this._Name == "Rats_1")
                 _tower.GetComponent<Tower>().TakeDamage(1.0f);
         }
-        else
+        else if (FrontAttack(_player.transform))
         {
-            if(_Order == Order.Barricade)
-            {
-                //_ObjectofBarricade.GetComponent<Tower>().TakeDamage(1.0f);
-            }
+            _player.GetComponent<Player>().TakeDamage(_Attack, false);
+            ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
-
-        Debug.Log(_tower.GetComponent<Tower>()._FullHealth);
-        yield return new WaitForSeconds(0.5f);
         if (_Order != Order.Fight)
         {
             _Order = Order.Back;
@@ -312,6 +334,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public IEnumerator DeathAnimation()
     {
+        _Agent.isStopped = true;
         _AttackCoolTime = 3.0f;
         yield return new WaitForSeconds(1.0f);
         killed?.Invoke();

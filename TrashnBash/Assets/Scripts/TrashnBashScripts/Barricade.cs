@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Barricade : MonoBehaviour
 {
@@ -12,16 +13,20 @@ public class Barricade : MonoBehaviour
 
     private bool _CanBePickedUp = true;
     private float _MaxHealth =0.0f;
-
+    public Image healthBar;
     public float _barricadeBuildTime = 3.0f;
     public bool inRangeRepair = false;
     public bool isRepairing = false;
+    public bool isAlive = true;
 
     public void PickUp(GameObject playerGO)
     {
         Tower tower = ServiceLocator.Get<GameManager>()._Tower.GetComponent<Tower>() ;
         _Health = tower._health * _PercentFromTower *0.01f;
         _MaxHealth = _Health;
+        if (_MaxHealth != 0.0f)
+            healthBar.fillAmount = _Health / _MaxHealth;
+        isAlive = true;
         //tower.TakeDamage(_Health);
 
         float height = transform.position.y;
@@ -63,8 +68,21 @@ public class Barricade : MonoBehaviour
         if (isRepairing)
         {
             _Health = _MaxHealth ;
+            if (_MaxHealth != 0.0f)
+                healthBar.fillAmount = _Health / _MaxHealth;
         }
         isRepairing = false;
+        isAlive = true;
     }
 
+    public void TakeDamage(float dmg)
+    {
+        _Health -= dmg;
+        if (_MaxHealth != 0.0f)
+            healthBar.fillAmount = _Health / _MaxHealth;
+        if (_Health <= 0.0f)
+        {
+            isAlive = false;
+        }
+    }
 }

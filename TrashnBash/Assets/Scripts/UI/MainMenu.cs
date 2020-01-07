@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
     private int levelToLoad = 1;
     void Start()
     {
-        ServiceLocator.Get<GameManager>()._GameState = GameManager.GameState.MainMenu;
+        ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.MainMenu);
     }
     public void OnLevelButtonClick(int level)
     {
@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator LoadLevelRoutine()
     {
-        ServiceLocator.Get<GameManager>()._GameState = GameManager.GameState.GamePlay;
+        ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.GamePlay);
         yield return SceneManager.LoadSceneAsync(levelToLoad);
     }
 }

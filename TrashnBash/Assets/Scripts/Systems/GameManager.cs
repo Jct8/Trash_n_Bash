@@ -5,20 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameState _GameState;
-    public GameObject _LevelInstance;
-    public GameObject _Player;
-    public GameObject _Tower;
+    private GameState _GameState;
 
-    public int _level;
-    private bool _Start = false;
-    
+    public int currentlevel;
+    public int highScore;
+
     public enum GameState
     {
         Loader,
         MainMenu,
         GamePlay,
-        GameOver
+        GameWin,
+        GameLose
     }
 
     private void Awake()
@@ -28,12 +26,7 @@ public class GameManager : MonoBehaviour
 
     public GameManager Initialize()
     {
-        _LevelInstance = new GameObject("LevelManager");
-        _LevelInstance.SetActive(false);
-        DontDestroyOnLoad(_LevelInstance);
-        LevelManager _LevelComp = _LevelInstance.AddComponent<LevelManager>();
-        ServiceLocator.Register<LevelManager>(_LevelComp);
-
+        currentlevel = 0;
         return this;
     }
 
@@ -46,33 +39,19 @@ public class GameManager : MonoBehaviour
             case GameState.MainMenu:
                 break;
             case GameState.GamePlay:
-                if (!_Start)
+                if (ServiceLocator.Get<LevelManager>().CheckLoseCondition())
                 {
-                    _LevelInstance.SetActive(true);
-                    _LevelInstance.GetComponent<LevelManager>().ResetLevel();
-                    ServiceLocator.Get<UIManager>().gameObject.SetActive(true);
-                    ServiceLocator.Get<UIManager>().StartCoroutine("Reset");
-                    ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
-                    _level++;
-                    _Start = true;
+                    _GameState = GameState.GameLose;
                 }
-                else
+                else if (ServiceLocator.Get<LevelManager>().CheckWinCondition())
                 {
-                    if(_Player == null && _Tower == null)
-                    {
-                        _Player = GameObject.FindGameObjectWithTag("Player");
-                        _Tower = GameObject.FindGameObjectWithTag("Tower");
-                    }
-                    else
-                    {
-                        if (_Player.GetComponent<Player>().Health <= 0.0f || _Tower.GetComponent<Tower>()._FullHealth <= 0.0f)
-                        {
-                            _GameState = GameState.GameOver;
-                        }
-                    }
+                    _GameState = GameState.GameWin;
                 }
                 break;
-            case GameState.GameOver:
+            case GameState.GameWin:
+                StartCoroutine("SetGameWin");
+                break;
+            case GameState.GameLose:
                 StartCoroutine("SetGameOver");
                 break;
         }
@@ -80,8 +59,28 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator SetGameOver()
     {
+        _GameState = GameState.MainMenu;
         yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene("GameOver");
         yield return null;
+    }
+
+    public IEnumerator SetGameWin()
+    {
+        _GameState = GameState.MainMenu;
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("GameWin");
+        yield return null;
+    }
+
+    public void changeGameState(GameState state)
+    {
+        _GameState = state;
+        if (_GameState == GameState.GamePlay)
+        {
+            ServiceLocator.Get<UIManager>().gameObject.SetActive(true);
+            ServiceLocator.Get<UIManager>().StartCoroutine("Reset");
+            ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
+        }
     }
 }

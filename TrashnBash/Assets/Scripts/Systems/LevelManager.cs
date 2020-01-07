@@ -5,38 +5,83 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject _Prefeb;
-    public GameObject _PlayerInstance;
-    public GameObject _TowerInstance;
+    public GameObject playerInstance;
+    public GameObject towerInstance;
 
-    public int _Level;
-    public float _Money;
-    public int _Score;
+    public int levelNumber;
+    public int enemyDeathCount;
 
-    private void Awake()
+    public float playerHealth = 100.0f;
+    public float towerHealth = 100.0f;
+
+    public LevelManager Initialize()
     {
-        if (gameObject == null)
-        {
-            Debug.Log("Failed to find it, since it doesn't exist!");
-        }
+        return this;
     }
 
     public void ClearLevel()
     {
         SaveData();
         ResetLevel();
-        _Level++;
+    }
+
+    public void IncreaseEnemyDeathCount(int increment)
+    {
+        enemyDeathCount += increment;
+        //Debug.Log("Enemy Death Count:" + enemyDeathCount);
+    }
+
+    public bool CheckLoseCondition()
+    {
+        if (playerInstance == null || towerInstance == null)
+        {
+            return false;
+        }
+        if (playerInstance.GetComponent<Player>().Health <= 0.0f || towerInstance.GetComponent<Tower>()._FullHealth <= 0.0f)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool CheckWinCondition()
+    {
+        if (enemyDeathCount == 2)
+        {
+            playerHealth = playerInstance.GetComponent<Player>().Health;
+            towerHealth = towerInstance.GetComponent<Tower>()._FullHealth;
+            return true;
+        }
+        return false;
+    }
+
+    public int GetStarRating()
+    {
+        float average = (playerHealth + towerHealth) *0.5f;
+
+        if (average < 60.0f)
+            return 1;
+        else if (average >= 60.0f && average < 80.0f)
+            return 2;
+        else
+            return 3;
     }
 
     public void ResetLevel()
     {
-        return;
+        if (playerInstance == null || towerInstance == null)
+        {
+            playerInstance = GameObject.FindGameObjectWithTag("Player");
+            towerInstance = GameObject.FindGameObjectWithTag("Tower");
+        }
+        enemyDeathCount = 0;
+        playerHealth = 100.0f;
+        towerHealth = 100.0f;
     }
 
     public void SaveData()
     {
         return;
-
     }
 
     public void LoadData()

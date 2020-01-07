@@ -103,6 +103,11 @@ public class GameLoader : AsyncLoader
         var gameManagerComp = gameManagerGO.AddComponent<GameManager>();
         ServiceLocator.Register<GameManager>(gameManagerComp.Initialize());
 
+        GameObject levelManagerGO = new GameObject("LevelManager");
+        levelManagerGO.transform.SetParent(systemsParent);
+        var levelManagerComp = levelManagerGO.AddComponent<LevelManager>();
+        ServiceLocator.Register<LevelManager>(levelManagerComp.Initialize());
+
         yield return null;
     }
 

@@ -84,7 +84,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
     void Update()
     {
         if (player == null)
-            player = GameObject.FindGameObjectWithTag("Player");
+            return;
+            //player = GameObject.FindGameObjectWithTag("Player");
         if (_ObjectofBarricade == null)
             _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
 
@@ -337,6 +338,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Agent.isStopped = true;
         _AttackCoolTime = 3.0f;
         yield return new WaitForSeconds(1.0f);
+        ServiceLocator.Get<LevelManager>().IncreaseEnemyDeathCount(1);
         killed?.Invoke();
         yield return null;
     }

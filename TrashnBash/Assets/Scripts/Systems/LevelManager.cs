@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
     public void ClearLevel()
     {
         SaveData();
-        ResetLevel();
+        ResetLevel(); 
     }
 
     public void IncreaseEnemyDeathCount(int increment)
@@ -48,8 +48,10 @@ public class LevelManager : MonoBehaviour
     {
         if (enemyDeathCount == 2)
         {
-            playerHealth = playerInstance.GetComponent<Player>().Health;
-            towerHealth = towerInstance.GetComponent<Tower>()._FullHealth;
+            if(playerInstance != null)
+                playerHealth = playerInstance.GetComponent<Player>().Health;
+            if(towerInstance != null)
+                towerHealth = towerInstance.GetComponent<Tower>()._FullHealth;
             return true;
         }
         return false;

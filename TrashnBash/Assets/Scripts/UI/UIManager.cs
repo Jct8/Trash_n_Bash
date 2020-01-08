@@ -16,20 +16,24 @@ public class UIManager : MonoBehaviour
     public Image EnergyBar;
 
     public GameObject PresentTextrue;
+    public GameObject[] spawners;
     public Texture BasicTexture;
     public Texture SickTexture;
     public Texture PowerFulTexture;
 
     private float _TowerHP;
     private float fullEnergy = 100.0f;
-    private float fullWaves = 25.0f;
     private bool IsPower = false;
 
     public UIManager Initialize()
     {
         playerHealthBar.value = 0.0f;
-        waveTimerBar.maxValue = fullWaves;
-        waveTimerBar.value = 25.0f;
+        spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        foreach(GameObject spawn in spawners)
+        {
+            waveTimerBar.maxValue += spawn.GetComponent<EnemySpawner>()._numberOfWave;
+        }
+        waveTimerBar.value = waveTimerBar.maxValue;
         towerHealthPercentage.text = string.Empty;
         return this;
     }
@@ -40,8 +44,12 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         player = GameObject.FindGameObjectWithTag("Player");
         tower = GameObject.FindGameObjectWithTag("Tower");
-
-        waveTimerBar.value = fullWaves;
+        spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        foreach (GameObject spawn in spawners)
+        {
+            waveTimerBar.maxValue += spawn.GetComponent<EnemySpawner>()._numberOfWave;
+        }
+        waveTimerBar.value = waveTimerBar.maxValue;
         AnimationTexture.SetBool("IsHit", false);
         AnimationTexture.SetFloat("Energy", 0.0f);
         UpdatePlayerHealth(player.GetComponent<Player>().Health);
@@ -53,10 +61,11 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator CountingTimer()
     {
+        spawners = GameObject.FindGameObjectsWithTag("Spawner");
         yield return new WaitForSeconds(10.0f); // Wait for a wave
         while(waveTimerBar.value >= 0)
         {
-            waveTimerBar.value--;
+            waveTimerBar.value = waveTimerBar.value - spawners.Length;
             yield return new WaitForSeconds(8.0f);
         }
         yield return null;

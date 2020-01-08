@@ -107,11 +107,12 @@ MonoBehaviour:
   player: {fileID: 0}
   fullHealth: 0
   _CurrentWayPoint: 0
+  _isDetected: 0
   _DataSource: Rats_1
   _Name: 
-  _Attack: 0
-  _Health: 0
-  _Money: 0
+  _Attack: 2
+  _Health: 5
+  _Money: 10
   _Speed: 5
   _AttackCoolTime: 0
 --- !u!1 &7435411569412823581
@@ -354,11 +355,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1986332374905582975}
     m_Modifications:
-    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyHealth
-      objectReference: {fileID: 0}
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -463,6 +459,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyHealth
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac930b1727b18944bc0983f8f595921, type: 3}

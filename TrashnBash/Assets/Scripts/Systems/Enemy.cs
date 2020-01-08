@@ -63,14 +63,17 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         _Path = path;
         killed += Recycle;
-        _DataLoader = ServiceLocator.Get<DataLoader>();
-        _EnemyData = _DataLoader.GetDataSourceById(_DataSource) as JsonDataSource;
+        //_DataLoader = ServiceLocator.Get<DataLoader>();
+        //_EnemyData = _DataLoader.GetDataSourceById(_DataSource) as JsonDataSource;
+
+        //_Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
+        //_Attack = System.Convert.ToSingle(_EnemyData.DataDictionary["Attack"]);
+        //_Health = System.Convert.ToSingle(_EnemyData.DataDictionary["Health"]);
+        //_Money = System.Convert.ToSingle(_EnemyData.DataDictionary["Money"]);
+
         _Detect = Detect.None;
         _Order = Order.Tower;
-        _Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
-        _Attack = System.Convert.ToSingle(_EnemyData.DataDictionary["Attack"]);
-        _Health = System.Convert.ToSingle(_EnemyData.DataDictionary["Health"]);
-        _Money = System.Convert.ToSingle(_EnemyData.DataDictionary["Money"]);
+
         _Agent = GetComponent<NavMeshAgent>();
         _IsDead = false;
         fullHealth = _Health;

@@ -1,18 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WinScreen : MonoBehaviour
 {
     public List<GameObject> starList;
-
+    public AudioClip winMusic;
+    public Button returnButton;
     private void Awake()
     {
-        for(int i = 0; i< ServiceLocator.Get<LevelManager>().GetStarRating();i++)
+        ServiceLocator.Get<AudioManager>().musicSource.Stop();
+        ServiceLocator.Get<AudioManager>().musicSource.clip = winMusic;
+        ServiceLocator.Get<AudioManager>().musicSource.volume = 0.5f;
+        ServiceLocator.Get<AudioManager>().musicSource.Play();
+        ServiceLocator.Get<AudioManager>().musicSource.loop = false;
+        for (int i = 0; i< ServiceLocator.Get<LevelManager>().GetStarRating();i++)
         {
             starList[i].SetActive(true);
         }
+        returnButton.onClick.AddListener(ReturnToMainMenu);
         GameObject.Find("EnemyText").GetComponent<Text>().text = "Enemies Defeated: " + ServiceLocator.Get<LevelManager>().enemyDeathCount;
+    }
+
+    void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

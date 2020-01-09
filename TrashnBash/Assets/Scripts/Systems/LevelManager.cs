@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
 
     public bool CheckWinCondition()
     {
-        if (enemyDeathCount == 2)
+        if (enemyDeathCount == 10)
         {
             if(playerInstance != null)
                 playerHealth = playerInstance.GetComponent<Player>().Health;
@@ -77,6 +77,12 @@ public class LevelManager : MonoBehaviour
             towerInstance = GameObject.FindGameObjectWithTag("Tower");
         }
         enemyDeathCount = 0;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Enemy>().rigid.velocity = Vector3.zero;
+            enemy.GetComponent<Enemy>().killed?.Invoke();
+        }
         playerHealth = 100.0f;
         towerHealth = 100.0f;
     }

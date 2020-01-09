@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public Order _Order { get; set; }
     public bool _isDetected = false;
 
-    public string _DataSource;
+    //public string _DataSource;
 
     [SerializeField]
     private string _Name;
@@ -57,6 +57,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         player = GameObject.FindGameObjectWithTag("Player");
         _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
+    }
+
+    private void OnEnable()
+    {
+        player = ServiceLocator.Get<LevelManager>().playerInstance;
     }
 
     public void Initialize(WayPointManager.Path path, Action Recycle)

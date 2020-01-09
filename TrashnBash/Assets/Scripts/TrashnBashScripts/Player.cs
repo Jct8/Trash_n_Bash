@@ -110,36 +110,72 @@ public class Player : MonoBehaviour, ICharacterAction
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
         }
         yield return null;
+        //target.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
+        //target.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
     }
 
-    public void PoisonAttack()
+    public IEnumerator PoisonAttack()
     {
-        ////Justin - TODO:Find a better method.
-        GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
+        //////Justin - TODO:Find a better method.
+        //GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
 
-        if (target)
-        {
-            target.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
-            target.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
-            return;
-        }
+        //if (target)
+        //{
+        //    target.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
+        //    target.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+        //    return;
+        //}
+
+        //List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
+        //foreach (var enemy in ListOfEnemies)
+        //{
+        //    List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+        //    foreach (var go in gameObjects)
+        //    {
+        //        Vector3 direction = (go.transform.position - transform.position);
+        //        float distance = Vector2.Distance(transform.position, go.transform.position);
+        //        float angle = Vector3.Angle(transform.forward, direction);
+        //        if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+        //        {
+        //            go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true); // ERROR : Null Reference Excption
+        //            go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+        //        }
+        //    }
+        //}
 
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
-        foreach (var enemy in ListOfEnemies)
+        float closestDistance = Mathf.Infinity;
+        GameObject closestEnemy = null;
+
+        GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
+
+        if (target == null)
         {
-            List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
-            foreach (var go in gameObjects)
+            foreach (var enemy in ListOfEnemies)
             {
-                Vector3 direction = (go.transform.position - transform.position);
-                float distance = Vector2.Distance(transform.position, go.transform.position);
-                float angle = Vector3.Angle(transform.forward, direction);
-                if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+                List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+                foreach (var go in gameObjects)
                 {
-                    go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true); // ERROR : Null Reference Excption
-                    go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+                    Vector3 direction = (go.transform.position - transform.position);
+                    float distance = Vector2.Distance(transform.position, go.transform.position);
+                    if (distance < closestDistance && distance < attackRange)
+                    {
+                        closestDistance = distance;
+                        closestEnemy = go;
+                    }
                 }
             }
         }
+        else
+            closestEnemy = target;
+
+        if (closestEnemy)
+        {
+            closestEnemy.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
+            closestEnemy.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+            gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
+        }
+        yield return null;
     }
 
     public void UltimateAttack()

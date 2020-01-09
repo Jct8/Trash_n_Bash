@@ -135,11 +135,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
   healthBar: {fileID: 2111063261784629607}
+  healthBarGO: {fileID: 2515801581956126890}
   player: {fileID: 0}
   fullHealth: 0
   _CurrentWayPoint: 0
   _isDetected: 0
-  _DataSource: Skunks_1
   _Name: 
   _Attack: 1
   _Health: 8
@@ -292,6 +292,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7759828449410312193}
     m_Modifications:
+    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyHealth
+      objectReference: {fileID: 0}
     - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_FillAmount
@@ -402,13 +407,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyHealth
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac930b1727b18944bc0983f8f595921, type: 3}
+--- !u!1 &2515801581956126890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+    type: 3}
+  m_PrefabInstance: {fileID: 3142805333898327090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7620023016237512377 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,

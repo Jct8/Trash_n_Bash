@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [Header("Unity Stuff")]
     public Image healthBar;
 
+    public GameObject healthBarGO;
+
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
     private NavMeshAgent _Agent;
@@ -91,6 +93,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     void Update()
     {
+        healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward,Camera.main.transform.up);
         if (player == null)
             return;
             //player = GameObject.FindGameObjectWithTag("Player");
@@ -125,7 +128,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     }
                 }
                 if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 4.0f
-                    && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true)
+                    && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
                 {
                     _Order = Order.Barricade;
                 }
@@ -168,7 +171,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 Vector3 targetToBarricade = _ObjectofBarricade.transform.position;
                 targetToBarricade.y = transform.position.y;
                 transform.LookAt(_ObjectofBarricade.transform);
-                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 1.5f)
+                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 1.5f && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
                 {
                     if (_AttackCoolTime <= 0.0f)
                     {
@@ -217,6 +220,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         healthBar.fillAmount = fullHealth / _Health;
         rigid.velocity = Vector3.zero;
         _isDetected = false;
+        _isPoisoned = false;
     }
 
     public void TakeDamage(float Dmg, bool isHero)
@@ -285,7 +289,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
         _Agent.isStopped = true;
-        if(_ObjectofBarricade.GetComponent<Barricade>().isAlive == true)
+        if(_ObjectofBarricade.GetComponent<Barricade>().isAlive == true )
         {
             _ObjectofBarricade?.GetComponent<Barricade>().TakeDamage(1.0f);
         }

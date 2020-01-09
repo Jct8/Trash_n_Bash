@@ -104,11 +104,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
   healthBar: {fileID: 8022808708343617850}
+  healthBarGO: {fileID: 5833097119454191863}
   player: {fileID: 0}
   fullHealth: 0
   _CurrentWayPoint: 0
   _isDetected: 0
-  _DataSource: Rats_1
   _Name: 
   _Attack: 2
   _Health: 5
@@ -355,6 +355,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1986332374905582975}
     m_Modifications:
+    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyHealth
+      objectReference: {fileID: 0}
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -460,13 +465,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyHealth
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac930b1727b18944bc0983f8f595921, type: 3}
+--- !u!1 &5833097119454191863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+    type: 3}
+  m_PrefabInstance: {fileID: 6451338389726809199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1992135123144052452 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,

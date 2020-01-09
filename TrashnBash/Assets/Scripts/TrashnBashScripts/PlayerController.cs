@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(_PoisonAttackButton))
         {
-            _player.PoisonAttack();
+            StartCoroutine(_player.PoisonAttack());
         }
 
         if (Input.GetKeyDown(_LockTargetButton))
@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_CanMove)
             return;
+
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
 

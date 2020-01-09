@@ -14,11 +14,12 @@ public class Barricade : MonoBehaviour
     private bool _CanBePickedUp = true;
     private float _MaxHealth =0.0f;
     public Image healthBar;
+    public GameObject healthBarGO;
     public float _barricadeBuildTime = 3.0f;
     public bool inRangeRepair = false;
     public bool isRepairing = false;
     public bool isAlive = true;
-
+    public bool isPlaced = false;
     public void PickUp(GameObject playerGO)
     {
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>() ;
@@ -45,10 +46,16 @@ public class Barricade : MonoBehaviour
         return _CanBePickedUp;
     }
 
+    private void Update()
+    {
+        healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
+    }
+
     public void PlaceBarricade()
     {
         _CanBePickedUp = false;
         transform.parent = null;
+        isPlaced = true;
     }
 
     public bool CheckRepairValid(Transform playerTransform)

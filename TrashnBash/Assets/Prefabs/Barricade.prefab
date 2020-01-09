@@ -111,6 +111,7 @@ MonoBehaviour:
   repairTime: 3
   repairRange: 1
   healthBar: {fileID: 1056988090011311257}
+  healthBarGO: {fileID: 3534976058428351828}
   _barricadeBuildTime: 3
   inRangeRepair: 0
   isRepairing: 0
@@ -122,6 +123,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7626825810756298206}
     m_Modifications:
+    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.7924528
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.41791397
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -227,28 +248,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.7924528
-      objectReference: {fileID: 0}
-    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.41791397
-      objectReference: {fileID: 0}
-    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac930b1727b18944bc0983f8f595921, type: 3}
+--- !u!1 &3534976058428351828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+    type: 3}
+  m_PrefabInstance: {fileID: 4069654306352777676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8816059349586578247 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,

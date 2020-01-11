@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private WayPointManager.Path _Path;
 
     public GameObject player;
+    public GameObject popUp;
     private GameObject _targetIndicator;
     private GameObject _ObjectofBarricade;
     public float fullHealth;
@@ -226,7 +227,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public void TakeDamage(float Dmg, bool isHero)
     {
         fullHealth -= Dmg;
+
+        if(popUp)
+        {
+            PopingDamageText(Dmg);
+        }
+
         healthBar.fillAmount = fullHealth / _Health;
+
         if (_Detect == Detect.Detected && isHero == true)
         {
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
@@ -256,6 +264,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _IsDead = true;
             _isPoisoned = false;
         }
+    }
+
+    private void PopingDamageText(float dmg)
+    {
+        Instantiate(popUp, transform.position, Quaternion.identity, transform);
     }
 
     private void CheckPoison()

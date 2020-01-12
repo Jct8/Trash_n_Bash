@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public Order _Order { get; set; }
     public bool _isDetected = false;
 
-    //public string _DataSource;
+    public string _DataSource;
 
     [SerializeField]
     private string _Name;
@@ -71,10 +71,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         _Path = path;
         killed += Recycle;
-        //_DataLoader = ServiceLocator.Get<DataLoader>();
-        //_EnemyData = _DataLoader.GetDataSourceById(_DataSource) as JsonDataSource;
+        _DataLoader = ServiceLocator.Get<DataLoader>();
+        _EnemyData = _DataLoader.GetDataSourceById(_DataSource) as JsonDataSource;
 
-        //_Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
+        _Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
         //_Attack = System.Convert.ToSingle(_EnemyData.DataDictionary["Attack"]);
         //_Health = System.Convert.ToSingle(_EnemyData.DataDictionary["Health"]);
         //_Money = System.Convert.ToSingle(_EnemyData.DataDictionary["Money"]);
@@ -115,13 +115,18 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 _Agent.SetDestination(_Desination.position);
                 if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
                 {
-                    if (_CurrentWayPoint == 2)
+                    if (_CurrentWayPoint == 2 && _Name == "Rats")
                     {
                         if (_AttackCoolTime <= 0.0f)
                         {
                             StartCoroutine("Attack");
                             _AttackCoolTime = 3.0f;
                         }
+                    }
+                    else if(_CurrentWayPoint == 6 && _Name == "Skunks")
+                    {
+                        StartCoroutine("Attack");
+                        _AttackCoolTime = 3.0f;
                     }
                     else
                     {
@@ -222,6 +227,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         rigid.velocity = Vector3.zero;
         _isDetected = false;
         _isPoisoned = false;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void TakeDamage(float Dmg, bool isHero)
@@ -268,7 +274,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     private void PopingDamageText(float dmg)
     {
+        popUp.GetComponent<TextMesh>().text = dmg.ToString();
         Instantiate(popUp, transform.position, Quaternion.identity, transform);
+        popUp.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
     }
 
     private void CheckPoison()

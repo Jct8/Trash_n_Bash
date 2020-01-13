@@ -112,10 +112,11 @@ MonoBehaviour:
   repairRange: 1
   healthBar: {fileID: 1056988090011311257}
   healthBarGO: {fileID: 3534976058428351828}
-  _barricadeBuildTime: 3
+  _barricadeBuildTime: 1
   inRangeRepair: 0
   isRepairing: 0
   isAlive: 1
+  isPlaced: 0
 --- !u!1001 &4069654306352777676
 PrefabInstance:
   m_ObjectHideFlags: 0

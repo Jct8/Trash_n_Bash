@@ -106,9 +106,11 @@ MonoBehaviour:
   healthBar: {fileID: 8022808708343617850}
   healthBarGO: {fileID: 5833097119454191863}
   player: {fileID: 0}
+  popUp: {fileID: 6407678084736455969, guid: ae71a9f809cb43d4ea1bc3fa88328f47, type: 3}
   fullHealth: 0
   _CurrentWayPoint: 0
   _isDetected: 0
+  _DataSource: Rats
   _Name: 
   _Attack: 2
   _Health: 5

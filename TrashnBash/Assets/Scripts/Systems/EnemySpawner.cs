@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     public int _secondBetweenWave;
     public int _secondStartDelay;
     public int _currentWave;
+    public bool StartOnSceneLoad = true;
 
     public List<GameObject> _activeEnemies = new List<GameObject>();
 

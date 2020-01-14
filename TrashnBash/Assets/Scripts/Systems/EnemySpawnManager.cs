@@ -19,7 +19,13 @@ public class EnemySpawnManager : MonoBehaviour
     {
         foreach(var spawner in Spawners)
         {
-            spawner.StartSpawner();
+            if(spawner.StartOnSceneLoad == true)
+                spawner.StartSpawner();
         }
+    }
+
+    public void StartSpawer(EnemySpawner spawner)
+    {
+        spawner.StartSpawner();
     }
 }

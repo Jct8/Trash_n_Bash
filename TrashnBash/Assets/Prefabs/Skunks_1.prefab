@@ -133,8 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45583728f95d9a1448daa7a8bf96b065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigid: {fileID: 0}
   healthBar: {fileID: 2111063261784629607}
+  rigid: {fileID: 0}
   healthBarGO: {fileID: 2515801581956126890}
   player: {fileID: 0}
   popUp: {fileID: 6407678084736455969, guid: ae71a9f809cb43d4ea1bc3fa88328f47, type: 3}
@@ -144,10 +144,11 @@ MonoBehaviour:
   _DataSource: Skunks
   _Name: 
   _Attack: 1
-  _Health: 45
+  _Health: 60
   _Money: 12
   _Speed: 5
   _AttackCoolTime: 0
+  _ObjectDetectionRange: 3
 --- !u!1 &5700120618532984917
 GameObject:
   m_ObjectHideFlags: 0

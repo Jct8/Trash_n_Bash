@@ -86,7 +86,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 foreach (var go in gameObjects)
                 {
                     Vector3 direction = (go.transform.position - transform.position);
-                    float distance = Vector2.Distance(transform.position, go.transform.position);
+                    float distance = Vector3.Distance(transform.position, go.transform.position);
                     //float angle = Vector3.Angle(transform.forward, direction);
                     //if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
                     //{
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour, ICharacterAction
         else
             closestEnemy = target;
 
-        if (closestEnemy)
+        if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
         {
             closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true);
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
@@ -157,7 +157,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 foreach (var go in gameObjects)
                 {
                     Vector3 direction = (go.transform.position - transform.position);
-                    float distance = Vector2.Distance(transform.position, go.transform.position);
+                    float distance = Vector3.Distance(transform.position, go.transform.position);
                     if (distance < closestDistance && distance < attackRange)
                     {
                         closestDistance = distance;
@@ -169,7 +169,7 @@ public class Player : MonoBehaviour, ICharacterAction
         else
             closestEnemy = target;
 
-        if (closestEnemy)
+        if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
         {
             closestEnemy.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
             closestEnemy.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);

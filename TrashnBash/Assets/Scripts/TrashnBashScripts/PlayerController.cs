@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController)), RequireComponent(typeof(Player))]
 public class PlayerController : MonoBehaviour
 {
+    #region Variables
     private CharacterController _controller;
     private Player _player;
     private Camera _mainCamera;
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float deacceleration = 5f;
     [SerializeField] private float gravity = 1.0f;
     [SerializeField] private float burstSpeed = 40.0f;
+    [SerializeField] private float attackCoolDown = 0.4f;
+    [SerializeField] private float poisonAttackCoolDown = 3.0f;
 
     [SerializeField] private KeyCode _AttackButton = KeyCode.Space;
     [SerializeField] private KeyCode _PoisonAttackButton = KeyCode.E;
@@ -33,6 +36,11 @@ public class PlayerController : MonoBehaviour
     private bool _isHoldingItem = false;
     private bool _isRepairing = false;
     private bool _CanMove = true;
+
+    private float currentAttackCoolDown = 0.0f;
+    private float currentPoisonAttackCoolDown = 0.0f;
+
+    #endregion
 
     #region Unity Functions
 
@@ -83,19 +91,27 @@ public class PlayerController : MonoBehaviour
             else
             {
                 _isRepairing = true;
-                _RepairBarricade.GetComponent<Barricade>().inRangeRepair  = true;
+                _RepairBarricade.GetComponent<Barricade>().inRangeRepair = true;
                 StartCoroutine(_RepairBarricade.GetComponent<Barricade>().Repair());
             }
         }
 
         if (Input.GetKeyDown(_AttackButton))
         {
-            StartCoroutine(_player.Attack());
+            if (currentAttackCoolDown < Time.time)
+            {
+                StartCoroutine(_player.Attack());
+                currentAttackCoolDown = Time.time + attackCoolDown;
+            }
         }
 
         if (Input.GetKeyDown(_PoisonAttackButton))
         {
-            StartCoroutine(_player.PoisonAttack());
+            if (currentPoisonAttackCoolDown < Time.time)
+            {
+                StartCoroutine(_player.PoisonAttack());
+                currentPoisonAttackCoolDown = Time.time + poisonAttackCoolDown;
+            }
         }
 
         if (Input.GetKeyDown(_LockTargetButton))

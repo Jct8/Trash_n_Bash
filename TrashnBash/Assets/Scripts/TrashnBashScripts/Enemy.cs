@@ -7,44 +7,40 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, ICharacterAction
 {
-    public Action killed;
-    public Rigidbody rigid;
-
     [Header("Unity Stuff")]
     public Image healthBar;
 
-    public GameObject healthBarGO;
-
+    public Rigidbody rigid;
+    public Action killed;
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
     private NavMeshAgent _Agent;
     private WayPointManager.Path _Path;
 
+    public GameObject healthBarGO;
     public GameObject player;
     public GameObject popUp;
     private GameObject _targetIndicator;
     private GameObject _ObjectofBarricade;
-    public float fullHealth;
-    public int _CurrentWayPoint = 0;
-    private bool _IsDead = false;
+
     public Detect _Detect { get; set; }
     public Order _Order { get; set; }
+    public float fullHealth;
+    public int _CurrentWayPoint = 0;
     public bool _isDetected = false;
+    private bool _IsDead = false;
 
     public string _DataSource;
 
-    [SerializeField]
-    private string _Name;
-    [SerializeField]
-    private float _Attack;
-    [SerializeField]
-    private float _Health;
-    [SerializeField]
-    private float _Money;
-    [SerializeField]
-    private float _Speed;
-    [SerializeField]
-    private float _AttackCoolTime = 3.0f;
+    [SerializeField] private string _Name;
+    [SerializeField] private float _Attack;
+    [SerializeField] private float _Health;
+    [SerializeField] private float _Money;
+    [SerializeField] private float _Speed;
+    [SerializeField] private float _AttackCoolTime = 3.0f;
+    [SerializeField] private float _ObjectDetectionRange = 3.0f;
+
+
     private float _enemyAttackRange = 2.0f;
     private float _EndDistance = 3.0f;
     private float _InsideofRange = 200.0f;
@@ -59,7 +55,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
+        //_ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
     }
 
     private void OnEnable()
@@ -94,12 +90,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     void Update()
     {
-        healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward,Camera.main.transform.up);
+        healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         if (player == null)
             return;
-            //player = GameObject.FindGameObjectWithTag("Player");
-        if (_ObjectofBarricade == null)
-            _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //if (_ObjectofBarricade == null)
+        //    _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
 
         if (!_IsDead)
         {
@@ -115,7 +111,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 _Agent.SetDestination(_Desination.position);
                 if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
                 {
-                    if (_CurrentWayPoint == 2 && _Name == "Rats")
+                    if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                     {
                         if (_AttackCoolTime <= 0.0f)
                         {
@@ -123,20 +119,27 @@ public class Enemy : MonoBehaviour, ICharacterAction
                             _AttackCoolTime = 3.0f;
                         }
                     }
-                    else if(_CurrentWayPoint == 6 && _Name == "Skunks")
-                    {
-                        StartCoroutine("Attack");
-                        _AttackCoolTime = 3.0f;
-                    }
                     else
                     {
                         _CurrentWayPoint++;
                     }
                 }
-                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 4.0f
-                    && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, _ObjectDetectionRange);
+                foreach (var hit in hitColliders)
                 {
-                    _Order = Order.Barricade;
+                    if (hit.CompareTag("Barricade"))
+                    {
+                        _ObjectofBarricade = hit.gameObject;
+                        break;
+                    }
+                }
+                if (_ObjectofBarricade)
+                {
+                    if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= _ObjectDetectionRange
+                        && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
+                    {
+                        _Order = Order.Barricade;
+                    }
                 }
             }
             else if (_Order == Order.Fight)
@@ -200,7 +203,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public void Detection()
     {
-        if (_Order == Order.Fight) //Justin : added to follow and attack player without stopping
+        if (_Order == Order.Fight)
         {
             _Detect = Detect.Attack;
         }
@@ -227,26 +230,27 @@ public class Enemy : MonoBehaviour, ICharacterAction
         rigid.velocity = Vector3.zero;
         _isDetected = false;
         _isPoisoned = false;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = ServiceLocator.Get<LevelManager>().playerInstance;
     }
 
     public void TakeDamage(float Dmg, bool isHero)
     {
         fullHealth -= Dmg;
 
-        if(popUp)
+        if (popUp)
         {
             PopingDamageText(Dmg);
         }
 
         healthBar.fillAmount = fullHealth / _Health;
 
+        //Justin: Not sure what this does
         if (_Detect == Detect.Detected && isHero == true)
         {
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in list)
             {
-                if(enemy.GetComponent<Enemy>()._Order == Order.Fight)
+                if (enemy.GetComponent<Enemy>()._Order == Order.Fight)
                 {
                     _isDetected = false;
                     break;
@@ -256,7 +260,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     _isDetected = true;
                 }
             }
-            if(_isDetected)
+            if (_isDetected)
                 _Order = Order.Fight;
         }
         else
@@ -308,15 +312,16 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public void BarricadeAttack()
     {
-        _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
+        //_ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
         _Agent.isStopped = true;
-        if(_ObjectofBarricade.GetComponent<Barricade>().isAlive == true )
+        if (_ObjectofBarricade?.GetComponent<Barricade>().isAlive == true)
         {
-            _ObjectofBarricade?.GetComponent<Barricade>().TakeDamage(1.0f);
+            _ObjectofBarricade?.GetComponent<Barricade>().TakeDamage(_Attack);
         }
         else
         {
             _Order = Order.Tower;
+            _ObjectofBarricade = null;
             _Agent.isStopped = false;
         }
     }
@@ -324,15 +329,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public IEnumerator Attack()
     {
         _Agent.isStopped = true;
-        GameObject _player = GameObject.FindGameObjectWithTag("Player");
-        GameObject _tower = GameObject.FindGameObjectWithTag("Tower");
+        GameObject _player = ServiceLocator.Get<LevelManager>().playerInstance;
+        GameObject _tower = ServiceLocator.Get<LevelManager>().towerInstance;
         yield return new WaitForSeconds(3.0f);
         if (FrontAttack(_tower.transform))
         {
-            if (this._Name == "Skunks_1")
-                _tower.GetComponent<Tower>().TakeDamage(3.0f);
-            else if(this._Name == "Rats_1")
-                _tower.GetComponent<Tower>().TakeDamage(1.0f);
+            _tower.GetComponent<Tower>().TakeDamage(_Attack);
         }
         else if (FrontAttack(_player.transform))
         {

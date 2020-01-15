@@ -26,6 +26,9 @@ public class Tower : MonoBehaviour
     public float _shotTime;
     public bool isShooting = true;
 
+    public AudioClip shotSound;
+    AudioSource audioSource;
+
     private void Awake()
     {
         _dataLoader = ServiceLocator.Get<DataLoader>();
@@ -36,6 +39,7 @@ public class Tower : MonoBehaviour
         _health = System.Convert.ToSingle(_towerData.DataDictionary["Health"]);
         _attackRate = System.Convert.ToSingle(_towerData.DataDictionary["AttackRate"]);
         _range = System.Convert.ToSingle(_towerData.DataDictionary["Range"]);
+        audioSource = GetComponent<AudioSource>();
         _FullHealth = _health;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
@@ -84,6 +88,7 @@ public class Tower : MonoBehaviour
         var rb = _bulletGO.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.AddForce(firePoint.up * _speed * 3.0f, ForceMode.Force);
+        audioSource.PlayOneShot(shotSound, 1.0f);
     }
 
     public void TakeDamage(float dmg)

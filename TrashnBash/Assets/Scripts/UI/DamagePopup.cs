@@ -6,7 +6,7 @@ public class DamagePopup : MonoBehaviour
 {
     void Start()
     {
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject, 0.5f);
         transform.localScale += new Vector3(0.0f, 5.0f, 0.0f);
     }
 }

@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 {
     [Header("Unity Stuff")]
     public Image healthBar;
+    public Image CooltimeBar;
 
     public Rigidbody rigid;
     public Action killed;
@@ -18,8 +19,13 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private WayPointManager.Path _Path;
 
     public GameObject healthBarGO;
+    public GameObject CoolTimeGO;
     public GameObject player;
     public GameObject popUp;
+    public GameObject popUp_Posion;
+    public GameObject popUp_Ult;
+    public GameObject pickUp;
+
     private GameObject _targetIndicator;
     private GameObject _ObjectofBarricade;
 
@@ -29,8 +35,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public int _CurrentWayPoint = 0;
     public bool _isDetected = false;
     private bool _IsDead = false;
-
+    private bool _IsStolen = false;
+    private bool _IsAttacked = false;
     public string _DataSource;
+    public AudioClip attackEffect;
+    public AudioClip poisonedEffect;
+    AudioSource audioSource;
 
     [SerializeField] private string _Name;
     [SerializeField] private float _Attack;
@@ -39,6 +49,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private float _Speed;
     [SerializeField] private float _AttackCoolTime = 3.0f;
     [SerializeField] private float _ObjectDetectionRange = 3.0f;
+    [SerializeField] private float _DropRate = 0.5f;
 
 
     private float _enemyAttackRange = 2.0f;
@@ -52,9 +63,15 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _poisonCurrentDuration = 0.0f;
     private bool _isPoisoned = false;
 
+    [SerializeField] private float _skunksPoisonTickTime = 1.0f;
+    [SerializeField] private float _skunksPoisonDamage = 1.0f;
+    [SerializeField] private float _skunksPoisonRange = 5.0f;
+    [SerializeField] private float _skunksPoisonTotaltime = 3.0f;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        audioSource = GetComponent<AudioSource>();
+        CooltimeBar.fillAmount = 0;
         //_ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
     }
 
@@ -82,23 +99,36 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _IsDead = false;
         fullHealth = _Health;
         healthBar.fillAmount = fullHealth / _Health;
+        CooltimeBar.fillAmount = 0;
         rigid = gameObject.GetComponent<Rigidbody>();
         _targetIndicator = transform.Find("TargetIndicator").gameObject;
         gameObject.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
         _isDetected = false;
+        _IsAttacked = false;
+        _isPoisoned = false;
     }
+
+    private bool ChargingCoolDown()
+    {
+        CooltimeBar.fillAmount += 1/(_AttackCoolTime * 60.0f);
+        if (CooltimeBar.fillAmount >= 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     void Update()
     {
         healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
+        CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         if (player == null)
             return;
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //if (_ObjectofBarricade == null)
-        //    _ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
-
         if (!_IsDead)
         {
+            SkunksAbility();
+
             if (_isPoisoned)
             {
                 CheckPoison();
@@ -113,10 +143,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 {
                     if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                     {
-                        if (_AttackCoolTime <= 0.0f)
+                        if (ChargingCoolDown())
                         {
                             StartCoroutine("Attack");
-                            _AttackCoolTime = 3.0f;
                         }
                     }
                     else
@@ -150,17 +179,19 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     Vector3 newtarget = player.transform.position;
                     newtarget.y = transform.position.y;
                     transform.LookAt(newtarget);
-                    if ((Vector3.Distance(transform.position, player.transform.position) <= _enemyAttackRange))
+                    if ((Vector3.Distance(transform.position, player.transform.position) < _enemyAttackRange))
                     {
-                        if (_AttackCoolTime <= 0.0f)
+                        _Agent.isStopped = true;
+                        if (ChargingCoolDown())
                         {
                             StartCoroutine("Attack");
-                            _AttackCoolTime = 3.0f;
                         }
                     }
                     else
                     {
                         _Agent.isStopped = false;
+                        CooltimeBar.fillAmount = 0;
+                        _IsAttacked = false;
                     }
                 }
             }
@@ -182,10 +213,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 transform.LookAt(_ObjectofBarricade.transform);
                 if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 1.5f && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
                 {
-                    if (_AttackCoolTime <= 0.0f)
+                    if(ChargingCoolDown())
                     {
                         BarricadeAttack();
-                        _AttackCoolTime = 3.0f;
                     }
                 }
 
@@ -198,7 +228,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
             rigid.velocity = Vector3.zero;
         }
 
-        _AttackCoolTime -= Time.deltaTime;
+        if(_IsAttacked)
+        {
+            ChargingCoolDown();
+        }
+
     }
 
     public void Detection()
@@ -227,26 +261,51 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _CurrentWayPoint = 0;
         fullHealth = _Health;
         healthBar.fillAmount = fullHealth / _Health;
+        CooltimeBar.fillAmount = 0;
         rigid.velocity = Vector3.zero;
         _isDetected = false;
         _isPoisoned = false;
+        _IsStolen = false;
+        _IsAttacked = false;
         player = ServiceLocator.Get<LevelManager>().playerInstance;
     }
 
-    public void TakeDamage(float Dmg, bool isHero)
+    public void TakeDamage(float Dmg, bool isHero, DamageType type)
     {
         fullHealth -= Dmg;
-
-        if (popUp)
+        switch(type)
         {
-            PopingDamageText(Dmg);
+            case DamageType.Normal:
+                {
+                    popUp.GetComponent<TextMesh>().text = Dmg.ToString();
+                    Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
+                    popUp.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
+                    break;
+                }
+            case DamageType.Poison:
+                {
+                    popUp_Posion.GetComponent<TextMesh>().text = Dmg.ToString();
+                    Instantiate(popUp_Posion, transform.position, Camera.main.transform.rotation, transform);
+                    popUp_Posion.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
+                    break;
+                }
+            case DamageType.Ultimate:
+                {
+                    popUp_Ult.GetComponent<TextMesh>().text = Dmg.ToString();
+                    Instantiate(popUp_Ult, transform.position, Camera.main.transform.rotation, transform);
+                    popUp_Ult.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
+                    break;
+                }
         }
 
         healthBar.fillAmount = fullHealth / _Health;
 
         //Justin: Not sure what this does
+        //Jimmy: It's about function for one targeting when the player attacks to one enemy
         if (_Detect == Detect.Detected && isHero == true)
         {
+            if (_Name == "Rats")
+                RatsAbility();
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in list)
             {
@@ -268,19 +327,23 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         if (fullHealth <= 0.0f)
         {
+            if (_IsStolen)
+            {
+                float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f);
+                if (randomNumber > _DropRate)
+                {
+                    Instantiate(pickUp, transform.position, Quaternion.identity);
+                }
+                _IsStolen = false;
+            }
             StartCoroutine("DeathAnimation");
             if (!_IsDead)
                 player.GetComponent<Player>().IncrementUltCharge();
+ 
             _IsDead = true;
             _isPoisoned = false;
+            _IsAttacked = false;
         }
-    }
-
-    private void PopingDamageText(float dmg)
-    {
-        popUp.GetComponent<TextMesh>().text = dmg.ToString();
-        Instantiate(popUp, transform.position, Quaternion.identity, transform);
-        popUp.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
     }
 
     private void CheckPoison()
@@ -288,7 +351,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (_poisonCurrentDuration < Time.time)
         {
             _poisonCurrentDuration = Time.time + _poisonTickTime;
-            TakeDamage(_poisonDamage, true);
+            TakeDamage(_poisonDamage, true, DamageType.Poison);
         }
         if (_poisonTotalTime < Time.time)
         {
@@ -308,12 +371,43 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _poisonCurrentDuration = Time.time;
         _poisonTotalTime = Time.time + totalTime;
         _isPoisoned = true;
+        audioSource.PlayOneShot(poisonedEffect, 0.2f);
+    }
+
+    private void SkunksAbility()
+    {
+        if (Vector3.Distance(transform.position, player.transform.position) <= _skunksPoisonRange
+            && _Name == "Skunks"
+            && !_IsDead)
+        {
+            player.GetComponent<Player>().SetPoisoned(_skunksPoisonDamage, _skunksPoisonTickTime, _skunksPoisonTotaltime);
+        }
+    }
+
+    private void RatsAbility()
+    {
+        int limit = 3;
+        int numbers = 0;
+        foreach(GameObject rat in ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Rats_1"))
+        {
+            if(numbers < limit)
+            {
+                rat.GetComponent<Enemy>()._Order = Order.Fight;
+            }
+            else
+            {
+                numbers = 0;
+                return;
+            }
+            numbers++;
+        }
     }
 
     public void BarricadeAttack()
     {
         //_ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
         _Agent.isStopped = true;
+        _IsAttacked = true;
         if (_ObjectofBarricade?.GetComponent<Barricade>().isAlive == true)
         {
             _ObjectofBarricade?.GetComponent<Barricade>().TakeDamage(_Attack);
@@ -323,28 +417,34 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Order = Order.Tower;
             _ObjectofBarricade = null;
             _Agent.isStopped = false;
+            _IsAttacked = false;
         }
     }
 
     public IEnumerator Attack()
     {
         _Agent.isStopped = true;
+        _IsAttacked = true;
         GameObject _player = ServiceLocator.Get<LevelManager>().playerInstance;
         GameObject _tower = ServiceLocator.Get<LevelManager>().towerInstance;
-        yield return new WaitForSeconds(3.0f);
         if (FrontAttack(_tower.transform))
         {
             _tower.GetComponent<Tower>().TakeDamage(_Attack);
+            _IsStolen = true;
         }
         else if (FrontAttack(_player.transform))
         {
-            _player.GetComponent<Player>().TakeDamage(_Attack, false);
+            _player.GetComponent<Player>().TakeDamage(_Attack, false, DamageType.Enemy);
             ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
+        audioSource.PlayOneShot(attackEffect, 0.7f);
         if (_Order != Order.Fight)
         {
             _Order = Order.Back;
         }
+        CooltimeBar.fillAmount = 0;
+        _Agent.isStopped = false;
+        _IsAttacked = false;
         yield return null;
     }
 
@@ -355,7 +455,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         ConeToTarget.Normalize();
         float _Distance = Vector3.Distance(transform.position, target.transform.position);
 
-        if ((Vector3.Angle(ConeToTarget, Coneforward) < _MaximumAngle) && (_Distance <= _MaximumDistance))
+        if ((Vector3.Angle(ConeToTarget, Coneforward) < _MaximumAngle) && (_Distance < _MaximumDistance))
         {
             return true;
         }

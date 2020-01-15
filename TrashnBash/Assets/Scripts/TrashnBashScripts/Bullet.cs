@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
         var _damageable = collision.gameObject.GetComponent<ICharacterAction>();
         if(_damageable != null && collision.gameObject.CompareTag("Enemy"))
         {
-            _damageable.TakeDamage(_damage,false);
+            _damageable.TakeDamage(_damage,false, DamageType.Normal);
             _action?.Invoke();
         }
     }

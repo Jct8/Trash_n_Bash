@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4208394709829915080}
   - component: {fileID: 1011058151224188264}
   - component: {fileID: 2115016952094743300}
+  - component: {fileID: -9134956417358145422}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -79,7 +80,21 @@ MonoBehaviour:
   ultimateTotalTime: 3
   ultimateTickTime: 1
   ultimateChargeTime: 3
+  healedByItem: 5
+  Popup_Enemy: {fileID: 3994238057033681723, guid: c4fea3b43a7db3c4c94e6eaf72e01443,
+    type: 3}
+  Popup_Skunks: {fileID: 8359619849396166840, guid: aba286cd1aec75049806c3f2923aafc6,
+    type: 3}
+  attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
+  poisonEffect: {fileID: 8300000, guid: 31960797e7e12004c857a9547dad7efc, type: 3}
+  UltimateEffect: {fileID: 8300000, guid: 00d257894e229354f9ab925c723cb27c, type: 3}
+  poisonedbySkunks: {fileID: 8300000, guid: 3932b7b4f6b029342ac35cf9165b9eec, type: 3}
   _ultimateCharge: 0
+  _ispoisoned: 0
+  _poisonTickTime: 0
+  _poisonDamage: 0
+  _poisonCurrentTime: 0
+  _poisonTotalTime: 5
 --- !u!114 &1011058151224188264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +115,8 @@ MonoBehaviour:
   deacceleration: 100
   gravity: 1
   burstSpeed: 45
+  attackCoolDown: 0.4
+  poisonAttackCoolDown: 3
   _AttackButton: 32
   _PoisonAttackButton: 101
   _LockTargetButton: 323
@@ -123,6 +140,102 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &-9134956417358145422
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4473401949322046555}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3550494672790243906
 PrefabInstance:
   m_ObjectHideFlags: 0

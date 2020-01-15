@@ -16,3 +16,12 @@ public enum Order
     Fight,
     Back
 }
+
+public enum DamageType
+{
+    Normal,
+    Poison,
+    Ultimate,
+    Enemy,
+    Skunks
+}

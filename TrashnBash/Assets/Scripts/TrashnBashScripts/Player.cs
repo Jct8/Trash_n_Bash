@@ -18,19 +18,33 @@ public class Player : MonoBehaviour, ICharacterAction
     [SerializeField] private float ultimateTotalTime = 3.0f;
     [SerializeField] private float ultimateTickTime = 1.0f;
     [SerializeField] private float ultimateChargeTime = 3.0f;
-
+    [SerializeField] private float healedByItem = 5.0f;
     public const string DAMAGE_KEY = "Damage";
     public const string HEALTH_KEY = "Health";
+
+    public GameObject Popup_Enemy;
+    public GameObject Popup_Skunks;
+
+    public AudioClip attackEffect;
+    public AudioClip poisonEffect;
+    public AudioClip UltimateEffect;
+    AudioSource audioSource;
 
     private float _maxHealth = 100.0f;
     public float _ultimateCharge = 0.0f;
     private UIManager uiManager;
+    public bool _ispoisoned = false;
+    public float _poisonTickTime;
+    public float _poisonDamage;
+    public float _poisonCurrentTime;
+    public float _poisonTotalTime = 5.0f;
 
     void Start()
     {
         _maxHealth = health;
         InvokeRepeating("IncrementUltCharge", 10.0f, ultimateChargeTime);
         uiManager = ServiceLocator.Get<UIManager>();
+        audioSource = GetComponent<AudioSource>();
         //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
         //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
     }
@@ -48,9 +62,63 @@ public class Player : MonoBehaviour, ICharacterAction
     //    PlayerPrefs.SetFloat(HEALTH_KEY, hp);
     //}
 
-    public void TakeDamage(float damage, bool isHero)
+    public void SetPoisoned(float damage, float time, float total)
+    {
+        if (_ispoisoned)
+            return;
+        _poisonDamage = damage;
+        _poisonTickTime = time;
+        _poisonCurrentTime = Time.time;
+        _poisonTotalTime = Time.time + total;
+        _ispoisoned = true;
+    }
+
+    void Update()
+    {
+        if(!_ispoisoned)
+        {
+            return;
+        }
+        else
+        {
+            Tick();
+        }
+    }
+    
+    private void Tick()
+    {
+        if(_poisonCurrentTime < Time.time)
+        {
+            _poisonCurrentTime = Time.time + _poisonTickTime;
+            TakeDamage(_poisonDamage, false, DamageType.Skunks);
+        }
+        if(_poisonTotalTime < Time.time)
+        {
+            _ispoisoned = false;
+            return;
+        }
+    }
+
+    public void TakeDamage(float damage, bool isHero, DamageType type)
     {
         health -= damage;
+        switch(type)
+        {
+            case DamageType.Enemy:
+                {
+                    Popup_Enemy.GetComponent<TextMesh>().text = damage.ToString();
+                    Instantiate(Popup_Enemy, transform.position, Camera.main.transform.rotation, transform);
+                    Popup_Enemy.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
+                    break;
+                }
+            case DamageType.Skunks:
+                {
+                    Popup_Skunks.GetComponent<TextMesh>().text = damage.ToString();
+                    Instantiate(Popup_Skunks, transform.position, Camera.main.transform.rotation, transform);
+                    Popup_Skunks.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
+                    break;
+                }
+        }
         //Debug.Log("Player Took " + damage + " damage");
         ServiceLocator.Get<UIManager>().UpdatePlayerHealth(health);
     }
@@ -106,8 +174,9 @@ public class Player : MonoBehaviour, ICharacterAction
 
         if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
         {
-            closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true);
+            closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true, DamageType.Normal);
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
+            audioSource.PlayOneShot(attackEffect, 0.75f);
         }
         yield return null;
         //target.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
@@ -171,9 +240,10 @@ public class Player : MonoBehaviour, ICharacterAction
 
         if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
         {
-            closestEnemy.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
+            closestEnemy.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
             closestEnemy.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
+            audioSource.PlayOneShot(poisonEffect, 0.5f);
         }
         yield return null;
     }
@@ -193,8 +263,9 @@ public class Player : MonoBehaviour, ICharacterAction
                 float distance = Vector2.Distance(transform.position, go.transform.position);
                 if (distance < ultimateRange)
                 {
-                    go.GetComponent<Enemy>().TakeDamage(ultimateDamage, true);
+                    go.GetComponent<Enemy>().TakeDamage(ultimateDamage, true, DamageType.Ultimate);
                     go.GetComponent<Enemy>().SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
+                    audioSource.PlayOneShot(UltimateEffect, 0.95f);
                 }
             }
         }
@@ -216,6 +287,18 @@ public class Player : MonoBehaviour, ICharacterAction
 
         }
         return null;
+    }
+
+    private void OnTriggerEnter(Collider item)
+    {
+        if(item.gameObject.CompareTag("PickUp"))
+        {
+            item.gameObject.SetActive(false);
+            GameObject tower = GameObject.FindGameObjectWithTag("Tower");
+            tower.GetComponent<Tower>()._FullHealth += healedByItem;
+            _maxHealth += healedByItem;
+            
+        }
     }
 
     public void UpdateAnimation()

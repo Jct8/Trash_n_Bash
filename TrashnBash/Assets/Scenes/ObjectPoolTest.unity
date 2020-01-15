@@ -3191,9 +3191,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _UnitPrefeb: {fileID: 6876065404672406170, guid: bc53838e0830dae489d9ea831ce6bd08,
     type: 3}
-  _numberOfWave: 25
-  _enemiesPerWave: 1
-  _secondBetweenWave: 8
+  _numberOfWave: 75
+  _enemiesPerWave: 3
+  _secondBetweenWave: 12
   _secondStartDelay: 10
   _currentWave: 0
   StartOnSceneLoad: 1

@@ -14,7 +14,8 @@ public enum Order
     Barricade,
     Tower,
     Fight,
-    Back
+    Back,
+    Stunned
 }
 
 public enum DamageType

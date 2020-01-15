@@ -148,6 +148,7 @@ MonoBehaviour:
     type: 3}
   pickUp: {fileID: 6712860952908622751, guid: 3f77307380e88ae42b678cb78e05a074, type: 3}
   fullHealth: 0
+  stunTime: 0
   _CurrentWayPoint: 0
   _isDetected: 0
   _DataSource: Skunks
@@ -155,7 +156,7 @@ MonoBehaviour:
   poisonedEffect: {fileID: 8300000, guid: 16b5e8f6ec7e27b4482558644ab456c3, type: 3}
   _Name: 
   _Attack: 1
-  _Health: 60
+  _Health: 30
   _Money: 12
   _Speed: 5
   _AttackCoolTime: 3

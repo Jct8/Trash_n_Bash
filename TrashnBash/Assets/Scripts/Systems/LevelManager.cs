@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
 
     public bool CheckWinCondition()
     {
-        if (enemyDeathCount == 10)
+        if (enemyDeathCount == 30)
         {
             if(playerInstance != null)
                 playerHealth = playerInstance.GetComponent<Player>().Health;

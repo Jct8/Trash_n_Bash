@@ -6,6 +6,7 @@ public class Player : MonoBehaviour, ICharacterAction
 {
     [SerializeField] private float health = 100.0f;
     [SerializeField] private float attack = 1.0f;
+    [SerializeField] private float intimdateStunTime = 3.0f;
     [SerializeField] public float attackRange = 20.0f;
     [SerializeField] private float attackAngleRange = 45.0f;
     [SerializeField] private float poisonDamage = 10.0f;
@@ -268,6 +269,15 @@ public class Player : MonoBehaviour, ICharacterAction
                     audioSource.PlayOneShot(UltimateEffect, 0.95f);
                 }
             }
+        }
+    }
+
+    public void IntimidateAttack( GameObject enemy)
+    {
+        if (enemy && Vector3.Distance(transform.position, enemy.transform.position) < attackRange)
+        {
+            enemy.GetComponent<Enemy>()._Order = Order.Stunned;
+            enemy.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
         }
     }
 

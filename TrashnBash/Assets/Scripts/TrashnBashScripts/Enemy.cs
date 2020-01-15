@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public Detect _Detect { get; set; }
     public Order _Order { get; set; }
     public float fullHealth;
+    public float stunTime = 0.0f;
     public int _CurrentWayPoint = 0;
     public bool _isDetected = false;
     private bool _IsDead = false;
@@ -51,7 +52,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private float _ObjectDetectionRange = 3.0f;
     [SerializeField] private float _DropRate = 0.5f;
 
-
     private float _enemyAttackRange = 2.0f;
     private float _EndDistance = 3.0f;
     private float _InsideofRange = 200.0f;
@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private float _skunksPoisonDamage = 1.0f;
     [SerializeField] private float _skunksPoisonRange = 5.0f;
     [SerializeField] private float _skunksPoisonTotaltime = 3.0f;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -113,6 +114,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         CooltimeBar.fillAmount += 1/(_AttackCoolTime * 60.0f);
         if (CooltimeBar.fillAmount >= 1)
         {
+            CooltimeBar.fillAmount = 0;
             return true;
         }
         return false;
@@ -136,13 +138,24 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
             //UpdateAnimation();
             Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
-            if (_Order == Order.Tower)
+            if(_Order == Order.Stunned)
+            {
+                _Agent.isStopped = true;
+                if ( stunTime < Time.time)
+                {
+                    _Agent.isStopped = false;
+                    _Order = Order.Fight;
+                }
+                return;
+            }
+            else if (_Order == Order.Tower)
             {
                 _Agent.SetDestination(_Desination.position);
                 if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
                 {
                     if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                     {
+                        _Agent.isStopped = true;
                         if (ChargingCoolDown())
                         {
                             StartCoroutine("Attack");
@@ -213,7 +226,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 transform.LookAt(_ObjectofBarricade.transform);
                 if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 1.5f && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
                 {
-                    if(ChargingCoolDown())
+                    _Agent.isStopped = true;
+                    if (ChargingCoolDown())
                     {
                         BarricadeAttack();
                     }

@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float burstSpeed = 40.0f;
     [SerializeField] private float attackCoolDown = 0.4f;
     [SerializeField] private float poisonAttackCoolDown = 3.0f;
+    [SerializeField] private float intimidateAttackCoolDown = 5.0f;
 
     [SerializeField] private KeyCode _AttackButton = KeyCode.Space;
     [SerializeField] private KeyCode _PoisonAttackButton = KeyCode.E;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _PickUpButton = KeyCode.F;
     [SerializeField] private KeyCode _RepairButton = KeyCode.R;
     [SerializeField] private KeyCode _ReleaseLockButton = KeyCode.LeftShift;
+    [SerializeField] private KeyCode _Intimidate = KeyCode.LeftControl;
 
     private bool _isTargetLockedOn = false;
     private bool _isHoldingItem = false;
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private float currentAttackCoolDown = 0.0f;
     private float currentPoisonAttackCoolDown = 0.0f;
+    private float currentIntimidateAttackCoolDown = 0.0f;
 
     #endregion
 
@@ -160,6 +163,18 @@ public class PlayerController : MonoBehaviour
                 _isTargetLockedOn = false;
                 _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
                 _lockedOnEnemyGO = null;
+            }
+        }
+
+        if(Input.GetKeyDown(_Intimidate))
+        {
+            if (currentIntimidateAttackCoolDown < Time.time)
+            {
+                if (_isTargetLockedOn)
+                {
+                    _player.IntimidateAttack(_lockedOnEnemyGO);
+                }
+                currentIntimidateAttackCoolDown = Time.time + intimidateAttackCoolDown;
             }
         }
         ActivateTargetLockedOn();

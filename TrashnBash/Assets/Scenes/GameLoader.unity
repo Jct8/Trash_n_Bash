@@ -313,11 +313,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToPool:
-  - name: Skunks_1
+  - name: Skunks
     prefab: {fileID: 5110960924001791372, guid: e776da64559f14f488b335a399426ea3,
       type: 3}
     poolSize: 25
-  - name: Rats_1
+  - name: Rats
     prefab: {fileID: 6876065404672406170, guid: bc53838e0830dae489d9ea831ce6bd08,
       type: 3}
     poolSize: 25

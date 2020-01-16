@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, ICharacterAction
 {
+    #region Variables
     [Header("Unity Stuff")]
     public Image healthBar;
     public Image CooltimeBar;
@@ -22,15 +23,13 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public GameObject CoolTimeGO;
     public GameObject player;
     public GameObject popUp;
-    public GameObject popUp_Posion;
-    public GameObject popUp_Ult;
     public GameObject pickUp;
-
     private GameObject _targetIndicator;
     private GameObject _ObjectofBarricade;
 
     public Detect _Detect { get; set; }
     public Order _Order { get; set; }
+
     public float fullHealth;
     public float stunTime = 0.0f;
     public int _CurrentWayPoint = 0;
@@ -39,9 +38,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private bool _IsStolen = false;
     private bool _IsAttacked = false;
     public string _DataSource;
+
     public AudioClip attackEffect;
     public AudioClip poisonedEffect;
-    AudioSource audioSource;
+    private AudioSource audioSource;
+
+    public string Name { get { return _Name; } private set { } }
 
     [SerializeField] private string _Name;
     [SerializeField] private float _Attack;
@@ -63,23 +65,149 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _poisonCurrentDuration = 0.0f;
     private bool _isPoisoned = false;
 
-    [SerializeField] private float _skunksPoisonTickTime = 1.0f;
-    [SerializeField] private float _skunksPoisonDamage = 1.0f;
-    [SerializeField] private float _skunksPoisonRange = 5.0f;
-    [SerializeField] private float _skunksPoisonTotaltime = 3.0f;
+    IEnemyAbilities enemyAbilities;
 
+    #endregion
+
+    #region UnityFunctions
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         audioSource = GetComponent<AudioSource>();
         CooltimeBar.fillAmount = 0;
-        //_ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
+        enemyAbilities = GetComponent<IEnemyAbilities>();
     }
 
     private void OnEnable()
     {
         player = ServiceLocator.Get<LevelManager>().playerInstance;
     }
+
+    void Update()
+    {
+        healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
+        CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
+        if (player == null || _IsDead)
+        {
+            _Agent.isStopped = true;
+            rigid.velocity = Vector3.zero;
+            return;
+        }
+
+        enemyAbilities.PoisonAOE(player);
+        if (_isPoisoned)
+        {
+            CheckPoison();
+        }
+
+        //UpdateAnimation();
+        Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
+        if (_Order == Order.Stunned)
+        {
+            _Agent.isStopped = true;
+            if (stunTime < Time.time)
+            {
+                _Agent.isStopped = false;
+                _Order = Order.Fight;
+            }
+            return;
+        }
+        else if (_Order == Order.Tower)
+        {
+            _Agent.SetDestination(_Desination.position);
+            if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
+            {
+                if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
+                {
+                    _Agent.isStopped = true;
+                    if (ChargingCoolDown())
+                    {
+                        StartCoroutine("Attack");
+                    }
+                }
+                else
+                {
+                    _CurrentWayPoint++;
+                }
+            }
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _ObjectDetectionRange);
+            foreach (var hit in hitColliders)
+            {
+                if (hit.CompareTag("Barricade"))
+                {
+                    _ObjectofBarricade = hit.gameObject;
+                    break;
+                }
+            }
+            if (_ObjectofBarricade)
+            {
+                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= _ObjectDetectionRange
+                    && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
+                {
+                    _Order = Order.Barricade;
+                }
+            }
+        }
+        else if (_Order == Order.Fight)
+        {
+            if (_Detect == Detect.Attack)
+            {
+                _Agent.SetDestination(player.transform.position);
+                Vector3 newtarget = player.transform.position;
+                newtarget.y = transform.position.y;
+                transform.LookAt(newtarget);
+                if ((Vector3.Distance(transform.position, player.transform.position) < _enemyAttackRange))
+                {
+                    _Agent.isStopped = true;
+                    if (ChargingCoolDown())
+                    {
+                        StartCoroutine("Attack");
+                    }
+                }
+                else
+                {
+                    _Agent.isStopped = false;
+                    CooltimeBar.fillAmount = 0;
+                    _IsAttacked = false;
+                }
+            }
+        }
+        else if (_Order == Order.Back)
+        {
+            _Agent.isStopped = false;
+            _Desination = _Path.WayPoints[0];
+            _Agent.SetDestination(_Desination.position);
+            if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance))
+            {
+                killed?.Invoke();
+            }
+        }
+        else if (_Order == Order.Barricade)
+        {
+            _Agent.SetDestination(_ObjectofBarricade.transform.position);
+            Vector3 targetToBarricade = _ObjectofBarricade.transform.position;
+            targetToBarricade.y = transform.position.y;
+            transform.LookAt(_ObjectofBarricade.transform);
+            if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 1.5f && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
+            {
+                _Agent.isStopped = true;
+                if (ChargingCoolDown())
+                {
+                    BarricadeAttack();
+                }
+            }
+
+        }
+        Detection();
+
+        if (_IsAttacked)
+        {
+            ChargingCoolDown();
+        }
+
+    }
+    #endregion
+
+    #region Initiliaztion
 
     public void Initialize(WayPointManager.Path path, Action Recycle)
     {
@@ -109,144 +237,36 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _isPoisoned = false;
     }
 
+    public void Alive()
+    {
+        _Agent.isStopped = false;
+        _IsDead = false;
+        _Detect = Detect.None;
+        _Order = Order.Tower;
+        _CurrentWayPoint = 0;
+        fullHealth = _Health;
+        healthBar.fillAmount = fullHealth / _Health;
+        CooltimeBar.fillAmount = 0;
+        rigid.velocity = Vector3.zero;
+        _isDetected = false;
+        _isPoisoned = false;
+        _IsStolen = false;
+        _IsAttacked = false;
+        player = ServiceLocator.Get<LevelManager>().playerInstance;
+    }
+
+    #endregion
+
+    #region Check and Ultility Functions
     private bool ChargingCoolDown()
     {
-        CooltimeBar.fillAmount += 1/(_AttackCoolTime * 60.0f);
+        CooltimeBar.fillAmount += 1 / (_AttackCoolTime * 60.0f);
         if (CooltimeBar.fillAmount >= 1)
         {
             CooltimeBar.fillAmount = 0;
             return true;
         }
         return false;
-    }
-
-
-    void Update()
-    {
-        healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
-        CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
-        if (player == null)
-            return;
-        if (!_IsDead)
-        {
-            SkunksAbility();
-
-            if (_isPoisoned)
-            {
-                CheckPoison();
-            }
-
-            //UpdateAnimation();
-            Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
-            if(_Order == Order.Stunned)
-            {
-                _Agent.isStopped = true;
-                if ( stunTime < Time.time)
-                {
-                    _Agent.isStopped = false;
-                    _Order = Order.Fight;
-                }
-                return;
-            }
-            else if (_Order == Order.Tower)
-            {
-                _Agent.SetDestination(_Desination.position);
-                if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
-                {
-                    if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
-                    {
-                        _Agent.isStopped = true;
-                        if (ChargingCoolDown())
-                        {
-                            StartCoroutine("Attack");
-                        }
-                    }
-                    else
-                    {
-                        _CurrentWayPoint++;
-                    }
-                }
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, _ObjectDetectionRange);
-                foreach (var hit in hitColliders)
-                {
-                    if (hit.CompareTag("Barricade"))
-                    {
-                        _ObjectofBarricade = hit.gameObject;
-                        break;
-                    }
-                }
-                if (_ObjectofBarricade)
-                {
-                    if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= _ObjectDetectionRange
-                        && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
-                    {
-                        _Order = Order.Barricade;
-                    }
-                }
-            }
-            else if (_Order == Order.Fight)
-            {
-                if (_Detect == Detect.Attack)
-                {
-                    _Agent.SetDestination(player.transform.position);
-                    Vector3 newtarget = player.transform.position;
-                    newtarget.y = transform.position.y;
-                    transform.LookAt(newtarget);
-                    if ((Vector3.Distance(transform.position, player.transform.position) < _enemyAttackRange))
-                    {
-                        _Agent.isStopped = true;
-                        if (ChargingCoolDown())
-                        {
-                            StartCoroutine("Attack");
-                        }
-                    }
-                    else
-                    {
-                        _Agent.isStopped = false;
-                        CooltimeBar.fillAmount = 0;
-                        _IsAttacked = false;
-                    }
-                }
-            }
-            else if (_Order == Order.Back)
-            {
-                _Agent.isStopped = false;
-                _Desination = _Path.WayPoints[0];
-                _Agent.SetDestination(_Desination.position);
-                if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance))
-                {
-                    killed?.Invoke();
-                }
-            }
-            else if (_Order == Order.Barricade)
-            {
-                _Agent.SetDestination(_ObjectofBarricade.transform.position);
-                Vector3 targetToBarricade = _ObjectofBarricade.transform.position;
-                targetToBarricade.y = transform.position.y;
-                transform.LookAt(_ObjectofBarricade.transform);
-                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 1.5f && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
-                {
-                    _Agent.isStopped = true;
-                    if (ChargingCoolDown())
-                    {
-                        BarricadeAttack();
-                    }
-                }
-
-            }
-            Detection();
-            rigid.velocity = Vector3.zero;
-        }
-        else
-        {
-            rigid.velocity = Vector3.zero;
-        }
-
-        if(_IsAttacked)
-        {
-            ChargingCoolDown();
-        }
-
     }
 
     public void Detection()
@@ -266,51 +286,37 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
     }
 
-    public void Alive()
+    public void SwitchOnTargetIndicator(bool turnOn)
     {
-        _Agent.isStopped = false;
-        _IsDead = false;
-        _Detect = Detect.None;
-        _Order = Order.Tower;
-        _CurrentWayPoint = 0;
-        fullHealth = _Health;
-        healthBar.fillAmount = fullHealth / _Health;
-        CooltimeBar.fillAmount = 0;
-        rigid.velocity = Vector3.zero;
-        _isDetected = false;
-        _isPoisoned = false;
-        _IsStolen = false;
-        _IsAttacked = false;
-        player = ServiceLocator.Get<LevelManager>().playerInstance;
+        _targetIndicator.SetActive(turnOn);
     }
+    #endregion
 
+    #region TakeDamage
     public void TakeDamage(float Dmg, bool isHero, DamageType type)
     {
         fullHealth -= Dmg;
-        switch(type)
+        popUp.GetComponent<TextMesh>().text = Dmg.ToString();
+        switch (type)
         {
             case DamageType.Normal:
-                {
-                    popUp.GetComponent<TextMesh>().text = Dmg.ToString();
-                    Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
-                    popUp.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
-                    break;
-                }
+            {
+                popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 0.0f);
+                break;
+            }
             case DamageType.Poison:
-                {
-                    popUp_Posion.GetComponent<TextMesh>().text = Dmg.ToString();
-                    Instantiate(popUp_Posion, transform.position, Camera.main.transform.rotation, transform);
-                    popUp_Posion.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
-                    break;
-                }
+            {
+                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
+                break;
+            }
             case DamageType.Ultimate:
-                {
-                    popUp_Ult.GetComponent<TextMesh>().text = Dmg.ToString();
-                    Instantiate(popUp_Ult, transform.position, Camera.main.transform.rotation, transform);
-                    popUp_Ult.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
-                    break;
-                }
+            {
+                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 0.0f, 1.0f);
+                break;
+            }
         }
+        Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
+        //popUp.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
 
         healthBar.fillAmount = fullHealth / _Health;
 
@@ -318,8 +324,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         //Jimmy: It's about function for one targeting when the player attacks to one enemy
         if (_Detect == Detect.Detected && isHero == true)
         {
-            if (_Name == "Rats")
-                RatsAbility();
+            enemyAbilities.GroupAttack();
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in list)
             {
@@ -353,7 +358,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             StartCoroutine("DeathAnimation");
             if (!_IsDead)
                 player.GetComponent<Player>().IncrementUltCharge();
- 
+
             _IsDead = true;
             _isPoisoned = false;
             _IsAttacked = false;
@@ -387,35 +392,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _isPoisoned = true;
         audioSource.PlayOneShot(poisonedEffect, 0.2f);
     }
+    #endregion
 
-    private void SkunksAbility()
-    {
-        if (Vector3.Distance(transform.position, player.transform.position) <= _skunksPoisonRange
-            && _Name == "Skunks"
-            && !_IsDead)
-        {
-            player.GetComponent<Player>().SetPoisoned(_skunksPoisonDamage, _skunksPoisonTickTime, _skunksPoisonTotaltime);
-        }
-    }
-
-    private void RatsAbility()
-    {
-        int limit = 3;
-        int numbers = 0;
-        foreach(GameObject rat in ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("Rats_1"))
-        {
-            if(numbers < limit)
-            {
-                rat.GetComponent<Enemy>()._Order = Order.Fight;
-            }
-            else
-            {
-                numbers = 0;
-                return;
-            }
-            numbers++;
-        }
-    }
+    #region Attacks
 
     public void BarricadeAttack()
     {
@@ -476,11 +455,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         return false;
     }
+    #endregion
 
-    public void SwitchOnTargetIndicator(bool turnOn)
-    {
-        _targetIndicator.SetActive(turnOn);
-    }
+    #region Animations
 
     public IEnumerator DeathAnimation()
     {
@@ -496,4 +473,5 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         throw new NotImplementedException();
     }
+    #endregion
 }

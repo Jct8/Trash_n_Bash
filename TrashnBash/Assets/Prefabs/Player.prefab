@@ -68,6 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   attack: 2
+  intimdateStunTime: 3
   attackRange: 2
   attackAngleRange: 45
   poisonDamage: 5
@@ -81,14 +82,11 @@ MonoBehaviour:
   ultimateTickTime: 1
   ultimateChargeTime: 3
   healedByItem: 5
-  Popup_Enemy: {fileID: 3994238057033681723, guid: c4fea3b43a7db3c4c94e6eaf72e01443,
-    type: 3}
-  Popup_Skunks: {fileID: 8359619849396166840, guid: aba286cd1aec75049806c3f2923aafc6,
-    type: 3}
+  popUp: {fileID: 6407678084736455969, guid: ae71a9f809cb43d4ea1bc3fa88328f47, type: 3}
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
   poisonEffect: {fileID: 8300000, guid: 31960797e7e12004c857a9547dad7efc, type: 3}
   UltimateEffect: {fileID: 8300000, guid: 00d257894e229354f9ab925c723cb27c, type: 3}
-  poisonedbySkunks: {fileID: 8300000, guid: 3932b7b4f6b029342ac35cf9165b9eec, type: 3}
+  audioSource: {fileID: 0}
   _ultimateCharge: 0
   _ispoisoned: 0
   _poisonTickTime: 0
@@ -117,6 +115,7 @@ MonoBehaviour:
   burstSpeed: 45
   attackCoolDown: 0.4
   poisonAttackCoolDown: 3
+  intimidateAttackCoolDown: 5
   _AttackButton: 32
   _PoisonAttackButton: 101
   _LockTargetButton: 323
@@ -124,6 +123,7 @@ MonoBehaviour:
   _PickUpButton: 102
   _RepairButton: 114
   _ReleaseLockButton: 304
+  _Intimidate: 306
 --- !u!54 &2115016952094743300
 Rigidbody:
   m_ObjectHideFlags: 0

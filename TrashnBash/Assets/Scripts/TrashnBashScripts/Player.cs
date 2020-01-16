@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICharacterAction
 {
+    #region Variables
+
     [SerializeField] private float health = 100.0f;
     [SerializeField] private float attack = 1.0f;
     [SerializeField] private float intimdateStunTime = 3.0f;
@@ -23,13 +25,13 @@ public class Player : MonoBehaviour, ICharacterAction
     public const string DAMAGE_KEY = "Damage";
     public const string HEALTH_KEY = "Health";
 
-    public GameObject Popup_Enemy;
-    public GameObject Popup_Skunks;
+
+    public GameObject popUp;
 
     public AudioClip attackEffect;
     public AudioClip poisonEffect;
     public AudioClip UltimateEffect;
-    AudioSource audioSource;
+    public AudioSource audioSource;
 
     private float _maxHealth = 100.0f;
     public float _ultimateCharge = 0.0f;
@@ -40,6 +42,12 @@ public class Player : MonoBehaviour, ICharacterAction
     public float _poisonCurrentTime;
     public float _poisonTotalTime = 5.0f;
 
+    public float UltimateCharge { get { return _ultimateCharge; } private set { } }
+    public float Health { get { return health; } private set { } }
+    #endregion
+
+    #region UnityFunctions
+
     void Start()
     {
         _maxHealth = health;
@@ -49,7 +57,32 @@ public class Player : MonoBehaviour, ICharacterAction
         //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
         //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
     }
+    void Update()
+    {
+        if (!_ispoisoned)
+        {
+            return;
+        }
+        else
+        {
+            Tick();
+        }
+    }
+    private void OnTriggerEnter(Collider item)
+    {
+        if (item.gameObject.CompareTag("PickUp"))
+        {
+            item.gameObject.SetActive(false);
+            GameObject tower = ServiceLocator.Get<LevelManager>().towerInstance;
+            tower.GetComponent<Tower>()._FullHealth += healedByItem;
+            _maxHealth += healedByItem;
 
+        }
+    }
+
+    #endregion
+
+    #region Initialization
     public void Initialize(float dmg, float hp)
     {
         attack = dmg;
@@ -62,6 +95,9 @@ public class Player : MonoBehaviour, ICharacterAction
     //    PlayerPrefs.SetFloat(DAMAGE_KEY, dmg);
     //    PlayerPrefs.SetFloat(HEALTH_KEY, hp);
     //}
+    #endregion
+
+    #region Take Damage
 
     public void SetPoisoned(float damage, float time, float total)
     {
@@ -74,26 +110,14 @@ public class Player : MonoBehaviour, ICharacterAction
         _ispoisoned = true;
     }
 
-    void Update()
-    {
-        if(!_ispoisoned)
-        {
-            return;
-        }
-        else
-        {
-            Tick();
-        }
-    }
-    
     private void Tick()
     {
-        if(_poisonCurrentTime < Time.time)
+        if (_poisonCurrentTime < Time.time)
         {
             _poisonCurrentTime = Time.time + _poisonTickTime;
             TakeDamage(_poisonDamage, false, DamageType.Skunks);
         }
-        if(_poisonTotalTime < Time.time)
+        if (_poisonTotalTime < Time.time)
         {
             _ispoisoned = false;
             return;
@@ -103,29 +127,29 @@ public class Player : MonoBehaviour, ICharacterAction
     public void TakeDamage(float damage, bool isHero, DamageType type)
     {
         health -= damage;
-        switch(type)
+        popUp.GetComponent<TextMesh>().text = damage.ToString();
+        switch (type)
         {
             case DamageType.Enemy:
-                {
-                    Popup_Enemy.GetComponent<TextMesh>().text = damage.ToString();
-                    Instantiate(Popup_Enemy, transform.position, Camera.main.transform.rotation, transform);
-                    Popup_Enemy.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
-                    break;
-                }
+            {
+                popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 1.0f);
+                break;
+            }
             case DamageType.Skunks:
-                {
-                    Popup_Skunks.GetComponent<TextMesh>().text = damage.ToString();
-                    Instantiate(Popup_Skunks, transform.position, Camera.main.transform.rotation, transform);
-                    Popup_Skunks.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
-                    break;
-                }
+            {
+                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
+                break;
+            }
         }
+        //popUp.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
+        Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
         //Debug.Log("Player Took " + damage + " damage");
         ServiceLocator.Get<UIManager>().UpdatePlayerHealth(health);
     }
 
-    public float UltimateCharge { get { return _ultimateCharge; } private set { } }
-    public float Health { get { return health; } private set { } }
+    #endregion
+
+    #region Attacks
 
     public void IncrementUltCharge()
     {
@@ -180,38 +204,11 @@ public class Player : MonoBehaviour, ICharacterAction
             audioSource.PlayOneShot(attackEffect, 0.75f);
         }
         yield return null;
-        //target.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
-        //target.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
     }
 
     public IEnumerator PoisonAttack()
     {
         //////Justin - TODO:Find a better method.
-        //GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
-
-        //if (target)
-        //{
-        //    target.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true);
-        //    target.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
-        //    return;
-        //}
-
-        //List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
-        //foreach (var enemy in ListOfEnemies)
-        //{
-        //    List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
-        //    foreach (var go in gameObjects)
-        //    {
-        //        Vector3 direction = (go.transform.position - transform.position);
-        //        float distance = Vector2.Distance(transform.position, go.transform.position);
-        //        float angle = Vector3.Angle(transform.forward, direction);
-        //        if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
-        //        {
-        //            go.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true); // ERROR : Null Reference Excption
-        //            go.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
-        //        }
-        //    }
-        //}
 
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
         float closestDistance = Mathf.Infinity;
@@ -272,7 +269,7 @@ public class Player : MonoBehaviour, ICharacterAction
         }
     }
 
-    public void IntimidateAttack( GameObject enemy)
+    public void IntimidateAttack(GameObject enemy)
     {
         if (enemy && Vector3.Distance(transform.position, enemy.transform.position) < attackRange)
         {
@@ -280,6 +277,9 @@ public class Player : MonoBehaviour, ICharacterAction
             enemy.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
         }
     }
+    #endregion
+
+    #region Checks and Utility Functions
 
     public GameObject DetectBarricade()
     {
@@ -299,17 +299,9 @@ public class Player : MonoBehaviour, ICharacterAction
         return null;
     }
 
-    private void OnTriggerEnter(Collider item)
-    {
-        if(item.gameObject.CompareTag("PickUp"))
-        {
-            item.gameObject.SetActive(false);
-            GameObject tower = GameObject.FindGameObjectWithTag("Tower");
-            tower.GetComponent<Tower>()._FullHealth += healedByItem;
-            _maxHealth += healedByItem;
-            
-        }
-    }
+    #endregion
+
+    #region Animations
 
     public void UpdateAnimation()
     {
@@ -320,4 +312,6 @@ public class Player : MonoBehaviour, ICharacterAction
     {
         throw new System.NotImplementedException();
     }
+
+    #endregion
 }

@@ -9,8 +9,6 @@ public class LevelManager : MonoBehaviour
     public GameObject playerInstance;
     public GameObject towerInstance;
 
-    public GameObject displayPause;
-
     public int levelNumber;
     public int enemyDeathCount;
 
@@ -38,23 +36,24 @@ public class LevelManager : MonoBehaviour
 
     public void Restart()
     {
-        ServiceLocator.Get<LevelManager>().PauseGame();
-        ServiceLocator.Get<LevelManager>().ClearLevel();
+        PauseGame();
+        ClearLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ReturnToMainMenu()
     {
-        ServiceLocator.Get<LevelManager>().PauseGame();
-        ServiceLocator.Get<LevelManager>().ClearLevel();
+        PauseGame();
+        ClearLevel();
         SceneManager.LoadScene("MainMenu");
     }
 
     public void PauseGame()
     {
-        ServiceLocator.Get<UIManager>().pauseScreen.SetActive(!ServiceLocator.Get<UIManager>().pauseScreen.activeSelf);
+        GameObject pauseScreen = ServiceLocator.Get<UIManager>().pauseScreen;
+        pauseScreen.SetActive(!pauseScreen.activeSelf);
 
-        if (ServiceLocator.Get<UIManager>().pauseScreen.activeSelf)
+        if (pauseScreen.activeSelf)
         {
             Time.timeScale = 0.0f;
         }

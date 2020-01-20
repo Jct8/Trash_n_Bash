@@ -17,6 +17,12 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(LoadLevelRoutine());
     }
 
+    public void OnQuitClick()
+    {
+        Debug.Log("Quiting when in Build mode");
+        Application.Quit();
+    }
+
     private IEnumerator LoadLevelRoutine()
     {
         ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.GamePlay);

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
     public GameObject playerInstance;
     public GameObject towerInstance;
+
+    public GameObject displayPause;
 
     public int levelNumber;
     public int enemyDeathCount;
@@ -23,6 +26,43 @@ public class LevelManager : MonoBehaviour
     {
         SaveData();
         ResetLevel(); 
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PauseGame();
+        }
+    }
+
+    public void Restart()
+    {
+        ServiceLocator.Get<LevelManager>().PauseGame();
+        ServiceLocator.Get<LevelManager>().ClearLevel();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        ServiceLocator.Get<LevelManager>().PauseGame();
+        ServiceLocator.Get<LevelManager>().ClearLevel();
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void PauseGame()
+    {
+        ServiceLocator.Get<UIManager>().pauseScreen.SetActive(!ServiceLocator.Get<UIManager>().pauseScreen.activeSelf);
+
+        if (ServiceLocator.Get<UIManager>().pauseScreen.activeSelf)
+        {
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
+            
     }
 
     public void IncreaseEnemyDeathCount(int increment)

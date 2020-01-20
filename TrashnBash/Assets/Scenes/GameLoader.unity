@@ -265,6 +265,8 @@ MonoBehaviour:
   loadingScreen: {fileID: 1289506453}
   _UIPrefeb: {fileID: 6670158105797579109, guid: 245b064f6d9f9c14cb6a6e8d5f867f03,
     type: 3}
+  _LevelPrefeb: {fileID: 3117837276972815955, guid: d5b4604a6c86f86479a84c203bd4cee3,
+    type: 3}
   audioPrefeb: {fileID: 544923296358960396, guid: a72dc9901841b694f88aada8e9096d7c,
     type: 3}
   gameModules:

@@ -17,9 +17,14 @@ public class UIManager : MonoBehaviour
 
     public GameObject PresentTextrue;
     public GameObject[] spawners;
+    public GameObject pauseScreen;
     public Texture BasicTexture;
     public Texture SickTexture;
     public Texture PowerFulTexture;
+
+    public Button continueButton;
+    public Button restartButton;
+    public Button mainmenuButton;
 
     private float _TowerHP;
     private float fullEnergy = 100.0f;
@@ -27,6 +32,11 @@ public class UIManager : MonoBehaviour
 
     public UIManager Initialize()
     {
+        restartButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().Restart);
+        continueButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().PauseGame);
+        mainmenuButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().ReturnToMainMenu);
+
+        pauseScreen.SetActive(false);
         playerHealthBar.value = 0.0f;
         spawners = GameObject.FindGameObjectsWithTag("Spawner");
         foreach(GameObject spawn in spawners)
@@ -37,6 +47,8 @@ public class UIManager : MonoBehaviour
         towerHealthPercentage.text = string.Empty;
         return this;
     }
+
+
 
     public IEnumerator Reset()
     {

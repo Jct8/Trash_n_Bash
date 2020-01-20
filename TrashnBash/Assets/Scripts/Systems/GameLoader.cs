@@ -10,6 +10,7 @@ public class GameLoader : AsyncLoader
     private static int _sceneIndex = 1;
     private static GameLoader _instance;
     public GameObject _UIPrefeb;
+    public GameObject _LevelPrefeb;
     public GameObject audioPrefeb;
     public List<Component> gameModules = new List<Component>();
 
@@ -84,6 +85,13 @@ public class GameLoader : AsyncLoader
         // Setup Core Systems
         //Debug.Log("Loading Core Systems");
 
+        GameObject _LevelInstance = GameObject.Instantiate(_LevelPrefeb);
+        _LevelInstance.transform.SetParent(systemsParent);
+        _LevelInstance.SetActive(false);
+        //DontDestroyOnLoad(_UIInstance);
+        LevelManager LevelManagerComp = _LevelInstance.GetComponent<LevelManager>();
+        ServiceLocator.Register<LevelManager>(LevelManagerComp.Initialize());
+
         GameObject _UIInstance = GameObject.Instantiate(_UIPrefeb);
         _UIInstance.transform.SetParent(systemsParent);
         _UIInstance.SetActive(false);
@@ -102,11 +110,6 @@ public class GameLoader : AsyncLoader
         gameManagerGO.transform.SetParent(systemsParent);
         var gameManagerComp = gameManagerGO.AddComponent<GameManager>();
         ServiceLocator.Register<GameManager>(gameManagerComp.Initialize());
-
-        GameObject levelManagerGO = new GameObject("LevelManager");
-        levelManagerGO.transform.SetParent(systemsParent);
-        var levelManagerComp = levelManagerGO.AddComponent<LevelManager>();
-        ServiceLocator.Register<LevelManager>(levelManagerComp.Initialize());
 
         yield return null;
     }

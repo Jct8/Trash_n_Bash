@@ -22,6 +22,12 @@ public class UIManager : MonoBehaviour
     public Texture SickTexture;
     public Texture PowerFulTexture;
 
+    public Image attackCover;
+    public Image poisonCover;
+    public Image intimidateCover;
+    public Image ultCover;
+    public Image repairIcon;
+
     public Button continueButton;
     public Button restartButton;
     public Button mainmenuButton;
@@ -48,7 +54,26 @@ public class UIManager : MonoBehaviour
         return this;
     }
 
-
+    public void UpdateImage(DamageType type, float fill)
+    {
+        switch (type)
+        {
+            case DamageType.Normal:
+                attackCover.fillAmount = fill;
+                break;
+            case DamageType.Poison:
+                poisonCover.fillAmount = fill;
+                break;
+            case DamageType.Intimidate:
+                intimidateCover.fillAmount = fill;
+                break;
+            case DamageType.Ultimate:
+                ultCover.fillAmount = fill;
+                break;
+            default:
+                break;
+        }
+    }
 
     public IEnumerator Reset()
     {
@@ -98,7 +123,11 @@ public class UIManager : MonoBehaviour
         ultimateChargePercentage.text = curr.ToString() + " %";
         EnergyBar.fillAmount = player.GetComponent<Player>()._ultimateCharge / fullEnergy;
 
-        if(curr>= 80.0f)
+        float iconFill = EnergyBar.fillAmount;
+        iconFill = Mathf.Clamp(iconFill, 0.0f, 1.0f);
+        ultCover.fillAmount = 1.0f - iconFill;
+
+        if (curr>= 80.0f)
         {
             IsPower = true;
             PresentTextrue.GetComponent<RawImage>().texture = PowerFulTexture;

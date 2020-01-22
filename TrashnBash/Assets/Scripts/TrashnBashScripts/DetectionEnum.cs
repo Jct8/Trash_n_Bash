@@ -22,6 +22,7 @@ public enum DamageType
 {
     Normal,
     Poison,
+    Intimidate,
     Ultimate,
     Enemy,
     Skunks

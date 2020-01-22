@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _lockedOnEnemyGO = null;
     private GameObject _Barricade = null;
     private GameObject _RepairBarricade = null;
+    private UIManager uiManager;
 
     [SerializeField] private float moveSpeed = 10.0f;
     [SerializeField] private float minMoveSpeed = 10.0f;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
         _controller = gameObject.GetComponent<CharacterController>();
         _player = gameObject.GetComponent<Player>();
         _mainCamera = Camera.main;
+        uiManager = ServiceLocator.Get<UIManager>();
     }
 
     private void Update()
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
         {
             _isRepairing = _RepairBarricade.GetComponent<Barricade>().CheckRepairValid(transform);
         }
+        UpdateUI();
 
         if (Input.GetKeyDown(_PickUpButton))
         {
@@ -91,7 +94,7 @@ public class PlayerController : MonoBehaviour
             _RepairBarricade = _player.DetectBarricade();
             if (_RepairBarricade == null)
                 _isHoldingItem = false;
-            else
+            else if( !_isRepairing )
             {
                 _isRepairing = true;
                 _RepairBarricade.GetComponent<Barricade>().inRangeRepair = true;
@@ -166,7 +169,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(_Intimidate))
+        if (Input.GetKeyDown(_Intimidate))
         {
             if (currentIntimidateAttackCoolDown < Time.time)
             {
@@ -298,6 +301,25 @@ public class PlayerController : MonoBehaviour
         return _controller;
     }
 
+    #endregion
+
+    #region UI
+    public void UpdateUI()
+    {
+        float fill = (currentAttackCoolDown - Time.time) / attackCoolDown;
+        fill = Mathf.Clamp(fill, 0.0f, 1.0f);
+        uiManager.UpdateImage(DamageType.Normal, fill);
+
+        fill = (currentPoisonAttackCoolDown - Time.time) / poisonAttackCoolDown;
+        fill = Mathf.Clamp(fill, 0.0f, 1.0f);
+        uiManager.UpdateImage(DamageType.Poison, fill);
+
+        fill = (currentIntimidateAttackCoolDown - Time.time) / intimidateAttackCoolDown;
+        fill = Mathf.Clamp(fill, 0.0f, 1.0f);
+        uiManager.UpdateImage(DamageType.Intimidate, fill);
+
+        uiManager.repairIcon.enabled = _isRepairing;
+    }
     #endregion
 
 }

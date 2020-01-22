@@ -64,6 +64,7 @@ public class Barricade : MonoBehaviour
         {
             return true;
         }
+        StopCoroutine(Repair());
         isRepairing = false;
         return false;
     }

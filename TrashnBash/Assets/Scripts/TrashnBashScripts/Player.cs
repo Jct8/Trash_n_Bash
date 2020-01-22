@@ -290,7 +290,7 @@ public class Player : MonoBehaviour, ICharacterAction
             Vector3 direction = (go.transform.position - transform.position);
             float distance = Vector2.Distance(transform.position, go.transform.position);
             float angle = Vector3.Angle(transform.forward, direction);
-            if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange && go.CompareTag("Barricade"))
+            if ( distance < attackRange && go.CompareTag("Barricade"))
             {
                 return go.gameObject;
             }

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-
     public GameObject player;
     public GameObject tower;
     public Slider playerHealthBar;
@@ -27,6 +26,11 @@ public class UIManager : MonoBehaviour
     public Image intimidateCover;
     public Image ultCover;
     public Image repairIcon;
+
+    public GameObject attackImg;
+    public GameObject poisonImg;
+    public GameObject intimidateImg;
+    public GameObject ultImg;
 
     public Button continueButton;
     public Button restartButton;

@@ -17,6 +17,16 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         levelManager = ServiceLocator.Get<LevelManager>();
+        PlayerController player = levelManager.playerInstance.GetComponent<PlayerController>();
+        player.attackEnabled = true;
+        player.poisonAttackEnabled = false;
+        player.intimidateAttackEnabled = false;
+        player.ultimateAttackEnabled = false;
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        uiManager.attackImg.SetActive(true);
+        uiManager.poisonImg.SetActive(false);
+        uiManager.intimidateImg.SetActive(false);
+        uiManager.ultImg.SetActive(false);
         UISequences[currentSequence].SetActive(true);
     }
 

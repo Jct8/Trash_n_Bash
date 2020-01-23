@@ -44,6 +44,11 @@ public class PlayerController : MonoBehaviour
     private float currentPoisonAttackCoolDown = 0.0f;
     private float currentIntimidateAttackCoolDown = 0.0f;
 
+    public bool attackEnabled = true;
+    public bool poisonAttackEnabled = true;
+    public bool intimidateAttackEnabled = true;
+    public bool ultimateAttackEnabled = true;
+
     #endregion
 
     #region Unity Functions
@@ -94,7 +99,7 @@ public class PlayerController : MonoBehaviour
             _RepairBarricade = _player.DetectBarricade();
             if (_RepairBarricade == null)
                 _isHoldingItem = false;
-            else if( !_isRepairing )
+            else if (!_isRepairing)
             {
                 _isRepairing = true;
                 _RepairBarricade.GetComponent<Barricade>().inRangeRepair = true;
@@ -102,7 +107,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_AttackButton))
+        if (Input.GetKeyDown(_AttackButton) && attackEnabled)
         {
             if (currentAttackCoolDown < Time.time)
             {
@@ -111,7 +116,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_PoisonAttackButton))
+        if (Input.GetKeyDown(_PoisonAttackButton) && poisonAttackEnabled)
         {
             if (currentPoisonAttackCoolDown < Time.time)
             {
@@ -153,7 +158,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_UltimateButton))
+        if (Input.GetKeyDown(_UltimateButton) && ultimateAttackEnabled)
         {
             _player.UltimateAttack();
         }
@@ -169,7 +174,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_Intimidate))
+        if (Input.GetKeyDown(_Intimidate) && intimidateAttackEnabled)
         {
             if (currentIntimidateAttackCoolDown < Time.time)
             {
@@ -322,4 +327,28 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    public void EnableAttack()
+    {
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        uiManager.attackImg.SetActive(true);
+        attackEnabled = true;
+    }
+    public void EnablePoisonAttack()
+    {
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        uiManager.poisonImg.SetActive(true);
+        poisonAttackEnabled = true;
+    }
+    public void EnableIntimidateAttack()
+    {
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        uiManager.intimidateImg.SetActive(true);
+        intimidateAttackEnabled = true;
+    }
+    public void EnableUltAttack()
+    {
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        uiManager.ultImg.SetActive(true);
+        ultimateAttackEnabled = true;
+    }
 }

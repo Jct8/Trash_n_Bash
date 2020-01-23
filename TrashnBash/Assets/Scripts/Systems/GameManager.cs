@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public int currentlevel;
     public int highScore;
+    private float coolTime = 0.0f;
+    public bool _enemySkillActived { get; set; }
 
     public enum GameState
     {
@@ -82,5 +84,15 @@ public class GameManager : MonoBehaviour
             ServiceLocator.Get<UIManager>().StartCoroutine("Reset");
             ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
             ServiceLocator.Get<LevelManager>().gameObject.SetActive(true);        }
+    }
+
+    public void enemySkillActived()
+    {
+        _enemySkillActived = true;
+        if (coolTime < Time.time)
+        {
+            coolTime = 15.0f + Time.time;
+            _enemySkillActived = false;
+        }
     }
 }

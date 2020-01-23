@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkunkAbility : MonoBehaviour, IEnemyAbilities
 {
-    [SerializeField] private float _skunksPoisonTickTime = 1.0f;
+    [SerializeField] private float _skunksPoisonTickTime = 3.0f;
     [SerializeField] private float _skunksPoisonDamage = 1.0f;
     [SerializeField] private float _skunksPoisonRange = 5.0f;
     [SerializeField] private float _skunksPoisonTotaltime = 3.0f;

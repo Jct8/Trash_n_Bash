@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class RatAbility : MonoBehaviour, IEnemyAbilities
 {
+    public int limit = 3;
+    public int numbers = 0;
+    private bool _active = false;
     public void GroupAttack()
     {
-        int limit = 3;
-        int numbers = 0;
+        _active = ServiceLocator.Get<GameManager>()._enemySkillActived;
         string name = gameObject.GetComponent<Enemy>().Name;
-        foreach (GameObject rat in ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(name))
+        if(_active)
         {
-            if (numbers < limit)
+            foreach (GameObject rat in ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(name))
             {
-                rat.GetComponent<Enemy>()._Order = Order.Fight;
+                if (numbers <= limit)
+                {
+                    if (rat.GetComponent<Enemy>()._Order != Order.Barricade)
+                        rat.GetComponent<Enemy>()._Order = Order.Fight;
+                }
+                else
+                {
+                    numbers = 0;
+                    _active = false;
+                    return;
+                }
+                numbers++;
             }
-            else
-            {
-                numbers = 0;
-                return;
-            }
-            numbers++;
+        }
+        else
+        {
+            return;
         }
     }
 

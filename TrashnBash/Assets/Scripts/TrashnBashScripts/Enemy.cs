@@ -8,35 +8,34 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour, ICharacterAction
 {
     #region Variables
-    [Header("Unity Stuff")]
+    [Header("UI Health")]
     public Image healthBar;
     public Image CooltimeBar;
+    public GameObject healthBarGO;
+    public GameObject CoolTimeGO;
+    public GameObject popUp;
+    public GameObject pickUp;
 
-    public Rigidbody rigid;
-    public Action killed;
+    private GameObject player;
+    private GameObject _targetIndicator;
+    private GameObject _ObjectofBarricade;
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
     private NavMeshAgent _Agent;
     private WayPointManager.Path _Path;
 
-    public GameObject healthBarGO;
-    public GameObject CoolTimeGO;
-    public GameObject player;
-    public GameObject popUp;
-    public GameObject pickUp;
-    private GameObject _targetIndicator;
-    private GameObject _ObjectofBarricade;
 
     public Detect _Detect { get; set; }
     public Order _Order { get; set; }
 
     public float fullHealth;
     public float stunTime = 0.0f;
-    public int _CurrentWayPoint = 0;
-    public bool _isDetected = false;
+    private int _CurrentWayPoint = 0;
+    private bool _isDetected = false;
     private bool _IsDead = false;
     private bool _IsStolen = false;
     private bool _IsAttacked = false;
+    private bool _isPoisoned = false;
     public string _DataSource;
 
     public AudioClip attackEffect;
@@ -45,26 +44,30 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public string Name { get { return _Name; } private set { } }
 
+    [Header("Enemy Status")]
     [SerializeField] private string _Name;
-    [SerializeField] private float _Attack;
-    [SerializeField] private float _Health;
+    [SerializeField] private float _Attack = 1.0f;
+    [SerializeField] private float _Health = 1.0f;
     [SerializeField] private float _Money;
     [SerializeField] private float _Speed;
     [SerializeField] private float _AttackCoolTime = 3.0f;
     [SerializeField] private float _ObjectDetectionRange = 3.0f;
     [SerializeField] private float _DropRate = 0.5f;
+    [SerializeField] private float _enemyAttackRange = 2.5f;
 
-    private float _enemyAttackRange = 2.0f;
     private float _EndDistance = 3.0f;
     private float _InsideofRange = 200.0f;
     private float _MaximumAngle = 45.0f;
-    private float _MaximumDistance = 7.0f;
+    private float _MaximumDistance = 5.0f;
+    private float _distanceToBarricade;
     private float _poisonDamage = 0.0f;
     private float _poisonTotalTime = 0.0f;
     private float _poisonTickTime = 0.0f;
     private float _poisonCurrentDuration = 0.0f;
-    private bool _isPoisoned = false;
 
+    [Header("Etc")]
+    public Rigidbody rigid;
+    public Action killed;
     IEnemyAbilities enemyAbilities;
 
     #endregion
@@ -86,6 +89,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
+
+        Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
+
         if (player == null || _IsDead)
         {
             _Agent.isStopped = true;
@@ -100,7 +106,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
 
         //UpdateAnimation();
-        Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
         if (_Order == Order.Stunned)
         {
             _Agent.isStopped = true;
@@ -114,14 +119,23 @@ public class Enemy : MonoBehaviour, ICharacterAction
         else if (_Order == Order.Tower)
         {
             _Agent.SetDestination(_Desination.position);
-            if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
+            float distanceToTower = Vector3.Distance(transform.position, _Desination.position);
+            if ((distanceToTower < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
             {
                 if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                 {
-                    _Agent.isStopped = true;
+                    if(distanceToTower <= _enemyAttackRange)
+                    {
+                        _Agent.isStopped = true;
+                    }
+                    else
+                    {
+                        _Agent.isStopped = false;
+                    }
+
                     if (ChargingCoolDown())
                     {
-                        StartCoroutine("Attack");
+                        StartCoroutine("TowerAttack");
                     }
                 }
                 else
@@ -140,8 +154,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             if (_ObjectofBarricade)
             {
-                if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= _ObjectDetectionRange
-                    && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
+                _distanceToBarricade = Vector3.Distance(transform.position, _ObjectofBarricade.transform.position);
+                if (_distanceToBarricade <= _ObjectDetectionRange 
+                    && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true 
+                    && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
                 {
                     _Order = Order.Barricade;
                 }
@@ -176,7 +192,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Agent.isStopped = false;
             _Desination = _Path.WayPoints[0];
             _Agent.SetDestination(_Desination.position);
-            if ((Vector3.Distance(transform.position, _Desination.position) < _EndDistance))
+            float distanceToEscape = Vector3.Distance(transform.position, _Desination.position);
+            if ((distanceToEscape < _EndDistance))
             {
                 killed?.Invoke();
             }
@@ -187,7 +204,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
             Vector3 targetToBarricade = _ObjectofBarricade.transform.position;
             targetToBarricade.y = transform.position.y;
             transform.LookAt(_ObjectofBarricade.transform);
-            if (Vector3.Distance(transform.position, _ObjectofBarricade.transform.position) <= 1.5f && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
+            _distanceToBarricade = Vector3.Distance(transform.position, _ObjectofBarricade.transform.position);
+            if (_distanceToBarricade <= 1.5f && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
             {
                 _Agent.isStopped = true;
                 if (ChargingCoolDown())
@@ -203,7 +221,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
         {
             ChargingCoolDown();
         }
-
     }
     #endregion
 
@@ -324,7 +341,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
         //Jimmy: It's about function for one targeting when the player attacks to one enemy
         if (_Detect == Detect.Detected && isHero == true)
         {
-            enemyAbilities.GroupAttack();
+            if (!ServiceLocator.Get<GameManager>()._enemySkillActived)
+            {
+                ServiceLocator.Get<GameManager>()._enemySkillActived = true;
+                enemyAbilities.GroupAttack();
+            }
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in list)
             {
@@ -416,18 +437,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public IEnumerator Attack()
     {
-        _Agent.isStopped = true;
         _IsAttacked = true;
-        GameObject _player = ServiceLocator.Get<LevelManager>().playerInstance;
-        GameObject _tower = ServiceLocator.Get<LevelManager>().towerInstance;
-        if (FrontAttack(_tower.transform))
+        player = ServiceLocator.Get<LevelManager>().playerInstance;
+        if (FrontAttack(player.transform))
         {
-            _tower.GetComponent<Tower>().TakeDamage(_Attack);
-            _IsStolen = true;
-        }
-        else if (FrontAttack(_player.transform))
-        {
-            _player.GetComponent<Player>().TakeDamage(_Attack, false, DamageType.Enemy);
+            player.GetComponent<Player>().TakeDamage(_Attack, false, DamageType.Enemy);
             ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
         audioSource.PlayOneShot(attackEffect, 0.7f);
@@ -436,7 +450,20 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Order = Order.Back;
         }
         CooltimeBar.fillAmount = 0;
-        _Agent.isStopped = false;
+        _IsAttacked = false;
+        yield return null;
+    }
+
+    public IEnumerator TowerAttack()
+    {
+        _IsAttacked = true;
+        GameObject _tower = ServiceLocator.Get<LevelManager>().towerInstance;
+        _tower.GetComponent<Tower>().TakeDamage(_Attack);
+        _IsStolen = true;
+        audioSource.PlayOneShot(attackEffect, 0.7f);
+        if (_Order != Order.Fight)
+            _Order = Order.Back;
+        CooltimeBar.fillAmount = 0;
         _IsAttacked = false;
         yield return null;
     }
@@ -462,7 +489,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public IEnumerator DeathAnimation()
     {
         _Agent.isStopped = true;
-        _AttackCoolTime = 3.0f;
         yield return new WaitForSeconds(1.0f);
         ServiceLocator.Get<LevelManager>().IncreaseEnemyDeathCount(1);
         killed?.Invoke();

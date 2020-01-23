@@ -121,7 +121,7 @@ MonoBehaviour:
   poisonedEffect: {fileID: 8300000, guid: 16b5e8f6ec7e27b4482558644ab456c3, type: 3}
   _Name: 
   _Attack: 2
-  _Health: 20
+  _Health: 8
   _Money: 10
   _Speed: 5
   _AttackCoolTime: 3

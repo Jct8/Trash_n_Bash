@@ -1918,6 +1918,7 @@ MonoBehaviour:
   - {fileID: 563957458}
   - {fileID: 670326105}
   WayPointManager: {fileID: 874770422}
+  tutorialManager: {fileID: 0}
 --- !u!1 &1153754540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3035,6 +3036,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _ultimateCharge
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208394709829915080, guid: db02aa316148c134697875e590fe91c6,
+        type: 3}
+      propertyPath: health
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208394709829915080, guid: db02aa316148c134697875e590fe91c6,
+        type: 3}
+      propertyPath: attack
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3550494672790114550, guid: db02aa316148c134697875e590fe91c6,
         type: 3}

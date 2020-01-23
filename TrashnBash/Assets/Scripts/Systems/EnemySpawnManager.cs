@@ -6,6 +6,7 @@ public class EnemySpawnManager : MonoBehaviour
 {
     public List<EnemySpawner> Spawners;
     public WayPointManager WayPointManager;
+    public TutorialManager tutorialManager;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     public void StartSpawer(EnemySpawner spawner)
     {
+        tutorialManager.AddCount(spawner._numberOfWave * spawner._enemiesPerWave);
         spawner.StartSpawner();
     }
 }

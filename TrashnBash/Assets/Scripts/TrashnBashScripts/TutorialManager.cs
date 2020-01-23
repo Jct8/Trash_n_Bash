@@ -20,10 +20,10 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if ( numEnemiesToKill == levelManager.enemyDeathCount && isSpawnStarted)
+        if (numEnemiesToKill == levelManager.enemyDeathCount && isSpawnStarted)
         {
             currentSequence++;
-            if( UISequences.Count-1 >= currentSequence )
+            if (UISequences.Count - 1 >= currentSequence)
             {
                 UISequences[currentSequence].SetActive(true);
             }
@@ -31,10 +31,18 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void SetEnemySpawner(EnemySpawner enemySpawner)
+    public void SetEnemySpawner(List<EnemySpawner> enemySpawner)
     {
         isSpawnStarted = true;
-        numEnemiesToKill += enemySpawner._numberOfWave * enemySpawner._enemiesPerWave;
+        foreach (var item in enemySpawner)
+        {
+            numEnemiesToKill += item._numberOfWave * item._enemiesPerWave;
+        }
+    }
+
+    public void AddCount(int total)
+    {
+        numEnemiesToKill += total;
     }
 
 }

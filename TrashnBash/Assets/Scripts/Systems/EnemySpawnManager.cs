@@ -30,4 +30,12 @@ public class EnemySpawnManager : MonoBehaviour
         tutorialManager.AddCount(spawner._numberOfWave * spawner._enemiesPerWave);
         spawner.StartSpawner();
     }
+
+    public void ResetSpawners()
+    {
+        foreach (var spawner in Spawners)
+        {
+            spawner.ResetSpawner();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class TutorialManager : MonoBehaviour
     private bool isSpawnStarted = false;
 
     private LevelManager levelManager;
+    public EnemySpawnManager enemySpawnManager;
 
     private void Start()
     {
@@ -28,7 +30,13 @@ public class TutorialManager : MonoBehaviour
                 UISequences[currentSequence].SetActive(true);
             }
             isSpawnStarted = false;
+            enemySpawnManager.ResetSpawners();
         }
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void SetEnemySpawner(List<EnemySpawner> enemySpawner)
@@ -42,6 +50,7 @@ public class TutorialManager : MonoBehaviour
 
     public void AddCount(int total)
     {
+        isSpawnStarted = true;
         numEnemiesToKill += total;
     }
 

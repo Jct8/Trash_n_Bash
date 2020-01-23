@@ -70,4 +70,9 @@ public class EnemySpawner : MonoBehaviour
             _activeEnemies.Add(_enemy);
         }
     }
+
+    public void ResetSpawner()
+    {
+        _currentWave = 0;
+    }
 }

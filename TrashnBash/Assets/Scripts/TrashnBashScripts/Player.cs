@@ -314,4 +314,9 @@ public class Player : MonoBehaviour, ICharacterAction
     }
 
     #endregion
+
+    public void FullUltimate()
+    {
+        _ultimateCharge = 100.0f;
+    }
 }

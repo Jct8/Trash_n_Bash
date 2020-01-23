@@ -4092,6 +4092,7 @@ MonoBehaviour:
   - {fileID: 1726771814}
   - {fileID: 968492152}
   - {fileID: 1830760333}
+  enemySpawnManager: {fileID: 1293048788}
 --- !u!4 &966860344
 Transform:
   m_ObjectHideFlags: 0
@@ -6523,30 +6524,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1170655848}
-        m_MethodName: StartSpawner
-        m_Mode: 1
+      - m_Target: {fileID: 1293048788}
+        m_MethodName: StartSpawer
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1068270626}
+          m_ObjectArgumentAssemblyTypeName: EnemySpawner, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 422662768}
-        m_MethodName: StartSpawner
-        m_Mode: 1
+      - m_Target: {fileID: 1293048788}
+        m_MethodName: StartSpawer
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 422662768}
+          m_ObjectArgumentAssemblyTypeName: EnemySpawner, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1068270626}
-        m_MethodName: StartSpawner
+      - m_Target: {fileID: 1293048788}
+        m_MethodName: StartSpawer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1170655848}
+          m_ObjectArgumentAssemblyTypeName: EnemySpawner, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1822299591}
+        m_MethodName: FullUltimate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8091,12 +8103,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: StartSpawer
-        m_Mode: 2
+      - m_Target: {fileID: 966860343}
+        m_MethodName: LoadMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: EnemySpawner, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8972,6 +8984,18 @@ MonoBehaviour:
   gizmoColour: 3
   gizmoRadius: 0.5
   gizmoScale: {x: 1, y: 1, z: 1}
+--- !u!114 &1822299591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4208394709829915080, guid: db02aa316148c134697875e590fe91c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1201456842}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffcb9a6c26fcfbf4bb5e54ae5628280a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1827995095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1671943395006712, guid: 8ae7718c33e89b042b204b36902c7745,

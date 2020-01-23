@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!_isHoldingItem)
             {
-                _Barricade = _player.DetectBarricade();
+                _Barricade = _player.DetectBarricadeSpawner();
                 if (_Barricade == null)
                     _isHoldingItem = false;
                 else if (_Barricade.GetComponent<Barricade>().CanBePickedUp())
@@ -160,7 +160,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(_UltimateButton) && ultimateAttackEnabled)
         {
-            _player.UltimateAttack();
+            //_player.UltimateAttack();
+            StartCoroutine(_player.UltimateAttack());
         }
 
         if (Input.GetKeyDown(_ReleaseLockButton))

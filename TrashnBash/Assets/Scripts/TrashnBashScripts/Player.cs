@@ -21,11 +21,12 @@ public class Player : MonoBehaviour, ICharacterAction
     [SerializeField] private float ultimateTotalTime = 3.0f;
     [SerializeField] private float ultimateTickTime = 1.0f;
     [SerializeField] private float ultimateChargeTime = 3.0f;
+    [SerializeField] private float ultimateDelay = 2.0f;
     [SerializeField] private float healedByItem = 5.0f;
     public const string DAMAGE_KEY = "Damage";
     public const string HEALTH_KEY = "Health";
 
-
+    public GameObject ultimateIndicator;
     public GameObject popUp;
 
     public AudioClip attackEffect;
@@ -246,11 +247,16 @@ public class Player : MonoBehaviour, ICharacterAction
         yield return null;
     }
 
-    public void UltimateAttack()
+    public IEnumerator UltimateAttack()
     {
         if (_ultimateCharge != 100.0f)
-            return;
+            yield break;
         ////Justin - TODO:Find a better method.
+        ultimateIndicator.GetComponent<Transform>().localScale = new Vector3( ultimateRange , 0.007460861f, ultimateRange);
+        ultimateIndicator.SetActive(true);
+        yield return new WaitForSeconds(ultimateDelay);
+
+        ultimateIndicator.SetActive(false);
         _ultimateCharge = 0.0f;
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
         foreach (var enemy in ListOfEnemies)
@@ -281,6 +287,23 @@ public class Player : MonoBehaviour, ICharacterAction
 
     #region Checks and Utility Functions
 
+    public GameObject DetectBarricadeSpawner()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+
+        foreach (var go in hitColliders)
+        {
+            Vector3 direction = (go.transform.position - transform.position);
+            float distance = Vector2.Distance(transform.position, go.transform.position);
+            float angle = Vector3.Angle(transform.forward, direction);
+            if ( distance < attackRange && go.CompareTag("BarricadeSpawner"))
+            {
+                return go.GetComponent<BarricadeSpawner>().GetBarricade() ;
+            }
+        }
+        return null;
+    }
+
     public GameObject DetectBarricade()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
@@ -290,11 +313,10 @@ public class Player : MonoBehaviour, ICharacterAction
             Vector3 direction = (go.transform.position - transform.position);
             float distance = Vector2.Distance(transform.position, go.transform.position);
             float angle = Vector3.Angle(transform.forward, direction);
-            if ( distance < attackRange && go.CompareTag("Barricade"))
+            if (distance < attackRange && go.CompareTag("Barricade"))
             {
                 return go.gameObject;
             }
-
         }
         return null;
     }

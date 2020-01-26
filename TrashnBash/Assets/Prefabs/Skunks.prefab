@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skunksPoisonTickTime: 3
-  _skunksPoisonDamage: 1
+  _skunksPoisonDamage: 5
   _skunksPoisonRange: 5
   _skunksPoisonTotaltime: 3
 --- !u!1 &5700120618532984917

@@ -72,6 +72,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public Action killed;
     IEnemyAbilities enemyAbilities;
 
+    private bool _barricadeAlive;
+    private bool _barricadePlaced;
+
     #endregion
 
     #region UnityFunctions
@@ -93,7 +96,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         numOfRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(_Name).Count;
         Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
-
+        
         if (player == null || _IsDead)
         {
             _Agent.isStopped = true;
@@ -103,12 +106,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         enemyAbilities.PoisonAOE(player);
         if (_isPoisoned)
-        {
             CheckPoison();
-        }
 
-        //UpdateAnimation();
-        if (_Order == Order.Stunned)
+        if(_Order == Order.Stunned)
         {
             _Agent.isStopped = true;
             if (stunTime < Time.time)
@@ -118,23 +118,13 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             return;
         }
-        else if (_Order == Order.Tower)
+        else if(_Order == Order.Tower)
         {
             _Agent.SetDestination(_Desination.position);
-            float distanceToTower = Vector3.Distance(transform.position, _Desination.position);
-            if ((distanceToTower < _EndDistance) && (_Detect == Detect.Detected || _Detect == Detect.None))
+            if ((isInRangeOfObject(_Desination, _EndDistance)) && (_Detect == Detect.Detected || _Detect == Detect.None))
             {
                 if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                 {
-                    if(distanceToTower <= _enemyAttackRange)
-                    {
-                        _Agent.isStopped = true;
-                    }
-                    else
-                    {
-                        _Agent.isStopped = false;
-                    }
-
                     if (ChargingCoolDown())
                     {
                         StartCoroutine("TowerAttack");
@@ -144,6 +134,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 {
                     _CurrentWayPoint++;
                 }
+
             }
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, _ObjectDetectionRange);
             foreach (var hit in hitColliders)
@@ -155,38 +146,33 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 }
             }
             if (_ObjectofBarricade)
-            {
-                _distanceToBarricade = Vector3.Distance(transform.position, _ObjectofBarricade.transform.position);
-                if (_distanceToBarricade <= _ObjectDetectionRange 
-                    && _ObjectofBarricade.GetComponent<Barricade>().isAlive == true 
-                    && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
-                {
+                if (isCloseToBarricade(_ObjectDetectionRange))
                     _Order = Order.Barricade;
-                }
-            }
         }
-        else if (_Order == Order.Fight)
+        else if(_Order == Order.Fight)
         {
             if (_Detect == Detect.Attack)
             {
-                _Agent.SetDestination(player.transform.position);
-                Vector3 newtarget = player.transform.position;
-                newtarget.y = transform.position.y;
-                transform.LookAt(newtarget);
-                if ((Vector3.Distance(transform.position, player.transform.position) < _enemyAttackRange))
+                LookAt(player.transform.position, player);
+                if (isInRangeOfObject(player.transform, _enemyAttackRange))
                 {
-                    _Agent.isStopped = true;
                     if (ChargingCoolDown())
-                    {
                         StartCoroutine("Attack");
-                    }
                 }
                 else
                 {
-                    _Agent.isStopped = false;
                     CooltimeBar.fillAmount = 0;
                     _IsAttacked = false;
                 }
+            }
+        }
+        else if(_Order == Order.Barricade)
+        {
+            LookAt(_ObjectofBarricade.transform.position, _ObjectofBarricade);
+            if (isCloseToBarricade(1.5f))
+            {
+                if (ChargingCoolDown())
+                    BarricadeAttack();
             }
         }
         else if (_Order == Order.Back)
@@ -194,29 +180,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Agent.isStopped = false;
             _Desination = _Path.WayPoints[0];
             _Agent.SetDestination(_Desination.position);
-            float distanceToEscape = Vector3.Distance(transform.position, _Desination.position);
-            if ((distanceToEscape < _EndDistance))
-            {
+            if (isInRangeOfObject(_Desination,_EndDistance))
                 killed?.Invoke();
-            }
         }
-        else if (_Order == Order.Barricade)
-        {
-            _Agent.SetDestination(_ObjectofBarricade.transform.position);
-            Vector3 targetToBarricade = _ObjectofBarricade.transform.position;
-            targetToBarricade.y = transform.position.y;
-            transform.LookAt(_ObjectofBarricade.transform);
-            _distanceToBarricade = Vector3.Distance(transform.position, _ObjectofBarricade.transform.position);
-            if (_distanceToBarricade <= 1.5f && _ObjectofBarricade.GetComponent<Barricade>().isPlaced == true)
-            {
-                _Agent.isStopped = true;
-                if (ChargingCoolDown())
-                {
-                    BarricadeAttack();
-                }
-            }
 
-        }
         Detection();
 
         if (_IsAttacked)
@@ -237,9 +204,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _EnemyData = _DataLoader.GetDataSourceById(_DataSource) as JsonDataSource;
 
         _Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
-        //_Attack = System.Convert.ToSingle(_EnemyData.DataDictionary["Attack"]);
-        //_Health = System.Convert.ToSingle(_EnemyData.DataDictionary["Health"]);
-        //_Money = System.Convert.ToSingle(_EnemyData.DataDictionary["Money"]);
 
         _Detect = Detect.None;
         _Order = Order.Tower;
@@ -297,7 +261,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Detect = Detect.Attack;
         }
         else if ((_Detect != Detect.Attack || _Detect != Detect.Detected) &&
-            Vector3.Distance(_Path.WayPoints[2].transform.position, transform.position) < _InsideofRange)
+             Vector3.Distance(_Path.WayPoints[2].transform.position, transform.position) < _InsideofRange)
         {
             _Detect = Detect.Detected;
         }
@@ -311,6 +275,31 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         _targetIndicator.SetActive(turnOn);
     }
+
+    private bool isInRangeOfObject(Transform desination, float other)
+    {
+        float distance = Vector3.Distance(transform.position, desination.position);
+        return (distance <= other) ? _Agent.isStopped = true : _Agent.isStopped = false;
+    }
+
+    private bool isCloseToBarricade(float other)
+    {
+        float distance = Vector3.Distance(transform.position, _ObjectofBarricade.transform.position);
+        _barricadeAlive = _ObjectofBarricade.GetComponent<Barricade>().isAlive;
+        _barricadePlaced = _ObjectofBarricade.GetComponent<Barricade>().isPlaced;
+        if (other <= 2.0f)
+            return (distance <= other && _barricadeAlive && _barricadePlaced) ? _Agent.isStopped = true : _Agent.isStopped = false;
+        else
+            return (distance <= other && _barricadeAlive && _barricadePlaced);
+    }
+
+    private void LookAt(Vector3 obj, GameObject go)
+    {
+        _Agent.SetDestination(go.transform.position);
+        obj.y = transform.position.y;
+        transform.LookAt(obj);
+    }
+
     #endregion
 
     #region TakeDamage

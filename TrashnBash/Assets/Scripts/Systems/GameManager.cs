@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public int currentlevel;
     public int highScore;
-    private float coolTime = 0.0f;
+    private float coolTime = 10.0f;
     public bool _enemySkillActived { get; set; }
 
     public enum GameState
@@ -88,11 +88,16 @@ public class GameManager : MonoBehaviour
 
     public void enemySkillActived()
     {
+        Debug.Log("Act!");
         _enemySkillActived = true;
-        if (coolTime < Time.time)
+        if(_enemySkillActived)
         {
-            coolTime = 15.0f + Time.time;
-            _enemySkillActived = false;
+            if (coolTime < Time.time)
+            {
+                coolTime = 10.0f + Time.time;
+                _enemySkillActived = false;
+                Debug.Log("Stop!");
+            }
         }
     }
 }

@@ -28,6 +28,8 @@ public class Player : MonoBehaviour, ICharacterAction
 
     public GameObject ultimateIndicator;
     public GameObject popUp;
+    public GameObject poisonAttack;
+    public GameObject hitEffect;
 
     public AudioClip attackEffect;
     public AudioClip poisonEffect;
@@ -37,11 +39,13 @@ public class Player : MonoBehaviour, ICharacterAction
     private float _maxHealth = 100.0f;
     public float _ultimateCharge = 0.0f;
     private UIManager uiManager;
+    [Header("Poisoned player")]
     public bool _ispoisoned = false;
     public float _poisonTickTime;
     public float _poisonDamage;
     public float _poisonCurrentTime;
     public float _poisonTotalTime = 5.0f;
+    public GameObject poison;
 
     public float UltimateCharge { get { return _ultimateCharge; } private set { } }
     public float Health { get { return health; } private set { } }
@@ -51,6 +55,8 @@ public class Player : MonoBehaviour, ICharacterAction
 
     void Start()
     {
+        poisonAttack.SetActive(false);
+        poison.SetActive(_ispoisoned);
         _maxHealth = health;
         InvokeRepeating("IncrementUltCharge", 10.0f, ultimateChargeTime);
         uiManager = ServiceLocator.Get<UIManager>();
@@ -86,6 +92,7 @@ public class Player : MonoBehaviour, ICharacterAction
     #region Initialization
     public void Initialize(float dmg, float hp)
     {
+        poison.SetActive(_ispoisoned);
         attack = dmg;
         health = hp;
         _maxHealth = health;
@@ -109,6 +116,7 @@ public class Player : MonoBehaviour, ICharacterAction
         _poisonCurrentTime = Time.time;
         _poisonTotalTime = Time.time + total;
         _ispoisoned = true;
+        poison.SetActive(_ispoisoned);
     }
 
     private void Tick()
@@ -121,6 +129,7 @@ public class Player : MonoBehaviour, ICharacterAction
         if (_poisonTotalTime < Time.time)
         {
             _ispoisoned = false;
+            poison.SetActive(_ispoisoned);
             return;
         }
     }
@@ -134,6 +143,7 @@ public class Player : MonoBehaviour, ICharacterAction
             case DamageType.Enemy:
             {
                 popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 1.0f);
+                GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
                 break;
             }
             case DamageType.Skunks:
@@ -243,6 +253,10 @@ public class Player : MonoBehaviour, ICharacterAction
             closestEnemy.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
             audioSource.PlayOneShot(poisonEffect, 0.5f);
+            poisonAttack.SetActive(true);
+            yield return new WaitForSeconds(1.1f);
+            poisonAttack.SetActive(false);
+
         }
         yield return null;
     }

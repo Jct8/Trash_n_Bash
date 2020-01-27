@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public GameObject CoolTimeGO;
     public GameObject popUp;
     public GameObject pickUp;
+    public GameObject poison;
+    public GameObject hitEffect;
 
     private GameObject player;
     private GameObject _targetIndicator;
@@ -64,7 +66,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _poisonTotalTime = 0.0f;
     private float _poisonTickTime = 0.0f;
     private float _poisonCurrentDuration = 0.0f;
-
+    private int numOfRats = 0;
     [Header("Etc")]
     public Rigidbody rigid;
     public Action killed;
@@ -89,7 +91,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
-
+        numOfRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(_Name).Count;
         Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
 
         if (player == null || _IsDead)
@@ -228,6 +230,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public void Initialize(WayPointManager.Path path, Action Recycle)
     {
+        poison.SetActive(_isPoisoned);
         _Path = path;
         killed += Recycle;
         _DataLoader = ServiceLocator.Get<DataLoader>();
@@ -269,6 +272,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _isPoisoned = false;
         _IsStolen = false;
         _IsAttacked = false;
+        poison.SetActive(_isPoisoned);
         player = ServiceLocator.Get<LevelManager>().playerInstance;
     }
 
@@ -313,12 +317,15 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public void TakeDamage(float Dmg, bool isHero, DamageType type)
     {
         fullHealth -= Dmg;
+        
         popUp.GetComponent<TextMesh>().text = Dmg.ToString();
+
         switch (type)
         {
             case DamageType.Normal:
             {
                 popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 0.0f);
+                GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
                 break;
             }
             case DamageType.Poison:
@@ -333,19 +340,16 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
         }
         Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
-        //popUp.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
 
         healthBar.fillAmount = fullHealth / _Health;
 
-        //Justin: Not sure what this does
-        //Jimmy: It's about function for one targeting when the player attacks to one enemy
         if (_Detect == Detect.Detected && isHero == true)
         {
-            if (!ServiceLocator.Get<GameManager>()._enemySkillActived)
+            if(_Name == "Rats" &&  numOfRats <= 3)
             {
-                ServiceLocator.Get<GameManager>()._enemySkillActived = true;
                 enemyAbilities.GroupAttack();
             }
+
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in list)
             {
@@ -396,6 +400,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (_poisonTotalTime < Time.time)
         {
             _isPoisoned = false;
+            poison.SetActive(_isPoisoned);
             return;
         }
     }
@@ -412,6 +417,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _poisonTotalTime = Time.time + totalTime;
         _isPoisoned = true;
         audioSource.PlayOneShot(poisonedEffect, 0.2f);
+        poison.SetActive(_isPoisoned);
     }
     #endregion
 
@@ -489,7 +495,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public IEnumerator DeathAnimation()
     {
         _Agent.isStopped = true;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         ServiceLocator.Get<LevelManager>().IncreaseEnemyDeathCount(1);
         killed?.Invoke();
         yield return null;

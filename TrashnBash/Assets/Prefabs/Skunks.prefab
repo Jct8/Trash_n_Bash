@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skunksPoisonTickTime: 3
-  _skunksPoisonDamage: 5
+  _skunksPoisonDamage: 3
   _skunksPoisonRange: 5
   _skunksPoisonTotaltime: 3
   poisonArea: {fileID: 1623258127465319001}

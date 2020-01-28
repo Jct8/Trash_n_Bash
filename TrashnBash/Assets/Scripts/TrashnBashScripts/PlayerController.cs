@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(CharacterController)), RequireComponent(typeof(Player))]
+[RequireComponent(typeof(CharacterController)), RequireComponent(typeof(Player)), RequireComponent(typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
 {
     #region Variables
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _Barricade = null;
     private GameObject _RepairBarricade = null;
     private UIManager uiManager;
+    private NavMeshAgent agent;
 
     [SerializeField] private float moveSpeed = 10.0f;
     [SerializeField] private float minMoveSpeed = 10.0f;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _RepairButton = KeyCode.R;
     [SerializeField] private KeyCode _ReleaseLockButton = KeyCode.LeftShift;
     [SerializeField] private KeyCode _Intimidate = KeyCode.LeftControl;
+    [SerializeField] private KeyCode _ClickMovementButton = KeyCode.Mouse1;
 
     private bool _isTargetLockedOn = false;
     private bool _isHoldingItem = false;
@@ -44,10 +47,12 @@ public class PlayerController : MonoBehaviour
     private float currentPoisonAttackCoolDown = 0.0f;
     private float currentIntimidateAttackCoolDown = 0.0f;
 
+    public bool isUsingMouseMovement = true;
     public bool attackEnabled = true;
     public bool poisonAttackEnabled = true;
     public bool intimidateAttackEnabled = true;
     public bool ultimateAttackEnabled = true;
+    public bool autoAttack = true;
 
     #endregion
 
@@ -59,6 +64,10 @@ public class PlayerController : MonoBehaviour
         _player = gameObject.GetComponent<Player>();
         _mainCamera = Camera.main;
         uiManager = ServiceLocator.Get<UIManager>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed ;
+        //agent.acceleration = 0.0f;
+        //agent.angularSpeed = turnSpeed * 5.0f;
     }
 
     private void Update()
@@ -107,7 +116,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_AttackButton) && attackEnabled)
+        if ((Input.GetKeyDown(_AttackButton) && attackEnabled) || (autoAttack && CheckCoolDownTimes()))
         {
             if (currentAttackCoolDown < Time.time)
             {
@@ -194,10 +203,46 @@ public class PlayerController : MonoBehaviour
 
     #region Actions
 
+    public bool CheckCoolDownTimes()
+    {
+        if (currentPoisonAttackCoolDown < Time.time && currentIntimidateAttackCoolDown < Time.time)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void CalculateMovement()
     {
         if (!_CanMove)
             return;
+
+        if (isUsingMouseMovement)
+        {
+            if (Vector3.Distance(transform.position,agent.destination) < 1.0f)
+            {
+                agent.isStopped = true;
+            }
+            agent.speed = moveSpeed;
+            if (Input.GetKeyDown(_ClickMovementButton))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit = new RaycastHit();
+                if (Physics.Raycast(ray, out hit))
+                {
+                    
+                    agent.isStopped = true;
+                    agent.SetDestination(hit.point);
+                    agent.isStopped = false;
+                    Vector3 look = agent.destination;
+                    look.y = transform.position.y;
+                    transform.LookAt(look);
+                }
+            }
+
+            
+            return;
+        }
 
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
@@ -264,7 +309,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 //Deselect
-                _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
                 _isTargetLockedOn = false;
                 _lockedOnEnemyGO = null;
             }
@@ -286,11 +331,11 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchAutoLock(GameObject enemy)
     {
-        _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+        _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
 
         _lockedOnEnemyGO = enemy;
         _isTargetLockedOn = true;
-        _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
+        _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(true);
     }
 
     #endregion

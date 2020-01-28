@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1011058151224188264}
   - component: {fileID: 2115016952094743300}
   - component: {fileID: -9134956417358145422}
+  - component: {fileID: 8298391441723140574}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd4e04314d69814c96b370194d6a5bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 5
   minMoveSpeed: 5
   maxMoveSpeed: 8
   turnSpeed: 20.88
@@ -122,21 +123,24 @@ MonoBehaviour:
   deacceleration: 100
   gravity: 1
   burstSpeed: 30
-  attackCoolDown: 0.4
+  attackCoolDown: 0.6
   poisonAttackCoolDown: 3
   intimidateAttackCoolDown: 5
   _AttackButton: 323
   _PoisonAttackButton: 101
-  _LockTargetButton: 324
+  _LockTargetButton: 323
   _UltimateButton: 113
   _PickUpButton: 102
   _RepairButton: 114
   _ReleaseLockButton: 306
   _Intimidate: 304
+  _ClickMovementButton: 324
+  isUsingMouseMovement: 1
   attackEnabled: 1
   poisonAttackEnabled: 1
   intimidateAttackEnabled: 1
   ultimateAttackEnabled: 1
+  autoAttack: 1
 --- !u!54 &2115016952094743300
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -249,6 +253,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &8298391441723140574
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4473401949322046555}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3
+  m_Acceleration: 25
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &6043743588640519989
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +287,7 @@ GameObject:
   - component: {fileID: 3291320978076015522}
   - component: {fileID: 3885254890332264397}
   - component: {fileID: 2703610882420635356}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: UltIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,10 +500,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3502200499049515719}
     m_Modifications:
-    - target: {fileID: 100054, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
-      propertyPath: m_Name
-      value: SCharacter_Squirrel
-      objectReference: {fileID: 0}
     - target: {fileID: 400054, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -533,6 +555,10 @@ PrefabInstance:
     - target: {fileID: 400054, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.383
+      objectReference: {fileID: 0}
+    - target: {fileID: 100054, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
+      propertyPath: m_Name
+      value: SCharacter_Squirrel
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
       propertyPath: m_Controller

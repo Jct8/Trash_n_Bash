@@ -8,7 +8,7 @@ public class Tower : MonoBehaviour
     public Transform partToRotate;
     public GameObject bulletPrefeb;
     public Transform firePoint;
-
+    public float radius = 2.5f;
     private Transform _target;
     private DataLoader _dataLoader;
     private JsonDataSource _towerData;
@@ -129,5 +129,10 @@ public class Tower : MonoBehaviour
         {
             _target = null;
         }
+    }
+
+    public float Getradius()
+    {
+        return radius * radius;
     }
 }

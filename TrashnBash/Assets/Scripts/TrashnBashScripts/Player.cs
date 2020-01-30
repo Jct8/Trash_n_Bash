@@ -30,6 +30,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public GameObject popUp;
     public GameObject poisonAttack;
     public GameObject hitEffect;
+    //public GameObject restoreEffect;
 
     public AudioClip attackEffect;
     public AudioClip poisonEffect;
@@ -83,7 +84,8 @@ public class Player : MonoBehaviour, ICharacterAction
             GameObject tower = ServiceLocator.Get<LevelManager>().towerInstance;
             tower.GetComponent<Tower>()._FullHealth += healedByItem;
             _maxHealth += healedByItem;
-
+            ServiceLocator.Get<UIManager>().UpdateTowerHealth(tower.GetComponent<Tower>()._FullHealth);
+            ServiceLocator.Get<UIManager>().UpdatePlayerHealth(_maxHealth);
         }
     }
 
@@ -335,6 +337,10 @@ public class Player : MonoBehaviour, ICharacterAction
         return null;
     }
 
+    public void restoringHealth(float value)
+    {
+        health += value;
+    }
     #endregion
 
     #region Animations

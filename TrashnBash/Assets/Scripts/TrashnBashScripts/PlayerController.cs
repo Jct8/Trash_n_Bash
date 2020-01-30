@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     #region Variables
     private CharacterController _controller;
     private Player _player;
+    private Tower _tower = null;
     private Camera _mainCamera;
     private GameObject _lockedOnEnemyGO = null;
     private GameObject _Barricade = null;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackCoolDown = 0.4f;
     [SerializeField] private float poisonAttackCoolDown = 3.0f;
     [SerializeField] private float intimidateAttackCoolDown = 5.0f;
+    [SerializeField] private float restoreValue = 0.5f;
 
     [SerializeField] private KeyCode _AttackButton = KeyCode.Space;
     [SerializeField] private KeyCode _PoisonAttackButton = KeyCode.E;
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _ReleaseLockButton = KeyCode.LeftShift;
     [SerializeField] private KeyCode _Intimidate = KeyCode.LeftControl;
     [SerializeField] private KeyCode _ClickMovementButton = KeyCode.Mouse1;
+    [SerializeField] private KeyCode _ClickRestoreButton = KeyCode.H;
 
     private bool _isTargetLockedOn = false;
     private bool _isHoldingItem = false;
@@ -62,6 +65,8 @@ public class PlayerController : MonoBehaviour
     {
         _controller = gameObject.GetComponent<CharacterController>();
         _player = gameObject.GetComponent<Player>();
+        GameObject tower = GameObject.FindGameObjectWithTag("Tower");
+        _tower = tower.GetComponent<Tower>();
         _mainCamera = Camera.main;
         uiManager = ServiceLocator.Get<UIManager>();
         agent = GetComponent<NavMeshAgent>();
@@ -193,6 +198,17 @@ public class PlayerController : MonoBehaviour
                     _player.IntimidateAttack(_lockedOnEnemyGO);
                 }
                 currentIntimidateAttackCoolDown = Time.time + intimidateAttackCoolDown;
+            }
+        }
+
+        if(Vector3.Distance(_tower.transform.position, transform.position) < _tower.Getradius())
+        {
+            if(Input.GetMouseButtonDown(0) && _player.Health < 100.0f)
+            {
+                _tower._FullHealth -= restoreValue;
+                ServiceLocator.Get<UIManager>().UpdateTowerHealth(_tower._FullHealth);
+                _player.restoringHealth(restoreValue * 2.0f);
+                ServiceLocator.Get<UIManager>().UpdatePlayerHealth(_player.Health);
             }
         }
         ActivateTargetLockedOn();

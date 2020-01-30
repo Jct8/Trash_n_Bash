@@ -39,7 +39,7 @@ public class Player : MonoBehaviour, ICharacterAction
 
     private float _maxHealth = 100.0f;
     public float _ultimateCharge = 0.0f;
-    private UIManager uiManager;
+    private float ultimateChargeStart = 0.0f;
     [Header("Poisoned player")]
     public bool _ispoisoned = false;
     public float _poisonTickTime;
@@ -56,12 +56,13 @@ public class Player : MonoBehaviour, ICharacterAction
 
     void Start()
     {
+        ResetPlayer();
         poisonAttack.SetActive(false);
         poison.SetActive(_ispoisoned);
         _maxHealth = health;
         InvokeRepeating("IncrementUltCharge", 10.0f, ultimateChargeTime);
-        uiManager = ServiceLocator.Get<UIManager>();
         audioSource = GetComponent<AudioSource>();
+        ultimateChargeStart = _ultimateCharge;
         //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
         //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
     }
@@ -98,6 +99,14 @@ public class Player : MonoBehaviour, ICharacterAction
         attack = dmg;
         health = hp;
         _maxHealth = health;
+        ultimateChargeStart = _ultimateCharge;
+    }
+
+    public void ResetPlayer()
+    {
+        poison.SetActive(false);
+        _maxHealth = health;
+        _ultimateCharge = ultimateChargeStart;
     }
 
     //public void SaveData(float dmg, float hp)
@@ -171,7 +180,7 @@ public class Player : MonoBehaviour, ICharacterAction
         {
             _ultimateCharge = 100.0f;
         }
-        uiManager.UpdateUltimatePercentage(_ultimateCharge);
+        
     }
 
     public IEnumerator Attack()

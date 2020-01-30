@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _Intimidate = KeyCode.LeftControl;
     [SerializeField] private KeyCode _ClickMovementButton = KeyCode.Mouse1;
     [SerializeField] private KeyCode _ClickRestoreButton = KeyCode.H;
+    [SerializeField] private KeyCode _ClickTowerButton = KeyCode.Mouse0;
 
     private bool _isTargetLockedOn = false;
     private bool _isHoldingItem = false;
@@ -201,9 +202,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Vector3.Distance(_tower.transform.position, transform.position) < _tower.Getradius())
+        if (Input.GetKey(_ClickTowerButton) && _player.Health < 100.0f)
         {
-            if(Input.GetMouseButtonDown(0) && _player.Health < 100.0f)
+            if (Vector3.Distance(_tower.transform.position, transform.position) < _tower.Getradius())
             {
                 _tower._FullHealth -= restoreValue;
                 ServiceLocator.Get<UIManager>().UpdateTowerHealth(_tower._FullHealth);
@@ -211,6 +212,7 @@ public class PlayerController : MonoBehaviour
                 ServiceLocator.Get<UIManager>().UpdatePlayerHealth(_player.Health);
             }
         }
+ 
         ActivateTargetLockedOn();
 
     }

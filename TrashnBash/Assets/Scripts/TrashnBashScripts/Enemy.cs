@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         numOfRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(_Name).Count;
         Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
-        
+
         if (player == null || _IsDead)
         {
             _Agent.isStopped = true;
@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (_isPoisoned)
             CheckPoison();
 
-        if(_Order == Order.Stunned)
+        if (_Order == Order.Stunned)
         {
             _Agent.isStopped = true;
             if (stunTime < Time.time)
@@ -118,10 +118,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             return;
         }
-        else if(_Order == Order.Tower)
+        else if (_Order == Order.Tower)
         {
             _Agent.SetDestination(_Desination.position);
-            if ((isInRangeOfObject(_Desination, _EndDistance)) && (_Detect == Detect.Detected || _Detect == Detect.None))
+            if ((isInRangeOfWayPoint(_Desination, _EndDistance)) && (_Detect == Detect.Detected || _Detect == Detect.None))
             {
                 if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                 {
@@ -149,12 +149,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 if (isCloseToBarricade(_ObjectDetectionRange))
                     _Order = Order.Barricade;
         }
-        else if(_Order == Order.Fight)
+        else if (_Order == Order.Fight)
         {
             if (_Detect == Detect.Attack)
             {
                 LookAt(player.transform.position, player);
-                if (isInRangeOfObject(player.transform, _enemyAttackRange))
+                if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
                 {
                     if (ChargingCoolDown())
                         StartCoroutine("Attack");
@@ -166,13 +166,18 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 }
             }
         }
-        else if(_Order == Order.Barricade)
+        else if (_Order == Order.Barricade)
         {
             LookAt(_ObjectofBarricade.transform.position, _ObjectofBarricade);
-            if (isCloseToBarricade(1.5f))
+            if (isCloseToBarricade(_enemyAttackRange))
             {
                 if (ChargingCoolDown())
                     BarricadeAttack();
+            }
+            if (!_ObjectofBarricade.GetComponent<Barricade>().isAlive)
+            {
+                _ObjectofBarricade = null;
+                _Order = Order.Tower;
             }
         }
         else if (_Order == Order.Back)
@@ -180,7 +185,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Agent.isStopped = false;
             _Desination = _Path.WayPoints[0];
             _Agent.SetDestination(_Desination.position);
-            if (isInRangeOfObject(_Desination,_EndDistance))
+            if (isInRangeOfWayPoint(_Desination, _EndDistance))
                 killed?.Invoke();
         }
 
@@ -276,21 +281,24 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _targetIndicator.SetActive(turnOn);
     }
 
-    private bool isInRangeOfObject(Transform desination, float other)
+    private bool isInRangeOfWayPoint(Transform desination, float range)
     {
         float distance = Vector3.Distance(transform.position, desination.position);
-        return (distance <= other) ? _Agent.isStopped = true : _Agent.isStopped = false;
+        return (distance <= range) ? _Agent.isStopped = true : _Agent.isStopped = false;
     }
 
-    private bool isCloseToBarricade(float other)
+    private bool isCloseToBarricade(float range)
     {
         float distance = Vector3.Distance(transform.position, _ObjectofBarricade.transform.position);
         _barricadeAlive = _ObjectofBarricade.GetComponent<Barricade>().isAlive;
         _barricadePlaced = _ObjectofBarricade.GetComponent<Barricade>().isPlaced;
-        if (other <= 2.0f)
-            return (distance <= other && _barricadeAlive && _barricadePlaced) ? _Agent.isStopped = true : _Agent.isStopped = false;
+
+        if (distance <= _enemyAttackRange && _barricadeAlive && _barricadePlaced)
+            _Agent.isStopped = true;
         else
-            return (distance <= other && _barricadeAlive && _barricadePlaced);
+            _Agent.isStopped = false;
+
+        return _Agent.isStopped;
     }
 
     private void LookAt(Vector3 obj, GameObject go)
@@ -306,27 +314,27 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public void TakeDamage(float Dmg, bool isHero, DamageType type)
     {
         fullHealth -= Dmg;
-        
+
         popUp.GetComponent<TextMesh>().text = Dmg.ToString();
 
         switch (type)
         {
             case DamageType.Normal:
-            {
-                popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 0.0f);
-                GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
-                break;
-            }
+                {
+                    popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 0.0f);
+                    GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
+                    break;
+                }
             case DamageType.Poison:
-            {
-                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
-                break;
-            }
+                {
+                    popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
+                    break;
+                }
             case DamageType.Ultimate:
-            {
-                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 0.0f, 1.0f);
-                break;
-            }
+                {
+                    popUp.GetComponent<TextMesh>().color = new Color(0.0f, 0.0f, 1.0f);
+                    break;
+                }
         }
         Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
 
@@ -334,7 +342,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         if (_Detect == Detect.Detected && isHero == true)
         {
-            if(_Name == "Rats" &&  numOfRats <= 3)
+            if (_Name == "Rats" && numOfRats <= 3)
             {
                 enemyAbilities.GroupAttack();
             }
@@ -484,7 +492,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public IEnumerator DeathAnimation()
     {
         _Agent.isStopped = true;
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         ServiceLocator.Get<LevelManager>().IncreaseEnemyDeathCount(1);
         killed?.Invoke();
         yield return null;

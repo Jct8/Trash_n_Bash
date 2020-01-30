@@ -124,8 +124,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUltimatePercentage(float curr)
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         ultimateChargePercentage.text = curr.ToString() + " %";
-        EnergyBar.fillAmount = player.GetComponent<Player>()._ultimateCharge / fullEnergy;
+        EnergyBar.fillAmount = player.GetComponent<Player>().UltimateCharge / fullEnergy;
 
         float iconFill = EnergyBar.fillAmount;
         iconFill = Mathf.Clamp(iconFill, 0.0f, 1.0f);

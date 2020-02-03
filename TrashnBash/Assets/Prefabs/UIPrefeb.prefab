@@ -1152,8 +1152,9 @@ GameObject:
   - component: {fileID: 5702239152037251414}
   - component: {fileID: 6635957361566926311}
   - component: {fileID: 2074349346983358603}
+  - component: {fileID: 3632898860123777753}
   m_Layer: 5
-  m_Name: PickUp
+  m_Name: PickUpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1217,6 +1218,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &3632898860123777753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186905857761781842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed2b496ce793eb468ba6051a9e1d520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isButtonPressed: 0
 --- !u!1 &2319404860344749307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,6 +1816,7 @@ GameObject:
   - component: {fileID: 1144858326484608763}
   - component: {fileID: 8050394379061324315}
   - component: {fileID: 7269567658230638493}
+  - component: {fileID: 3979640333161575155}
   m_Layer: 5
   m_Name: AttackImg
   m_TagString: Untagged
@@ -1867,6 +1882,62 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &3979640333161575155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411925572309282522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 7269567658230638493}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &3412284970495275295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,8 +1949,9 @@ GameObject:
   - component: {fileID: 2545755515329689451}
   - component: {fileID: 4750204110091047635}
   - component: {fileID: 8178359394933027618}
+  - component: {fileID: 1744150069598140374}
   m_Layer: 5
-  m_Name: Repair
+  m_Name: RepairButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1943,6 +2015,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &1744150069598140374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412284970495275295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed2b496ce793eb468ba6051a9e1d520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isButtonPressed: 0
 --- !u!1 &3516124053532256690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,6 +2376,7 @@ GameObject:
   - component: {fileID: 8973029246818904419}
   - component: {fileID: 9042082904112449924}
   - component: {fileID: 4745642551915875944}
+  - component: {fileID: 2630409759573673645}
   m_Layer: 5
   m_Name: PoisonImg
   m_TagString: Untagged
@@ -2356,6 +2442,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &2630409759573673645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5981971334127681075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed2b496ce793eb468ba6051a9e1d520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isButtonPressed: 0
 --- !u!1 &6008570385068575775
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,7 +2490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 49.58255, y: 2.4976196}
+  m_AnchoredPosition: {x: 49.58255, y: 2.4976807}
   m_SizeDelta: {x: 156.5, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &94425544243921546
@@ -2613,6 +2712,8 @@ MonoBehaviour:
   poisonImg: {fileID: 5981971334127681075}
   intimidateImg: {fileID: 8421950482891805819}
   ultImg: {fileID: 6700151371963824885}
+  repairButton: {fileID: 3412284970495275295}
+  placeButton: {fileID: 2186905857761781842}
   continueButton: {fileID: 3507394451075753025}
   restartButton: {fileID: 7645782853492125592}
   mainmenuButton: {fileID: 9064604746297091232}
@@ -2627,6 +2728,7 @@ GameObject:
   - component: {fileID: 5768010967537993009}
   - component: {fileID: 3247977486772309333}
   - component: {fileID: 6989700182961796884}
+  - component: {fileID: 2352789636398350762}
   m_Layer: 5
   m_Name: UltImg
   m_TagString: Untagged
@@ -2652,7 +2754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -49.7, y: 13}
+  m_AnchoredPosition: {x: -49.69995, y: 13}
   m_SizeDelta: {x: 978, y: 476}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3247977486772309333
@@ -2692,6 +2794,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &2352789636398350762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6700151371963824885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed2b496ce793eb468ba6051a9e1d520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isButtonPressed: 0
 --- !u!1 &6719653423042042299
 GameObject:
   m_ObjectHideFlags: 0
@@ -2770,7 +2885,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pick Up
+  m_Text: Place
 --- !u!1 &6743722009375455493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3133,7 +3248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -5.6000366}
+  m_AnchoredPosition: {x: 0, y: -5.5999756}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &3706150385042815586
@@ -3388,6 +3503,7 @@ GameObject:
   - component: {fileID: 8976793213945270155}
   - component: {fileID: 139880731797174593}
   - component: {fileID: 3607224675548682854}
+  - component: {fileID: 3070387992334238533}
   m_Layer: 5
   m_Name: IntimidateImg
   m_TagString: Untagged
@@ -3453,6 +3569,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &3070387992334238533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421950482891805819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed2b496ce793eb468ba6051a9e1d520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isButtonPressed: 0
 --- !u!1 &8505872053541396800
 GameObject:
   m_ObjectHideFlags: 0

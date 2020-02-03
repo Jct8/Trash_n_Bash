@@ -31,6 +31,8 @@ public class UIManager : MonoBehaviour
     public GameObject poisonImg;
     public GameObject intimidateImg;
     public GameObject ultImg;
+    public GameObject repairButton;
+    public GameObject placeButton;
 
     public Button continueButton;
     public Button restartButton;

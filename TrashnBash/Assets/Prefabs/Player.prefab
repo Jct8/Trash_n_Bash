@@ -92,9 +92,6 @@ MonoBehaviour:
   poisonAttack: {fileID: 1342458468121041236}
   hitEffect: {fileID: 6462621314868396975, guid: d192a558b2fca7249989b6570e020d87,
     type: 3}
-  restoreEffect: {fileID: 5108329040562407767, guid: 4d93b4f1ea7f87d408eaf10550931a0d,
-    type: 3}
-  isRestoring: 0
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
   poisonEffect: {fileID: 8300000, guid: 31960797e7e12004c857a9547dad7efc, type: 3}
   UltimateEffect: {fileID: 8300000, guid: 00d257894e229354f9ab925c723cb27c, type: 3}
@@ -138,8 +135,9 @@ MonoBehaviour:
   _RepairButton: 114
   _ReleaseLockButton: 306
   _Intimidate: 304
-  _ClickMovementButton: 324
-  _ClickRestoreButton: 324
+  _ClickMovementButton: 323
+  _ClickRestoreButton: 323
+  _ClickTowerButton: 323
   isUsingMouseMovement: 1
   attackEnabled: 1
   poisonAttackEnabled: 1

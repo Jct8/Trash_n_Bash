@@ -58,6 +58,12 @@ public class PlayerController : MonoBehaviour
     public bool ultimateAttackEnabled = true;
     public bool autoAttack = true;
 
+    private UIbutton poisonUIbutton;
+    private UIbutton intimidateUIbutton;
+    private UIbutton ultUIbutton;
+    private UIbutton repairUIbutton;
+    private UIbutton placeUIbutton;
+
     #endregion
 
     #region Unity Functions
@@ -71,9 +77,12 @@ public class PlayerController : MonoBehaviour
         _mainCamera = Camera.main;
         uiManager = ServiceLocator.Get<UIManager>();
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = moveSpeed ;
-        //agent.acceleration = 0.0f;
-        //agent.angularSpeed = turnSpeed * 5.0f;
+        agent.speed = moveSpeed;
+        poisonUIbutton = ServiceLocator.Get<UIManager>().poisonImg.GetComponent<UIbutton>();
+        intimidateUIbutton = ServiceLocator.Get<UIManager>().intimidateImg.GetComponent<UIbutton>();
+        ultUIbutton = ServiceLocator.Get<UIManager>().ultImg.GetComponent<UIbutton>();
+        repairUIbutton = ServiceLocator.Get<UIManager>().repairButton.GetComponent<UIbutton>();
+        placeUIbutton = ServiceLocator.Get<UIManager>().placeButton.GetComponent<UIbutton>();
     }
 
     private void Update()
@@ -86,7 +95,7 @@ public class PlayerController : MonoBehaviour
         }
         UpdateUI();
 
-        if (Input.GetKeyDown(_PickUpButton))
+        if (Input.GetKeyDown(_PickUpButton) || CheckBarricadePickUp())
         {
             if (!_isHoldingItem)
             {
@@ -99,17 +108,25 @@ public class PlayerController : MonoBehaviour
                     _isHoldingItem = true;
                 }
             }
-            else
+            else if (!CheckBarricadePickUp())
             {
                 StartCoroutine(PlaceBarricade());
             }
 
         }
+        if (placeUIbutton.isButtonPressed)
+        {
+            if (_isHoldingItem && _Barricade != null)
+            {
+                _isHoldingItem = false;
+                StartCoroutine(PlaceBarricade());
+            }
 
+        }
         if (_isHoldingItem)
             return;
 
-        if (Input.GetKeyDown(_RepairButton))
+        if (Input.GetKeyDown(_RepairButton) || repairUIbutton.isButtonPressed)
         {
             _RepairBarricade = _player.DetectBarricade();
             if (_RepairBarricade == null)
@@ -131,7 +148,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_PoisonAttackButton) && poisonAttackEnabled)
+        if ((Input.GetKeyDown(_PoisonAttackButton) || poisonUIbutton.isButtonPressed) && poisonAttackEnabled)
         {
             if (currentPoisonAttackCoolDown < Time.time)
             {
@@ -173,9 +190,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_UltimateButton) && ultimateAttackEnabled)
+        if ((Input.GetKeyDown(_UltimateButton) || ultUIbutton.isButtonPressed) && ultimateAttackEnabled)
         {
             //_player.UltimateAttack();
+            ultUIbutton.isButtonPressed = false;
             StartCoroutine(_player.UltimateAttack());
         }
 
@@ -190,7 +208,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_Intimidate) && intimidateAttackEnabled)
+        if ((Input.GetKeyDown(_Intimidate) || intimidateUIbutton.isButtonPressed) && intimidateAttackEnabled)
         {
             if (currentIntimidateAttackCoolDown < Time.time)
             {
@@ -212,7 +230,7 @@ public class PlayerController : MonoBehaviour
                 uiManager.UpdatePlayerHealth(_player.Health);
             }
         }
- 
+
         ActivateTargetLockedOn();
 
     }
@@ -220,6 +238,20 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Actions
+
+    public bool CheckBarricadePickUp()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.gameObject.CompareTag("BarricadeSpawner"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public bool CheckCoolDownTimes()
     {
@@ -237,28 +269,32 @@ public class PlayerController : MonoBehaviour
 
         if (isUsingMouseMovement)
         {
-            if (Vector3.Distance(transform.position,agent.destination) < 1.0f)
+            if (Vector3.Distance(transform.position, agent.destination) < 1.0f)
             {
                 agent.isStopped = true;
             }
             agent.speed = moveSpeed;
-            if (Input.GetKeyDown(_ClickMovementButton))
+            if (Input.GetKeyDown(_ClickMovementButton) && !ultUIbutton.isButtonPressed 
+                && !poisonUIbutton.isButtonPressed && !intimidateUIbutton.isButtonPressed 
+                && !placeUIbutton.isButtonPressed && !repairUIbutton.isButtonPressed)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit = new RaycastHit();
                 if (Physics.Raycast(ray, out hit))
                 {
-                    
-                    agent.isStopped = true;
-                    agent.SetDestination(hit.point);
-                    agent.isStopped = false;
-                    Vector3 look = agent.destination;
-                    look.y = transform.position.y;
-                    transform.LookAt(look);
+                    if (hit.transform.gameObject.CompareTag("Ground"))
+                    {
+                        agent.isStopped = true;
+                        agent.SetDestination(hit.point);
+                        agent.isStopped = false;
+                        Vector3 look = agent.destination;
+                        look.y = transform.position.y;
+                        transform.LookAt(look);
+                    }
                 }
             }
 
-            
+
             return;
         }
 
@@ -389,6 +425,7 @@ public class PlayerController : MonoBehaviour
 
         uiManager.repairIcon.enabled = _isRepairing;
     }
+
     #endregion
 
     public void EnableAttack()

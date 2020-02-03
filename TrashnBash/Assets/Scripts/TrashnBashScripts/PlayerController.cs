@@ -282,7 +282,7 @@ public class PlayerController : MonoBehaviour
                 RaycastHit hit = new RaycastHit();
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.transform.gameObject.CompareTag("Ground"))
+                    if (hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("Enemy"))
                     {
                         agent.isStopped = true;
                         agent.SetDestination(hit.point);

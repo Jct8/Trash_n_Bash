@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
     public GameObject repairButton;
     public GameObject placeButton;
 
+    public Button pauseButton;
     public Button continueButton;
     public Button restartButton;
     public Button mainmenuButton;
@@ -47,6 +48,7 @@ public class UIManager : MonoBehaviour
         restartButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().Restart);
         continueButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().PauseGame);
         mainmenuButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().ReturnToMainMenu);
+        pauseButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().PauseGame);
 
         pauseScreen.SetActive(false);
         playerHealthBar.value = 0.0f;

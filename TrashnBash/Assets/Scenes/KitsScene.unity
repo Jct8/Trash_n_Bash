@@ -5774,16 +5774,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4208394709829915080, guid: db02aa316148c134697875e590fe91c6,
-        type: 3}
-      propertyPath: _ultimateCharge
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208394709829915080, guid: db02aa316148c134697875e590fe91c6,
-        type: 3}
-      propertyPath: health
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 1011058151224188264, guid: db02aa316148c134697875e590fe91c6,
         type: 3}
       propertyPath: moveSpeed
@@ -5793,6 +5783,16 @@ PrefabInstance:
         type: 3}
       propertyPath: turnSpeed
       value: 20.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208394709829915080, guid: db02aa316148c134697875e590fe91c6,
+        type: 3}
+      propertyPath: _ultimateCharge
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208394709829915080, guid: db02aa316148c134697875e590fe91c6,
+        type: 3}
+      propertyPath: health
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3550494672790114550, guid: db02aa316148c134697875e590fe91c6,
         type: 3}
@@ -5959,11 +5959,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 4.8890824e-17
       objectReference: {fileID: 0}
-    - target: {fileID: 3550494672785064418, guid: db02aa316148c134697875e590fe91c6,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 92a89afb33762b649b4a9875ee86ca38, type: 2}
     - target: {fileID: 3550494672790114434, guid: db02aa316148c134697875e590fe91c6,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -6554,6 +6549,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.008784193
       objectReference: {fileID: 0}
+    - target: {fileID: 3550494672785064418, guid: db02aa316148c134697875e590fe91c6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 92a89afb33762b649b4a9875ee86ca38, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db02aa316148c134697875e590fe91c6, type: 3}
 --- !u!114 &1201456843 stripped
@@ -7936,8 +7936,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030518, y: 58.899982}
-  m_SizeDelta: {x: 667.5, y: 117.8}
+  m_AnchoredPosition: {x: -12, y: 88.6}
+  m_SizeDelta: {x: 666.1, y: 177.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1567410548
 MonoBehaviour:
@@ -7972,9 +7972,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press [W][A][S][D] to Move &
-
-    [Spacebar] to Attack'
+  m_Text: Right Click Anywhere to Move & Left Click to Target Opponents
 --- !u!222 &1567410549
 CanvasRenderer:
   m_ObjectHideFlags: 0

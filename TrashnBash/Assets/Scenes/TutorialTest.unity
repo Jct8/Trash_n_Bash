@@ -2968,9 +2968,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press [W][A][S][D] to Move &
-
-    [Spacebar] to Attack'
+  m_Text: Click Anywhere to Move
 --- !u!222 &1100488357
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3111,6 +3109,7 @@ MonoBehaviour:
   - {fileID: 670326105}
   - {fileID: 2117101698}
   WayPointManager: {fileID: 874770422}
+  tutorialManager: {fileID: 0}
 --- !u!1 &1153754540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3972,7 +3971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1513325500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4375,6 +4374,7 @@ MonoBehaviour:
   - {fileID: 210234432}
   - {fileID: 395581932}
   - {fileID: 415139870}
+  enemySpawnManager: {fileID: 0}
 --- !u!4 &1626255591
 Transform:
   m_ObjectHideFlags: 0

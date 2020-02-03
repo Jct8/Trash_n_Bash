@@ -206,10 +206,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Vector3.Distance(_tower.transform.position, transform.position) < _tower.Getradius())
             {
-                _tower._FullHealth -= restoreValue;
-                ServiceLocator.Get<UIManager>().UpdateTowerHealth(_tower._FullHealth);
+                _tower.fullHealth -= restoreValue;
+                uiManager.UpdateTowerHealth(_tower.fullHealth);
                 _player.restoringHealth(restoreValue * 2.0f);
-                ServiceLocator.Get<UIManager>().UpdatePlayerHealth(_player.Health);
+                uiManager.UpdatePlayerHealth(_player.Health);
             }
         }
  

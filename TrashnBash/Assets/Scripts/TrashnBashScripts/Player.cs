@@ -81,12 +81,22 @@ public class Player : MonoBehaviour, ICharacterAction
     {
         if (item.gameObject.CompareTag("PickUp"))
         {
-            item.gameObject.SetActive(false);
+            UIManager uiManager = ServiceLocator.Get<UIManager>();
             GameObject tower = ServiceLocator.Get<LevelManager>().towerInstance;
-            tower.GetComponent<Tower>()._FullHealth += healedByItem;
+            item.gameObject.SetActive(false);
+            tower.GetComponent<Tower>().fullHealth += healedByItem;
+
+            if (tower.GetComponent<Tower>().fullHealth > 100.0f)
+            {
+                tower.GetComponent<Tower>().fullHealth = 100.0f;
+            }
             _maxHealth += healedByItem;
-            ServiceLocator.Get<UIManager>().UpdateTowerHealth(tower.GetComponent<Tower>()._FullHealth);
-            ServiceLocator.Get<UIManager>().UpdatePlayerHealth(_maxHealth);
+            if(_maxHealth > 100.0f)
+            {
+                _maxHealth = 100.0f;
+            }
+            uiManager.UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
+            uiManager.UpdatePlayerHealth(_maxHealth);
         }
     }
 
@@ -106,7 +116,7 @@ public class Player : MonoBehaviour, ICharacterAction
     {
         poison.SetActive(false);
         _maxHealth = health;
-        _ultimateCharge = ultimateChargeStart;
+        ultimateChargeStart = _ultimateCharge;
     }
 
     //public void SaveData(float dmg, float hp)
@@ -180,7 +190,9 @@ public class Player : MonoBehaviour, ICharacterAction
         {
             _ultimateCharge = 100.0f;
         }
-        
+
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        uiManager.UpdateUltimatePercentage(_ultimateCharge);
     }
 
     public IEnumerator Attack()

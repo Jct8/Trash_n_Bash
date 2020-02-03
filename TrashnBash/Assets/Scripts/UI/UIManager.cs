@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator Reset()
     {
-        Debug.Log("Start Reset");
+        Debug.Log("Start Reset UI");
         yield return new WaitForSeconds(1.0f);
         player = GameObject.FindGameObjectWithTag("Player");
         tower = GameObject.FindGameObjectWithTag("Tower");
@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
         AnimationTexture.SetBool("IsHit", false);
         AnimationTexture.SetFloat("Energy", 0.0f);
         UpdatePlayerHealth(player.GetComponent<Player>().Health);
-        UpdateTowerHealth(tower.GetComponent<Tower>()._FullHealth);
+        UpdateTowerHealth(tower.GetComponent<Tower>().health);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
         StartCoroutine("CountingTimer");
         yield return null;

@@ -23,7 +23,7 @@ public class Barricade : MonoBehaviour
     public void PickUp(GameObject playerGO)
     {
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>() ;
-        _Health = tower._health * _PercentFromTower *0.01f;
+        _Health = tower.health * _PercentFromTower *0.01f;
         _MaxHealth = _Health;
         if (_MaxHealth != 0.0f)
             healthBar.fillAmount = _Health / _MaxHealth;

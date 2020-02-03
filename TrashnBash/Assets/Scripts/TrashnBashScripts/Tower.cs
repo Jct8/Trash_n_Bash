@@ -10,20 +10,20 @@ public class Tower : MonoBehaviour
     public Transform firePoint;
     public float radius = 2.5f;
     private Transform _target;
-    private DataLoader _dataLoader;
-    private JsonDataSource _towerData;
+    private DataLoader dataLoader;
+    private JsonDataSource towerData;
 
     private Action _action;
 
-    public string _dataSourceId = "Tower";
-    public string _name;
-    public float _range;
-    public float _damage;
-    public float _speed;
-    public float _health;
-    public float _attackRate;
-    public float _FullHealth;
-    public float _shotTime;
+    public string dataSourceId = "Tower";
+    public string name;
+    public float range;
+    public float damage;
+    public float speed;
+    public float health;
+    public float attackRate;
+    public float fullHealth;
+    public float shotTime;
     public bool isShooting = true;
 
     public AudioClip shotSound;
@@ -31,26 +31,26 @@ public class Tower : MonoBehaviour
 
     private void Awake()
     {
-        _dataLoader = ServiceLocator.Get<DataLoader>();
-        _towerData = _dataLoader.GetDataSourceById(_dataSourceId) as JsonDataSource;
-        _name = System.Convert.ToString(_towerData.DataDictionary["Name"]);
-        _damage = System.Convert.ToSingle(_towerData.DataDictionary["Damage"]);
-        _speed = System.Convert.ToSingle(_towerData.DataDictionary["Speed"]);
-        _health = System.Convert.ToSingle(_towerData.DataDictionary["Health"]);
-        _attackRate = System.Convert.ToSingle(_towerData.DataDictionary["AttackRate"]);
-        _range = System.Convert.ToSingle(_towerData.DataDictionary["Range"]);
+        dataLoader = ServiceLocator.Get<DataLoader>();
+        towerData = dataLoader.GetDataSourceById(dataSourceId) as JsonDataSource;
+        name = System.Convert.ToString(towerData.DataDictionary["Name"]);
+        damage = System.Convert.ToSingle(towerData.DataDictionary["Damage"]);
+        speed = System.Convert.ToSingle(towerData.DataDictionary["Speed"]);
+        health = System.Convert.ToSingle(towerData.DataDictionary["Health"]);
+        attackRate = System.Convert.ToSingle(towerData.DataDictionary["AttackRate"]);
+        range = System.Convert.ToSingle(towerData.DataDictionary["Range"]);
         audioSource = GetComponent<AudioSource>();
-        _FullHealth = _health;
+        fullHealth = health;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
-    public void Initialize(float damage, float speed, float health, float attackR, float range)
+    public void Initialize(float dmg, float s, float h, float ar, float r)
     {
-        _damage = damage;
-        _speed = speed;
-        _health = health;
-        _attackRate = attackR;
-        _range = range;
-        _FullHealth = _health;
+        damage = dmg;
+        speed = s;
+        health = h;
+        attackRate = ar;
+        range = r;
+        fullHealth = health;
     }
 
     void Update()
@@ -68,13 +68,13 @@ public class Tower : MonoBehaviour
         Vector3 _rotation = _lookRotation.eulerAngles;
         partToRotate.rotation = Quaternion.Euler(_rotation.x + 10.0f, _rotation.y, _rotation.z);
 
-        if(_shotTime <= 0.0f)
+        if(shotTime <= 0.0f)
         {
             Shoot();
-            _shotTime = 1.0f / _attackRate;
+            shotTime = 1.0f / attackRate;
         }
 
-        _shotTime -= Time.deltaTime;
+        shotTime -= Time.deltaTime;
     }
 
     void Shoot()
@@ -84,19 +84,20 @@ public class Tower : MonoBehaviour
         _bulletGO.transform.rotation = firePoint.transform.rotation;
         _bulletGO.SetActive(true);
         _action = () => Recycle(_bulletGO);
-        _bulletGO.GetComponent<Bullet>().Initialize(_target,_damage,_speed, _action);
+        _bulletGO.GetComponent<Bullet>().Initialize(_target,damage,speed, _action);
         var rb = _bulletGO.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
-        rb.AddForce(firePoint.up * _speed * 3.0f, ForceMode.Force);
+        rb.AddForce(firePoint.up * speed * 3.0f, ForceMode.Force);
         audioSource.PlayOneShot(shotSound, 1.0f);
     }
 
     public void TakeDamage(float dmg)
     {
-        _FullHealth -= dmg;
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        fullHealth -= dmg;
         //Debug.Log("Taken damage: " + dmg);
-        ServiceLocator.Get<UIManager>().UpdateTowerHealth(_FullHealth);
-        if (_FullHealth <= 0.0f)
+        uiManager.UpdateTowerHealth(fullHealth);
+        if (fullHealth <= 0.0f)
         {
             return;
         }
@@ -121,7 +122,7 @@ public class Tower : MonoBehaviour
                 _nearestEnemy = enemy;
             }
         }
-        if(_nearestEnemy != null && _shortestDistance <= _range)
+        if(_nearestEnemy != null && _shortestDistance <= range)
         {
             _target = _nearestEnemy.transform;
         }

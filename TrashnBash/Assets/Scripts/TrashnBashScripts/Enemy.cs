@@ -281,9 +281,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _targetIndicator.SetActive(turnOn);
     }
 
-    private bool isInRangeOfWayPoint(Transform desination, float range)
+    private bool isInRangeOfWayPoint(Transform destination, float range)
     {
-        float distance = Vector3.Distance(transform.position, desination.position);
+        // Range is enemy's area, it could be enemy's attack range, or enemy's width
+        // if enemy's area reachs to inside of distance, they stop moving
+        float distance = Vector3.Distance(transform.position, destination.position);
         return (distance <= range) ? _Agent.isStopped = true : _Agent.isStopped = false;
     }
 

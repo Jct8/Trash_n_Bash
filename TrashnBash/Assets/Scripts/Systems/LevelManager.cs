@@ -36,10 +36,11 @@ public class LevelManager : MonoBehaviour
 
     public void Restart()
     {
-
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
         PauseGame();
         ClearLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        uiManager.Reset();
     }
 
     public void ReturnToMainMenu()
@@ -82,7 +83,7 @@ public class LevelManager : MonoBehaviour
         {
             return false;
         }
-        if (playerInstance.GetComponent<Player>().Health <= 0.0f || towerInstance.GetComponent<Tower>()._FullHealth <= 0.0f)
+        if (playerInstance.GetComponent<Player>().Health <= 0.0f || towerInstance.GetComponent<Tower>().fullHealth <= 0.0f)
         {
             return true;
         }
@@ -96,7 +97,7 @@ public class LevelManager : MonoBehaviour
             if (playerInstance != null)
                 playerHealth = playerInstance.GetComponent<Player>().Health;
             if (towerInstance != null)
-                towerHealth = towerInstance.GetComponent<Tower>()._FullHealth;
+                towerHealth = towerInstance.GetComponent<Tower>().fullHealth;
             return true;
         }
         return false;
@@ -116,6 +117,7 @@ public class LevelManager : MonoBehaviour
 
     public void ResetLevel()
     {
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
         if (playerInstance == null || towerInstance == null)
         {
             playerInstance = GameObject.FindGameObjectWithTag("Player");
@@ -123,16 +125,12 @@ public class LevelManager : MonoBehaviour
         }
         enemyDeathCount = 0;
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
+        for (int i = 0; i < enemies.Length; i++)
         {
-            enemy.GetComponent<Enemy>().rigid.velocity = Vector3.zero;
-            enemy.GetComponent<Enemy>().killed?.Invoke();
+            enemies[i].GetComponent<Enemy>().rigid.velocity = Vector3.zero;
+            enemies[i].GetComponent<Enemy>().killed?.Invoke();
         }
-        playerHealth = 100.0f;
-        towerHealth = 100.0f;
-        ServiceLocator.Get<UIManager>().UpdatePlayerHealth(playerHealth);
-        ServiceLocator.Get<UIManager>().UpdateTowerHealth(towerHealth);
-        ServiceLocator.Get<UIManager>().UpdateUltimatePercentage(playerInstance.GetComponent<Player>()._ultimateCharge);
+        uiManager.Reset();
     }
 
     public void SaveData()

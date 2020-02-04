@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     public GameObject ultImg;
     public GameObject repairButton;
     public GameObject placeButton;
+    public GameObject basicAttackButton;
 
     public Button pauseButton;
     public Button continueButton;

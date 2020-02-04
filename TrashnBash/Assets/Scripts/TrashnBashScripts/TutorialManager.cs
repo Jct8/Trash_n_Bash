@@ -17,6 +17,7 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         levelManager = ServiceLocator.Get<LevelManager>();
+        levelManager.isTutorial = true;
         PlayerController player = levelManager.playerInstance.GetComponent<PlayerController>();
         player.attackEnabled = true;
         player.poisonAttackEnabled = false;

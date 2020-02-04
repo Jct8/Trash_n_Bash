@@ -50,7 +50,9 @@ public class PlayerController : MonoBehaviour
     private float currentAttackCoolDown = 0.0f;
     private float currentPoisonAttackCoolDown = 0.0f;
     private float currentIntimidateAttackCoolDown = 0.0f;
+    private float holdClickTime = 0.0f;
 
+    public float holdClickTimeMax = 2.0f;
     public bool isUsingMouseMovement = true;
     public bool attackEnabled = true;
     public bool poisonAttackEnabled = true;
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
     public bool ultimateAttackEnabled = true;
     public bool autoAttack = true;
 
+    private UIbutton attackUIbutton;
     private UIbutton poisonUIbutton;
     private UIbutton intimidateUIbutton;
     private UIbutton ultUIbutton;
@@ -83,6 +86,7 @@ public class PlayerController : MonoBehaviour
         ultUIbutton = ServiceLocator.Get<UIManager>().ultImg.GetComponent<UIbutton>();
         repairUIbutton = ServiceLocator.Get<UIManager>().repairButton.GetComponent<UIbutton>();
         placeUIbutton = ServiceLocator.Get<UIManager>().placeButton.GetComponent<UIbutton>();
+        attackUIbutton = ServiceLocator.Get<UIManager>().basicAttackButton.GetComponent<UIbutton>();
     }
 
     private void Update()
@@ -95,7 +99,7 @@ public class PlayerController : MonoBehaviour
         }
         UpdateUI();
 
-        if (Input.GetKeyDown(_PickUpButton) || CheckBarricadePickUp())
+        if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("BarricadeSpawner"))
         {
             if (!_isHoldingItem)
             {
@@ -114,7 +118,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if (placeUIbutton.isButtonPressed)
+        if (placeUIbutton.isButtonPressed || CheckHoldDownClick("Ground"))
         {
             if (_isHoldingItem && _Barricade != null)
             {
@@ -126,7 +130,7 @@ public class PlayerController : MonoBehaviour
         if (_isHoldingItem)
             return;
 
-        if (Input.GetKeyDown(_RepairButton) || repairUIbutton.isButtonPressed)
+        if (Input.GetKeyDown(_RepairButton) || CheckHoldDownClick("Barricade") || repairUIbutton.isButtonPressed)
         {
             _RepairBarricade = _player.DetectBarricade();
             if (_RepairBarricade == null)
@@ -159,17 +163,46 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(_LockTargetButton))
         {
+            //if (_isTargetLockedOn)
+            //{
+            //    GameObject prevTarget = _lockedOnEnemyGO;
+            //    CheckTargetLockedOn();
+
+            //    if (prevTarget == _lockedOnEnemyGO)
+            //    {
+            //        //Deselect
+            //        _isTargetLockedOn = false;
+            //        _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+            //        _lockedOnEnemyGO = null;
+            //    }
+            //    else
+            //    {
+            //        _lockedOnEnemyGO = prevTarget;
+            //    }
+            //}
+            //else
+            //{
+            //    CheckTargetLockedOn();
+            //    if (_lockedOnEnemyGO)
+            //    {
+            //        //Select
+            //        _isTargetLockedOn = true;
+            //        _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
+            //    }
+            //    else
+            //        _isTargetLockedOn = false;
+            //}
+
             if (_isTargetLockedOn)
             {
                 GameObject prevTarget = _lockedOnEnemyGO;
                 CheckTargetLockedOn();
 
-                if (prevTarget == _lockedOnEnemyGO)
+                if (_lockedOnEnemyGO != null && prevTarget != _lockedOnEnemyGO)
                 {
                     //Deselect
-                    _isTargetLockedOn = false;
-                    _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
-                    _lockedOnEnemyGO = null;
+                    prevTarget.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                    _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
                 }
                 else
                 {
@@ -188,6 +221,7 @@ public class PlayerController : MonoBehaviour
                 else
                     _isTargetLockedOn = false;
             }
+
         }
 
         if ((Input.GetKeyDown(_UltimateButton) || ultUIbutton.isButtonPressed) && ultimateAttackEnabled)
@@ -220,7 +254,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(_ClickTowerButton) && _player.Health < 100.0f)
+        if (CheckHoldDownClick("Tower") && _player.Health < 100.0f)
         {
             if (Vector3.Distance(_tower.transform.position, transform.position) < _tower.Getradius())
             {
@@ -238,6 +272,32 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Actions
+
+    public bool CheckHoldDownClick(string tagName)
+    {
+        if (Input.GetKey(_ClickMovementButton))
+        {
+            holdClickTime += Time.deltaTime;
+            if (holdClickTime > holdClickTimeMax)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit = new RaycastHit();
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.gameObject.CompareTag(tagName))
+                    {
+                        holdClickTime = 0.0f;
+                        return true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            holdClickTime = 0.0f;
+        }
+        return false;
+    }
 
     public bool CheckBarricadePickUp()
     {
@@ -262,6 +322,15 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    public bool CheckUIbuttonPressed()
+    {
+        if (!attackUIbutton.isButtonPressed && !ultUIbutton.isButtonPressed
+            && !poisonUIbutton.isButtonPressed && !intimidateUIbutton.isButtonPressed
+            && !placeUIbutton.isButtonPressed && !repairUIbutton.isButtonPressed)
+            return true;
+        return false;
+    }
+
     public void CalculateMovement()
     {
         if (!_CanMove)
@@ -269,20 +338,15 @@ public class PlayerController : MonoBehaviour
 
         if (isUsingMouseMovement)
         {
-            if (Vector3.Distance(transform.position, agent.destination) < 1.0f)
-            {
-                agent.isStopped = true;
-            }
+            //movement
             agent.speed = moveSpeed;
-            if (Input.GetKeyDown(_ClickMovementButton) && !ultUIbutton.isButtonPressed 
-                && !poisonUIbutton.isButtonPressed && !intimidateUIbutton.isButtonPressed 
-                && !placeUIbutton.isButtonPressed && !repairUIbutton.isButtonPressed)
+            if (Input.GetKeyDown(_ClickMovementButton))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit = new RaycastHit();
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("Enemy"))
+                    if ((hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("PickUp")) && CheckUIbuttonPressed())
                     {
                         agent.isStopped = true;
                         agent.SetDestination(hit.point);
@@ -290,11 +354,28 @@ public class PlayerController : MonoBehaviour
                         Vector3 look = agent.destination;
                         look.y = transform.position.y;
                         transform.LookAt(look);
+
+                        //Deselect
+                        _isTargetLockedOn = false;
+                        _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                        _lockedOnEnemyGO = null;
+
+                        return;
                     }
                 }
             }
-
-
+            //attack target
+            if (_isTargetLockedOn)
+            {
+                agent.SetDestination(_lockedOnEnemyGO.transform.position);
+                agent.isStopped = false;
+                Vector3 look = agent.destination;
+                look.y = transform.position.y;
+                transform.LookAt(look);
+                if (Vector3.Distance(transform.position, agent.destination) < _player.attackRange)
+                    agent.isStopped = true;
+                return;
+            }
             return;
         }
 

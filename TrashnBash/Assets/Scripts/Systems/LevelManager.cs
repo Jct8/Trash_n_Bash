@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     public float playerHealth = 100.0f;
     public float towerHealth = 100.0f;
 
+    public bool isTutorial = false;
+
     public LevelManager Initialize()
     {
         return this;
@@ -131,6 +133,7 @@ public class LevelManager : MonoBehaviour
             enemies[i].GetComponent<Enemy>().killed?.Invoke();
         }
         uiManager.Reset();
+        isTutorial = false;
     }
 
     public void SaveData()

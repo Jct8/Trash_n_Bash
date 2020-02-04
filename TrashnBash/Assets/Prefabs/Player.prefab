@@ -503,10 +503,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3502200499049515719}
     m_Modifications:
-    - target: {fileID: 100054, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
-      propertyPath: m_Name
-      value: SCharacter_Squirrel
-      objectReference: {fileID: 0}
     - target: {fileID: 400054, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -562,6 +558,10 @@ PrefabInstance:
     - target: {fileID: 400054, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.383
+      objectReference: {fileID: 0}
+    - target: {fileID: 100054, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
+      propertyPath: m_Name
+      value: SCharacter_Squirrel
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 265ee6fac4cc17345b23403e90e2ba45, type: 3}
       propertyPath: m_Controller

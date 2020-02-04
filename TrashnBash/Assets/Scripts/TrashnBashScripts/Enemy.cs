@@ -450,7 +450,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
         audioSource.PlayOneShot(attackEffect, 0.7f);
-        if (_Order != Order.Fight)
+        if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)
         {
             _Order = Order.Back;
         }
@@ -466,7 +466,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _tower.GetComponent<Tower>().TakeDamage(_Attack);
         _IsStolen = true;
         audioSource.PlayOneShot(attackEffect, 0.7f);
-        if (_Order != Order.Fight)
+        if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)
             _Order = Order.Back;
         CooltimeBar.fillAmount = 0;
         _IsAttacked = false;
@@ -494,7 +494,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public IEnumerator DeathAnimation()
     {
         _Agent.isStopped = true;
-        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
         ServiceLocator.Get<LevelManager>().IncreaseEnemyDeathCount(1);
         killed?.Invoke();
         yield return null;

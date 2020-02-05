@@ -90,13 +90,13 @@ public class Player : MonoBehaviour, ICharacterAction
             {
                 tower.GetComponent<Tower>().fullHealth = 100.0f;
             }
-            _maxHealth += healedByItem;
+            health += healedByItem;
             if(_maxHealth > 100.0f)
             {
                 _maxHealth = 100.0f;
             }
             uiManager.UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
-            uiManager.UpdatePlayerHealth(_maxHealth);
+            uiManager.UpdatePlayerHealth(health);
         }
     }
 

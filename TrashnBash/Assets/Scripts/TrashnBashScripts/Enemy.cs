@@ -26,8 +26,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private NavMeshAgent _Agent;
     private WayPointManager.Path _Path;
 
-
-    public Detect _Detect { get; set; }
     public Order _Order { get; set; }
 
     public float fullHealth;
@@ -55,7 +53,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private float _AttackCoolTime = 3.0f;
     [SerializeField] private float _ObjectDetectionRange = 3.0f;
     [SerializeField] private float _DropRate = 0.5f;
-    [SerializeField] private float _enemyAttackRange = 2.5f;
+    [SerializeField] private float _enemyAttackRange = 4.0f;
 
     private float _EndDistance = 3.0f;
     private float _InsideofRange = 200.0f;
@@ -121,7 +119,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         else if (_Order == Order.Tower)
         {
             _Agent.SetDestination(_Desination.position);
-            if ((isInRangeOfWayPoint(_Desination, _EndDistance)) && (_Detect == Detect.Detected || _Detect == Detect.None))
+            if ((isInRangeOfWayPoint(_Desination, _EndDistance)))
             {
                 if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                 {
@@ -136,34 +134,62 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 }
 
             }
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _ObjectDetectionRange);
-            foreach (var hit in hitColliders)
+
+            //Collider[] hitColliders = Physics.OverlapSphere(transform.position, _ObjectDetectionRange);
+            //foreach (var hit in hitColliders)
+            //{
+            //    if (hit.CompareTag("Barricade"))
+            //    {
+            //        _ObjectofBarricade = hit.gameObject;
+            //        break;
+            //    }
+            //}
+
+            GameObject[] barricades = GameObject.FindGameObjectsWithTag("Barricade");
+            for (int i = 0; i < barricades.Length; i++)
             {
-                if (hit.CompareTag("Barricade"))
+                if (_ObjectofBarricade)
+                    break;
+                if(Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
                 {
-                    _ObjectofBarricade = hit.gameObject;
+                    _ObjectofBarricade = barricades[i];
                     break;
                 }
             }
-            if (_ObjectofBarricade)
-                if (isCloseToBarricade(_ObjectDetectionRange))
-                    _Order = Order.Barricade;
-        }
-        else if (_Order == Order.Fight)
-        {
-            if (_Detect == Detect.Attack)
+            if(_ObjectofBarricade)
             {
-                LookAt(player.transform.position, player);
-                if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
+                if (_ObjectofBarricade.GetComponent<Barricade>().isAlive)
                 {
-                    if (ChargingCoolDown())
-                        StartCoroutine("Attack");
+                    if (isCloseToBarricade(_ObjectDetectionRange))
+                        _Order = Order.Barricade;
                 }
                 else
                 {
-                    CooltimeBar.fillAmount = 0;
-                    _IsAttacked = false;
+                    _ObjectofBarricade = null;
+                    for (int i = 0; i < barricades.Length; i++)
+                    {
+                        if (Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
+                        {
+                            _ObjectofBarricade = barricades[i];
+                            break;
+                        }
+                    }
                 }
+            }
+
+        }
+        else if (_Order == Order.Fight)
+        {
+            LookAt(player.transform.position, player);
+            if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
+            {
+                if (ChargingCoolDown())
+                    StartCoroutine("Attack");
+            }
+            else
+            {
+                CooltimeBar.fillAmount = 0;
+                _IsAttacked = false;
             }
         }
         else if (_Order == Order.Barricade)
@@ -189,8 +215,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 killed?.Invoke();
         }
 
-        Detection();
-
         if (_IsAttacked)
         {
             ChargingCoolDown();
@@ -210,7 +234,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         _Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
 
-        _Detect = Detect.None;
         _Order = Order.Tower;
 
         _Agent = GetComponent<NavMeshAgent>();
@@ -230,7 +253,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         _Agent.isStopped = false;
         _IsDead = false;
-        _Detect = Detect.None;
         _Order = Order.Tower;
         _CurrentWayPoint = 0;
         fullHealth = _Health;
@@ -259,23 +281,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
         return false;
     }
 
-    public void Detection()
-    {
-        if (_Order == Order.Fight)
-        {
-            _Detect = Detect.Attack;
-        }
-        else if ((_Detect != Detect.Attack || _Detect != Detect.Detected) &&
-             Vector3.Distance(_Path.WayPoints[2].transform.position, transform.position) < _InsideofRange)
-        {
-            _Detect = Detect.Detected;
-        }
-        else
-        {
-            _Detect = Detect.None;
-        }
-    }
-
     public void SwitchOnTargetIndicator(bool turnOn)
     {
         _targetIndicator.SetActive(turnOn);
@@ -295,7 +300,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _barricadeAlive = _ObjectofBarricade.GetComponent<Barricade>().isAlive;
         _barricadePlaced = _ObjectofBarricade.GetComponent<Barricade>().isPlaced;
 
-        if (distance <= _enemyAttackRange && _barricadeAlive && _barricadePlaced)
+        if (distance < _enemyAttackRange && _barricadeAlive && _barricadePlaced)
             _Agent.isStopped = true;
         else
             _Agent.isStopped = false;
@@ -342,7 +347,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         healthBar.fillAmount = fullHealth / _Health;
 
-        if (_Detect == Detect.Detected && isHero == true)
+        if (isHero)
         {
             if (_Name == "Rats" && numOfRats <= 3)
             {
@@ -352,7 +357,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in list)
             {
-                if (enemy.GetComponent<Enemy>()._Order == Order.Fight)
+                Order order = enemy.GetComponent<Enemy>()._Order;
+                if (order == Order.Fight)
                 {
                     _isDetected = false;
                     break;
@@ -365,8 +371,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
             if (_isDetected)
                 _Order = Order.Fight;
         }
-        else
-            _Detect = Detect.Detected;
 
         if (fullHealth <= 0.0f)
         {
@@ -444,7 +448,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         _IsAttacked = true;
         player = ServiceLocator.Get<LevelManager>().playerInstance;
-        if (FrontAttack(player.transform))
+        if (FrontAttack(player.transform) && !_IsDead)
         {
             player.GetComponent<Player>().TakeDamage(_Attack, false, DamageType.Enemy);
             ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");

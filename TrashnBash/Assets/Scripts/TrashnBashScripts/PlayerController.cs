@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private UIManager uiManager;
     private NavMeshAgent agent;
 
+    public GameObject moveParticle;
+
     [SerializeField] private float moveSpeed = 10.0f;
     [SerializeField] private float minMoveSpeed = 10.0f;
     [SerializeField] private float maxMoveSpeed = 50.0f;
@@ -92,12 +94,23 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         CalculateMovement();
-
         if (_isRepairing)
         {
             _isRepairing = _RepairBarricade.GetComponent<Barricade>().CheckRepairValid(transform);
         }
         UpdateUI();
+
+        GameObject[] particles = GameObject.FindGameObjectsWithTag("Display");
+        if(particles.Length > 0)
+        {
+            for (int i = 0; i < particles.Length; i++)
+            {
+                if (Vector3.Distance(particles[i].transform.position, transform.position) < 1.0f)
+                    Destroy(particles[i]);
+                else if (_isTargetLockedOn)
+                    Destroy(particles[i]);
+            }
+        }
 
         if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("BarricadeSpawner"))
         {
@@ -360,6 +373,9 @@ public class PlayerController : MonoBehaviour
                         _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
                         _lockedOnEnemyGO = null;
 
+                        Instantiate(moveParticle, agent.destination, Quaternion.identity);
+                        moveParticle.GetComponent<Animator>().Play("OnGround");
+
                         return;
                     }
                 }
@@ -421,7 +437,7 @@ public class PlayerController : MonoBehaviour
     {
         _CanMove = false;
         yield return new WaitForSeconds(_Barricade.GetComponent<Barricade>()._barricadeBuildTime);
-        _Barricade.GetComponent<Barricade>().PlaceBarricade();
+        _Barricade?.GetComponent<Barricade>().PlaceBarricade();
         _Barricade = null;
         _isHoldingItem = false;
         _CanMove = true;

@@ -83,7 +83,9 @@ public class GameManager : MonoBehaviour
             ServiceLocator.Get<UIManager>().gameObject.SetActive(true);
             ServiceLocator.Get<UIManager>().StartCoroutine("Reset");
             ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
-            ServiceLocator.Get<LevelManager>().gameObject.SetActive(true);        }
+            ServiceLocator.Get<LevelManager>().gameObject.SetActive(true);
+
+        }
     }
 
     public void enemySkillActived()

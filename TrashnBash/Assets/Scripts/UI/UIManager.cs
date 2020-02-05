@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     public Image intimidateCover;
     public Image ultCover;
     public Image repairIcon;
+    public GameObject fade;
+
 
     public GameObject attackImg;
     public GameObject poisonImg;
@@ -43,6 +45,31 @@ public class UIManager : MonoBehaviour
     private float _TowerHP;
     private float fullEnergy = 100.0f;
     private bool IsPower = false;
+
+    private void Start()
+    {
+        fade.SetActive(false);
+    }
+
+    public void enableFadeOut()
+    {
+        fade.SetActive(true);
+        fade.GetComponent<Animator>().Play("FadeOut");
+        StartCoroutine("unableFade");
+    }
+
+    public void enableFadeIn()
+    {
+        fade.SetActive(true);
+        fade.GetComponent<Animator>().Play("Fade");
+        StartCoroutine("unableFade");
+    }
+
+    private IEnumerator unableFade()
+    {
+        yield return new WaitForSeconds(2.1f);
+        fade.SetActive(false);
+    }
 
     public UIManager Initialize()
     {
@@ -87,7 +114,7 @@ public class UIManager : MonoBehaviour
     public IEnumerator Reset()
     {
         Debug.Log("Start Reset UI");
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         player = GameObject.FindGameObjectWithTag("Player");
         tower = GameObject.FindGameObjectWithTag("Tower");
         spawners = GameObject.FindGameObjectsWithTag("Spawner");
@@ -102,6 +129,7 @@ public class UIManager : MonoBehaviour
         UpdateTowerHealth(tower.GetComponent<Tower>().health);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
         StartCoroutine("CountingTimer");
+
         yield return null;
     }
 

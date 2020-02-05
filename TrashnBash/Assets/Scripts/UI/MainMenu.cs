@@ -7,8 +7,12 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     private int levelToLoad = 1;
+    private bool isClicked = false;
+    public GameObject fadeScreen;
+
     void Start()
     {
+        fadeScreen.SetActive(false);
         ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.MainMenu);
     }
     public void OnLevelButtonClick(int level)
@@ -25,7 +29,16 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator LoadLevelRoutine()
     {
-        ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.GamePlay);
-        yield return SceneManager.LoadSceneAsync(levelToLoad);
+        if (!isClicked)
+        {
+            fadeScreen.SetActive(true);
+            fadeScreen.GetComponent<Animator>().Play("Fade");
+            yield return new WaitForSeconds(1.0f);
+
+            ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.GamePlay);
+            yield return SceneManager.LoadSceneAsync(levelToLoad);
+            isClicked = true;
+        }
+
     }
 }

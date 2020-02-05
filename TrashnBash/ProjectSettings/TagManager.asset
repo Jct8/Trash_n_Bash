@@ -12,6 +12,7 @@ TagManager:
   - Barricade
   - PickUp
   - BarricadeSpawner
+  - Display
   layers:
   - Default
   - TransparentFX

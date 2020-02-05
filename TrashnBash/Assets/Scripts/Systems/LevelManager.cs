@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
         PauseGame();
         ClearLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        uiManager.enableFadeOut();
         uiManager.Reset();
     }
 
@@ -120,6 +121,7 @@ public class LevelManager : MonoBehaviour
     public void ResetLevel()
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
+        uiManager.enableFadeOut();
         if (playerInstance == null || towerInstance == null)
         {
             playerInstance = GameObject.FindGameObjectWithTag("Player");

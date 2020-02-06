@@ -21,7 +21,9 @@ public class EnemySpawnManager : MonoBehaviour
         foreach(var spawner in Spawners)
         {
             if(spawner.StartOnSceneLoad == true)
+            {
                 spawner.StartSpawner();
+            }
         }
     }
 

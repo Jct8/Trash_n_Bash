@@ -86,10 +86,10 @@ public class Player : MonoBehaviour, ICharacterAction
             item.gameObject.SetActive(false);
             tower.GetComponent<Tower>().fullHealth += healedByItem;
 
-            if (tower.GetComponent<Tower>().fullHealth > 100.0f)
-            {
-                tower.GetComponent<Tower>().fullHealth = 100.0f;
-            }
+            //if (tower.GetComponent<Tower>().fullHealth > 100.0f)
+            //{
+            //    tower.GetComponent<Tower>().fullHealth = 100.0f;
+            //}
             health += healedByItem;
             if(_maxHealth > 100.0f)
             {

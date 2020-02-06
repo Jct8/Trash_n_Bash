@@ -9,6 +9,7 @@ public class WinScreen : MonoBehaviour
     public List<GameObject> starList;
     public AudioClip winMusic;
     public Button returnButton;
+
     private void Awake()
     {
         ServiceLocator.Get<AudioManager>().musicSource.Stop();
@@ -22,6 +23,8 @@ public class WinScreen : MonoBehaviour
         }
         returnButton.onClick.AddListener(ReturnToMainMenu);
         GameObject.Find("EnemyText").GetComponent<Text>().text = "Enemies Defeated: " + ServiceLocator.Get<LevelManager>().enemyDeathCount;
+        GameObject.Find("TrashLeft").GetComponent<Text>().text = "Trash Left: " + ServiceLocator.Get<LevelManager>().towerHealth;
+        GameObject.Find("PlayerHealthC").GetComponent<Text>().text = "Player Health: " + ServiceLocator.Get<LevelManager>().playerHealth;
     }
 
     void ReturnToMainMenu()

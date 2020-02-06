@@ -6,11 +6,11 @@ public class Player : MonoBehaviour, ICharacterAction
 {
     #region Variables
 
-    [SerializeField] private float health = 100.0f;
+    public float health = 100.0f;
+    [SerializeField] private float _maxHealth = 100.0f;
     [SerializeField] private float attack = 1.0f;
     [SerializeField] private float intimdateStunTime = 3.0f;
     [SerializeField] public float attackRange = 20.0f;
-    [SerializeField] private float attackAngleRange = 45.0f;
     [SerializeField] private float poisonDamage = 10.0f;
     [SerializeField] private float poisonTotalTime = 3.0f;
     [SerializeField] private float poisonTickTime = 1.0f;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public AudioClip UltimateEffect;
     public AudioSource audioSource;
 
-    private float _maxHealth = 100.0f;
+
     public float _ultimateCharge = 0.0f;
     private float ultimateChargeStart = 0.0f;
     [Header("Poisoned player")]

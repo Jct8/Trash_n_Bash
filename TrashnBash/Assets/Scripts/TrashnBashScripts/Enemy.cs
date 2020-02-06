@@ -56,7 +56,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private float _enemyAttackRange = 4.0f;
 
     private float _EndDistance = 3.0f;
-    private float _InsideofRange = 200.0f;
     private float _MaximumAngle = 45.0f;
     private float _MaximumDistance = 5.0f;
     private float _distanceToBarricade;

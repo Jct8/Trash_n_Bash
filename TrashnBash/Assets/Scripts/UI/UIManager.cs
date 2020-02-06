@@ -10,9 +10,7 @@ public class UIManager : MonoBehaviour
     public Slider playerHealthBar;
     public Slider waveTimerBar;
     public Text towerHealthPercentage;
-    public Text ultimateChargePercentage;
     public Animator AnimationTexture;
-    public Image EnergyBar;
 
     public GameObject PresentTextrue;
     public GameObject[] spawners;
@@ -158,12 +156,6 @@ public class UIManager : MonoBehaviour
     public void UpdateUltimatePercentage(float curr)
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        ultimateChargePercentage.text = curr.ToString() + " %";
-        EnergyBar.fillAmount = player.GetComponent<Player>().UltimateCharge / fullEnergy;
-
-        float iconFill = EnergyBar.fillAmount;
-        iconFill = Mathf.Clamp(iconFill, 0.0f, 1.0f);
-        ultCover.fillAmount = 1.0f - iconFill;
 
         if (curr>= 80.0f)
         {

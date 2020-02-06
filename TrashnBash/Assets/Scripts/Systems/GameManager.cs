@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public int currentlevel;
     public int highScore;
     private float coolTime = 10.0f;
+
+    public float _houseHP;
+    public float _racoonHP;
     public bool _enemySkillActived { get; set; }
 
     public enum GameState
@@ -69,6 +72,12 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator SetGameWin()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject tower = GameObject.FindGameObjectWithTag("Tower");
+
+        _racoonHP = player.GetComponent<Player>().health;
+        _houseHP = tower.GetComponent<Tower>().fullHealth;
+
         _GameState = GameState.MainMenu;
         yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("GameWin");

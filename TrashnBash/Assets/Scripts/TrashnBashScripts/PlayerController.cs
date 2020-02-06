@@ -214,7 +214,7 @@ public class PlayerController : MonoBehaviour
                 if (_lockedOnEnemyGO != null && prevTarget != _lockedOnEnemyGO)
                 {
                     //Deselect
-                    prevTarget.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                    prevTarget?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
                     _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
                 }
                 else
@@ -374,7 +374,6 @@ public class PlayerController : MonoBehaviour
                         _lockedOnEnemyGO = null;
 
                         Instantiate(moveParticle, agent.destination, Quaternion.identity);
-                        moveParticle.GetComponent<Animator>().Play("OnGround");
 
                         return;
                     }

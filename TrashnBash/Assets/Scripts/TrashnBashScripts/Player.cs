@@ -91,7 +91,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 tower.GetComponent<Tower>().fullHealth = 100.0f;
             }
             health += healedByItem;
-            if(_maxHealth > 100.0f)
+            if (_maxHealth > 100.0f)
             {
                 _maxHealth = 100.0f;
             }
@@ -162,16 +162,16 @@ public class Player : MonoBehaviour, ICharacterAction
         switch (type)
         {
             case DamageType.Enemy:
-            {
-                popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 1.0f);
-                GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
-                break;
-            }
+                {
+                    popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 1.0f);
+                    GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
+                    break;
+                }
             case DamageType.Skunks:
-            {
-                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
-                break;
-            }
+                {
+                    popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
+                    break;
+                }
         }
         //popUp.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
         Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
@@ -204,31 +204,31 @@ public class Player : MonoBehaviour, ICharacterAction
         GameObject closestEnemy = null;
 
         GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
-        if (target == null)
-        {
-            foreach (var enemy in ListOfEnemies)
-            {
-                List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
-                foreach (var go in gameObjects)
-                {
-                    Vector3 direction = (go.transform.position - transform.position);
-                    float distance = Vector3.Distance(transform.position, go.transform.position);
-                    //float angle = Vector3.Angle(transform.forward, direction);
-                    //if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
-                    //{
-                    //    go.GetComponent<Enemy>().TakeDamage(attack, true);
-                    //    gameObject.GetComponent<PlayerController>().SwitchAutoLock(go);
-                    //}
-                    if (distance < closestDistance && distance < attackRange)
-                    {
-                        closestDistance = distance;
-                        closestEnemy = go;
-                    }
-                }
-            }
-        }
-        else
-            closestEnemy = target;
+        //if (target == null)
+        //{
+        //    foreach (var enemy in ListOfEnemies)
+        //    {
+        //        List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+        //        foreach (var go in gameObjects)
+        //        {
+        //            Vector3 direction = (go.transform.position - transform.position);
+        //            float distance = Vector3.Distance(transform.position, go.transform.position);
+        //            //float angle = Vector3.Angle(transform.forward, direction);
+        //            //if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+        //            //{
+        //            //    go.GetComponent<Enemy>().TakeDamage(attack, true);
+        //            //    gameObject.GetComponent<PlayerController>().SwitchAutoLock(go);
+        //            //}
+        //            if (distance < closestDistance && distance < attackRange)
+        //            {
+        //                closestDistance = distance;
+        //                closestEnemy = go;
+        //            }
+        //        }
+        //    }
+        //}
+        //else
+        closestEnemy = target;
 
         if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
         {
@@ -288,7 +288,7 @@ public class Player : MonoBehaviour, ICharacterAction
         if (_ultimateCharge != 100.0f)
             yield break;
         ////Justin - TODO:Find a better method.
-        ultimateIndicator.GetComponent<Transform>().localScale = new Vector3( ultimateRange , 0.007460861f, ultimateRange);
+        ultimateIndicator.GetComponent<Transform>().localScale = new Vector3(ultimateRange, 0.007460861f, ultimateRange);
         ultimateIndicator.SetActive(true);
         yield return new WaitForSeconds(ultimateDelay);
 
@@ -332,9 +332,9 @@ public class Player : MonoBehaviour, ICharacterAction
             Vector3 direction = (go.transform.position - transform.position);
             float distance = Vector2.Distance(transform.position, go.transform.position);
             float angle = Vector3.Angle(transform.forward, direction);
-            if ( distance < attackRange && go.CompareTag("BarricadeSpawner"))
+            if (distance < attackRange && go.CompareTag("BarricadeSpawner"))
             {
-                return go.GetComponent<BarricadeSpawner>().GetBarricade() ;
+                return go.GetComponent<BarricadeSpawner>().GetBarricade();
             }
         }
         return null;

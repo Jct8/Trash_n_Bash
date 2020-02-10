@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        ActivateTargetLockedOn();
         CalculateMovement();
         if (_isRepairing)
         {
@@ -287,9 +288,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
-
-        ActivateTargetLockedOn();
+        //ActivateTargetLockedOn();
 
     }
 
@@ -364,6 +363,9 @@ public class PlayerController : MonoBehaviour
         {
             //movement
             agent.speed = moveSpeed;
+            //Quaternion newDirection = Quaternion.LookRotation(agent.destination);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, newDirection, Time.deltaTime * turnSpeed);
+
             if (Input.GetKeyDown(_ClickMovementButton))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -389,6 +391,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
+            
             //attack target
             if (_isTargetLockedOn)
             {

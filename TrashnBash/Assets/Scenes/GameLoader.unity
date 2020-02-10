@@ -325,6 +325,10 @@ MonoBehaviour:
     prefab: {fileID: 7466416969426066422, guid: bbd04011c182cd24a85fa465ce3a8dc5,
       type: 3}
     poolSize: 100
+  - name: Box
+    prefab: {fileID: 8507280208481740581, guid: e0905687f893a6a42a257627df58ee13,
+      type: 3}
+    poolSize: 10
 --- !u!1 &679767949
 GameObject:
   m_ObjectHideFlags: 0

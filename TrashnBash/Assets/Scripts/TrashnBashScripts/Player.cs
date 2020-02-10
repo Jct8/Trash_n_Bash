@@ -86,10 +86,10 @@ public class Player : MonoBehaviour, ICharacterAction
             item.gameObject.SetActive(false);
             tower.GetComponent<Tower>().fullHealth += healedByItem;
 
-            //if (tower.GetComponent<Tower>().fullHealth > 100.0f)
-            //{
-            //    tower.GetComponent<Tower>().fullHealth = 100.0f;
-            //}
+            if (tower.GetComponent<Tower>().fullHealth > 100.0f)
+            {
+                tower.GetComponent<Tower>().fullHealth = 100.0f;
+            }
             health += healedByItem;
             if(_maxHealth > 100.0f)
             {
@@ -204,7 +204,6 @@ public class Player : MonoBehaviour, ICharacterAction
         GameObject closestEnemy = null;
 
         GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
-
         if (target == null)
         {
             foreach (var enemy in ListOfEnemies)
@@ -351,6 +350,23 @@ public class Player : MonoBehaviour, ICharacterAction
             float distance = Vector2.Distance(transform.position, go.transform.position);
             float angle = Vector3.Angle(transform.forward, direction);
             if (distance < attackRange && go.CompareTag("Barricade"))
+            {
+                return go.gameObject;
+            }
+        }
+        return null;
+    }
+
+    public GameObject DetectResource()
+    {
+        Collider[] HitColliders = Physics.OverlapSphere(transform.position, attackRange);
+
+        foreach (var go in HitColliders)
+        {
+            Vector3 direction = (go.transform.position - transform.position);
+            float distance = Vector2.Distance(transform.position, go.transform.position);
+            float angle = Vector3.Angle(transform.forward, direction);
+            if (distance < attackRange && go.CompareTag("Resource"))
             {
                 return go.gameObject;
             }

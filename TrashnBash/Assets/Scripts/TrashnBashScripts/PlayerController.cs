@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _lockedOnEnemyGO = null;
     private GameObject _Barricade = null;
     private GameObject _RepairBarricade = null;
+    private GameObject _Resource = null;
     private UIManager uiManager;
     private NavMeshAgent agent;
 
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _isTargetLockedOn = false;
     private bool _isHoldingItem = false;
+    private bool _isHoldingResource = false;
     private bool _isRepairing = false;
     private bool _CanMove = true;
 
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private float currentIntimidateAttackCoolDown = 0.0f;
     private float holdClickTime = 0.0f;
 
+    public float allowedRangeofResource = 3.5f;
     public float holdClickTimeMax = 2.0f;
     public bool isUsingMouseMovement = true;
     public bool attackEnabled = true;
@@ -93,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(_lockedOnEnemyGO)
+            Debug.Log(_lockedOnEnemyGO.name);
         CalculateMovement();
         if (_isRepairing)
         {
@@ -131,6 +136,22 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+        if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("Resource"))
+        {
+            if (!_isHoldingResource && !_isHoldingItem)
+            {
+                _Resource = _player.DetectResource();
+                if (_Resource == null)
+                    _isHoldingResource = false;
+                else if (_Resource.GetComponent<Resource>().CanBePickedUp())
+                {
+                    _Resource.GetComponent<Resource>().Pickup(gameObject);
+                    _isHoldingResource = true;
+                }
+            }
+        }
+
         if (placeUIbutton.isButtonPressed || CheckHoldDownClick("Ground"))
         {
             if (_isHoldingItem && _Barricade != null)
@@ -278,6 +299,19 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (Vector3.Distance(_tower.transform.position, transform.position) < allowedRangeofResource && _isHoldingResource)
+        {
+            _tower.GetComponent<Tower>().fullHealth += 10.0f;
+            Destroy(_Resource);
+            _Resource = null;
+            _isHoldingResource = false;
+        }
+        else
+        {
+            return;
+        }
+
+
         ActivateTargetLockedOn();
 
     }
@@ -374,7 +408,6 @@ public class PlayerController : MonoBehaviour
                         _lockedOnEnemyGO = null;
 
                         Instantiate(moveParticle, agent.destination, Quaternion.identity);
-
                         return;
                     }
                 }

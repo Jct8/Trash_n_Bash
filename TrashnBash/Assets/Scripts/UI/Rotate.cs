@@ -5,12 +5,13 @@ using UnityEngine;
 public class Rotate : MonoBehaviour
 {
     private Rigidbody rb;
-
+    public bool jump = false;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        StartCoroutine("Jump");
+        if(jump)
+            StartCoroutine("Jump");
     }
 
     // Update is called once per frame

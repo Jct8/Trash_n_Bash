@@ -195,35 +195,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(_LockTargetButton))
         {
-            //if (_isTargetLockedOn)
-            //{
-            //    GameObject prevTarget = _lockedOnEnemyGO;
-            //    CheckTargetLockedOn();
-
-            //    if (prevTarget == _lockedOnEnemyGO)
-            //    {
-            //        //Deselect
-            //        _isTargetLockedOn = false;
-            //        _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
-            //        _lockedOnEnemyGO = null;
-            //    }
-            //    else
-            //    {
-            //        _lockedOnEnemyGO = prevTarget;
-            //    }
-            //}
-            //else
-            //{
-            //    CheckTargetLockedOn();
-            //    if (_lockedOnEnemyGO)
-            //    {
-            //        //Select
-            //        _isTargetLockedOn = true;
-            //        _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
-            //    }
-            //    else
-            //        _isTargetLockedOn = false;
-            //}
+            if (_isTargetLockedOn && !_lockedOnEnemyGO)
+            {
+                _isTargetLockedOn = false;
+            }
 
             if (_isTargetLockedOn)
             {
@@ -553,6 +528,10 @@ public class PlayerController : MonoBehaviour
         fill = (currentIntimidateAttackCoolDown - Time.time) / intimidateAttackCoolDown;
         fill = Mathf.Clamp(fill, 0.0f, 1.0f);
         uiManager.UpdateImage(DamageType.Intimidate, fill);
+
+        fill = ((_player._ultimateCharge) / 100.0f) - 1.0f;
+        fill = Mathf.Clamp(-fill, 0.0f, 1.0f);
+        uiManager.UpdateImage(DamageType.Ultimate, fill);
 
         uiManager.repairIcon.enabled = _isRepairing;
     }

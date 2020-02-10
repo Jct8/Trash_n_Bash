@@ -96,8 +96,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(_lockedOnEnemyGO)
-            Debug.Log(_lockedOnEnemyGO.name);
         CalculateMovement();
         if (_isRepairing)
         {
@@ -137,11 +135,11 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("Resource"))
+        if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("ResourceSpawner"))
         {
             if (!_isHoldingResource && !_isHoldingItem)
             {
-                _Resource = _player.DetectResource();
+                _Resource = _player.DetectResourceSpawner();
                 if (_Resource == null)
                     _isHoldingResource = false;
                 else if (_Resource.GetComponent<Resource>().CanBePickedUp())
@@ -302,6 +300,10 @@ public class PlayerController : MonoBehaviour
         if (Vector3.Distance(_tower.transform.position, transform.position) < allowedRangeofResource && _isHoldingResource)
         {
             _tower.GetComponent<Tower>().fullHealth += 10.0f;
+
+            UIManager uiManager = ServiceLocator.Get<UIManager>();
+            uiManager.UpdateTowerHealth(_tower.GetComponent<Tower>().fullHealth);
+
             Destroy(_Resource);
             _Resource = null;
             _isHoldingResource = false;
@@ -404,7 +406,7 @@ public class PlayerController : MonoBehaviour
 
                         //Deselect
                         _isTargetLockedOn = false;
-                        _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                        _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
                         _lockedOnEnemyGO = null;
 
                         Instantiate(moveParticle, agent.destination, Quaternion.identity);

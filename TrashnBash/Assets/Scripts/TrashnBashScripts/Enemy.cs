@@ -382,7 +382,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 }
                 _IsStolen = false;
             }
-            StartCoroutine("DeathAnimation");
+            if(gameObject.activeInHierarchy)
+            {
+                StartCoroutine("DeathAnimation");
+            }
             if (!_IsDead)
                 player.GetComponent<Player>().IncrementUltCharge();
 

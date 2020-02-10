@@ -2877,9 +2877,7 @@ MonoBehaviour:
   playerHealthBar: {fileID: 94425544243921546}
   waveTimerBar: {fileID: 3706150385042815586}
   towerHealthPercentage: {fileID: 6187951834896247026}
-  ultimateChargePercentage: {fileID: 0}
   AnimationTexture: {fileID: 2538960165332369255}
-  EnergyBar: {fileID: 0}
   PresentTextrue: {fileID: 2085521411728653375}
   spawners: []
   pauseScreen: {fileID: 6617459380522681112}

@@ -40,7 +40,7 @@ public class Tower : MonoBehaviour
         attackRate = System.Convert.ToSingle(towerData.DataDictionary["AttackRate"]);
         range = System.Convert.ToSingle(towerData.DataDictionary["Range"]);
         audioSource = GetComponent<AudioSource>();
-        fullHealth = health;
+        fullHealth = health / 2.0f;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
     public void Initialize(float dmg, float s, float h, float ar, float r)

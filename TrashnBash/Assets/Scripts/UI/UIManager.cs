@@ -124,7 +124,7 @@ public class UIManager : MonoBehaviour
         AnimationTexture.SetBool("IsHit", false);
         AnimationTexture.SetFloat("Energy", 0.0f);
         UpdatePlayerHealth(player.GetComponent<Player>().Health);
-        UpdateTowerHealth(tower.GetComponent<Tower>().health);
+        UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
         StartCoroutine("CountingTimer");
 

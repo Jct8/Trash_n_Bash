@@ -7,34 +7,10 @@ public class ResourceSpawner : MonoBehaviour
 {
     public GameObject resourcePrefab;
 
-    public int numberOfResource = 0;
-    public int limitofResource = 2;
-
-    private void Start()
+    public GameObject GetResource()
     {
-        createResource();
-    }
-
-    public void createResource()
-    {
-        for (int i = 0; i <= limitofResource; i++)
-        {
-            if (numberOfResource <= limitofResource)
-            {
-                float randomNumber = UnityEngine.Random.Range(-1.0f, 1.1f);
-                GameObject resource = Instantiate(resourcePrefab, new Vector3
-                    (gameObject.transform.position.x + randomNumber, 
-                    gameObject.transform.position.y, 
-                    gameObject.transform.position.z + randomNumber), 
-                    Quaternion.identity) as GameObject;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        gameObject.SetActive(false);
+        GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
+        return resource;
     }
 
 }

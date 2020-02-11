@@ -384,7 +384,7 @@ public class PlayerController : MonoBehaviour
                 RaycastHit hit = new RaycastHit();
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if ((hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("PickUp")) && CheckUIbuttonPressed())
+                    if (/*(hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("PickUp")) &&*/ CheckUIbuttonPressed())
                     {
                         agent.isStopped = true;
                         agent.SetDestination(hit.point);

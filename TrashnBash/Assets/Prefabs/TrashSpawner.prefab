@@ -27,6 +27,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePrefab: {fileID: 8507280208481740581, guid: e0905687f893a6a42a257627df58ee13,
     type: 3}
+  trashModels:
+  - {fileID: 100000, guid: 695cb951c9e5b2e4ebc1baccb673fbb2, type: 3}
+  - {fileID: 100000, guid: 8cdf52bef3c7c874498d5def25a35bbf, type: 3}
+  - {fileID: 129966, guid: 44d893618ee70db4fbea9c13f14a89fb, type: 3}
+  - {fileID: 100000, guid: 9972094f27e0e794a81edfda44d34e38, type: 3}
+  - {fileID: 159330, guid: 18c7f6b8eb5793f49a8f6d81d2e01b43, type: 3}
+  - {fileID: 100000, guid: bfe4bd7ca2c7a254dbc9bcd23bb71cbe, type: 3}
+  - {fileID: 100000, guid: e41b4f9459c489a4596e740b61a3dcf1, type: 3}
+  - {fileID: 100000, guid: c508bee724909024ebabc106ffc525ee, type: 3}
+  - {fileID: 100006, guid: bc2d43327f6b0a24881ad76800285f26, type: 3}
+  - {fileID: 100000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
+  - {fileID: 100000, guid: 1acaaf86318fa854d91d6b1aab1551cb, type: 3}
+  - {fileID: 103030, guid: 8b342121ff2be5a45b964062c2ec412f, type: 3}
 --- !u!1 &7746538993245780239
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,7 +49,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7746538993245780232}
-  - component: {fileID: 1757702000802533518}
   m_Layer: 0
   m_Name: TrashSpawner
   m_TagString: ResourceSpawner
@@ -66,20 +78,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1757702000802533518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7746538993245780239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61e577327da84b44e890bdbc6ed7c075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourcePrefab: {fileID: 8507280208481740581, guid: e0905687f893a6a42a257627df58ee13,
-    type: 3}
 --- !u!1001 &7746538991808963669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -476,6 +474,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
+    - target: {fileID: 100000, guid: 10aa997cce14d3d41be3c9405d8ccb94, type: 3}
+      propertyPath: m_Name
+      value: ToiletPaper2
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 10aa997cce14d3d41be3c9405d8ccb94, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.8037721
@@ -531,10 +533,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 10aa997cce14d3d41be3c9405d8ccb94, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.6409099
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 10aa997cce14d3d41be3c9405d8ccb94, type: 3}
-      propertyPath: m_Name
-      value: ToiletPaper2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10aa997cce14d3d41be3c9405d8ccb94, type: 3}

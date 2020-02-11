@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3585084762118417815
 Transform:
@@ -44,7 +44,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &744479145971346679
 Transform:
@@ -80,7 +80,7 @@ GameObject:
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3881583059690077307
 Transform:
@@ -297,7 +297,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3001989385534655974
 Transform:
@@ -382,6 +382,18 @@ PrefabInstance:
     - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
       propertyPath: m_Name
       value: Trashcan1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
       propertyPath: m_LocalPosition.x

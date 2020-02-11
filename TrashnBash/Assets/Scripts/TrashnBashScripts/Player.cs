@@ -301,7 +301,7 @@ public class Player : MonoBehaviour, ICharacterAction
             foreach (var go in gameObjects)
             {
                 float distance = Vector2.Distance(transform.position, go.transform.position);
-                if (distance < ultimateRange)
+                if (distance < ultimateRange*0.5f)
                 {
                     go.GetComponent<Enemy>().TakeDamage(ultimateDamage, true, DamageType.Ultimate);
                     go.GetComponent<Enemy>().SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);

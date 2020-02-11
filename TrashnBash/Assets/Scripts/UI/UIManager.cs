@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public Texture SickTexture;
     public Texture PowerFulTexture;
 
+    public Image loadingImg;
     public Image attackCover;
     public Image poisonCover;
     public Image intimidateCover;
@@ -103,6 +104,9 @@ public class UIManager : MonoBehaviour
                 break;
             case DamageType.Ultimate:
                 ultCover.fillAmount = fill;
+                break;
+            case DamageType.Loading:
+                loadingImg.fillAmount = fill;
                 break;
             default:
                 break;

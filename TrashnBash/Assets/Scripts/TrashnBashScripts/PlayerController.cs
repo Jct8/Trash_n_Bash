@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
+    private Action OnRecycle;
+
     private CharacterController _controller;
     private Player _player;
     private Tower _tower = null;
@@ -17,8 +20,6 @@ public class PlayerController : MonoBehaviour
     private GameObject _Resource = null;
     private UIManager uiManager;
     private NavMeshAgent agent;
-
-    public GameObject moveParticle;
 
     [SerializeField] private float moveSpeed = 10.0f;
     [SerializeField] private float minMoveSpeed = 10.0f;
@@ -104,17 +105,8 @@ public class PlayerController : MonoBehaviour
         }
         UpdateUI();
 
-        GameObject[] particles = GameObject.FindGameObjectsWithTag("Display");
-        if(particles.Length > 0)
-        {
-            for (int i = 0; i < particles.Length; i++)
-            {
-                if (Vector3.Distance(particles[i].transform.position, transform.position) < 1.0f)
-                    Destroy(particles[i]);
-                else if (_isTargetLockedOn)
-                    Destroy(particles[i]);
-            }
-        }
+
+        CheckMoveIndicatorActive();
 
         if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("BarricadeSpawner"))
         {
@@ -176,7 +168,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if ((Input.GetKeyDown(_AttackButton) && attackEnabled) || (autoAttack && CheckCoolDownTimes()))
+        if (/*(Input.GetKeyDown(_AttackButton) && attackEnabled) ||*/ (autoAttack && CheckCoolDownTimes() && _isTargetLockedOn))
         {
             if (currentAttackCoolDown < Time.time)
             {
@@ -294,7 +286,22 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    #region Actions
+    #region Ultility
+
+    public void CheckMoveIndicatorActive()
+    {
+        List<GameObject> particles = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("MoveIndicator");
+        if (particles.Count > 0)
+        {
+            for (int i = 0; i < particles.Count; i++)
+            {
+                if (Vector3.Distance(particles[i].transform.position, transform.position) < 1.0f)
+                    ServiceLocator.Get<ObjectPoolManager>().RecycleObject(particles[i]);
+                //else if (_isTargetLockedOn)
+                //    Destroy(particles[i]);
+            }
+        }
+    }
 
     public bool CheckHoldDownClick(string tagName)
     {
@@ -361,10 +368,15 @@ public class PlayerController : MonoBehaviour
 
         if (isUsingMouseMovement)
         {
-            //movement
+            //Movement
             agent.speed = moveSpeed;
-            //Quaternion newDirection = Quaternion.LookRotation(agent.destination);
-            //transform.rotation = Quaternion.Lerp(transform.rotation, newDirection, Time.deltaTime * turnSpeed);
+            //Rotation
+            Vector3 direction = agent.destination - transform.position;
+            if (direction.magnitude > 0.0f)
+            {
+                Quaternion newDirection = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Lerp(transform.rotation, newDirection, Time.deltaTime * turnSpeed);
+            }
 
             if (Input.GetKeyDown(_ClickMovementButton))
             {
@@ -377,22 +389,23 @@ public class PlayerController : MonoBehaviour
                         agent.isStopped = true;
                         agent.SetDestination(hit.point);
                         agent.isStopped = false;
-                        Vector3 look = agent.destination;
-                        look.y = transform.position.y;
-                        transform.LookAt(look);
 
                         //Deselect
                         _isTargetLockedOn = false;
                         _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
                         _lockedOnEnemyGO = null;
 
-                        Instantiate(moveParticle, agent.destination, Quaternion.identity);
+                        //Show MoveIndicator
+                        ServiceLocator.Get<ObjectPoolManager>().RecycleAllObjects("MoveIndicator");
+                        GameObject moveIndicator = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool("MoveIndicator");
+                        moveIndicator.transform.position = agent.destination;
+                        moveIndicator.SetActive(true);
                         return;
                     }
                 }
             }
-            
-            //attack target
+
+            //Attack target
             if (_isTargetLockedOn)
             {
                 agent.SetDestination(_lockedOnEnemyGO.transform.position);
@@ -535,6 +548,12 @@ public class PlayerController : MonoBehaviour
         fill = ((_player._ultimateCharge) / 100.0f) - 1.0f;
         fill = Mathf.Clamp(-fill, 0.0f, 1.0f);
         uiManager.UpdateImage(DamageType.Ultimate, fill);
+
+        fill = (holdClickTime / holdClickTimeMax);
+        fill = Mathf.Clamp(fill, 0.0f, 1.0f);
+        if (fill < 0.5f)
+            fill = 0.0f;
+        uiManager.UpdateImage(DamageType.Loading, fill);
 
         uiManager.repairIcon.enabled = _isRepairing;
     }

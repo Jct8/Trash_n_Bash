@@ -325,8 +325,8 @@ MonoBehaviour:
     prefab: {fileID: 7466416969426066422, guid: bbd04011c182cd24a85fa465ce3a8dc5,
       type: 3}
     poolSize: 100
-  - name: Box
-    prefab: {fileID: 8507280208481740581, guid: e0905687f893a6a42a257627df58ee13,
+  - name: MoveIndicator
+    prefab: {fileID: 4305261768933097057, guid: 6ad03d53575662449a5ffe753893059e,
       type: 3}
     poolSize: 10
 --- !u!1 &679767949

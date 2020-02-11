@@ -110,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690f2e1dbde8bc140ba9f001687c4cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldRecycle: 0
+  shouldRecycle: 1
   delay: 2

@@ -18,5 +18,6 @@ public enum DamageType
     Intimidate,
     Ultimate,
     Enemy,
-    Skunks
+    Skunks,
+    Loading
 }

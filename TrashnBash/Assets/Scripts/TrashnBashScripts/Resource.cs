@@ -9,7 +9,7 @@ public class Resource : MonoBehaviour
 
     public void Pickup(GameObject playerGO)
     {
-        float height = transform.position.y + 1.0f;
+        float height = transform.position.y;
 
         transform.parent = playerGO.transform;
         transform.rotation = playerGO.GetComponent<PlayerController>().GetController().transform.rotation;

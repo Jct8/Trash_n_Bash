@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject player;
     public GameObject tower;
-    public Slider playerHealthBar;
+    public Image playerHealthBar;
     public Slider waveTimerBar;
     public Text towerHealthPercentage;
     public Animator AnimationTexture;
@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
         pauseButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().PauseGame);
 
         pauseScreen.SetActive(false);
-        playerHealthBar.value = 0.0f;
+        playerHealthBar.fillAmount = 0.0f;
         spawners = GameObject.FindGameObjectsWithTag("Spawner");
         foreach(GameObject spawn in spawners)
         {
@@ -127,7 +127,7 @@ public class UIManager : MonoBehaviour
         waveTimerBar.value = waveTimerBar.maxValue;
         AnimationTexture.SetBool("IsHit", false);
         AnimationTexture.SetFloat("Energy", 0.0f);
-        UpdatePlayerHealth(player.GetComponent<Player>().Health);
+        UpdatePlayerHealth(player.GetComponent<Player>().health, player.GetComponent<Player>()._maxHealth);
         UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
         StartCoroutine("CountingTimer");
@@ -147,14 +147,14 @@ public class UIManager : MonoBehaviour
         yield return null;
     }
 
-    public void UpdatePlayerHealth(float curr)
+    public void UpdatePlayerHealth(float curr, float max)
     {
-        playerHealthBar.value = curr;
+        playerHealthBar.fillAmount = curr / max;
     }
 
     public void UpdateTowerHealth(float curr)
     {
-        towerHealthPercentage.text = curr.ToString() + " %";
+        towerHealthPercentage.text = curr.ToString();
     }
 
     public void UpdateUltimatePercentage(float curr)

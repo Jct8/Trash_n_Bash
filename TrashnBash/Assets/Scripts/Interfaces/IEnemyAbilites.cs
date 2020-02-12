@@ -6,4 +6,5 @@ public interface IEnemyAbilities
 {
     void PoisonAOE(GameObject player);
     void GroupAttack();
+    void Flying(bool fly, Order order);
 }

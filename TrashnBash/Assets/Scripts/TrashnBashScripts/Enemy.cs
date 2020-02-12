@@ -45,9 +45,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public string Name { get { return _Name; } private set { } }
 
     [Header("Enemy Status")]
+    public float _Health = 1.0f;
     [SerializeField] private string _Name;
     [SerializeField] private float _Attack = 1.0f;
-    [SerializeField] private float _Health = 1.0f;
     [SerializeField] private float _Money;
     [SerializeField] private float _Speed;
     [SerializeField] private float _AttackCoolTime = 3.0f;
@@ -89,6 +89,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     void Update()
     {
+
         healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         numOfRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(_Name).Count;
@@ -120,8 +121,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Agent.SetDestination(_Desination.position);
             if ((isInRangeOfWayPoint(_Desination, _EndDistance)))
             {
+
                 if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                 {
+                    enemyAbilities.Flying(false, _Order);
                     if (ChargingCoolDown())
                     {
                         StartCoroutine("TowerAttack");
@@ -130,19 +133,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 else
                 {
                     _CurrentWayPoint++;
+                    enemyAbilities.Flying(true, _Order);
                 }
 
             }
-
-            //Collider[] hitColliders = Physics.OverlapSphere(transform.position, _ObjectDetectionRange);
-            //foreach (var hit in hitColliders)
-            //{
-            //    if (hit.CompareTag("Barricade"))
-            //    {
-            //        _ObjectofBarricade = hit.gameObject;
-            //        break;
-            //    }
-            //}
 
             GameObject[] barricades = GameObject.FindGameObjectsWithTag("Barricade");
             for (int i = 0; i < barricades.Length; i++)
@@ -207,6 +201,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         else if (_Order == Order.Back)
         {
+            enemyAbilities.Flying(true, _Order);
             _Agent.isStopped = false;
             _Desination = _Path.WayPoints[0];
             _Agent.SetDestination(_Desination.position);
@@ -242,6 +237,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         CooltimeBar.fillAmount = 0;
         rigid = gameObject.GetComponent<Rigidbody>();
         _targetIndicator = transform.Find("TargetIndicator").gameObject;
+
         gameObject.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
         _isDetected = false;
         _IsAttacked = false;

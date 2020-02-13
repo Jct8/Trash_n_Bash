@@ -41,4 +41,9 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
             player.GetComponent<Player>().SetPoisoned(_skunksPoisonDamage, _skunksPoisonTickTime, _skunksPoisonTotaltime);
         }
     }
+
+    public void Flying(Transform wayPoint, Order order)
+    {
+        return;
+    }
 }

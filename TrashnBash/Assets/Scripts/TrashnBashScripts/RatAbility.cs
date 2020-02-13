@@ -6,6 +6,12 @@ public class RatAbility : MonoBehaviour, IEnemyAbilities
 {
     public int limit = 3;
     public int numbers = 0;
+
+    public void Flying(Transform wayPoint, Order order)
+    {
+        return;
+    }
+
     public void GroupAttack()
     {
         string name = gameObject.GetComponent<Enemy>().Name;

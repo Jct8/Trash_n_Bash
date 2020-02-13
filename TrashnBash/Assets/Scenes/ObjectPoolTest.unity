@@ -303,6 +303,54 @@ Transform:
   m_Father: {fileID: 591000198}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: -145.23001, z: 0}
+--- !u!1 &173323959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 173323960}
+  - component: {fileID: 173323961}
+  m_Layer: 0
+  m_Name: CrowsPoint3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &173323960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173323959}
+  m_LocalRotation: {x: -0, y: 0.9999811, z: -0, w: 0.0061556078}
+  m_LocalPosition: {x: 9.45, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 874770421}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 179.29501, z: 0}
+--- !u!114 &173323961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173323959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bc46f1dc9fc0643aa9fe7148ced5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmo: 1
+  gizmoShape: 0
+  gizmoColour: 2
+  gizmoRadius: 0.5
+  gizmoScale: {x: 1, y: 1, z: 1}
 --- !u!1 &221029998
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +610,7 @@ MonoBehaviour:
   _secondBetweenWave: 8
   _secondStartDelay: 10
   _currentWave: 0
-  StartOnSceneLoad: 1
+  StartOnSceneLoad: 0
   _activeEnemies: []
   _pathID: 1
 --- !u!114 &563957459
@@ -1201,6 +1249,9 @@ Transform:
   - {fileID: 1024140972}
   - {fileID: 1425686061}
   - {fileID: 896009877}
+  - {fileID: 1498008355}
+  - {fileID: 883762545}
+  - {fileID: 173323960}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1231,6 +1282,11 @@ MonoBehaviour:
     - {fileID: 1024140972}
     - {fileID: 1425686061}
     - {fileID: 896009877}
+  - Id: 2
+    WayPoints:
+    - {fileID: 1498008355}
+    - {fileID: 883762545}
+    - {fileID: 173323960}
 --- !u!1 &875952602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,6 +1424,54 @@ MonoBehaviour:
   showGizmo: 1
   gizmoShape: 0
   gizmoColour: 3
+  gizmoRadius: 0.5
+  gizmoScale: {x: 1, y: 1, z: 1}
+--- !u!1 &883762544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 883762545}
+  - component: {fileID: 883762546}
+  m_Layer: 0
+  m_Name: CrowsPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &883762545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883762544}
+  m_LocalRotation: {x: -0, y: 0.9999811, z: -0, w: 0.0061556078}
+  m_LocalPosition: {x: -0.88, y: 0, z: -5.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 874770421}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 179.29501, z: 0}
+--- !u!114 &883762546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883762544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bc46f1dc9fc0643aa9fe7148ced5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmo: 1
+  gizmoShape: 0
+  gizmoColour: 2
   gizmoRadius: 0.5
   gizmoScale: {x: 1, y: 1, z: 1}
 --- !u!1 &896009876
@@ -1967,6 +2071,7 @@ Transform:
   - {fileID: 1990679501}
   - {fileID: 563957457}
   - {fileID: 670326106}
+  - {fileID: 1535281344}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1986,6 +2091,7 @@ MonoBehaviour:
   - {fileID: 1990679502}
   - {fileID: 563957458}
   - {fileID: 670326105}
+  - {fileID: 1535281346}
   WayPointManager: {fileID: 874770422}
   tutorialManager: {fileID: 0}
 --- !u!1 &1153754540
@@ -2278,7 +2384,7 @@ GameObject:
   - component: {fileID: 1457653497}
   - component: {fileID: 1457653496}
   - component: {fileID: 1457653495}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2358,6 +2464,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -0.485, z: 0}
+--- !u!1 &1498008354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1498008355}
+  - component: {fileID: 1498008356}
+  m_Layer: 0
+  m_Name: CrowsPoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1498008355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498008354}
+  m_LocalRotation: {x: -0, y: 0.9999811, z: -0, w: 0.0061556078}
+  m_LocalPosition: {x: -11.67, y: 0, z: -5.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 874770421}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 179.29501, z: 0}
+--- !u!114 &1498008356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498008354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bc46f1dc9fc0643aa9fe7148ced5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmo: 1
+  gizmoShape: 0
+  gizmoColour: 2
+  gizmoRadius: 0.5
+  gizmoScale: {x: 1, y: 1, z: 1}
 --- !u!1 &1500784754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2584,6 +2738,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 48.459003, y: 174.371, z: 89.22}
+--- !u!1 &1535281343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1535281344}
+  - component: {fileID: 1535281346}
+  - component: {fileID: 1535281345}
+  m_Layer: 0
+  m_Name: Crows
+  m_TagString: Spawner
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1535281344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535281343}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.56, y: 1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1141448450}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1535281345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535281343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bc46f1dc9fc0643aa9fe7148ced5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmo: 1
+  gizmoShape: 3
+  gizmoColour: 4
+  gizmoRadius: 1.08
+  gizmoScale: {x: 1, y: 1, z: 1}
+--- !u!114 &1535281346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535281343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9e1c48d630e794389328205cbd478b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _UnitPrefeb: {fileID: 3828688314252740787, guid: 8e052acd3dc32504b94cb0e83002661c,
+    type: 3}
+  _numberOfWave: 25
+  _enemiesPerWave: 1
+  _secondBetweenWave: 20
+  _secondStartDelay: 10
+  _currentWave: 0
+  StartOnSceneLoad: 1
+  _activeEnemies: []
+  _pathID: 2
 --- !u!1 &1560533852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,7 +3181,7 @@ MonoBehaviour:
   _secondBetweenWave: 12
   _secondStartDelay: 10
   _currentWave: 0
-  StartOnSceneLoad: 1
+  StartOnSceneLoad: 0
   _activeEnemies: []
   _pathID: 0
 --- !u!114 &1990679503

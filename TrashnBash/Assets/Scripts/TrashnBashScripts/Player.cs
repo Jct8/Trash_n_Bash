@@ -7,7 +7,7 @@ public class Player : MonoBehaviour, ICharacterAction
     #region Variables
 
     public float health = 100.0f;
-    [SerializeField] private float _maxHealth = 100.0f;
+    public float _maxHealth = 100.0f;
     [SerializeField] private float attack = 1.0f;
     [SerializeField] private float intimdateStunTime = 3.0f;
     [SerializeField] public float attackRange = 20.0f;
@@ -30,6 +30,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public GameObject popUp;
     public GameObject poisonAttack;
     public GameObject hitEffect;
+    private UIManager _uiManager = null;
     //public GameObject restoreEffect;
 
     public AudioClip attackEffect;
@@ -63,6 +64,8 @@ public class Player : MonoBehaviour, ICharacterAction
         InvokeRepeating("IncrementUltCharge", 10.0f, ultimateChargeTime);
         audioSource = GetComponent<AudioSource>();
         ultimateChargeStart = _ultimateCharge;
+        _uiManager = ServiceLocator.Get<UIManager>();
+        _uiManager.UpdatePlayerHealth(health, _maxHealth);
         //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
         //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
     }
@@ -96,7 +99,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 _maxHealth = 100.0f;
             }
             uiManager.UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
-            uiManager.UpdatePlayerHealth(health);
+            uiManager.UpdatePlayerHealth(health, _maxHealth);
         }
     }
 
@@ -158,6 +161,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public void TakeDamage(float damage, bool isHero, DamageType type)
     {
         health -= damage;
+        _uiManager.UpdatePlayerHealth(health, _maxHealth);
         popUp.GetComponent<TextMesh>().text = damage.ToString();
         switch (type)
         {
@@ -176,7 +180,7 @@ public class Player : MonoBehaviour, ICharacterAction
         //popUp.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
         Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
         //Debug.Log("Player Took " + damage + " damage");
-        ServiceLocator.Get<UIManager>().UpdatePlayerHealth(health);
+        ServiceLocator.Get<UIManager>().UpdatePlayerHealth(health, _maxHealth);
     }
 
     #endregion

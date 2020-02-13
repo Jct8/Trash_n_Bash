@@ -261,7 +261,7 @@ public class PlayerController : MonoBehaviour
                 _tower.fullHealth -= restoreValue;
                 uiManager.UpdateTowerHealth(_tower.fullHealth);
                 _player.restoringHealth(restoreValue * 2.0f);
-                uiManager.UpdatePlayerHealth(_player.Health);
+                uiManager.UpdatePlayerHealth(_player.health,_player._maxHealth);
             }
         }
 

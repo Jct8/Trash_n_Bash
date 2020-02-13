@@ -610,7 +610,7 @@ MonoBehaviour:
   _secondBetweenWave: 8
   _secondStartDelay: 10
   _currentWave: 0
-  StartOnSceneLoad: 0
+  StartOnSceneLoad: 1
   _activeEnemies: []
   _pathID: 1
 --- !u!114 &563957459
@@ -3181,7 +3181,7 @@ MonoBehaviour:
   _secondBetweenWave: 12
   _secondStartDelay: 10
   _currentWave: 0
-  StartOnSceneLoad: 0
+  StartOnSceneLoad: 1
   _activeEnemies: []
   _pathID: 0
 --- !u!114 &1990679503

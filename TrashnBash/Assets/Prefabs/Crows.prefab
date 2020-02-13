@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3494291691257986037}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.36, z: 0.96}
+  m_LocalPosition: {x: 0, y: 0, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1308867121832096795}
@@ -148,12 +148,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8205088429037997910}
-  - component: {fileID: 903615597388962401}
   - component: {fileID: 2849284180479456655}
   - component: {fileID: 7794960624073784991}
   - component: {fileID: 3262372353960133183}
   - component: {fileID: 2342654600482299871}
   - component: {fileID: -8864193881277896758}
+  - component: {fileID: 2663415070426248761}
   m_Layer: 0
   m_Name: Crows
   m_TagString: Enemy
@@ -177,20 +177,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &903615597388962401
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3828688314252740787}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!54 &2849284180479456655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -255,7 +241,7 @@ MonoBehaviour:
   _DataSource: Crows
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
   poisonedEffect: {fileID: 8300000, guid: 16b5e8f6ec7e27b4482558644ab456c3, type: 3}
-  _Health: 8
+  _Health: 25
   _Name: 
   _Attack: 2
   _Money: 10
@@ -264,6 +250,7 @@ MonoBehaviour:
   _ObjectDetectionRange: 3
   _DropRate: 0.5
   _enemyAttackRange: 2.5
+  _waitForsecondOfCrows: 1
   rigid: {fileID: 0}
 --- !u!82 &2342654600482299871
 AudioSource:
@@ -277,7 +264,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.099
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -374,8 +361,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maximumRaising: 3
-  _speedToLanding: 0.02
-  _distanceToGround: 0.5
+  _inRangeOfWaypoint: 4
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!136 &2663415070426248761
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828688314252740787}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5884984060430189117
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5884984060430189117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7111672014959044906}
@@ -483,7 +486,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7899227467104718771}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5195415108500023762}
@@ -497,14 +500,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1308867121832096795}
     m_Modifications:
-    - target: {fileID: 100000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
-      propertyPath: m_Name
-      value: SNature_Mushroom
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -547,6 +542,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
+      propertyPath: m_Name
+      value: SNature_Mushroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -716,11 +719,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1308867121832096795}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 40a36d82bf233a6458129fc824d3554a,
-        type: 3}
-      propertyPath: m_Name
-      value: Opposum
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 40a36d82bf233a6458129fc824d3554a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -729,7 +727,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 40a36d82bf233a6458129fc824d3554a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.211
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 40a36d82bf233a6458129fc824d3554a,
         type: 3}
@@ -790,6 +788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 40a36d82bf233a6458129fc824d3554a,
+        type: 3}
+      propertyPath: m_Name
+      value: Opposum
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a36d82bf233a6458129fc824d3554a, type: 3}
@@ -929,7 +932,7 @@ PrefabInstance:
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
@@ -979,7 +982,7 @@ PrefabInstance:
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.199997
+      value: 0.76
       objectReference: {fileID: 0}
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}

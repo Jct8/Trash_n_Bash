@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private float _ObjectDetectionRange = 3.0f;
     [SerializeField] private float _DropRate = 0.5f;
     [SerializeField] private float _enemyAttackRange = 4.0f;
+    [SerializeField] private float _waitForsecondOfCrows = 1.0f;
 
     private float _EndDistance = 3.0f;
     private float _MaximumAngle = 45.0f;
@@ -64,6 +65,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _poisonTickTime = 0.0f;
     private float _poisonCurrentDuration = 0.0f;
     private int numOfRats = 0;
+    
     [Header("Etc")]
     public Rigidbody rigid;
     public Action killed;
@@ -103,6 +105,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
 
         enemyAbilities.PoisonAOE(player);
+
+        enemyAbilities.Flying(_Desination, _Order);
+
         if (_isPoisoned)
             CheckPoison();
 
@@ -124,16 +129,24 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
                 if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                 {
-                    enemyAbilities.Flying(false, _Order);
-                    if (ChargingCoolDown())
+
+
+                    if (_Name == "Crows")
                     {
-                        StartCoroutine("TowerAttack");
+                        StartCoroutine("wait");
                     }
+                    else
+                    {
+                        if (ChargingCoolDown())
+                        {
+                            StartCoroutine("TowerAttack");
+                        }
+                    }
+
                 }
                 else
                 {
                     _CurrentWayPoint++;
-                    enemyAbilities.Flying(true, _Order);
                 }
 
             }
@@ -149,26 +162,30 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     break;
                 }
             }
-            if(_ObjectofBarricade)
+            if(_Name != "Crows")
             {
-                if (_ObjectofBarricade.GetComponent<Barricade>().isAlive)
+                if (_ObjectofBarricade)
                 {
-                    if (isCloseToBarricade(_ObjectDetectionRange))
-                        _Order = Order.Barricade;
-                }
-                else
-                {
-                    _ObjectofBarricade = null;
-                    for (int i = 0; i < barricades.Length; i++)
+                    if (_ObjectofBarricade.GetComponent<Barricade>().isAlive)
                     {
-                        if (Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
+                        if (isCloseToBarricade(_ObjectDetectionRange))
+                            _Order = Order.Barricade;
+                    }
+                    else
+                    {
+                        _ObjectofBarricade = null;
+                        for (int i = 0; i < barricades.Length; i++)
                         {
-                            _ObjectofBarricade = barricades[i];
-                            break;
+                            if (Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
+                            {
+                                _ObjectofBarricade = barricades[i];
+                                break;
+                            }
                         }
                     }
                 }
             }
+
 
         }
         else if (_Order == Order.Fight)
@@ -201,7 +218,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         else if (_Order == Order.Back)
         {
-            enemyAbilities.Flying(true, _Order);
+            if(_Name == "Crows")
+            {
+                _CurrentWayPoint = 0;
+            }
             _Agent.isStopped = false;
             _Desination = _Path.WayPoints[0];
             _Agent.SetDestination(_Desination.position);
@@ -308,6 +328,16 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Agent.SetDestination(go.transform.position);
         obj.y = transform.position.y;
         transform.LookAt(obj);
+    }
+
+    private IEnumerator wait()
+    {
+        yield return new WaitForSeconds(_waitForsecondOfCrows);
+        if (ChargingCoolDown())
+        {
+            StartCoroutine("TowerAttack");
+        }
+
     }
 
     #endregion

@@ -1,0 +1,310 @@
+fileFormatVersion: 2
+guid: 90322802b98b4a84cb09fddbac9439d5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9073845281653625145
+    second: IMG_0070_0
+  - first:
+      213: 5746969527941037214
+    second: IMG_0070_1
+  - first:
+      213: -6760225107212462786
+    second: IMG_0070_2
+  - first:
+      213: -1924266700409324417
+    second: IMG_0070_3
+  - first:
+      213: 901035217160356287
+    second: IMG_0070_4
+  - first:
+      213: 5059763979243064046
+    second: IMG_0070_5
+  - first:
+      213: 6073629293810458179
+    second: IMG_0070_6
+  - first:
+      213: 3481781310193383284
+    second: IMG_0070_7
+  - first:
+      213: -1812108360684978308
+    second: IMG_0070_8
+  - first:
+      213: -3875259876929878976
+    second: IMG_0070_9
+  - first:
+      213: 3692044455476058713
+    second: IMG_0070_10
+  - first:
+      213: 5820448174981710137
+    second: IMG_0070_11
+  - first:
+      213: -9100040310396493809
+    second: IMG_0070_12
+  - first:
+      213: 2365312018290010512
+    second: IMG_0070_13
+  - first:
+      213: -3646784937326111789
+    second: IMG_0070_14
+  - first:
+      213: -3106026385939759121
+    second: IMG_0070_15
+  - first:
+      213: 1926330961455503263
+    second: IMG_0070_16
+  - first:
+      213: -1911502124109291320
+    second: IMG_0070_17
+  - first:
+      213: -210750960822766356
+    second: IMG_0070_18
+  - first:
+      213: 8527656577555307360
+    second: IMG_0070_19
+  - first:
+      213: 7472163440849144661
+    second: IMG_0070_20
+  - first:
+      213: 6415203234113891148
+    second: IMG_0070_21
+  - first:
+      213: -424234464487029947
+    second: IMG_0070_22
+  - first:
+      213: 8577376493896073944
+    second: IMG_0070_23
+  - first:
+      213: -8903179195890325374
+    second: IMG_0070_24
+  - first:
+      213: 6210566171985403915
+    second: IMG_0070_25
+  - first:
+      213: -368864823063936405
+    second: IMG_0070_26
+  - first:
+      213: -8724998302142694576
+    second: IMG_0070_27
+  - first:
+      213: 5005778332461187328
+    second: IMG_0070_28
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 1027, y: 0, z: 0, w: 764}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: IMG_0070_1
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 824
+        width: 682
+        height: 604
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc27839d88e26974db7164192081b6d5
+      internalID: 5746969527941037214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_0070_0
+      rect:
+        serializedVersion: 2
+        x: 1452
+        y: 835
+        width: 596
+        height: 560
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d85190d66c6a0ac4ea0dab2ed5544c92
+      internalID: 9073845281653625145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_0070_2
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 105
+        width: 688
+        height: 677
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a35b8138735e21f43a110eef111d63bd
+      internalID: -6760225107212462786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_0070_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 133
+        width: 780
+        height: 585
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745e592d5e2c57145a0da32ef953a0dc
+      internalID: -1924266700409324417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -935, y: 88}
+      - {x: -935, y: 614}
+      - {x: -299, y: 614}
+      - {x: -299, y: 88}
+    - - {x: -975, y: -604}
+      - {x: -975, y: -65}
+      - {x: -263, y: -65}
+      - {x: -263, y: -604}
+    - - {x: 329, y: -607}
+      - {x: 329, y: -35}
+      - {x: 955, y: -35}
+      - {x: 955, y: -607}
+    - - {x: 250, y: 65}
+      - {x: 250, y: 717}
+      - {x: 991, y: 717}
+      - {x: 991, y: 65}
+    physicsShape: []
+    bones: []
+    spriteID: 0b91509b929de4e4c85c1e9abe76bea0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

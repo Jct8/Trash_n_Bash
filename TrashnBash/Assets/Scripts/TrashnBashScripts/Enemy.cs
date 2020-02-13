@@ -106,7 +106,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         enemyAbilities.PoisonAOE(player);
 
-        enemyAbilities.Flying(_Desination, _Order);
 
         if (_isPoisoned)
             CheckPoison();
@@ -124,6 +123,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         else if (_Order == Order.Tower)
         {
             _Agent.SetDestination(_Desination.position);
+            enemyAbilities.Flying(_Desination, _Order);
             if ((isInRangeOfWayPoint(_Desination, _EndDistance)))
             {
 
@@ -218,13 +218,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         else if (_Order == Order.Back)
         {
-            if(_Name == "Crows")
-            {
-                _CurrentWayPoint = 0;
-            }
+            //if(_Name == "Crows")
+            //{
+            //    _CurrentWayPoint = 0;
+            //}
             _Agent.isStopped = false;
             _Desination = _Path.WayPoints[0];
             _Agent.SetDestination(_Desination.position);
+            enemyAbilities.Flying(_Desination, _Order);
             if (isInRangeOfWayPoint(_Desination, _EndDistance))
                 killed?.Invoke();
         }

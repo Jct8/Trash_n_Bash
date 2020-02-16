@@ -83,4 +83,9 @@ public class CrowAbility : MonoBehaviour, IEnemyAbilities
     {
         return;
     }
+
+    public void PlayDead(GameObject player)
+    {
+        return;
+    }
 }

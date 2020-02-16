@@ -499,7 +499,10 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.transform.gameObject.CompareTag("Enemy"))
-                _lockedOnEnemyGO = hit.transform.gameObject;
+            {
+                if(!hit.transform.gameObject.GetComponent<Enemy>().Dead)
+                    _lockedOnEnemyGO = hit.transform.gameObject;
+            }
             else
                 _lockedOnEnemyGO = null;
         }
@@ -512,6 +515,13 @@ public class PlayerController : MonoBehaviour
         _lockedOnEnemyGO = enemy;
         _isTargetLockedOn = true;
         _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(true);
+    }
+
+    public void DeselectLockOn()
+    {
+        _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
+        _isTargetLockedOn = false;
+        _lockedOnEnemyGO = null;
     }
 
     #endregion

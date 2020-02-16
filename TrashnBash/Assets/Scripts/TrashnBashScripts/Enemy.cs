@@ -23,8 +23,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private GameObject _ObjectofBarricade;
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
-    private NavMeshAgent _Agent;
     private WayPointManager.Path _Path;
+    public NavMeshAgent _Agent;
 
     public Order _Order { get; set; }
 
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private AudioSource audioSource;
 
     public string Name { get { return _Name; } private set { } }
-
+    public bool Dead { get { return _IsDead; } set { _IsDead = value; } }
     [Header("Enemy Status")]
     public float _Health = 1.0f;
     [SerializeField] private string _Name;
@@ -96,143 +96,145 @@ public class Enemy : MonoBehaviour, ICharacterAction
         CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         numOfRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(_Name).Count;
         Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
-
         if (player == null || _IsDead)
         {
             _Agent.isStopped = true;
-            rigid.velocity = Vector3.zero;
             return;
         }
-
-        enemyAbilities.PoisonAOE(player);
-
-
-        if (_isPoisoned)
-            CheckPoison();
-
-        if (_Order == Order.Stunned)
+        if (!_IsDead)
         {
-            _Agent.isStopped = true;
-            if (stunTime < Time.time)
+
+
+            enemyAbilities.PoisonAOE(player);
+
+
+            if (_isPoisoned)
+                CheckPoison();
+
+            if (_Order == Order.Stunned)
             {
-                _Agent.isStopped = false;
-                _Order = Order.Fight;
+                _Agent.isStopped = true;
+                if (stunTime < Time.time)
+                {
+                    _Agent.isStopped = false;
+                    _Order = Order.Fight;
+                }
+                return;
             }
-            return;
-        }
-        else if (_Order == Order.Tower)
-        {
-            _Agent.SetDestination(_Desination.position);
-            enemyAbilities.Flying(_Desination, _Order);
-            if ((isInRangeOfWayPoint(_Desination, _EndDistance)))
+            else if (_Order == Order.Tower)
             {
-
-                if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
+                _Agent.SetDestination(_Desination.position);
+                enemyAbilities.Flying(_Desination, _Order);
+                if ((isInRangeOfWayPoint(_Desination, _EndDistance)))
                 {
 
+                    if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
+                    {
 
-                    if (_Name == "Crows")
-                    {
-                        StartCoroutine("wait");
-                    }
-                    else
-                    {
-                        if (ChargingCoolDown())
+
+                        if (_Name == "Crows")
                         {
-                            StartCoroutine("TowerAttack");
+                            StartCoroutine("wait");
                         }
-                    }
+                        else
+                        {
+                            if (ChargingCoolDown())
+                            {
+                                StartCoroutine("TowerAttack");
+                            }
+                        }
 
-                }
-                else
-                {
-                    _CurrentWayPoint++;
-                }
-
-            }
-
-            GameObject[] barricades = GameObject.FindGameObjectsWithTag("Barricade");
-            for (int i = 0; i < barricades.Length; i++)
-            {
-                if (_ObjectofBarricade)
-                    break;
-                if(Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
-                {
-                    _ObjectofBarricade = barricades[i];
-                    break;
-                }
-            }
-            if(_Name != "Crows")
-            {
-                if (_ObjectofBarricade)
-                {
-                    if (_ObjectofBarricade.GetComponent<Barricade>().isAlive)
-                    {
-                        if (isCloseToBarricade(_ObjectDetectionRange))
-                            _Order = Order.Barricade;
                     }
                     else
                     {
-                        _ObjectofBarricade = null;
-                        for (int i = 0; i < barricades.Length; i++)
+                        _CurrentWayPoint++;
+                    }
+
+                }
+
+                GameObject[] barricades = GameObject.FindGameObjectsWithTag("Barricade");
+                for (int i = 0; i < barricades.Length; i++)
+                {
+                    if (_ObjectofBarricade)
+                        break;
+                    if (Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
+                    {
+                        _ObjectofBarricade = barricades[i];
+                        break;
+                    }
+                }
+                if (_Name != "Crows")
+                {
+                    if (_ObjectofBarricade)
+                    {
+                        if (_ObjectofBarricade.GetComponent<Barricade>().isAlive)
                         {
-                            if (Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
+                            if (isCloseToBarricade(_ObjectDetectionRange))
+                                _Order = Order.Barricade;
+                        }
+                        else
+                        {
+                            _ObjectofBarricade = null;
+                            for (int i = 0; i < barricades.Length; i++)
                             {
-                                _ObjectofBarricade = barricades[i];
-                                break;
+                                if (Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
+                                {
+                                    _ObjectofBarricade = barricades[i];
+                                    break;
+                                }
                             }
                         }
                     }
                 }
-            }
 
 
-        }
-        else if (_Order == Order.Fight)
-        {
-            LookAt(player.transform.position, player);
-            if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
-            {
-                if (ChargingCoolDown())
-                    StartCoroutine("Attack");
             }
-            else
+            else if (_Order == Order.Fight)
             {
-                CooltimeBar.fillAmount = 0;
-                _IsAttacked = false;
+                LookAt(player.transform.position, player);
+                if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
+                {
+                    if (ChargingCoolDown())
+                        StartCoroutine("Attack");
+                }
+                else
+                {
+                    CooltimeBar.fillAmount = 0;
+                    _IsAttacked = false;
+                }
             }
-        }
-        else if (_Order == Order.Barricade)
-        {
-            LookAt(_ObjectofBarricade.transform.position, _ObjectofBarricade);
-            if (isCloseToBarricade(_enemyAttackRange))
+            else if (_Order == Order.Barricade)
             {
-                if (ChargingCoolDown())
-                    BarricadeAttack();
+                LookAt(_ObjectofBarricade.transform.position, _ObjectofBarricade);
+                if (isCloseToBarricade(_enemyAttackRange))
+                {
+                    if (ChargingCoolDown())
+                        BarricadeAttack();
+                }
+                if (!_ObjectofBarricade.GetComponent<Barricade>().isAlive)
+                {
+                    _ObjectofBarricade = null;
+                    _Order = Order.Tower;
+                }
             }
-            if (!_ObjectofBarricade.GetComponent<Barricade>().isAlive)
+            else if (_Order == Order.Back)
             {
-                _ObjectofBarricade = null;
-                _Order = Order.Tower;
+                //if(_Name == "Crows")
+                //{
+                //    _CurrentWayPoint = 0;
+                //}
+                _Agent.isStopped = false;
+                _Desination = _Path.WayPoints[0];
+                _Agent.SetDestination(_Desination.position);
+                enemyAbilities.Flying(_Desination, _Order);
+                if (isInRangeOfWayPoint(_Desination, _EndDistance))
+                    killed?.Invoke();
             }
-        }
-        else if (_Order == Order.Back)
-        {
-            //if(_Name == "Crows")
-            //{
-            //    _CurrentWayPoint = 0;
-            //}
-            _Agent.isStopped = false;
-            _Desination = _Path.WayPoints[0];
-            _Agent.SetDestination(_Desination.position);
-            enemyAbilities.Flying(_Desination, _Order);
-            if (isInRangeOfWayPoint(_Desination, _EndDistance))
-                killed?.Invoke();
-        }
 
-        if (_IsAttacked)
-        {
-            ChargingCoolDown();
+            if (_IsAttacked)
+            {
+                ChargingCoolDown();
+            }
         }
     }
     #endregion
@@ -302,6 +304,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _targetIndicator.SetActive(turnOn);
     }
 
+    public void SwitchEnemyDead(bool active)
+    {
+        _IsDead = active;
+    }
+
     private bool isInRangeOfWayPoint(Transform destination, float range)
     {
         // Range is enemy's area, it could be enemy's attack range, or enemy's width
@@ -346,6 +353,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
     #region TakeDamage
     public void TakeDamage(float Dmg, bool isHero, DamageType type)
     {
+        if (_IsDead)
+            return;
+
+        enemyAbilities.PlayDead(player);
         fullHealth -= Dmg;
 
         popUp.GetComponent<TextMesh>().text = Dmg.ToString();

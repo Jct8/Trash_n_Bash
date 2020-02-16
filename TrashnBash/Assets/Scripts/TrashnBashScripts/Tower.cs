@@ -70,8 +70,12 @@ public class Tower : MonoBehaviour
 
         if(shotTime <= 0.0f)
         {
-            Shoot();
-            shotTime = 1.0f / attackRate;
+            if(!_target.GetComponent<Enemy>().Dead)
+            {
+                Shoot();
+                shotTime = 1.0f / attackRate;
+            }
+
         }
 
         shotTime -= Time.deltaTime;

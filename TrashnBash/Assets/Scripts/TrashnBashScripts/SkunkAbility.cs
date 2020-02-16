@@ -46,4 +46,9 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
     {
         return;
     }
+
+    public void PlayDead(GameObject player)
+    {
+        return;
+    }
 }

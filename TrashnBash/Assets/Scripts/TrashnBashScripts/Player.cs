@@ -26,16 +26,20 @@ public class Player : MonoBehaviour, ICharacterAction
     public const string DAMAGE_KEY = "Damage";
     public const string HEALTH_KEY = "Health";
 
+    [Header("Prefab")]
     public GameObject ultimateIndicator;
     public GameObject popUp;
     public GameObject poisonAttack;
     public GameObject hitEffect;
+    public GameObject Lighting;
+    public GameObject LightingOnGround;
     private UIManager _uiManager = null;
     //public GameObject restoreEffect;
 
     public AudioClip attackEffect;
     public AudioClip poisonEffect;
     public AudioClip UltimateEffect;
+    public AudioClip LightingEffectSound;
     public AudioSource audioSource;
 
 
@@ -319,6 +323,9 @@ public class Player : MonoBehaviour, ICharacterAction
     {
         if (enemy && Vector3.Distance(transform.position, enemy.transform.position) < attackRange)
         {
+            Instantiate(Lighting, enemy.transform.position, Quaternion.identity);
+            Instantiate(LightingOnGround, gameObject.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(LightingEffectSound, 0.5f);
             enemy.GetComponent<Enemy>()._Order = Order.Stunned;
             enemy.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
         }

@@ -301,6 +301,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91cbc605b764bfd4f994d599fc293207, type: 2}
   - {fileID: 11400000, guid: 2c1662dfd4677cc498a7143bd796f004, type: 2}
   - {fileID: 11400000, guid: b637bc66f8360764aa4affbd9e397330, type: 2}
+  - {fileID: 11400000, guid: 5c1c0514ed0b8004a878a730f6438c68, type: 2}
 --- !u!114 &498627633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +329,10 @@ MonoBehaviour:
     poolSize: 100
   - name: Crows
     prefab: {fileID: 3828688314252740787, guid: 8e052acd3dc32504b94cb0e83002661c,
+      type: 3}
+    poolSize: 100
+  - name: Opossums
+    prefab: {fileID: 6876065404672406170, guid: 0af8d18b2435b9649b41a61af95c702b,
       type: 3}
     poolSize: 100
   - name: MoveIndicator

@@ -93,9 +93,14 @@ MonoBehaviour:
   poisonAttack: {fileID: 1342458468121041236}
   hitEffect: {fileID: 6462621314868396975, guid: d192a558b2fca7249989b6570e020d87,
     type: 3}
+  Lighting: {fileID: 3328304981364864585, guid: ad8a579c52f56b44fb461e719e3a7931,
+    type: 3}
+  LightingOnGround: {fileID: 1644072437544401464, guid: 3ad4e477a64676343bec224b27a27ee3,
+    type: 3}
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
   poisonEffect: {fileID: 8300000, guid: 31960797e7e12004c857a9547dad7efc, type: 3}
   UltimateEffect: {fileID: 8300000, guid: 00d257894e229354f9ab925c723cb27c, type: 3}
+  LightingEffectSound: {fileID: 8300000, guid: e4d66ebbda2dcb842a16c92e50dd3c44, type: 3}
   audioSource: {fileID: 0}
   _ultimateCharge: 75
   _ispoisoned: 0

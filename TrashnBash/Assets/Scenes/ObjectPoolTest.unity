@@ -610,7 +610,7 @@ MonoBehaviour:
   _secondBetweenWave: 8
   _secondStartDelay: 10
   _currentWave: 0
-  StartOnSceneLoad: 0
+  StartOnSceneLoad: 1
   _activeEnemies: []
   _pathID: 1
 --- !u!114 &563957459
@@ -858,77 +858,6 @@ Transform:
   m_Father: {fileID: 591000198}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -36.194, z: 0}
---- !u!1 &670326104
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 670326106}
-  - component: {fileID: 670326105}
-  - component: {fileID: 670326107}
-  m_Layer: 0
-  m_Name: SkunkTest
-  m_TagString: Spawner
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &670326105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670326104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9e1c48d630e794389328205cbd478b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _UnitPrefeb: {fileID: 5110960924001791372, guid: e776da64559f14f488b335a399426ea3,
-    type: 3}
-  _numberOfWave: 5
-  _enemiesPerWave: 3
-  _secondBetweenWave: 3
-  _secondStartDelay: 1
-  _currentWave: 0
-  StartOnSceneLoad: 0
-  _activeEnemies: []
-  _pathID: 0
---- !u!4 &670326106
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670326104}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.21, y: 0.7, z: -3.97}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1141448450}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &670326107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670326104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bc46f1dc9fc0643aa9fe7148ced5f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showGizmo: 1
-  gizmoShape: 3
-  gizmoColour: 4
-  gizmoRadius: 0.72
-  gizmoScale: {x: 1, y: 1, z: 1}
 --- !u!1001 &686692034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2165,7 +2094,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1141448450}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1141448449
 GameObject:
@@ -2197,7 +2126,6 @@ Transform:
   m_Children:
   - {fileID: 1990679501}
   - {fileID: 563957457}
-  - {fileID: 670326106}
   - {fileID: 1535281344}
   - {fileID: 1105665104}
   m_Father: {fileID: 0}
@@ -2218,9 +2146,8 @@ MonoBehaviour:
   Spawners:
   - {fileID: 1990679502}
   - {fileID: 563957458}
-  - {fileID: 670326105}
-  - {fileID: 1535281346}
   - {fileID: 1105665102}
+  - {fileID: 1535281346}
   WayPointManager: {fileID: 874770422}
   tutorialManager: {fileID: 0}
 --- !u!1 &1153754540
@@ -2945,7 +2872,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1141448450}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1535281345
 MonoBehaviour:
@@ -2983,7 +2910,7 @@ MonoBehaviour:
   _secondBetweenWave: 20
   _secondStartDelay: 10
   _currentWave: 0
-  StartOnSceneLoad: 0
+  StartOnSceneLoad: 1
   _activeEnemies: []
   _pathID: 2
 --- !u!1 &1560533852
@@ -3406,7 +3333,7 @@ MonoBehaviour:
   _secondBetweenWave: 12
   _secondStartDelay: 10
   _currentWave: 0
-  StartOnSceneLoad: 0
+  StartOnSceneLoad: 1
   _activeEnemies: []
   _pathID: 0
 --- !u!114 &1990679503

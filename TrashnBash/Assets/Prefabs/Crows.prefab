@@ -236,12 +236,13 @@ MonoBehaviour:
   poison: {fileID: 5884984060430189117}
   hitEffect: {fileID: 6462621314868396975, guid: d192a558b2fca7249989b6570e020d87,
     type: 3}
+  _Agent: {fileID: 0}
   fullHealth: 0
   stunTime: 0
   _DataSource: Crows
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
   poisonedEffect: {fileID: 8300000, guid: 16b5e8f6ec7e27b4482558644ab456c3, type: 3}
-  _Health: 25
+  _Health: 12
   _Name: 
   _Attack: 2
   _Money: 10
@@ -576,6 +577,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1308867121832096795}
     m_Modifications:
+    - target: {fileID: 100000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
+      propertyPath: m_Name
+      value: SNature_Mushroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -618,14 +627,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
-      propertyPath: m_Name
-      value: SNature_Mushroom
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: abe2d5d82aa6b0a44a7170f0f5d9b0f3, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -795,6 +796,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1308867121832096795}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 40a36d82bf233a6458129fc824d3554a,
+        type: 3}
+      propertyPath: m_Name
+      value: Opposum
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 40a36d82bf233a6458129fc824d3554a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 40a36d82bf233a6458129fc824d3554a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -864,16 +875,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 40a36d82bf233a6458129fc824d3554a,
-        type: 3}
-      propertyPath: m_Name
-      value: Opposum
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 40a36d82bf233a6458129fc824d3554a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a36d82bf233a6458129fc824d3554a, type: 3}

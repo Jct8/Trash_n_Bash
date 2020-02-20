@@ -329,7 +329,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7940001824949302396}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -379,22 +379,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3881583059690077307}
     m_Modifications:
-    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
-      propertyPath: m_Name
-      value: Trashcan1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.02
@@ -442,6 +426,22 @@ PrefabInstance:
     - target: {fileID: 400000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
       propertyPath: m_LocalScale.y
       value: 1.2183
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_Name
+      value: Trashcan1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}

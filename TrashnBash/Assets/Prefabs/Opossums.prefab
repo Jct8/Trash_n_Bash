@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: -3833604232468093450}
   - component: {fileID: 8941732546900928204}
   m_Layer: 0
-  m_Name: Opossum
+  m_Name: Opossums
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   poison: {fileID: 801450321962728225}
   hitEffect: {fileID: 6462621314868396975, guid: d192a558b2fca7249989b6570e020d87,
     type: 3}
+  _Agent: {fileID: 0}
   fullHealth: 0
   stunTime: 0
   _DataSource: Opossums
@@ -155,7 +156,7 @@ MonoBehaviour:
   _Name: 
   _Attack: 2
   _Money: 10
-  _Speed: 5
+  _Speed: 3
   _AttackCoolTime: 3
   _ObjectDetectionRange: 3
   _DropRate: 0.5
@@ -270,7 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb19844e13d5484bad09fa9b7bdb2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outRange: 2
   castingTime: 3
 --- !u!1 &7435411569412823581
 GameObject:

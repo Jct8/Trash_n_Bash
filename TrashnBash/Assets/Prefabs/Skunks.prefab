@@ -233,7 +233,7 @@ MonoBehaviour:
   _Name: 
   _Attack: 1
   _Money: 12
-  _Speed: 5
+  _Speed: 2
   _AttackCoolTime: 3
   _ObjectDetectionRange: 3
   _DropRate: 0.5

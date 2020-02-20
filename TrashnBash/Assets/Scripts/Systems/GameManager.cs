@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public float _racoonHP;
     public bool _enemySkillActived { get; set; }
 
+    public Dictionary<UpgradeMenu.Upgrade, int> upgradeLevelsDictionary = new Dictionary<UpgradeMenu.Upgrade, int>();
+
     public enum GameState
     {
         Loader,
@@ -27,6 +29,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _GameState = GameState.Loader;
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Barricades, 1);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ExtraProjectiles, 1);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.FireProjectile, 1);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Ranged, 1);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.TargetEnemy, 1);
     }
 
     public GameManager Initialize()

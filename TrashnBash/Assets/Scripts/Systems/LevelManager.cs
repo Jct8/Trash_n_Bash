@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour
 
     public bool CheckWinCondition()
     {
-        if (enemyDeathCount >= 5)
+        if (enemyDeathCount >= 40)
         {
             if (playerInstance != null)
                 playerHealth = playerInstance.GetComponent<Player>().Health;
@@ -133,10 +133,20 @@ public class LevelManager : MonoBehaviour
         uiManager.Reset();
         isTutorial = false;
 
+        //Upgrade options
         GameManager gameManager = ServiceLocator.Get<GameManager>();
-        int rangedLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged];
-        towerInstance.GetComponent<Tower>().range += (rangedLevel - 1) * 10;
-
+        UpgradeStats upgradeStats = ServiceLocator.Get<UpgradeStats>();
+        //Long Ranged Upgrade
+        int rangedLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged]-1;
+        if (rangedLevel >= 0)
+            towerInstance.GetComponent<Tower>().range += upgradeStats.towerRange[rangedLevel];
+        //Barricade Upgrade
+        BarricadeSpawner barricadeSpawner = GameObject.FindGameObjectWithTag("BarricadeSpawner").GetComponent<BarricadeSpawner>();
+        int barricadeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Barricades] - 1;
+        if (barricadeLevel >= 0)
+            barricadeSpawner.baseBarricadeCost -= upgradeStats.barricadeCostReduction[barricadeLevel];
+        //UpdateTowerTrashCount
+        towerInstance.GetComponent<Tower>().fullHealth = gameManager._houseHP;
     }
 
     public void LoadData()

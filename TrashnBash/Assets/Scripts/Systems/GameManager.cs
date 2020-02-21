@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int highScore;
     private float coolTime = 10.0f;
 
-    public float _houseHP;
+    public float _houseHP = 50.0f;
     public float _racoonHP;
     public bool _enemySkillActived { get; set; }
 
@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _GameState = GameState.Loader;
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Barricades, 1);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ExtraProjectiles, 1);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.FireProjectile, 1);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Ranged, 1);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.TargetEnemy, 1);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Barricades, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ExtraProjectiles, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.FireProjectile, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Ranged, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.TargetEnemy, 0);
     }
 
     public GameManager Initialize()

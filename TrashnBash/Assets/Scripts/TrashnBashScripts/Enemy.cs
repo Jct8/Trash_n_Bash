@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private AudioSource audioSource;
 
     public string Name { get { return _Name; } private set { } }
-    public bool Dead { get { return _IsDead; } set { _IsDead = value; } }
+    public bool IsDead { get { return _IsDead; } set { _IsDead = value; } }
     [Header("Enemy Status")]
     public float _Health = 1.0f;
     [SerializeField] private string _Name;

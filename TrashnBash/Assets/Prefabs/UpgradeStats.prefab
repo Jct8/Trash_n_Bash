@@ -44,18 +44,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwingSpeed:
-  - 0
-  - 0
-  moreProjectilecost:
-  - 0
-  - 0
-  - 0
-  - 0
-  towerRange: []
-  longRangedcost: []
-  barricadeCostReduction: []
-  baricadeUpgradecost: []
-  targetEnemy: []
-  targetEnmeyUpgradecost: []
-  fireDuration: []
-  fireUpgradecost: []
+  - 1
+  moreProjectileCost:
+  - 10
+  moreProjectileDescription:
+  - Your raccoon wife joins in on throwing junk to ward off your enemies
+  towerRange:
+  - 5
+  longRangedCost:
+  - 5
+  longRangedDescription:
+  - Projectiles can hit targets that are farther away
+  barricadeCostReduction:
+  - 1
+  baricadeUpgradeCost:
+  - 10
+  barricadeDescription:
+  - Barricades take less trash to build
+  targetEnemy:
+  - Rats
+  targetEnmeyUpgradeCost:
+  - 5
+  targetEnmeyDescription:
+  - 'Target Specific enemies Ie. choose to prioritize firing at rats  '
+  fireDuration:
+  - 1
+  fireUpgradeCost:
+  - 10
+  fireDescription:
+  - Projectiles will catch enemies on fire, dealing residual damage

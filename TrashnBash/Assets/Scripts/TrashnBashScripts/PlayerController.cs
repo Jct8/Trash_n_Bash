@@ -276,10 +276,6 @@ public class PlayerController : MonoBehaviour
             _Resource = null;
             _isHoldingResource = false;
         }
-        else
-        {
-            return;
-        }
         //ActivateTargetLockedOn();
 
     }
@@ -500,8 +496,10 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.gameObject.CompareTag("Enemy"))
             {
-                if(!hit.transform.gameObject.GetComponent<Enemy>().Dead)
+                if(!hit.transform.gameObject.GetComponent<Enemy>().IsDead)
+                {
                     _lockedOnEnemyGO = hit.transform.gameObject;
+                }
             }
             else
                 _lockedOnEnemyGO = null;

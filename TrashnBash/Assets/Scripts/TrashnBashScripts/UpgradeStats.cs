@@ -16,27 +16,27 @@ public class UpgradeStats : MonoBehaviour
         return this;
     }
 
-    [Header("More projectiles")]
+    [Header("More Projectiles")]
     public List<float> throwingSpeed;
     public List<float> moreProjectileCost;
     public List<string> moreProjectileDescription;
 
-    [Header("Long range")]
+    [Header("Long Range")]
     public List<float> towerRange;
     public List<float> longRangedCost;
     public List<string> longRangedDescription;
 
-    [Header("Barricades cost")]
+    [Header("Barricades Cost")]
     public List<float> barricadeCostReduction;
     public List<float> baricadeUpgradeCost;
     public List<string> barricadeDescription;
 
-    [Header("Target Specific enemies")]
+    [Header("Target Specific Enemies")]
     public List<string> targetEnemy;
-    public List<string> targetEnmeyUpgradeCost;
+    public List<float> targetEnmeyUpgradeCost;
     public List<string> targetEnmeyDescription;
 
-    [Header("Fire projectiles")]
+    [Header("Fire Projectiles")]
     public List<float> fireDuration;
     public List<float> fireUpgradeCost;
     public List<string> fireDescription;

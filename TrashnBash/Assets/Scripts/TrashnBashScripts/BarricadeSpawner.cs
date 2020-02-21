@@ -6,6 +6,7 @@ public class BarricadeSpawner : MonoBehaviour
 {
     public GameObject barricadePrefab;
     public int barricadeLimit = 5;
+    public float baseBarricadeCost = 10.0f;
 
     private int totalBarricades = 0;
 
@@ -13,6 +14,7 @@ public class BarricadeSpawner : MonoBehaviour
     {
         if (totalBarricades <= barricadeLimit)
         {
+            ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().TakeDamage(baseBarricadeCost);
             GameObject barricade = Instantiate(barricadePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
             totalBarricades++;
             return barricade;

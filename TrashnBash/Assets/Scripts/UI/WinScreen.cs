@@ -29,7 +29,6 @@ public class WinScreen : MonoBehaviour
 
     void ReturnToMainMenu()
     {
-        ServiceLocator.Get<LevelManager>().ClearLevel();
         SceneManager.LoadScene("MainMenu");
     }
 }

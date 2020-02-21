@@ -22,12 +22,6 @@ public class LevelManager : MonoBehaviour
         return this;
     }
 
-    public void ClearLevel()
-    {
-        SaveData();
-        ResetLevel();
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -38,10 +32,10 @@ public class LevelManager : MonoBehaviour
 
     public void Restart()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         UIManager uiManager = ServiceLocator.Get<UIManager>();
         PauseGame();
-        ClearLevel();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //ResetLevel();
         uiManager.enableFadeOut();
         uiManager.Reset();
     }
@@ -54,7 +48,7 @@ public class LevelManager : MonoBehaviour
         uiManager.intimidateImg.SetActive(true);
         uiManager.ultImg.SetActive(true);
         PauseGame();
-        ClearLevel();
+        //ResetLevel();
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -95,7 +89,7 @@ public class LevelManager : MonoBehaviour
 
     public bool CheckWinCondition()
     {
-        if (enemyDeathCount >= 50)
+        if (enemyDeathCount >= 5)
         {
             if (playerInstance != null)
                 playerHealth = playerInstance.GetComponent<Player>().Health;
@@ -120,6 +114,8 @@ public class LevelManager : MonoBehaviour
 
     public void ResetLevel()
     {
+        ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.GamePlay);
+
         UIManager uiManager = ServiceLocator.Get<UIManager>();
         uiManager.enableFadeOut();
         if (playerInstance == null || towerInstance == null)
@@ -136,11 +132,11 @@ public class LevelManager : MonoBehaviour
         }
         uiManager.Reset();
         isTutorial = false;
-    }
 
-    public void SaveData()
-    {
-        return;
+        GameManager gameManager = ServiceLocator.Get<GameManager>();
+        int rangedLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged];
+        towerInstance.GetComponent<Tower>().range += (rangedLevel - 1) * 10;
+
     }
 
     public void LoadData()

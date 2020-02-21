@@ -61,10 +61,10 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.GameWin:
-                StartCoroutine("SetGameWin");
+                StartCoroutine(SetGameWin());
                 break;
             case GameState.GameLose:
-                StartCoroutine("SetGameOver");
+                StartCoroutine(SetGameOver());
                 break;
         }
     }
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
         _GameState = GameState.MainMenu;
         yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("GameWin");
+        SceneManager.LoadScene("UpgradeMenu");
         yield return null;
     }
 

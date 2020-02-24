@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameLoader : AsyncLoader
 {
-    public int sceneIndexToLoad = 1;
+    public int defaultSceneToLoadIndex = 1;
+    public int sceneToLoadIndex = 1;
+
     public LoadingScreen loadingScreen = null;
-    private static int _sceneIndex = 1;
     private static GameLoader _instance;
     public GameObject _UIPrefeb;
     public GameObject audioPrefeb;
@@ -33,13 +34,13 @@ public class GameLoader : AsyncLoader
         DontDestroyOnLoad(gameObject);
 
         // Scene Index Check
-        if (sceneIndexToLoad < 0 || sceneIndexToLoad >= SceneManager.sceneCountInBuildSettings)
+        if (defaultSceneToLoadIndex < 0 || defaultSceneToLoadIndex >= SceneManager.sceneCountInBuildSettings)
         {
-            Debug.Log($"Invalid Scene Index {sceneIndexToLoad} ... using default value of {_sceneIndex}");
+            Debug.Log($"Invalid Scene Index {defaultSceneToLoadIndex} ... using default value of {sceneToLoadIndex}");
         }
         else
         {
-            _sceneIndex = sceneIndexToLoad;
+            sceneToLoadIndex = defaultSceneToLoadIndex;
         }
 
         // Setup System GameObject
@@ -131,8 +132,9 @@ public class GameLoader : AsyncLoader
 
     private void OnComplete()
     {
+        App.Instance.hasLoaded = true;
         //Debug.Log("GameLoader Completed");
-        StartCoroutine(LoadInitialScene(_sceneIndex));
+        StartCoroutine(LoadInitialScene(sceneToLoadIndex));
     }
 
     private IEnumerator LoadInitialScene(int index)

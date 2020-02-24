@@ -7,18 +7,27 @@ public class ResourceSpawner : MonoBehaviour
 {
     public GameObject resourcePrefab;
     public List<GameObject> trashModels;
-
+    public int resourceLimit = 5;
+    private int currentResource = 0;
     public GameObject GetResource()
     {
-        GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
+        currentResource++;
+        if(currentResource < resourceLimit)
+        {
+            GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
 
-        //random trash model
-        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
-        int randomNumber = UnityEngine.Random.Range(0, trashModels.Count - 1);
-        GameObject resourceModel = Instantiate(trashModels[randomNumber], gameObject.transform.position, Quaternion.identity) as GameObject;
-        resourceModel.transform.parent = resource.transform;
+            //random trash model
+            UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+            int randomNumber = UnityEngine.Random.Range(0, trashModels.Count - 1);
+            GameObject resourceModel = Instantiate(trashModels[randomNumber], gameObject.transform.position, Quaternion.identity) as GameObject;
+            resourceModel.transform.parent = resource.transform;
 
-        return resource;
+            return resource;
+        }
+        else
+        {
+            return null;
+        }
     }
 
 }

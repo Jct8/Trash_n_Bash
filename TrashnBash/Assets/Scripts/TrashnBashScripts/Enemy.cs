@@ -103,7 +103,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         if (!_IsDead)
         {
-
+            if (_targetIndicator.activeSelf)
+                _Order = Order.Fight;
+            
 
             enemyAbilities.PoisonAOE(player);
 
@@ -254,6 +256,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Order = Order.Tower;
 
         _Agent = GetComponent<NavMeshAgent>();
+        _Agent.speed = _Speed;
         _IsDead = false;
         fullHealth = _Health;
         healthBar.fillAmount = fullHealth / _Health;

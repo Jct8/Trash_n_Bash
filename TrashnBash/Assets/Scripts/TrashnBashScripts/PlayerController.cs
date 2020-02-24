@@ -452,6 +452,7 @@ public class PlayerController : MonoBehaviour
         move.y -= gravity;
 
         _controller.Move(move * Time.deltaTime * moveSpeed);
+
     }
 
     public IEnumerator PlaceBarricade()

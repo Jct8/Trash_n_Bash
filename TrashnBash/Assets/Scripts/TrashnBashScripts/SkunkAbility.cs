@@ -42,7 +42,7 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
         }
     }
 
-    public void Flying(Transform wayPoint, Order order)
+    public void Flying(Transform wayPoint)
     {
         return;
     }

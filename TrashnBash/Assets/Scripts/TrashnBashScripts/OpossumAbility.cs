@@ -6,7 +6,7 @@ public class OpossumAbility : MonoBehaviour, IEnemyAbilities
 {
     [SerializeField] private float castingTime = 3.0f;
     private int _stack = 0;
-    public void Flying(Transform wayPoint, Order order)
+    public void Flying(Transform wayPoint)
     {
         return;
     }

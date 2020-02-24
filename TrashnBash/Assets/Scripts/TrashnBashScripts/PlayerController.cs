@@ -98,7 +98,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         ActivateTargetLockedOn();
-        CalculateMovement();
+
+        if(!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            CalculateMovement();
+
         if (_isRepairing)
         {
             _isRepairing = _RepairBarricade.GetComponent<Barricade>().CheckRepairValid(transform);
@@ -520,7 +523,7 @@ public class PlayerController : MonoBehaviour
     {
         _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
         _isTargetLockedOn = false;
-        _lockedOnEnemyGO = null;
+        CheckTargetLockedOn();
     }
 
     #endregion

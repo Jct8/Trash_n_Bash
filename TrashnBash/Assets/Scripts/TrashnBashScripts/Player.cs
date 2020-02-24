@@ -212,30 +212,7 @@ public class Player : MonoBehaviour, ICharacterAction
         GameObject closestEnemy = null;
 
         GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
-        //if (target == null)
-        //{
-        //    foreach (var enemy in ListOfEnemies)
-        //    {
-        //        List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
-        //        foreach (var go in gameObjects)
-        //        {
-        //            Vector3 direction = (go.transform.position - transform.position);
-        //            float distance = Vector3.Distance(transform.position, go.transform.position);
-        //            //float angle = Vector3.Angle(transform.forward, direction);
-        //            //if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
-        //            //{
-        //            //    go.GetComponent<Enemy>().TakeDamage(attack, true);
-        //            //    gameObject.GetComponent<PlayerController>().SwitchAutoLock(go);
-        //            //}
-        //            if (distance < closestDistance && distance < attackRange)
-        //            {
-        //                closestDistance = distance;
-        //                closestEnemy = go;
-        //            }
-        //        }
-        //    }
-        //}
-        //else
+
         closestEnemy = target;
 
         if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
@@ -257,6 +234,26 @@ public class Player : MonoBehaviour, ICharacterAction
 
         GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
 
+        //if (target == null)
+        //{
+        //    foreach (var enemy in ListOfEnemies)
+        //    {
+        //        List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+        //        foreach (var go in gameObjects)
+        //        {
+        //            Vector3 direction = (go.transform.position - transform.position);
+        //            float distance = Vector3.Distance(transform.position, go.transform.position);
+        //            if (distance < closestDistance && distance < attackRange)
+        //            {
+        //                closestDistance = distance;
+        //                closestEnemy = go;
+        //            }
+        //        }
+        //    }
+        //}
+        //else
+        //    closestEnemy = target;
+
         if (target == null)
         {
             foreach (var enemy in ListOfEnemies)
@@ -266,6 +263,12 @@ public class Player : MonoBehaviour, ICharacterAction
                 {
                     Vector3 direction = (go.transform.position - transform.position);
                     float distance = Vector3.Distance(transform.position, go.transform.position);
+                    //float angle = Vector3.Angle(transform.forward, direction);
+                    //if (Mathf.Abs(angle) < attackAngleRange && distance < attackRange)
+                    //{
+                    //    go.GetComponent<Enemy>().TakeDamage(attack, true);
+                    //    gameObject.GetComponent<PlayerController>().SwitchAutoLock(go);
+                    //}
                     if (distance < closestDistance && distance < attackRange)
                     {
                         closestDistance = distance;
@@ -275,11 +278,13 @@ public class Player : MonoBehaviour, ICharacterAction
             }
         }
         else
-            closestEnemy = target;
+        {
+           closestEnemy = target;
+        }
 
         if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
         {
-            closestEnemy.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
+            closestEnemy.GetComponent<Enemy>()?.TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
             closestEnemy.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
             audioSource.PlayOneShot(poisonEffect, 0.5f);

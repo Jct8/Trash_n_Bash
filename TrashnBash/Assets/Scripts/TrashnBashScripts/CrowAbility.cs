@@ -5,16 +5,18 @@ using UnityEngine;
 public class CrowAbility : MonoBehaviour, IEnemyAbilities
 {
     [SerializeField] private float _maximumRaising = 3.0f;
+    [SerializeField] private float _minimumHeight = 0.5f;
     [SerializeField] private float _inRangeOfWaypoint = 4.0f;
-    private GameObject _crowGO = null;
+    public GameObject _crowGO = null;
     private Rigidbody rb = null;
-
-    private bool _isLanding = false;
+    private Order order = 0;
+    public bool _isLanding = false;
     private bool _isRising = false;
     public LayerMask groundLayers;
 
-    public void Flying(Transform wayPoint, Order order)
+    public void Flying(Transform wayPoint)
     {
+        order = gameObject.GetComponent<Enemy>()._Order;
         if(order != Order.Fight || order != Order.Stunned)
         {
             if (Vector3.Distance(wayPoint.position,_crowGO.transform.position) > _inRangeOfWaypoint)
@@ -36,7 +38,6 @@ public class CrowAbility : MonoBehaviour, IEnemyAbilities
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _crowGO = transform.Find("Model").gameObject;
@@ -46,32 +47,42 @@ public class CrowAbility : MonoBehaviour, IEnemyAbilities
 
     void Update()
     {
-        if (_isLanding)
+        order = gameObject.GetComponent<Enemy>()._Order;
+        if(order != Order.Fight || order != Order.Stunned)
         {
-            if (_crowGO?.transform.position.y >= 0.5f)
+            if (_isLanding) // When Crow reaches to the object: Tower and barricade
+            {
+                if (_crowGO?.transform.position.y >= _minimumHeight)
+                {
+                    _crowGO?.transform.Translate(Vector3.down * Time.deltaTime);
+                }
+            }
+
+            if (_isRising) // When Crow succeed to break the tower or the barricade
+            {
+                if (_crowGO.transform.position.y < _maximumRaising)
+                {
+                    _crowGO.transform.Translate(new Vector3(0.0f, _maximumRaising, 0.0f) * Time.deltaTime);
+                }
+                else
+                {
+                    _isLanding = false;
+                    _isRising = false;
+                }
+                if (_crowGO.transform.position.y > _maximumRaising) // if Crow's height exceeds over maximum height, matches height correctly
+                    _crowGO.transform.Translate(new Vector3(0.0f, _maximumRaising, 0.0f) * Time.deltaTime);
+
+            }
+        }
+        else // When Crow takes damage by the player
+        {
+            _isLanding = false;
+            _isRising = false;
+            if (_crowGO?.transform.position.y >= _minimumHeight)
             {
                 _crowGO?.transform.Translate(Vector3.down * Time.deltaTime);
             }
         }
-
-        if (_isRising && onGround())
-        {
-            if (_crowGO.transform.position.y <= _maximumRaising)
-            {
-                rb.AddForce(0.0f, _maximumRaising, 0.0f, ForceMode.Force);
-            }
-            else
-            {
-                _isLanding = false;
-                _isRising = false;
-            }
-        }
-
-    }
-
-    bool onGround()
-    {
-        return Physics.Raycast(_crowGO.transform.position, -Vector3.up, groundLayers);
     }
 
     public void GroupAttack()

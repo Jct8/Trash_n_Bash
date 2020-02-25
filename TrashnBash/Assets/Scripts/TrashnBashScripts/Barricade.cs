@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Barricade : MonoBehaviour
 {
     [SerializeField] private float _Defence  = 10.0f;
-    [SerializeField] private float _Health;
+    [SerializeField] public float _Health;
     [SerializeField] private float _PercentFromTower = 5.0f;
     [SerializeField] private float repairTime = 3.0f;
     [SerializeField] private float repairRange = 1.0f;
@@ -81,6 +81,11 @@ public class Barricade : MonoBehaviour
         }
         isRepairing = false;
         isAlive = true;
+        if (ServiceLocator.Get<LevelManager>().isTutorial == true)
+        {
+            TutorialManager tutorialManager = GameObject.FindGameObjectWithTag("TutorialManager").GetComponent<TutorialManager>();
+            tutorialManager.EndTutorial();
+        }
     }
 
     public void TakeDamage(float dmg)
@@ -93,4 +98,16 @@ public class Barricade : MonoBehaviour
             isAlive = false;
         }
     }
+
+    public void TakeFullDamage()
+    {
+        _Health -= _MaxHealth;
+        if (_MaxHealth != 0.0f)
+            healthBar.fillAmount = _Health / _MaxHealth;
+        if (_Health <= 0.0f)
+        {
+            isAlive = false;
+        }
+    }
+
 }

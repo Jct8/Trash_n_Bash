@@ -15,6 +15,7 @@ TagManager:
   - Display
   - ResourceSpawner
   - Resource
+  - TutorialManager
   layers:
   - Default
   - TransparentFX

@@ -17,6 +17,11 @@ public class BarricadeSpawner : MonoBehaviour
             ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().TakeDamage(baseBarricadeCost);
             GameObject barricade = Instantiate(barricadePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
             totalBarricades++;
+            if (ServiceLocator.Get<LevelManager>().isTutorial)
+            {
+                TutorialManager tutorialManager = GameObject.FindGameObjectWithTag("TutorialManager").GetComponent<TutorialManager>();
+                tutorialManager.AddBarricade(barricade.GetComponent<Barricade>());
+            }
             return barricade;
         }
         return null;

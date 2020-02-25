@@ -10,7 +10,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        foreach(var spawner in Spawners)
+        foreach (var spawner in Spawners)
         {
             spawner.Init(WayPointManager.GetPath(spawner._pathID));
         }
@@ -18,9 +18,9 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Start()
     {
-        foreach(var spawner in Spawners)
+        foreach (var spawner in Spawners)
         {
-            if(spawner.StartOnSceneLoad == true)
+            if (spawner.StartOnSceneLoad == true)
             {
                 spawner.StartSpawner();
             }
@@ -40,4 +40,13 @@ public class EnemySpawnManager : MonoBehaviour
             spawner.ResetSpawner();
         }
     }
+    public void StartAllSpawners()
+    {
+        ResetSpawners();
+        foreach (var spawner in Spawners)
+        {
+            spawner.StartSpawner();
+        }
+    }
+
 }

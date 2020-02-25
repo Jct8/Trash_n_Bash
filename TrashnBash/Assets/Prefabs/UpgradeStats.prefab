@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwingSpeed:
-  - 1
+  - 0.2
   moreProjectileCost:
   - 10
   moreProjectileDescription:

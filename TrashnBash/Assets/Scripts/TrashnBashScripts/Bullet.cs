@@ -7,6 +7,10 @@ public class Bullet : MonoBehaviour
 {
     private Transform _target;
 
+    public DamageType damageType = DamageType.Normal;
+    public float fireTotalTime = 3.0f;
+    public float fireTickTime = 1.0f;
+
     public float _speed;
     public float _damage;
     private Action _action;
@@ -46,9 +50,14 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         var _damageable = collision.gameObject.GetComponent<ICharacterAction>();
-        if(_damageable != null && collision.gameObject.CompareTag("Enemy"))
+        if(_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Normal)
         {
-            _damageable.TakeDamage(_damage,false, DamageType.Normal);
+            _damageable.TakeDamage(_damage,false, damageType);
+            _action?.Invoke();
+        }
+        else if (_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Poison) //fire attack
+        {
+            collision.gameObject.GetComponent<Enemy>().SetPoison(_damage, fireTickTime, fireTotalTime);
             _action?.Invoke();
         }
     }

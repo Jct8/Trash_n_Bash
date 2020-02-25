@@ -818,7 +818,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TargetEnemy Upgrade (Not Implemented Yet)
+  m_Text: TargetEnemy Upgrade
 --- !u!222 &243955123
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1039,7 +1039,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: More Projectiles Upgrade (Not Implemented Yet)
+  m_Text: 'More Projectiles Upgrade '
 --- !u!222 &391549345
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1848,7 +1848,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FireProjectile Upgrade (Not Implemented Yet)
+  m_Text: FireProjectile Upgrade
 --- !u!222 &1213368805
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -99,6 +99,11 @@ public class TutorialManager : MonoBehaviour
             UISequences[currentSequence].SetActive(true);
         }
         ServiceLocator.Get<LevelManager>().isTutorial = false;
+        LevelManager levelManager =  ServiceLocator.Get<LevelManager>();
+        levelManager.playerInstance.GetComponent<PlayerController>().EnableAttack();
+        levelManager.playerInstance.GetComponent<PlayerController>().EnableIntimidateAttack();
+        levelManager.playerInstance.GetComponent<PlayerController>().EnableUltAttack();
+        levelManager.playerInstance.GetComponent<PlayerController>().EnablePoisonAttack();
         enemySpawnManager.StartAllSpawners();
     }
 

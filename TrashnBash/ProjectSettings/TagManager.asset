@@ -16,6 +16,7 @@ TagManager:
   - ResourceSpawner
   - Resource
   - TutorialManager
+  - Wife
   layers:
   - Default
   - TransparentFX

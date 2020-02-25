@@ -13,6 +13,9 @@ public class Tower : MonoBehaviour
     private DataLoader dataLoader;
     private JsonDataSource towerData;
 
+    public DamageType damageType = DamageType.Normal;
+    public float fireDuration = 0.0f;
+
     private Action _action;
 
     public string dataSourceId = "Tower";
@@ -25,6 +28,7 @@ public class Tower : MonoBehaviour
     public float fullHealth;
     public float shotTime;
     public bool isShooting = true;
+    public string specificEnemy = "NONE";
 
     public AudioClip shotSound;
     AudioSource audioSource;
@@ -89,6 +93,9 @@ public class Tower : MonoBehaviour
         _bulletGO.SetActive(true);
         _action = () => Recycle(_bulletGO);
         _bulletGO.GetComponent<Bullet>().Initialize(_target,damage,speed, _action);
+        _bulletGO.GetComponent<Bullet>().damageType = damageType;
+        if(fireDuration != 0.0f)
+        _bulletGO.GetComponent<Bullet>().fireTotalTime = fireDuration;
         var rb = _bulletGO.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.AddForce(firePoint.up * speed * 3.0f, ForceMode.Force);
@@ -120,7 +127,13 @@ public class Tower : MonoBehaviour
         foreach(GameObject enemy in _enemies)
         {
             float _distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if(_distanceToEnemy < _shortestDistance)
+            string name = enemy.GetComponent<Enemy>().Name;
+            if (_distanceToEnemy < _shortestDistance)
+            {
+                _shortestDistance = _distanceToEnemy;
+                _nearestEnemy = enemy;
+            }
+            if ((name == specificEnemy) && _distanceToEnemy <= range)
             {
                 _shortestDistance = _distanceToEnemy;
                 _nearestEnemy = enemy;

@@ -44,6 +44,10 @@ public class TutorialManager : MonoBehaviour
                 UISequences[currentSequence].SetActive(true);
             }
             isSpawnStarted = false;
+            ServiceLocator.Get<UIManager>().totalWave = 0;
+            ServiceLocator.Get<UIManager>().currentWave = 0;
+            ServiceLocator.Get<UIManager>().currentWave = ServiceLocator.Get<UIManager>().totalWave = numEnemiesToKill;
+
             enemySpawnManager.ResetSpawners();
         }
         if (barricade)
@@ -55,10 +59,12 @@ public class TutorialManager : MonoBehaviour
                 {
                     UISequences[currentSequence].SetActive(true);
                 }
+
                 barricade.TakeFullDamage() ;
                 isplaced = true;
             }
         }
+        
     }
 
     public void LoadMenu()
@@ -98,6 +104,7 @@ public class TutorialManager : MonoBehaviour
         {
             UISequences[currentSequence].SetActive(true);
         }
+        GameObject barricadeManager = GameObject.FindGameObjectWithTag("BarricadeSpawner");
         ServiceLocator.Get<LevelManager>().isTutorial = false;
         LevelManager levelManager =  ServiceLocator.Get<LevelManager>();
         levelManager.playerInstance.GetComponent<PlayerController>().EnableAttack();

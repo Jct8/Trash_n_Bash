@@ -132,7 +132,7 @@ public class LevelManager : MonoBehaviour
         }
         uiManager.Reset();
         isTutorial = false;
-
+        playerInstance.GetComponent<Player>().health = playerInstance.GetComponent<Player>()._maxHealth;
         //Upgrade options
         GameManager gameManager = ServiceLocator.Get<GameManager>();
         UpgradeStats upgradeStats = ServiceLocator.Get<UpgradeStats>();

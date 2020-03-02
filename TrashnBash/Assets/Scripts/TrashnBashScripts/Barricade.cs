@@ -81,6 +81,7 @@ public class Barricade : MonoBehaviour
         }
         isRepairing = false;
         isAlive = true;
+
         if (ServiceLocator.Get<LevelManager>().isTutorial == true)
         {
             TutorialManager tutorialManager = GameObject.FindGameObjectWithTag("TutorialManager").GetComponent<TutorialManager>();

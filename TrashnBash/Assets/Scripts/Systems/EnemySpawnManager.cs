@@ -35,6 +35,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     public void ResetSpawners()
     {
+        ServiceLocator.Get<UIManager>().waveTimerBar.fillAmount = 1;
         foreach (var spawner in Spawners)
         {
             spawner.ResetSpawner();
@@ -43,9 +44,16 @@ public class EnemySpawnManager : MonoBehaviour
     public void StartAllSpawners()
     {
         ResetSpawners();
+
+        foreach (var spawner in Spawners)
+        {
+            ServiceLocator.Get<UIManager>().totalWave += spawner._enemiesPerWave;
+        }
+        ServiceLocator.Get<UIManager>().currentWave = ServiceLocator.Get<UIManager>().totalWave;
         foreach (var spawner in Spawners)
         {
             spawner.StartSpawner();
+            
         }
     }
 

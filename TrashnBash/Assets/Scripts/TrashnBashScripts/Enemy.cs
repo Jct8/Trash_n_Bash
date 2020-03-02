@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public GameObject hitEffect;
 
     private GameObject player;
-    private GameObject _targetIndicator;
+    public GameObject _targetIndicator;
     private GameObject _ObjectofBarricade;
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public string _DataSource;
 
     public AudioClip attackEffect;
-    public AudioClip poisonedEffect;
     private AudioSource audioSource;
 
     public string Name { get { return _Name; } private set { } }
@@ -49,7 +48,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private string _Name;
     [SerializeField] private float _Attack = 1.0f;
     [SerializeField] private float _Money;
-    [SerializeField] private float _Speed;
+    [SerializeField] private float _Speed = 1.0f;
     [SerializeField] private float _AttackCoolTime = 3.0f;
     [SerializeField] private float _ObjectDetectionRange = 3.0f;
     [SerializeField] private float _DropRate = 0.5f;
@@ -99,6 +98,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (player == null || _IsDead)
         {
             _Agent.isStopped = true;
+            _targetIndicator.SetActive(false);
             return;
         }
         if (!_IsDead)
@@ -490,7 +490,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _poisonCurrentDuration = Time.time;
         _poisonTotalTime = Time.time + totalTime;
         _isPoisoned = true;
-        audioSource.PlayOneShot(poisonedEffect, 0.2f);
+
         poison.SetActive(_isPoisoned);
     }
     #endregion

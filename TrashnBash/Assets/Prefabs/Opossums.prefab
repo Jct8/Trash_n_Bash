@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5118566301055973398}
   - component: {fileID: -3833604232468093450}
   - component: {fileID: 8941732546900928204}
+  - component: {fileID: 2386447359825863482}
   m_Layer: 0
   m_Name: Opossums
   m_TagString: Enemy
@@ -145,12 +146,12 @@ MonoBehaviour:
   poison: {fileID: 801450321962728225}
   hitEffect: {fileID: 6462621314868396975, guid: d192a558b2fca7249989b6570e020d87,
     type: 3}
+  _targetIndicator: {fileID: 0}
   _Agent: {fileID: 0}
   fullHealth: 0
   stunTime: 0
   _DataSource: Opossums
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
-  poisonedEffect: {fileID: 8300000, guid: 16b5e8f6ec7e27b4482558644ab456c3, type: 3}
   _Health: 8
   _Name: 
   _Attack: 2
@@ -271,6 +272,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castingTime: 3
+  animator: {fileID: 2386447359825863482}
+--- !u!95 &2386447359825863482
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876065404672406170}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 412e962055c5b1d409c565364b2f22a6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7435411569412823581
 GameObject:
   m_ObjectHideFlags: 0

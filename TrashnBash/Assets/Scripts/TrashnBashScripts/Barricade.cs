@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Barricade : MonoBehaviour
@@ -30,6 +31,7 @@ public class Barricade : MonoBehaviour
         isAlive = true;
         //tower.TakeDamage(_Health);
 
+        GetComponent<NavMeshObstacle>().enabled = false;
         float height = transform.position.y;
 
         transform.parent = playerGO.transform;
@@ -56,6 +58,8 @@ public class Barricade : MonoBehaviour
         _CanBePickedUp = false;
         transform.parent = null;
         isPlaced = true;
+        GetComponent<NavMeshObstacle>().enabled = true;
+        GetComponent<NavMeshObstacle>().carving = true;
     }
 
     public bool CheckRepairValid(Transform playerTransform)

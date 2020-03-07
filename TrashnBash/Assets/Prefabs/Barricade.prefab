@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7626825810756298200}
   - component: {fileID: 7626825810756298203}
   - component: {fileID: 7626825810756298207}
+  - component: {fileID: 3128932119553863145}
   m_Layer: 0
   m_Name: Barricade
   m_TagString: Barricade
@@ -92,7 +93,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.1711577, z: 0.9411955}
+  m_Size: {x: 1.5, y: 1.25, z: 1.25}
   m_Center: {x: 4.1553573e-16, y: 0.08557871, z: 0.13214475}
 --- !u!114 &7626825810756298207
 MonoBehaviour:
@@ -106,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df78b5b2c968c141ab5c11dfcdb587a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Defence: 10
+  _Defence: 50
   _Health: 0
   _PercentFromTower: 5
   repairTime: 3
@@ -118,6 +119,22 @@ MonoBehaviour:
   isRepairing: 0
   isAlive: 1
   isPlaced: 0
+--- !u!208 &3128932119553863145
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626825810756298202}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.2, y: 0.59, z: 0.265}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.13, z: 0.15}
+  m_TimeToStationary: 0.5
 --- !u!1001 &4024570299174761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125,10 +142,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7626825810756298206}
     m_Modifications:
-    - target: {fileID: 100000, guid: 8cdf52bef3c7c874498d5def25a35bbf, type: 3}
-      propertyPath: m_Name
-      value: Cereal
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8cdf52bef3c7c874498d5def25a35bbf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.03
@@ -184,6 +197,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 8cdf52bef3c7c874498d5def25a35bbf, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1569028
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8cdf52bef3c7c874498d5def25a35bbf, type: 3}
+      propertyPath: m_Name
+      value: Cereal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cdf52bef3c7c874498d5def25a35bbf, type: 3}

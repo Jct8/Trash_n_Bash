@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    private List<EnemySpawner> Spawners;
+    public List<EnemySpawner> Spawners;
+    public TutorialManager tutorialManager;
 
     private void Awake()
     {
@@ -13,26 +14,43 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Start()
     {
-        foreach(var spawner in Spawners)
+        foreach (var spawner in Spawners)
         {
-            if(spawner.StartOnSceneLoad == true)
+            if (spawner.StartOnSceneLoad == true)
             {
                 spawner.StartSpawner();
             }
         }
     }
 
-    public void StartTutorialSpawner(EnemySpawner spawner)
+    public void StartSpawer(EnemySpawner spawner)
     {
-        FindObjectOfType<TutorialManager>().AddCount(spawner._numberOfWave * spawner._enemiesPerWave);
+        tutorialManager.AddCount(spawner._numberOfWave * spawner._enemiesPerWave);
         spawner.StartSpawner();
     }
 
     public void ResetSpawners()
     {
+        ServiceLocator.Get<UIManager>().waveTimerBar.fillAmount = 1;
         foreach (var spawner in Spawners)
         {
             spawner.ResetSpawner();
         }
     }
+    public void StartAllSpawners()
+    {
+        ResetSpawners();
+
+        foreach (var spawner in Spawners)
+        {
+            ServiceLocator.Get<UIManager>().totalWave += spawner._enemiesPerWave;
+        }
+        ServiceLocator.Get<UIManager>().currentWave = ServiceLocator.Get<UIManager>().totalWave;
+        foreach (var spawner in Spawners)
+        {
+            spawner.StartSpawner();
+            
+        }
+    }
+
 }

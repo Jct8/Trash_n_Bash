@@ -97,8 +97,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(_lockedOnEnemyGO)
+        {
+            if (_lockedOnEnemyGO.GetComponent<Enemy>().IsDead)
+            {
+                _lockedOnEnemyGO = null;
+                _isTargetLockedOn = false;
+            }
+        }
+
+
         ActivateTargetLockedOn();
-        CalculateMovement();
+
+        if(!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            CalculateMovement();
+
         if (_isRepairing)
         {
             _isRepairing = _RepairBarricade.GetComponent<Barricade>().CheckRepairValid(transform);
@@ -404,7 +417,8 @@ public class PlayerController : MonoBehaviour
             //Attack target
             if (_isTargetLockedOn)
             {
-                agent.SetDestination(_lockedOnEnemyGO.transform.position);
+                if(_lockedOnEnemyGO)
+                    agent.SetDestination(_lockedOnEnemyGO.transform.position);
                 agent.isStopped = false;
                 Vector3 look = agent.destination;
                 look.y = transform.position.y;
@@ -501,6 +515,10 @@ public class PlayerController : MonoBehaviour
                 {
                     _lockedOnEnemyGO = hit.transform.gameObject;
                 }
+                else
+                {
+                    _lockedOnEnemyGO = null;
+                }
             }
             else
                 _lockedOnEnemyGO = null;
@@ -514,13 +532,6 @@ public class PlayerController : MonoBehaviour
         _lockedOnEnemyGO = enemy;
         _isTargetLockedOn = true;
         _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(true);
-    }
-
-    public void DeselectLockOn()
-    {
-        _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
-        _isTargetLockedOn = false;
-        _lockedOnEnemyGO = null;
     }
 
     #endregion

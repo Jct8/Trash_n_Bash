@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, ICharacterAction
     [SerializeField] private float attack = 1.0f;
     [SerializeField] private float intimdateStunTime = 3.0f;
     [SerializeField] public float attackRange = 20.0f;
+    [SerializeField] private float poisonRange = 5.0f;
     [SerializeField] private float poisonDamage = 10.0f;
     [SerializeField] private float poisonTotalTime = 3.0f;
     [SerializeField] private float poisonTickTime = 1.0f;
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour, ICharacterAction
 
     [Header("Prefab")]
     public GameObject ultimateIndicator;
+    public GameObject poisonIndicator;
     public GameObject popUp;
     public GameObject poisonAttack;
     public GameObject hitEffect;
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public AudioClip poisonEffect;
     public AudioClip UltimateEffect;
     public AudioClip LightingEffectSound;
+    public AudioClip poisonedEffect;
     public AudioSource audioSource;
 
 
@@ -63,6 +66,7 @@ public class Player : MonoBehaviour, ICharacterAction
     {
         ResetPlayer();
         poisonAttack.SetActive(false);
+        poisonIndicator.SetActive(false);
         poison.SetActive(_ispoisoned);
         _maxHealth = health;
         InvokeRepeating("IncrementUltCharge", 10.0f, ultimateChargeTime);
@@ -212,6 +216,48 @@ public class Player : MonoBehaviour, ICharacterAction
         GameObject closestEnemy = null;
 
         GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
+
+        closestEnemy = target;
+
+        if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
+        {
+            closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true, DamageType.Normal);
+            gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
+            audioSource.PlayOneShot(attackEffect, 0.75f);
+        }
+        yield return null;
+    }
+
+    public IEnumerator PoisonAttack()
+    {
+        //////Justin - TODO:Find a better method.
+
+
+        //float closestDistance = Mathf.Infinity;
+        //GameObject closestEnemy = null;
+
+        //GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
+
+        //if (target == null)
+        //{
+        //    foreach (var enemy in ListOfEnemies)
+        //    {
+        //        List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+        //        foreach (var go in gameObjects)
+        //        {
+        //            Vector3 direction = (go.transform.position - transform.position);
+        //            float distance = Vector3.Distance(transform.position, go.transform.position);
+        //            if (distance < closestDistance && distance < attackRange)
+        //            {
+        //                closestDistance = distance;
+        //                closestEnemy = go;
+        //            }
+        //        }
+        //    }
+        //}
+        //else
+        //    closestEnemy = target;
+
         //if (target == null)
         //{
         //    foreach (var enemy in ListOfEnemies)
@@ -236,58 +282,35 @@ public class Player : MonoBehaviour, ICharacterAction
         //    }
         //}
         //else
-        closestEnemy = target;
-
-        if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
-        {
-            closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true, DamageType.Normal);
-            gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
-            audioSource.PlayOneShot(attackEffect, 0.75f);
-        }
-        yield return null;
-    }
-
-    public IEnumerator PoisonAttack()
-    {
-        //////Justin - TODO:Find a better method.
-
+        //{
+        //   closestEnemy = target;
+        //}
+        poisonIndicator.GetComponent<Transform>().localScale = new Vector3(poisonRange + 1.0f, 0.007460861f, poisonRange + 1.0f);
+        poisonIndicator.SetActive(true);
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
-        float closestDistance = Mathf.Infinity;
-        GameObject closestEnemy = null;
 
-        GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
-
-        if (target == null)
+        foreach (var enemy in ListOfEnemies)
         {
-            foreach (var enemy in ListOfEnemies)
+            List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+            foreach (var go in gameObjects)
             {
-                List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
-                foreach (var go in gameObjects)
+                float distance = Vector2.Distance(transform.position, go.transform.position);
+                if (distance < poisonRange)
                 {
-                    Vector3 direction = (go.transform.position - transform.position);
-                    float distance = Vector3.Distance(transform.position, go.transform.position);
-                    if (distance < closestDistance && distance < attackRange)
-                    {
-                        closestDistance = distance;
-                        closestEnemy = go;
-                    }
+                    go.GetComponent<Enemy>()?.TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
+                    go.GetComponent<Enemy>()?.SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
                 }
             }
         }
-        else
-            closestEnemy = target;
+        audioSource.PlayOneShot(poisonEffect, 0.5f);
+        poisonAttack.SetActive(true);
 
-        if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
-        {
-            closestEnemy.GetComponent<Enemy>().TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
-            closestEnemy.GetComponent<Enemy>().SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
-            gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
-            audioSource.PlayOneShot(poisonEffect, 0.5f);
-            poisonAttack.SetActive(true);
-            yield return new WaitForSeconds(1.1f);
-            poisonAttack.SetActive(false);
+        yield return new WaitForSeconds(1.0f);
+        poisonIndicator.SetActive(!poisonIndicator.activeSelf);
 
-        }
+        audioSource.PlayOneShot(poisonedEffect, 0.2f);
+        poisonAttack.SetActive(false);
+
         yield return null;
     }
 
@@ -311,12 +334,12 @@ public class Player : MonoBehaviour, ICharacterAction
                 float distance = Vector2.Distance(transform.position, go.transform.position);
                 if (distance < ultimateRange*0.5f)
                 {
-                    go.GetComponent<Enemy>().TakeDamage(ultimateDamage, true, DamageType.Ultimate);
+                    go.GetComponent<Enemy>()?.TakeDamage(ultimateDamage, true, DamageType.Ultimate);
                     go.GetComponent<Enemy>().SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
-                    audioSource.PlayOneShot(UltimateEffect, 0.95f);
                 }
             }
         }
+        audioSource.PlayOneShot(UltimateEffect, 0.95f);
     }
 
     public void IntimidateAttack(GameObject enemy)

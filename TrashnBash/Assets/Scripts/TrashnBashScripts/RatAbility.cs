@@ -7,7 +7,7 @@ public class RatAbility : MonoBehaviour, IEnemyAbilities
     public int limit = 3;
     public int numbers = 0;
 
-    public void Flying(Transform wayPoint, Order order)
+    public void Flying(Transform wayPoint)
     {
         return;
     }

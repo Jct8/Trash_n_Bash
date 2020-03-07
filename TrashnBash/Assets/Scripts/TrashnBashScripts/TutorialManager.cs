@@ -13,6 +13,9 @@ public class TutorialManager : MonoBehaviour
 
     private LevelManager levelManager;
     public EnemySpawnManager enemySpawnManager;
+    private Barricade barricade = null;
+
+    private bool isplaced = false;
 
     private void Start()
     {
@@ -33,7 +36,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if (numEnemiesToKill == levelManager.enemyDeathCount && isSpawnStarted)
+        if (numEnemiesToKill <= levelManager.enemyDeathCount && isSpawnStarted)
         {
             currentSequence++;
             if (UISequences.Count - 1 >= currentSequence)
@@ -41,8 +44,27 @@ public class TutorialManager : MonoBehaviour
                 UISequences[currentSequence].SetActive(true);
             }
             isSpawnStarted = false;
+            ServiceLocator.Get<UIManager>().totalWave = 0;
+            ServiceLocator.Get<UIManager>().currentWave = 0;
+            ServiceLocator.Get<UIManager>().currentWave = ServiceLocator.Get<UIManager>().totalWave = numEnemiesToKill;
+
             enemySpawnManager.ResetSpawners();
         }
+        if (barricade)
+        {
+            if (barricade.isPlaced == true && isplaced == false)
+            {
+                currentSequence++;
+                if (UISequences.Count - 1 >= currentSequence)
+                {
+                    UISequences[currentSequence].SetActive(true);
+                }
+
+                barricade.TakeFullDamage() ;
+                isplaced = true;
+            }
+        }
+        
     }
 
     public void LoadMenu()
@@ -63,6 +85,33 @@ public class TutorialManager : MonoBehaviour
     {
         isSpawnStarted = true;
         numEnemiesToKill += total;
+    }
+
+    public void AddBarricade(Barricade inputBarricade)
+    {
+        currentSequence++;
+        if (UISequences.Count - 1 >= currentSequence)
+        {
+            UISequences[currentSequence].SetActive(true);
+        }
+        barricade = inputBarricade;
+    }
+
+    public void EndTutorial()
+    {
+        currentSequence++;
+        if (UISequences.Count - 1 >= currentSequence)
+        {
+            UISequences[currentSequence].SetActive(true);
+        }
+        GameObject barricadeManager = GameObject.FindGameObjectWithTag("BarricadeSpawner");
+        ServiceLocator.Get<LevelManager>().isTutorial = false;
+        LevelManager levelManager =  ServiceLocator.Get<LevelManager>();
+        levelManager.playerInstance.GetComponent<PlayerController>().EnableAttack();
+        levelManager.playerInstance.GetComponent<PlayerController>().EnableIntimidateAttack();
+        levelManager.playerInstance.GetComponent<PlayerController>().EnableUltAttack();
+        levelManager.playerInstance.GetComponent<PlayerController>().EnablePoisonAttack();
+        enemySpawnManager.StartAllSpawners();
     }
 
 }

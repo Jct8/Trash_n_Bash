@@ -12,13 +12,33 @@ public class BarricadeSpawner : MonoBehaviour
 
     public GameObject GetBarricade()
     {
-        if (totalBarricades <= barricadeLimit)
+        if(ServiceLocator.Get<LevelManager>().isTutorial)
         {
-            ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().TakeDamage(baseBarricadeCost);
-            GameObject barricade = Instantiate(barricadePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            totalBarricades++;
-            return barricade;
+            if(totalBarricades < 1)
+            {
+                ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().TakeDamage(baseBarricadeCost);
+                GameObject barricade = Instantiate(barricadePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                totalBarricades++;
+                if (ServiceLocator.Get<LevelManager>().isTutorial)
+                {
+                    TutorialManager tutorialManager = GameObject.FindGameObjectWithTag("TutorialManager").GetComponent<TutorialManager>();
+                    tutorialManager.AddBarricade(barricade.GetComponent<Barricade>());
+                }
+                return barricade;
+            }
+
         }
+        else
+        {
+            if (totalBarricades <= barricadeLimit)
+            {
+                ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().TakeDamage(baseBarricadeCost);
+                GameObject barricade = Instantiate(barricadePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                totalBarricades++;
+                return barricade;
+            }
+        }
+
         return null;
     }
 }

@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject player;
     public GameObject tower;
     public Image playerHealthBar;
-    public Slider waveTimerBar;
+    public Image waveTimerBar;
     public Text towerHealthPercentage;
     public Animator AnimationTexture;
 
@@ -44,7 +44,8 @@ public class UIManager : MonoBehaviour
     private float _TowerHP;
     private float fullEnergy = 100.0f;
     private bool IsPower = false;
-
+    public float totalWave = 0;
+    public float currentWave = 0;
     private void Start()
     {
         fade.SetActive(false);
@@ -72,6 +73,8 @@ public class UIManager : MonoBehaviour
 
     public UIManager Initialize()
     {
+        totalWave = 0;
+        currentWave = 0;
         restartButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().Restart);
         continueButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().PauseGame);
         mainmenuButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().ReturnToMainMenu);
@@ -79,12 +82,6 @@ public class UIManager : MonoBehaviour
 
         pauseScreen.SetActive(false);
         playerHealthBar.fillAmount = 0.0f;
-        spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        foreach(GameObject spawn in spawners)
-        {
-            waveTimerBar.maxValue += spawn.GetComponent<EnemySpawner>()._numberOfWave;
-        }
-        waveTimerBar.value = waveTimerBar.maxValue;
         towerHealthPercentage.text = string.Empty;
         return this;
     }
@@ -116,35 +113,31 @@ public class UIManager : MonoBehaviour
     public IEnumerator Reset()
     {
         Debug.Log("Start Reset UI");
+        totalWave = 0.0f;
+        currentWave = 0.0f;
         yield return new WaitForSeconds(0.5f);
         player = GameObject.FindGameObjectWithTag("Player");
         tower = GameObject.FindGameObjectWithTag("Tower");
         spawners = GameObject.FindGameObjectsWithTag("Spawner");
         foreach (GameObject spawn in spawners)
         {
-            waveTimerBar.maxValue += spawn.GetComponent<EnemySpawner>()._numberOfWave;
+            totalWave += spawn.GetComponent<EnemySpawner>()._numberOfWave;
         }
-        waveTimerBar.value = waveTimerBar.maxValue;
+        currentWave = totalWave;
+        waveTimerBar.fillAmount = currentWave / totalWave;
         AnimationTexture.SetBool("IsHit", false);
         AnimationTexture.SetFloat("Energy", 0.0f);
         UpdatePlayerHealth(player.GetComponent<Player>().health, player.GetComponent<Player>()._maxHealth);
         UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
-        StartCoroutine("CountingTimer");
 
         yield return null;
     }
 
-    public IEnumerator CountingTimer()
+    public void CountingTimer(float value)
     {
-        spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        yield return new WaitForSeconds(10.0f); // Wait for a wave
-        while(waveTimerBar.value >= 0)
-        {
-            waveTimerBar.value = waveTimerBar.value - spawners.Length;
-            yield return new WaitForSeconds(8.0f);
-        }
-        yield return null;
+        currentWave -= value;
+        waveTimerBar.fillAmount = currentWave / totalWave;
     }
 
     public void UpdatePlayerHealth(float curr, float max)

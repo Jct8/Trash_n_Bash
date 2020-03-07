@@ -132,19 +132,39 @@ public class LevelManager : MonoBehaviour
         }
         uiManager.Reset();
         isTutorial = false;
-
+        playerInstance.GetComponent<Player>().health = playerInstance.GetComponent<Player>()._maxHealth;
         //Upgrade options
         GameManager gameManager = ServiceLocator.Get<GameManager>();
         UpgradeStats upgradeStats = ServiceLocator.Get<UpgradeStats>();
         //Long Ranged Upgrade
-        int rangedLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged]-1;
+        int rangedLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged] - 1;
         if (rangedLevel >= 0)
             towerInstance.GetComponent<Tower>().range += upgradeStats.towerRange[rangedLevel];
         //Barricade Upgrade
-        BarricadeSpawner barricadeSpawner = GameObject.FindGameObjectWithTag("BarricadeSpawner").GetComponent<BarricadeSpawner>();
+        BarricadeSpawner barricadeSpawner = GameObject.FindGameObjectWithTag("BarricadeSpawner")?.GetComponent<BarricadeSpawner>();
         int barricadeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Barricades] - 1;
-        if (barricadeLevel >= 0)
+        if (barricadeLevel >= 0 && barricadeSpawner)
             barricadeSpawner.baseBarricadeCost -= upgradeStats.barricadeCostReduction[barricadeLevel];
+        //Wife tower Upgrade
+        Tower wife = GameObject.FindGameObjectWithTag("Wife").GetComponent<Tower>();
+        int wifeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.ExtraProjectiles] - 1;
+        if (wifeLevel >= 0)
+        {
+            wife.isShooting = true;
+            wife.attackRate -= upgradeStats.throwingSpeed[wifeLevel];
+        }
+        //Specific Target Upgrade
+        int specficLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.TargetEnemy] - 1;
+        if (specficLevel >= 0)
+            towerInstance.GetComponent<Tower>().specificEnemy = upgradeStats.targetEnemy[specficLevel];
+        // Fire Upgrade
+        int fireLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.FireProjectile] - 1;
+        if (fireLevel >= 0)
+        {
+            towerInstance.GetComponent<Tower>().damageType = DamageType.Poison;
+            towerInstance.GetComponent<Tower>().fireDuration = upgradeStats.fireDuration[fireLevel];
+        }
+
         //UpdateTowerTrashCount
         towerInstance.GetComponent<Tower>().fullHealth = gameManager._houseHP;
     }

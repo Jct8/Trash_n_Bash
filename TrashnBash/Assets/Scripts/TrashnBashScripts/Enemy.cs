@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public GameObject hitEffect;
 
     private GameObject player;
-    private GameObject _targetIndicator;
+    public GameObject _targetIndicator;
     private GameObject _ObjectofBarricade;
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public string _DataSource;
 
     public AudioClip attackEffect;
-    public AudioClip poisonedEffect;
     private AudioSource audioSource;
 
     public string Name { get { return _Name; } private set { } }
@@ -49,12 +48,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private string _Name;
     [SerializeField] private float _Attack = 1.0f;
     [SerializeField] private float _Money;
-    [SerializeField] private float _Speed;
+    [SerializeField] private float _Speed = 1.0f;
     [SerializeField] private float _AttackCoolTime = 3.0f;
     [SerializeField] private float _ObjectDetectionRange = 3.0f;
     [SerializeField] private float _DropRate = 0.5f;
     [SerializeField] private float _enemyAttackRange = 4.0f;
-    [SerializeField] private float _waitForsecondOfCrows = 1.0f;
+    [SerializeField] private float _waitForsecondOfCrows = 3.0f;
 
     private float _EndDistance = 3.0f;
     private float _MaximumAngle = 45.0f;
@@ -99,12 +98,27 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (player == null || _IsDead)
         {
             _Agent.isStopped = true;
+            _targetIndicator.SetActive(false);
             return;
         }
         if (!_IsDead)
         {
-            if (_targetIndicator.activeSelf)
-                _Order = Order.Fight;
+            if (_targetIndicator.activeSelf && _Order != Order.Stunned)
+            {
+                if(_Name == "Crows")
+                {
+                    if(gameObject.GetComponent<CrowAbility>()._isLanding)
+                    {
+                        _Order = Order.Fight;
+                    }
+                }
+                else
+                {
+                    _Order = Order.Fight;
+                }
+
+            }
+
             
 
             enemyAbilities.PoisonAOE(player);
@@ -115,6 +129,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
             if (_Order == Order.Stunned)
             {
+                CooltimeBar.fillAmount = 0;
                 _Agent.isStopped = true;
                 if (stunTime < Time.time)
                 {
@@ -126,14 +141,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
             else if (_Order == Order.Tower)
             {
                 _Agent.SetDestination(_Desination.position);
-                enemyAbilities.Flying(_Desination, _Order);
+                enemyAbilities.Flying(_Desination);
                 if ((isInRangeOfWayPoint(_Desination, _EndDistance)))
                 {
 
                     if (_CurrentWayPoint == _Path.WayPoints.Count - 1)
                     {
-
-
                         if (_Name == "Crows")
                         {
                             StartCoroutine("wait");
@@ -165,25 +178,22 @@ public class Enemy : MonoBehaviour, ICharacterAction
                         break;
                     }
                 }
-                if (_Name != "Crows")
+                if (_ObjectofBarricade)
                 {
-                    if (_ObjectofBarricade)
+                    if (_ObjectofBarricade.GetComponent<Barricade>().isAlive)
                     {
-                        if (_ObjectofBarricade.GetComponent<Barricade>().isAlive)
+                        if (isCloseToBarricade(_ObjectDetectionRange))
+                            _Order = Order.Barricade;
+                    }
+                    else
+                    {
+                        _ObjectofBarricade = null;
+                        for (int i = 0; i < barricades.Length; i++)
                         {
-                            if (isCloseToBarricade(_ObjectDetectionRange))
-                                _Order = Order.Barricade;
-                        }
-                        else
-                        {
-                            _ObjectofBarricade = null;
-                            for (int i = 0; i < barricades.Length; i++)
+                            if (Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
                             {
-                                if (Vector3.Distance(barricades[i].gameObject.transform.position, transform.position) < _enemyAttackRange)
-                                {
-                                    _ObjectofBarricade = barricades[i];
-                                    break;
-                                }
+                                _ObjectofBarricade = barricades[i];
+                                break;
                             }
                         }
                     }
@@ -208,27 +218,34 @@ public class Enemy : MonoBehaviour, ICharacterAction
             else if (_Order == Order.Barricade)
             {
                 LookAt(_ObjectofBarricade.transform.position, _ObjectofBarricade);
+                enemyAbilities.Flying(_ObjectofBarricade.transform);
                 if (isCloseToBarricade(_enemyAttackRange))
                 {
-                    if (ChargingCoolDown())
-                        BarricadeAttack();
+                    if (_Name == "Crows")
+                    {
+                        StartCoroutine("wait");
+                    }
+                    else
+                    {
+                        if (ChargingCoolDown())
+                            BarricadeAttack();
+                    }
                 }
                 if (!_ObjectofBarricade.GetComponent<Barricade>().isAlive)
                 {
                     _ObjectofBarricade = null;
-                    _Order = Order.Tower;
+                    if (_Name == "Crows")
+                        _Order = Order.Back;
+                    else
+                        _Order = Order.Tower;
                 }
             }
             else if (_Order == Order.Back)
             {
-                //if(_Name == "Crows")
-                //{
-                //    _CurrentWayPoint = 0;
-                //}
                 _Agent.isStopped = false;
                 _Desination = _Path.WayPoints[0];
                 _Agent.SetDestination(_Desination.position);
-                enemyAbilities.Flying(_Desination, _Order);
+                enemyAbilities.Flying(_Desination);
                 if (isInRangeOfWayPoint(_Desination, _EndDistance))
                     killed?.Invoke();
             }
@@ -344,9 +361,20 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private IEnumerator wait()
     {
         yield return new WaitForSeconds(_waitForsecondOfCrows);
-        if (ChargingCoolDown())
+        if (_Order == Order.Tower)
         {
-            StartCoroutine("TowerAttack");
+            if(ChargingCoolDown())
+            {
+                StartCoroutine("TowerAttack");
+            }
+
+        }
+        if(_Order == Order.Barricade)
+        {
+            if (ChargingCoolDown())
+            {
+                BarricadeAttack();
+            }
         }
 
     }
@@ -462,7 +490,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _poisonCurrentDuration = Time.time;
         _poisonTotalTime = Time.time + totalTime;
         _isPoisoned = true;
-        audioSource.PlayOneShot(poisonedEffect, 0.2f);
+
         poison.SetActive(_isPoisoned);
     }
     #endregion
@@ -480,10 +508,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         else
         {
-            _Order = Order.Tower;
+            if (_Name == "Crows")
+                _Order = Order.Back;
+            else
+                _Order = Order.Tower;
             _ObjectofBarricade = null;
             _Agent.isStopped = false;
             _IsAttacked = false;
+            CooltimeBar.fillAmount = 0;
         }
     }
 

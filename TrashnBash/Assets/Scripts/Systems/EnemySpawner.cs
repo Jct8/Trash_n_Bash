@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class EnemySpawner : MonoBehaviour
             _enemy.GetComponent<Enemy>().Alive();
             _activeEnemies.Add(_enemy);
         }
+        ServiceLocator.Get<UIManager>().CountingTimer((float)_enemiesPerWave);
     }
 
     public void ResetSpawner()

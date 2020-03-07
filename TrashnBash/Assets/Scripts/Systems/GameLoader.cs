@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameLoader : AsyncLoader
 {
-    public int defaultSceneToLoadIndex = 1;
+    private int defaultSceneToLoadIndex = 1;
     public int sceneToLoadIndex = 1;
 
     public LoadingScreen loadingScreen = null;
@@ -34,12 +34,9 @@ public class GameLoader : AsyncLoader
         DontDestroyOnLoad(gameObject);
 
         // Scene Index Check
-        if (defaultSceneToLoadIndex < 0 || defaultSceneToLoadIndex >= SceneManager.sceneCountInBuildSettings)
+        if (sceneToLoadIndex < 0 || sceneToLoadIndex >= SceneManager.sceneCountInBuildSettings)
         {
-            Debug.Log($"Invalid Scene Index {defaultSceneToLoadIndex} ... using default value of {sceneToLoadIndex}");
-        }
-        else
-        {
+            Debug.Log($"Invalid Scene Index {sceneToLoadIndex} ... using default value of {defaultSceneToLoadIndex}");
             sceneToLoadIndex = defaultSceneToLoadIndex;
         }
 
@@ -49,6 +46,7 @@ public class GameLoader : AsyncLoader
         Transform systemsParent = systemsGO.transform;
         DontDestroyOnLoad(systemsGO);
 
+        loadingScreen.gameObject.SetActive(true);
         loadingScreen.UpdateLoadingStep("Loading Game Systems");
 
         // Queue up loading routines
@@ -132,7 +130,7 @@ public class GameLoader : AsyncLoader
 
     private void OnComplete()
     {
-        App.Instance.hasLoaded = true;
+        App.Instance.hasGameLoaded = true;
         //Debug.Log("GameLoader Completed");
         StartCoroutine(LoadInitialScene(sceneToLoadIndex));
     }
@@ -149,5 +147,7 @@ public class GameLoader : AsyncLoader
             loadingScreen.UpdateLoadingBar(loadOp.progress);
             yield return loadOp;
         }
+
+        loadingScreen.gameObject.SetActive(false);
     }
 }

@@ -34,10 +34,8 @@ public class MainMenu : MonoBehaviour
             fadeScreen.SetActive(true);
             fadeScreen.GetComponent<Animator>().Play("Fade");
             yield return new WaitForSeconds(1.0f);
-
             yield return SceneManager.LoadSceneAsync(levelToLoad);
             isClicked = true;
         }
-
     }
 }

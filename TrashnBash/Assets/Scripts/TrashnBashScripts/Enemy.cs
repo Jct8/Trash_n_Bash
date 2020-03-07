@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private GameObject _ObjectofBarricade;
     private DataLoader _DataLoader;
     private JsonDataSource _EnemyData;
-    private WayPointManager.Path _Path;
+    private EnemySpawner.EnemyPath _Path;
     public NavMeshAgent _Agent;
 
     public Order _Order { get; set; }
@@ -243,7 +243,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     #region Initiliaztion
 
-    public void Initialize(WayPointManager.Path path, Action Recycle)
+    public void Initialize(EnemySpawner.EnemyPath path, Action Recycle)
     {
         poison.SetActive(_isPoisoned);
         _Path = path;

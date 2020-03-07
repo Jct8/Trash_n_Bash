@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6505d65a4e8bc41b12c756bbd07676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndexToLoad: 1
+  sceneToLoadIndex: 1
   loadingScreen: {fileID: 387498585855246513}
   _UIPrefeb: {fileID: 6670158105797579109, guid: 245b064f6d9f9c14cb6a6e8d5f867f03,
     type: 3}

@@ -5,6 +5,22 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public Color gizmoColor = Color.red;
+
+    [System.Serializable]
+    public class EnemyPath
+    {
+        public Transform WayPointsHolder;
+        public List<Transform> WayPoints { get; set; }
+
+        public void SetupWaypoints()
+        {
+            WayPoints = new List<Transform>();
+            foreach (Transform waypoint in WayPointsHolder)
+                WayPoints.Add(waypoint);
+        }
+    }
+
     public GameObject _UnitPrefeb;
 
     // It's property for waves
@@ -17,23 +33,19 @@ public class EnemySpawner : MonoBehaviour
 
     public List<GameObject> _activeEnemies = new List<GameObject>();
 
-    private WayPointManager.Path _path;
-    public int _pathID;
+    public EnemyPath _path;
     private Action OnRecycle;
 
     private void Awake()
     {
+        _path.SetupWaypoints();
+
         if (_UnitPrefeb == null)
         {
             Debug.LogError("Enemy Spawner disabled: Unit Prefab is NULL");
             gameObject.SetActive(false);
             return;
         }
-    }
-
-    public void Init(WayPointManager.Path path)
-    {
-        _path = path;
     }
 
     public void StartSpawner()
@@ -74,5 +86,28 @@ public class EnemySpawner : MonoBehaviour
     public void ResetSpawner()
     {
         _currentWave = 0;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = gizmoColor;
+
+        Gizmos.DrawWireCube(transform.position, Vector3.one);
+
+        if (_path.WayPointsHolder == null)
+            return;
+
+        Gizmos.DrawLine(transform.position, _path.WayPointsHolder.GetChild(0).transform.position);
+        int i = 0;
+        foreach (Transform child in _path.WayPointsHolder)
+        {
+            if (i < _path.WayPointsHolder.childCount - 1)
+            {
+                Gizmos.DrawLine(child.transform.position, _path.WayPointsHolder.GetChild(i + 1).transform.position);
+                Gizmos.DrawWireSphere(child.transform.position, 0.25f);
+            }
+
+            i++;
+        }
     }
 }

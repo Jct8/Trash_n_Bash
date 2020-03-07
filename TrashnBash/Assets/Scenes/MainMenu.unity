@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 80939509}
   - component: {fileID: 80939508}
   m_Layer: 5
-  m_Name: Button - Level 2
+  m_Name: Button - Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ RectTransform:
   m_Children:
   - {fileID: 1237850288}
   m_Father: {fileID: 743132485}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -274,7 +274,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -716,8 +716,8 @@ RectTransform:
   m_Children:
   - {fileID: 2003176062}
   - {fileID: 1570094050}
-  - {fileID: 2001460424}
   - {fileID: 80939507}
+  - {fileID: 2001460424}
   - {fileID: 1474063947}
   - {fileID: 273089317}
   - {fileID: 151572341}
@@ -1404,7 +1404,7 @@ RectTransform:
   m_Children:
   - {fileID: 394429662}
   m_Father: {fileID: 743132485}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1460,7 +1460,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

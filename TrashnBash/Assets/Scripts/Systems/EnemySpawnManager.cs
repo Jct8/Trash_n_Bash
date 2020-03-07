@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public List<EnemySpawner> Spawners;
-    public WayPointManager WayPointManager;
-    public TutorialManager tutorialManager;
+    private List<EnemySpawner> Spawners;
 
     private void Awake()
     {
-        foreach(var spawner in Spawners)
-        {
-            spawner.Init(WayPointManager.GetPath(spawner._pathID));
-        }
+        Spawners = new List<EnemySpawner>(GetComponentsInChildren<EnemySpawner>());
     }
 
     void Start()
@@ -27,9 +22,9 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
-    public void StartSpawer(EnemySpawner spawner)
+    public void StartTutorialSpawner(EnemySpawner spawner)
     {
-        tutorialManager.AddCount(spawner._numberOfWave * spawner._enemiesPerWave);
+        FindObjectOfType<TutorialManager>().AddCount(spawner._numberOfWave * spawner._enemiesPerWave);
         spawner.StartSpawner();
     }
 

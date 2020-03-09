@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     public Image ultCover;
     public Image repairIcon;
     public GameObject fade;
+    public GameObject fadeDumster;
 
 
     public GameObject attackImg;
@@ -64,14 +65,29 @@ public class UIManager : MonoBehaviour
         fade.GetComponent<Animator>().Play("Fade");
         StartCoroutine("unableFade");
     }
+    public void enableDumsterFadeOut()
+    {
+        fadeDumster.GetComponent<Animator>().Play("FadeOut");
+        StartCoroutine("unableDumSterFade");
+    }
+    public void enableDumsterFadeIn()
+    {
+        fadeDumster.SetActive(true);
+        fadeDumster.GetComponent<Animator>().Play("Fade");
 
+    }
     private IEnumerator unableFade()
     {
         yield return new WaitForSeconds(2.1f);
         fade.SetActive(false);
     }
+    private IEnumerator unableDumSterFade()
+    {
+        yield return new WaitForSeconds(1.9f);
+        fadeDumster.SetActive(false);
+    }
 
-    public UIManager Initialize()
+        public UIManager Initialize()
     {
         totalWave = 0;
         currentWave = 0;

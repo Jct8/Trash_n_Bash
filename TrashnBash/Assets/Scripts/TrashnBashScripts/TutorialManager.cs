@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class TutorialManager : MonoBehaviour
     private Barricade barricade = null;
 
     private bool isplaced = false;
+    private bool isStarted = false;
 
     private void Start()
     {
@@ -64,7 +66,28 @@ public class TutorialManager : MonoBehaviour
                 isplaced = true;
             }
         }
-        
+        if(currentSequence == 0)
+        {
+            if (UISequences[currentSequence].activeSelf && !isStarted)
+            {
+                isStarted = true;
+                activeFade();
+            }
+        }
+
+    }
+
+    public void activeFade()
+    {
+        StartCoroutine("fadeDumster");
+    }
+
+    private IEnumerator fadeDumster()
+    {
+        yield return new WaitForSeconds(1.0f);
+        ServiceLocator.Get<UIManager>().enableDumsterFadeIn();
+        yield return new WaitForSeconds(1.1f);
+        ServiceLocator.Get<UIManager>().enableDumsterFadeOut();
     }
 
     public void LoadMenu()

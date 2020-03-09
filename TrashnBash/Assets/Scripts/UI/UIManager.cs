@@ -68,26 +68,29 @@ public class UIManager : MonoBehaviour
     public void enableDumsterFadeOut()
     {
         fadeDumster.GetComponent<Animator>().Play("FadeOut");
-        StartCoroutine("unableDumSterFade");
+        //StartCoroutine(unableDumSterFade());
     }
     public void enableDumsterFadeIn()
     {
         fadeDumster.SetActive(true);
         fadeDumster.GetComponent<Animator>().Play("Fade");
+        StartCoroutine(unableDumSterFade());
+    }
 
+    private IEnumerator unableDumSterFade()
+    {
+        yield return new WaitForSeconds(1.1f);
+        ServiceLocator.Get<UIManager>().enableDumsterFadeOut();
+        yield return new WaitForSeconds(1.9f);
+        fadeDumster.SetActive(false);
     }
     private IEnumerator unableFade()
     {
         yield return new WaitForSeconds(2.1f);
         fade.SetActive(false);
     }
-    private IEnumerator unableDumSterFade()
-    {
-        yield return new WaitForSeconds(1.9f);
-        fadeDumster.SetActive(false);
-    }
 
-        public UIManager Initialize()
+    public UIManager Initialize()
     {
         totalWave = 0;
         currentWave = 0;
@@ -170,7 +173,7 @@ public class UIManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if (curr>= 80.0f)
+        if (curr >= 80.0f)
         {
             IsPower = true;
             PresentTextrue.GetComponent<RawImage>().texture = PowerFulTexture;
@@ -186,7 +189,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator HitAnimation()
     {
-        if(!IsPower)
+        if (!IsPower)
         {
             AnimationTexture.SetBool("IsHit", true);
             PresentTextrue.GetComponent<RawImage>().texture = SickTexture;

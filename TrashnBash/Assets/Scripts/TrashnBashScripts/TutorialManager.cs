@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TutorialManager : MonoBehaviour
 {
     public List<GameObject> UISequences;
+    public Button barricadeCreateBtn;
 
     private int currentSequence = 0;
     private int numEnemiesToKill = 0;
@@ -34,17 +35,14 @@ public class TutorialManager : MonoBehaviour
         uiManager.intimidateImg.SetActive(false);
         uiManager.ultImg.SetActive(false);
         UISequences[currentSequence].SetActive(true);
+        barricadeCreateBtn.onClick.AddListener(ServiceLocator.Get<UIManager>().enableDumsterFadeIn);
     }
 
     private void Update()
     {
         if (numEnemiesToKill <= levelManager.enemyDeathCount && isSpawnStarted)
         {
-            currentSequence++;
-            if (UISequences.Count - 1 >= currentSequence)
-            {
-                UISequences[currentSequence].SetActive(true);
-            }
+            IncrementSequence();
             isSpawnStarted = false;
             ServiceLocator.Get<UIManager>().totalWave = 0;
             ServiceLocator.Get<UIManager>().currentWave = 0;
@@ -56,38 +54,24 @@ public class TutorialManager : MonoBehaviour
         {
             if (barricade.isPlaced == true && isplaced == false)
             {
-                currentSequence++;
-                if (UISequences.Count - 1 >= currentSequence)
-                {
-                    UISequences[currentSequence].SetActive(true);
-                }
+                IncrementSequence();
 
-                barricade.TakeFullDamage() ;
+                barricade.TakeFullDamage();
                 isplaced = true;
             }
         }
-        if(currentSequence == 0)
+
+
+    }
+
+    public void IncrementSequence()
+    {
+        currentSequence++;
+        if (UISequences.Count - 1 >= currentSequence)
         {
-            if (UISequences[currentSequence].activeSelf && !isStarted)
-            {
-                isStarted = true;
-                activeFade();
-            }
+            UISequences[currentSequence].SetActive(true);
         }
 
-    }
-
-    public void activeFade()
-    {
-        StartCoroutine("fadeDumster");
-    }
-
-    private IEnumerator fadeDumster()
-    {
-        yield return new WaitForSeconds(1.0f);
-        ServiceLocator.Get<UIManager>().enableDumsterFadeIn();
-        yield return new WaitForSeconds(1.1f);
-        ServiceLocator.Get<UIManager>().enableDumsterFadeOut();
     }
 
     public void LoadMenu()

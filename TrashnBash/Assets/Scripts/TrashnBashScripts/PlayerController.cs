@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (/*(Input.GetKeyDown(_AttackButton) && attackEnabled) ||*/ (autoAttack && CheckCoolDownTimes() && _isTargetLockedOn))
+        if (/*(Input.GetKeyDown(_AttackButton) && attackEnabled) ||*/ (autoAttack /*&& CheckCoolDownTimes()*/ && _isTargetLockedOn))
         {
             if (currentAttackCoolDown < Time.time)
             {

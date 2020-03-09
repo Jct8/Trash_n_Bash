@@ -803,11 +803,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UISequences:
+  - {fileID: 1404182249}
   - {fileID: 536443257}
   - {fileID: 111716783}
   - {fileID: 1701879947}
+  barricadeCreateBtn: {fileID: 1248629363}
   enemySpawnManager: {fileID: 1141448451}
-  isStarted: 0
 --- !u!4 &552895849
 Transform:
   m_ObjectHideFlags: 0
@@ -1303,7 +1304,7 @@ GameObject:
   - component: {fileID: 861180021}
   - component: {fileID: 861180020}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: BarricadeIntroBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1383,16 +1384,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 536443257}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 552895848}
+        m_MethodName: IncrementSequence
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -2566,7 +2567,7 @@ GameObject:
   - component: {fileID: 1248629364}
   - component: {fileID: 1248629363}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: BarricadeCreateBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

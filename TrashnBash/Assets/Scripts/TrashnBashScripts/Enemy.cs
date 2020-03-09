@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     [SerializeField] private float _DropRate = 0.5f;
     [SerializeField] private float _enemyAttackRange = 4.0f;
     [SerializeField] private float _waitForsecondOfCrows = 3.0f;
+    [SerializeField] private int _NumberofTrash = 1;
 
     private float _EndDistance = 3.0f;
     private float _MaximumAngle = 45.0f;
@@ -447,7 +448,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f);
                 if (randomNumber > _DropRate)
                 {
-                    Instantiate(pickUp, transform.position, Quaternion.identity);
+                    for (int i = 0; i < _NumberofTrash; i++)
+                    {
+                        Instantiate(pickUp, transform.position, Quaternion.identity);
+                    }
                 }
                 _IsStolen = false;
             }

@@ -807,6 +807,7 @@ MonoBehaviour:
   - {fileID: 111716783}
   - {fileID: 1701879947}
   enemySpawnManager: {fileID: 1141448451}
+  isStarted: 0
 --- !u!4 &552895849
 Transform:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class TutorialManager : MonoBehaviour
         uiManager.intimidateImg.SetActive(false);
         uiManager.ultImg.SetActive(false);
         UISequences[currentSequence].SetActive(true);
-        barricadeCreateBtn.onClick.AddListener(ServiceLocator.Get<UIManager>().enableDumsterFadeIn);
+        barricadeCreateBtn?.onClick.AddListener(ServiceLocator.Get<UIManager>().enableDumsterFadeIn);
     }
 
     private void Update()

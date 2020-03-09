@@ -170,11 +170,11 @@ MonoBehaviour:
   attack: 4
   intimdateStunTime: 3
   attackRange: 3
-  poisonRange: 2
+  poisonRange: 3
   poisonDamage: 3
   poisonTotalTime: 3
   poisonTickTime: 1
-  initialPoisonAttackDamage: 10
+  initialPoisonAttackDamage: 3
   ultimateRange: 20
   ultimateDamage: 25
   ultimateTickDamage: 5
@@ -1401,16 +1401,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3502200499049515719}
     m_Modifications:
-    - target: {fileID: 8038425244393942781, guid: 13531b1cab9e41642b58c67f19c23a94,
-        type: 3}
-      propertyPath: m_Name
-      value: PoisonAttack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8038425244393942781, guid: 13531b1cab9e41642b58c67f19c23a94,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6474860260143408540, guid: 13531b1cab9e41642b58c67f19c23a94,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1464,6 +1454,16 @@ PrefabInstance:
     - target: {fileID: 6474860260143408540, guid: 13531b1cab9e41642b58c67f19c23a94,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038425244393942781, guid: 13531b1cab9e41642b58c67f19c23a94,
+        type: 3}
+      propertyPath: m_Name
+      value: PoisonAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038425244393942781, guid: 13531b1cab9e41642b58c67f19c23a94,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5353764163181395940, guid: 13531b1cab9e41642b58c67f19c23a94,

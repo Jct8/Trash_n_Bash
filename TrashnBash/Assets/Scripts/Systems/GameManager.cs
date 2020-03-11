@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float _houseHP = 50.0f;
     public float _racoonHP;
     public bool _enemySkillActived { get; set; }
+    public int sceneToLoad = 1;
 
     public Dictionary<UpgradeMenu.Upgrade, int> upgradeLevelsDictionary = new Dictionary<UpgradeMenu.Upgrade, int>();
 

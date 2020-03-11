@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackCoolDown = 0.4f;
     [SerializeField] private float poisonAttackCoolDown = 3.0f;
     [SerializeField] private float intimidateAttackCoolDown = 5.0f;
-    [SerializeField] private float restoreValue = 0.5f;
+    [SerializeField][Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
+    private float towerHealCostValue = 0.5f;
 
     [Header("Trash Cans")]
     [SerializeField] private float diggingTime = 2.0f;
@@ -113,7 +114,6 @@ public class PlayerController : MonoBehaviour
                 _isTargetLockedOn = false;
             }
         }
-
 
         ActivateTargetLockedOn();
 
@@ -270,9 +270,9 @@ public class PlayerController : MonoBehaviour
         {
             if (Vector3.Distance(_tower.transform.position, transform.position) < _tower.Getradius())
             {
-                _tower.fullHealth -= restoreValue;
+                _tower.fullHealth -= towerHealCostValue;
                 uiManager.UpdateTowerHealth(_tower.fullHealth);
-                _player.restoringHealth(restoreValue * 2.0f);
+                _player.restoringHealth(towerHealCostValue * 2.0f);
                 uiManager.UpdatePlayerHealth(_player.health,_player._maxHealth);
             }
         }

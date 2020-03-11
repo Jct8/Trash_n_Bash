@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     private int levelToLoad = 1;
     private bool isClicked = false;
+    private bool isLoadCutScene = false;
     public GameObject fadeScreen;
 
     void Start()
@@ -17,9 +18,23 @@ public class MainMenu : MonoBehaviour
     }
     public void OnLevelButtonClick(int level)
     {
-        levelToLoad = level;
-        StartCoroutine(LoadLevelRoutine());
+        //if (isLoadCutScene)
+        //{
+        //    ServiceLocator.Get<GameManager>().sceneToLoad = level;
+        //    SceneManager.LoadScene("CutScene");
+        //}
+        //else
+        //{
+            levelToLoad = level;
+            StartCoroutine(LoadLevelRoutine());
+        //}
     }
+
+    public void LoadCutScene()
+    {
+        isLoadCutScene = true;
+    }
+
 
     public void OnQuitClick()
     {
@@ -35,7 +50,15 @@ public class MainMenu : MonoBehaviour
             fadeScreen.GetComponent<Animator>().Play("Fade");
             yield return new WaitForSeconds(1.0f);
 
-            yield return SceneManager.LoadSceneAsync(levelToLoad);
+            if (isLoadCutScene)
+            {
+                ServiceLocator.Get<GameManager>().sceneToLoad = levelToLoad;
+                yield return SceneManager.LoadSceneAsync("CutScene");
+            }
+            else
+            {
+                yield return SceneManager.LoadSceneAsync(levelToLoad);
+            }
             isClicked = true;
         }
 

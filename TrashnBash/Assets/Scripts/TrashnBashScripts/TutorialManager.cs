@@ -34,7 +34,8 @@ public class TutorialManager : MonoBehaviour
         uiManager.poisonImg.SetActive(false);
         uiManager.intimidateImg.SetActive(false);
         uiManager.ultImg.SetActive(false);
-        UISequences[currentSequence].SetActive(true);
+
+        StartCoroutine(StartSequence(1.0f));
         barricadeCreateBtn?.onClick.AddListener(ServiceLocator.Get<UIManager>().enableScreenFadeIn);
     }
 
@@ -62,6 +63,12 @@ public class TutorialManager : MonoBehaviour
         }
 
 
+    }
+
+    IEnumerator StartSequence(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        UISequences[currentSequence].SetActive(true);
     }
 
     public void IncrementSequence()

@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/KitsScene.unity
     guid: 5455bd2505ea90441bc52ae5ab1f5699
   - enabled: 0
-    path: Assets/Scenes/TutorialTest.unity
+    path: 
     guid: 4ca71b00dda016d4c8b4054dc26ea84a
   - enabled: 0
     path: 
@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UpgradeMenu.unity
     guid: 8da04dec562659a49baecba835898cff
+  - enabled: 1
+    path: Assets/Scenes/CutScene.unity
+    guid: 953ee55d5dfbe734f892e1c35c285755
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: d28727b166638c344a4f8e93c8799685

@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
     public Image repairIcon;
     public GameObject fade;
     public GameObject fadeDumster;
-
+    public GameObject fadeTutorial;
 
     public GameObject attackImg;
     public GameObject poisonImg;
@@ -65,24 +65,48 @@ public class UIManager : MonoBehaviour
         fade.GetComponent<Animator>().Play("Fade");
         StartCoroutine("unableFade");
     }
-    public void enableDumsterFadeOut()
+    public void enableScreenFadeOut()
     {
-        fadeDumster.GetComponent<Animator>().Play("FadeOut");
-        //StartCoroutine(unableDumSterFade());
+        if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.Tutorial)
+        {
+            fadeTutorial.GetComponent<Animator>().Play("FadeOut");
+        }
+        else if(ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.GamePlay)
+        {
+            fadeDumster.GetComponent<Animator>().Play("FadeOut");
+        }
     }
-    public void enableDumsterFadeIn()
+    public void enableScreenFadeIn()
     {
-        fadeDumster.SetActive(true);
-        fadeDumster.GetComponent<Animator>().Play("Fade");
-        StartCoroutine(unableDumSterFade());
+        if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.Tutorial)
+        {
+            fadeTutorial.SetActive(true);
+            fadeTutorial.GetComponent<Animator>().Play("Fade");
+            StartCoroutine(unableScreenFade());
+        }
+        else if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.GamePlay)
+        {
+            fadeDumster.SetActive(true);
+            fadeDumster.GetComponent<Animator>().Play("Fade");
+            StartCoroutine(unableScreenFade());
+        }
+ 
     }
 
-    private IEnumerator unableDumSterFade()
+    private IEnumerator unableScreenFade()
     {
         yield return new WaitForSeconds(1.1f);
-        ServiceLocator.Get<UIManager>().enableDumsterFadeOut();
+        ServiceLocator.Get<UIManager>().enableScreenFadeOut();
         yield return new WaitForSeconds(1.9f);
-        fadeDumster.SetActive(false);
+
+        if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.Tutorial)
+        {
+            fadeTutorial.SetActive(false);
+        }
+        else if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.GamePlay)
+        {
+            fadeDumster.SetActive(false);
+        }
     }
     private IEnumerator unableFade()
     {

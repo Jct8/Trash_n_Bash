@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private GameState _GameState;
+    public GameState _GameState { get; set; }
 
     public int currentlevel;
     public int highScore;
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         Loader,
         MainMenu,
         GamePlay,
+        Tutorial,
         GameWin,
         GameLose
     }
@@ -51,6 +52,16 @@ public class GameManager : MonoBehaviour
             case GameState.MainMenu:
                 break;
             case GameState.GamePlay:
+                if (ServiceLocator.Get<LevelManager>().CheckLoseCondition())
+                {
+                    _GameState = GameState.GameLose;
+                }
+                else if (ServiceLocator.Get<LevelManager>().CheckWinCondition())
+                {
+                    _GameState = GameState.GameWin;
+                }
+                break;
+            case GameState.Tutorial:
                 if (ServiceLocator.Get<LevelManager>().CheckLoseCondition())
                 {
                     _GameState = GameState.GameLose;
@@ -94,10 +105,10 @@ public class GameManager : MonoBehaviour
     public void changeGameState(GameState state)
     {
         _GameState = state;
-        if (_GameState == GameState.GamePlay)
+        if (_GameState == GameState.GamePlay || _GameState == GameState.Tutorial)
         {
             ServiceLocator.Get<UIManager>().gameObject.SetActive(true);
-            ServiceLocator.Get<UIManager>().StartCoroutine("Reset");
+            ServiceLocator.Get<UIManager>().StartCoroutine(ServiceLocator.Get<UIManager>().Reset());
             ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
             ServiceLocator.Get<LevelManager>().gameObject.SetActive(true);
 

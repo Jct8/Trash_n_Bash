@@ -173,16 +173,19 @@ MonoBehaviour:
   bulletPrefeb: {fileID: 0}
   firePoint: {fileID: 0}
   radius: 2.5
+  damageType: 0
+  fireDuration: 0
   dataSourceId: Tower
   name: 
-  range: 0
-  damage: 0
-  speed: 0
-  health: 0
-  attackRate: 0
+  range: 10
+  damage: 5
+  speed: 500
+  health: 100
+  attackRate: 0.6
   fullHealth: 0
   shotTime: 0
   isShooting: 1
+  specificEnemy: NONE
   shotSound: {fileID: 8300000, guid: f1df4a14307925f44b248c7e6ecbeadd, type: 3}
 --- !u!82 &3174509829108607209
 AudioSource:
@@ -379,6 +382,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3881583059690077307}
     m_Modifications:
+    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_Name
+      value: Trashcan1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.02
@@ -426,22 +445,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
       propertyPath: m_LocalScale.y
       value: 1.2183
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
-      propertyPath: m_Name
-      value: Trashcan1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de32a7368f7dfb543b7be3010d09e8ca, type: 3}

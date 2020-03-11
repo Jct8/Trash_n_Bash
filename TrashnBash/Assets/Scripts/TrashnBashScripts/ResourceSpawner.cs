@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class ResourceSpawner : MonoBehaviour
 {
+    [Header("Trash can")]
     public GameObject resourcePrefab;
     public List<GameObject> trashModels;
-    public int resourceLimit = 5;
+    [SerializeField] private int _amountofLimit = 5;
+
     private int currentResource = 0;
+
     public GameObject GetResource()
     {
-        currentResource++;
-        if(currentResource < resourceLimit)
+        if(currentResource < _amountofLimit)
         {
+            currentResource++;
             GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
 
             //random trash model
@@ -21,7 +24,6 @@ public class ResourceSpawner : MonoBehaviour
             int randomNumber = UnityEngine.Random.Range(0, trashModels.Count - 1);
             GameObject resourceModel = Instantiate(trashModels[randomNumber], gameObject.transform.position, Quaternion.identity) as GameObject;
             resourceModel.transform.parent = resource.transform;
-
             return resource;
         }
         else
@@ -29,5 +31,4 @@ public class ResourceSpawner : MonoBehaviour
             return null;
         }
     }
-
 }

@@ -335,7 +335,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 if (distance < ultimateRange*0.5f)
                 {
                     go.GetComponent<Enemy>()?.TakeDamage(ultimateDamage, true, DamageType.Ultimate);
-                    go.GetComponent<Enemy>().SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
+                    go.GetComponent<Enemy>()?.SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
                 }
             }
         }

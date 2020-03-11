@@ -141,7 +141,6 @@ public class UpgradeMenu : MonoBehaviour
 
     public void BackButton()
     {
-        //ServiceLocator.Get<LevelManager>().ResetLevel();
         SceneManager.LoadScene("MainMenu");
     }
 

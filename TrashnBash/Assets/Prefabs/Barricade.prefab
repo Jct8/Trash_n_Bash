@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df78b5b2c968c141ab5c11dfcdb587a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Defence: 50
+  _Defence: 100
   _Health: 0
   _PercentFromTower: 5
   repairTime: 3

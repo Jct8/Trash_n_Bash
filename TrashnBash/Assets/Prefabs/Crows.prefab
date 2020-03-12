@@ -236,13 +236,13 @@ MonoBehaviour:
   poison: {fileID: 5884984060430189117}
   hitEffect: {fileID: 6462621314868396975, guid: d192a558b2fca7249989b6570e020d87,
     type: 3}
+  _targetIndicator: {fileID: 0}
   _Agent: {fileID: 0}
   fullHealth: 0
   stunTime: 0
   _DataSource: Crows
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
-  poisonedEffect: {fileID: 8300000, guid: 16b5e8f6ec7e27b4482558644ab456c3, type: 3}
-  _Health: 12
+  _Health: 18
   _Name: 
   _Attack: 2
   _Money: 10
@@ -252,6 +252,7 @@ MonoBehaviour:
   _DropRate: 0.5
   _enemyAttackRange: 2.5
   _waitForsecondOfCrows: 1
+  _AmountofTrash: 1
   rigid: {fileID: 0}
 --- !u!82 &2342654600482299871
 AudioSource:

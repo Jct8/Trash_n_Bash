@@ -146,13 +146,13 @@ MonoBehaviour:
   poison: {fileID: 801450321962728225}
   hitEffect: {fileID: 6462621314868396975, guid: d192a558b2fca7249989b6570e020d87,
     type: 3}
+  _targetIndicator: {fileID: 0}
   _Agent: {fileID: 0}
   fullHealth: 0
   stunTime: 0
   _DataSource: Rats
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
-  poisonedEffect: {fileID: 8300000, guid: 16b5e8f6ec7e27b4482558644ab456c3, type: 3}
-  _Health: 8
+  _Health: 12
   _Name: 
   _Attack: 2
   _Money: 10
@@ -162,6 +162,7 @@ MonoBehaviour:
   _DropRate: 0.5
   _enemyAttackRange: 2.5
   _waitForsecondOfCrows: 1
+  _AmountofTrash: 1
   rigid: {fileID: 0}
 --- !u!82 &-3833604232468093450
 AudioSource:

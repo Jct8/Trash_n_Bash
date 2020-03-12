@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RatAbility : MonoBehaviour, IEnemyAbilities
 {
-    public int limit = 3;
-    public int numbers = 0;
+    [SerializeField][Tooltip("Limit amount of Rats for using a skill of rats")] private int limit = 3;
+    private int numbers = 0;
 
     public void Flying(Transform wayPoint)
     {

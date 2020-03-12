@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
     private GameObject _Barricade = null;
     private GameObject _RepairBarricade = null;
     //private GameObject _Resource = null;
-    private List<GameObject> _Resources;
     private UIManager uiManager;
     private NavMeshAgent agent;
+    public List<GameObject> _Resources;
 
     [Header("Unit Status")]
     [SerializeField] private float moveSpeed = 10.0f;
@@ -36,12 +36,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float intimidateAttackCoolDown = 5.0f;
     [SerializeField][Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
     private float towerHealCostValue = 0.5f;
+    [SerializeField][Tooltip("Amount lost to Tower from healing the player")]
+    private float towerLostCostValue = 1.0f;
 
     [Header("Trash Cans")]
-    [SerializeField] private float diggingTime = 2.0f;
-    [SerializeField] private int limitOfHolding = 3;
+    [SerializeField][Tooltip("Timer for digging a trash cans")] private float diggingTime = 2.0f;
+    [SerializeField][Tooltip("Limit to get trashes from a trash cans")] private int limitOfHolding = 3;
     private bool _isDigging = false;
-    private int currentTrashes = 0;
+    public int currentTrashes = 0;
 
     [SerializeField] private KeyCode _AttackButton = KeyCode.Space;
     [SerializeField] private KeyCode _PoisonAttackButton = KeyCode.E;
@@ -272,7 +274,7 @@ public class PlayerController : MonoBehaviour
             {
                 _tower.fullHealth -= towerHealCostValue;
                 uiManager.UpdateTowerHealth(_tower.fullHealth);
-                _player.restoringHealth(towerHealCostValue * 2.0f);
+                _player.restoringHealth(towerLostCostValue);
                 uiManager.UpdatePlayerHealth(_player.health,_player._maxHealth);
             }
         }

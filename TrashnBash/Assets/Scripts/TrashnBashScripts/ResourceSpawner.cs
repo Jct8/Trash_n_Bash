@@ -8,7 +8,7 @@ public class ResourceSpawner : MonoBehaviour
     [Header("Trash can")]
     public GameObject resourcePrefab;
     public List<GameObject> trashModels;
-    [SerializeField] private int _amountofLimit = 5;
+    [SerializeField][Tooltip("Limit to get resource from one trash cans")] private int _amountofLimit = 5;
 
     private int currentResource = 0;
 

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CrowAbility : MonoBehaviour, IEnemyAbilities
 {
-    [SerializeField] private float _maximumRaising = 3.0f;
-    [SerializeField] private float _minimumHeight = 0.5f;
-    [SerializeField] private float _inRangeOfWaypoint = 4.0f;
+    [SerializeField][Tooltip("Value how much height can Crow raise")] private float _maximumRaising = 3.0f;
+    [SerializeField][Tooltip("Value how much height can Crow land")] private float _minimumHeight = 0.5f;
+    [SerializeField][Tooltip("Value how much range can Crow reach each way-point")] private float _inRangeOfWaypoint = 4.0f;
     public GameObject _crowGO = null;
+    public LayerMask groundLayers;
+
     private Rigidbody rb = null;
     private Order order = 0;
     public bool _isLanding = false;
     private bool _isRising = false;
-    public LayerMask groundLayers;
 
     public void Flying(Transform wayPoint)
     {

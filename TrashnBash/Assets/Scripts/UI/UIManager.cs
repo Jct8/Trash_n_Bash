@@ -43,13 +43,14 @@ public class UIManager : MonoBehaviour
     public Button mainmenuButton;
 
     private float _TowerHP;
-    private float fullEnergy = 100.0f;
     private bool IsPower = false;
     public float totalWave = 0;
     public float currentWave = 0;
     private void Start()
     {
         fade.SetActive(false);
+        fadeDumster.SetActive(false);
+        fadeTutorial.SetActive(false);
     }
 
     public void enableFadeOut()
@@ -67,24 +68,28 @@ public class UIManager : MonoBehaviour
     }
     public void enableScreenFadeOut()
     {
-        if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.Tutorial)
+        GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
+
+        if (state == GameManager.GameState.Tutorial)
         {
             fadeTutorial.GetComponent<Animator>().Play("FadeOut");
         }
-        else if(ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.GamePlay)
+        else if(state == GameManager.GameState.GamePlay)
         {
             fadeDumster.GetComponent<Animator>().Play("FadeOut");
         }
     }
     public void enableScreenFadeIn()
     {
-        if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.Tutorial)
+        GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
+
+        if (state == GameManager.GameState.Tutorial)
         {
             fadeTutorial.SetActive(true);
             fadeTutorial.GetComponent<Animator>().Play("Fade");
             StartCoroutine(unableScreenFade());
         }
-        else if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.GamePlay)
+        else if (state == GameManager.GameState.GamePlay)
         {
             fadeDumster.SetActive(true);
             fadeDumster.GetComponent<Animator>().Play("Fade");
@@ -99,11 +104,13 @@ public class UIManager : MonoBehaviour
         ServiceLocator.Get<UIManager>().enableScreenFadeOut();
         yield return new WaitForSeconds(1.9f);
 
-        if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.Tutorial)
+        GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
+
+        if (state == GameManager.GameState.Tutorial)
         {
             fadeTutorial.SetActive(false);
         }
-        else if (ServiceLocator.Get<GameManager>()._GameState == GameManager.GameState.GamePlay)
+        else if (state == GameManager.GameState.GamePlay)
         {
             fadeDumster.SetActive(false);
         }
@@ -160,6 +167,17 @@ public class UIManager : MonoBehaviour
         currentWave = 0.0f;
         yield return new WaitForSeconds(0.5f);
         player = GameObject.FindGameObjectWithTag("Player");
+        
+        if(player.GetComponent<PlayerController>()._Resources.Count > 0)
+        {
+            foreach (GameObject trash in player.GetComponent<PlayerController>()._Resources)
+            {
+                Destroy(trash);
+            }
+            player.GetComponent<PlayerController>()._Resources.Clear();
+            player.GetComponent<PlayerController>().currentTrashes = 0;
+        }
+
         tower = GameObject.FindGameObjectWithTag("Tower");
         spawners = GameObject.FindGameObjectsWithTag("Spawner");
         foreach (GameObject spawn in spawners)

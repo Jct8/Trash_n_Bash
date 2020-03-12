@@ -212,7 +212,7 @@ public class Player : MonoBehaviour, ICharacterAction
         ////Justin - TODO:Find a better method.
 
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
-        float closestDistance = Mathf.Infinity;
+        //float closestDistance = Mathf.Infinity;
         GameObject closestEnemy = null;
 
         GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();

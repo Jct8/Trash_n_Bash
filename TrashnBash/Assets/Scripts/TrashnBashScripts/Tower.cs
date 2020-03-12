@@ -19,13 +19,13 @@ public class Tower : MonoBehaviour
     private Action _action;
     [Header("Tower Status")]
     public string dataSourceId = "Tower";
-    public string name = "Tower";
+    public string name;
     public float range = 2.0f;
     public float damage = 10.0f;
     public float speed = 5.0f;
     public float health = 100.0f;
     public float attackRate = 1.0f;
-    public float fullHealth = 0.0f;
+    public float fullHealth = 50.0f;
     public float shotTime;
     public bool isShooting = true;
     public string specificEnemy = "NONE";

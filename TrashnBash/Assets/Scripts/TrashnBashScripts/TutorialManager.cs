@@ -18,7 +18,6 @@ public class TutorialManager : MonoBehaviour
     private Barricade barricade = null;
 
     private bool isplaced = false;
-    private bool isStarted = false;
 
     private void Start()
     {

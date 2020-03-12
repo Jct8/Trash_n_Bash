@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OpossumAbility : MonoBehaviour, IEnemyAbilities
 {
-    [SerializeField] private float castingTime = 4.0f;
+    [SerializeField][Tooltip("Casting time to Play Dead")] private float castingTime = 4.0f;
     private int _stack = 0;
     public Animator animator;
     public void Flying(Transform wayPoint)

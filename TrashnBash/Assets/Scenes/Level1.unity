@@ -204,6 +204,11 @@ PrefabInstance:
       propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: StartOnSceneLoad
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5874883554438289886, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -765,6 +770,11 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: StartOnSceneLoad
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554438289886, guid: b299041bea6e7d446951287b352d9ba5,
@@ -3255,6 +3265,11 @@ PrefabInstance:
         type: 3}
       propertyPath: gizmoColor.b
       value: 0.112401724
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: StartOnSceneLoad
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554438289886, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}

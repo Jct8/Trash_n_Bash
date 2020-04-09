@@ -4533,7 +4533,6 @@ MonoBehaviour:
   - {fileID: 968492152}
   - {fileID: 1830760333}
   barricadeCreateBtn: {fileID: 1544657070}
-  enemySpawnManager: {fileID: 0}
 --- !u!4 &966860344
 Transform:
   m_ObjectHideFlags: 0
@@ -5271,6 +5270,11 @@ PrefabInstance:
     - target: {fileID: 433153776155563319, guid: 18c7f0969ba5d0644814a9a3ca291106,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021528366411692247, guid: 18c7f0969ba5d0644814a9a3ca291106,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1508972013, guid: 18c7f0969ba5d0644814a9a3ca291106, type: 3}

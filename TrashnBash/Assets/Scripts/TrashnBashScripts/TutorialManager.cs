@@ -57,7 +57,6 @@ public class TutorialManager : MonoBehaviour
             if (barricade.isPlaced == true && isplaced == false)
             {
                 IncrementSequence();
-
                 barricade.TakeFullDamage();
                 isplaced = true;
             }

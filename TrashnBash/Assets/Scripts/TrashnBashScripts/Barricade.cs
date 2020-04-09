@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Barricade : MonoBehaviour
+public class Barricade : MonoBehaviour, IDragHandler , IDropHandler
 {
     [SerializeField] private float _Defence  = 10.0f;
-    [SerializeField] public float _Health;
+    [SerializeField] public float health;
     [SerializeField] private float _PercentFromTower = 5.0f;
     [SerializeField] private float repairTime = 3.0f;
     [SerializeField] private float repairRange = 1.0f;
 
     private bool _CanBePickedUp = true;
-    private float _MaxHealth =0.0f;
+    private float _MaxHealth = 0.0f;
     public Image healthBar;
     public GameObject healthBarGO;
     public float _barricadeBuildTime = 3.0f;
@@ -24,10 +25,10 @@ public class Barricade : MonoBehaviour
     public void PickUp(GameObject playerGO)
     {
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>() ;
-        _Health = tower.health * _PercentFromTower *0.01f;
-        _MaxHealth = _Health;
+        health = tower.health * _PercentFromTower *0.01f;
+        _MaxHealth = health;
         if (_MaxHealth != 0.0f)
-            healthBar.fillAmount = _Health / _MaxHealth;
+            healthBar.fillAmount = health / _MaxHealth;
         isAlive = true;
         //tower.TakeDamage(_Health);
 
@@ -46,6 +47,11 @@ public class Barricade : MonoBehaviour
     public bool CanBePickedUp()
     {
         return _CanBePickedUp;
+    }
+
+    private void Awake()
+    {
+        _MaxHealth = health;
     }
 
     private void Update()
@@ -79,9 +85,9 @@ public class Barricade : MonoBehaviour
         yield return new WaitForSeconds(repairTime);
         if (isRepairing)
         {
-            _Health = _MaxHealth ;
+            health = _MaxHealth ;
             if (_MaxHealth != 0.0f)
-                healthBar.fillAmount = _Health / _MaxHealth;
+                healthBar.fillAmount = health / _MaxHealth;
         }
         isRepairing = false;
         isAlive = true;
@@ -95,10 +101,10 @@ public class Barricade : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        _Health -= dmg;
+        health -= dmg;
         if (_MaxHealth != 0.0f)
-            healthBar.fillAmount = _Health / _MaxHealth;
-        if (_Health <= 0.0f)
+            healthBar.fillAmount = health / _MaxHealth;
+        if (health <= 0.0f)
         {
             isAlive = false;
         }
@@ -106,13 +112,34 @@ public class Barricade : MonoBehaviour
 
     public void TakeFullDamage()
     {
-        _Health -= _MaxHealth;
+        health -= _MaxHealth;
         if (_MaxHealth != 0.0f)
-            healthBar.fillAmount = _Health / _MaxHealth;
-        if (_Health <= 0.0f)
+            healthBar.fillAmount = health / _MaxHealth;
+        if (health <= 0.0f)
         {
             isAlive = false;
         }
     }
 
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (!isPlaced)
+        {
+            PlaceBarricade();
+        }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (!isPlaced)
+        {
+            Plane plane = new Plane(Vector3.up, transform.position);
+            Ray ray = eventData.pressEventCamera.ScreenPointToRay(eventData.position);
+            float distance;
+            if (plane.Raycast(ray, out distance))
+            {
+                transform.position = ray.origin + ray.direction * distance;
+            }
+        }
+    }
 }

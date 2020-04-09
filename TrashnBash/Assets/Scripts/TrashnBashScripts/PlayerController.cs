@@ -131,25 +131,30 @@ public class PlayerController : MonoBehaviour
 
         CheckMoveIndicatorActive();
 
-        if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("BarricadeSpawner"))
+        if(Input.GetMouseButtonDown(0))
         {
-            if (!_isHoldingItem)
-            {
-                _Barricade = _player.DetectBarricadeSpawner();
-                if (_Barricade == null)
-                    _isHoldingItem = false;
-                else if (_Barricade.GetComponent<Barricade>().CanBePickedUp())
-                {
-                    _Barricade.GetComponent<Barricade>().PickUp(gameObject);
-                    _isHoldingItem = true;
-                }
-            }
-            else if (!CheckBarricadePickUp())
-            {
-                StartCoroutine(PlaceBarricade());
-            }
-
+            CheckSpawnBarricade();
         }
+
+        //if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("BarricadeSpawner"))
+        //{
+        //    if (!_isHoldingItem)
+        //    {
+        //        _Barricade = _player.DetectBarricadeSpawner();
+        //        if (_Barricade == null)
+        //            _isHoldingItem = false;
+        //        else if (_Barricade.GetComponent<Barricade>().CanBePickedUp())
+        //        {
+        //            _Barricade.GetComponent<Barricade>().PickUp(gameObject);
+        //            _isHoldingItem = true;
+        //        }
+        //    }
+        //    else if (!CheckBarricadePickUp())
+        //    {
+        //        StartCoroutine(PlaceBarricade());
+        //    }
+
+        //}
 
         if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("ResourceSpawner"))
         {
@@ -384,6 +389,20 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    public void CheckSpawnBarricade()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject go = hit.transform.gameObject;
+            if (go.CompareTag("BarricadeSpawner"))
+            {
+                go.GetComponent<BarricadeSpawner>().SpawnBarricade();
+            }
+        }
+    }
+
     public bool CheckCoolDownTimes()
     {
         if (currentPoisonAttackCoolDown < Time.time && currentIntimidateAttackCoolDown < Time.time)
@@ -425,7 +444,8 @@ public class PlayerController : MonoBehaviour
                 RaycastHit hit = new RaycastHit();
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (/*(hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("PickUp")) &&*/ CheckUIbuttonPressed())
+                    if (/*(hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("PickUp")) &&*/ 
+                        CheckUIbuttonPressed() && (hit.transform.gameObject.CompareTag("Ground")))
                     {
                         agent.isStopped = true;
                         agent.SetDestination(hit.point);

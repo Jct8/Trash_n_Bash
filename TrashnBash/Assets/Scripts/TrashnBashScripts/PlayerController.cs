@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
     private GameObject _lockedOnEnemyGO = null;
     private GameObject _Barricade = null;
     private GameObject _RepairBarricade = null;
-    private GameObject _Resource = null;
+    //private GameObject _Resource = null;
     private UIManager uiManager;
     private NavMeshAgent agent;
+    public List<GameObject> _Resources;
 
+    [Header("Unit Status")]
     [SerializeField] private float moveSpeed = 10.0f;
     [SerializeField] private float minMoveSpeed = 10.0f;
     [SerializeField] private float maxMoveSpeed = 50.0f;
@@ -32,7 +34,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackCoolDown = 0.4f;
     [SerializeField] private float poisonAttackCoolDown = 3.0f;
     [SerializeField] private float intimidateAttackCoolDown = 5.0f;
-    [SerializeField] private float restoreValue = 0.5f;
+    [SerializeField][Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
+    private float towerHealCostValue = 0.5f;
+    [SerializeField][Tooltip("Amount lost to Tower from healing the player")]
+    private float towerLostCostValue = 1.0f;
+
+    [Header("Trash Cans")]
+    [SerializeField][Tooltip("Timer for digging a trash cans")] private float diggingTime = 2.0f;
+    [SerializeField][Tooltip("Limit to get trashes from a trash cans")] private int limitOfHolding = 3;
+    private bool _isDigging = false;
+    public int currentTrashes = 0;
 
     [SerializeField] private KeyCode _AttackButton = KeyCode.Space;
     [SerializeField] private KeyCode _PoisonAttackButton = KeyCode.E;
@@ -48,10 +59,9 @@ public class PlayerController : MonoBehaviour
 
     private bool _isTargetLockedOn = false;
     private bool _isHoldingItem = false;
-    private bool _isHoldingResource = false;
     private bool _isRepairing = false;
     private bool _CanMove = true;
-
+   
     private float currentAttackCoolDown = 0.0f;
     private float currentPoisonAttackCoolDown = 0.0f;
     private float currentIntimidateAttackCoolDown = 0.0f;
@@ -79,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _Resources = new List<GameObject>();
         _controller = gameObject.GetComponent<CharacterController>();
         _player = gameObject.GetComponent<Player>();
         GameObject tower = GameObject.FindGameObjectWithTag("Tower");
@@ -105,7 +116,6 @@ public class PlayerController : MonoBehaviour
                 _isTargetLockedOn = false;
             }
         }
-
 
         ActivateTargetLockedOn();
 
@@ -143,17 +153,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("ResourceSpawner"))
         {
-            if (!_isHoldingResource && !_isHoldingItem)
-            {
-                _Resource = _player.DetectResourceSpawner();
-                if (_Resource == null)
-                    _isHoldingResource = false;
-                else if (_Resource.GetComponent<Resource>().CanBePickedUp())
-                {
-                    _Resource.GetComponent<Resource>().Pickup(gameObject);
-                    _isHoldingResource = true;
-                }
-            }
+            _isDigging = true;
+            StartCoroutine(DiggingTrash());
         }
 
         if (placeUIbutton.isButtonPressed || CheckHoldDownClick("Ground"))
@@ -181,7 +182,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (/*(Input.GetKeyDown(_AttackButton) && attackEnabled) ||*/ (autoAttack && CheckCoolDownTimes() && _isTargetLockedOn))
+        if (/*(Input.GetKeyDown(_AttackButton) && attackEnabled) ||*/ (autoAttack /*&& CheckCoolDownTimes()*/ && _isTargetLockedOn))
         {
             if (currentAttackCoolDown < Time.time)
             {
@@ -271,23 +272,27 @@ public class PlayerController : MonoBehaviour
         {
             if (Vector3.Distance(_tower.transform.position, transform.position) < _tower.Getradius())
             {
-                _tower.fullHealth -= restoreValue;
+                _tower.fullHealth -= towerHealCostValue;
                 uiManager.UpdateTowerHealth(_tower.fullHealth);
-                _player.restoringHealth(restoreValue * 2.0f);
+                _player.restoringHealth(towerLostCostValue);
                 uiManager.UpdatePlayerHealth(_player.health,_player._maxHealth);
             }
         }
 
-        if (Vector3.Distance(_tower.transform.position, transform.position) < allowedRangeofResource && _isHoldingResource)
+        if (Vector3.Distance(_tower.transform.position, transform.position) < allowedRangeofResource && _Resources.Count > 0)
         {
-            _tower.GetComponent<Tower>().fullHealth += 10.0f;
-
+            _tower.GetComponent<Tower>().fullHealth += 10.0f * currentTrashes;
+            if (_tower.GetComponent<Tower>().fullHealth > 100.0f)
+                _tower.GetComponent<Tower>().fullHealth = 100.0f;
             UIManager uiManager = ServiceLocator.Get<UIManager>();
             uiManager.UpdateTowerHealth(_tower.GetComponent<Tower>().fullHealth);
 
-            Destroy(_Resource);
-            _Resource = null;
-            _isHoldingResource = false;
+            foreach(GameObject trash in _Resources)
+            {
+                Destroy(trash);
+            }
+            _Resources.Clear();
+            currentTrashes = 0;
         }
         //ActivateTargetLockedOn();
 
@@ -296,6 +301,33 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Ultility
+
+    private IEnumerator DiggingTrash()
+    {
+        if (_isHoldingItem)
+            yield return null;
+        agent.isStopped = true;
+        yield return new WaitForSeconds(diggingTime);
+        _isDigging = false;
+        agent.isStopped = false;
+        if (limitOfHolding - 1 > currentTrashes)
+        {
+            _Resources.Add(_player.DetectResourceSpawner());
+            currentTrashes++;
+            foreach (GameObject trash in _Resources)
+            {
+                if (trash)
+                {
+                    if (trash.GetComponent<Resource>().CanBePickedUp())
+                    {
+                        trash.GetComponent<Resource>().Pickup(gameObject);
+                    }
+                }
+            }
+
+        }
+        yield return null;
+    }
 
     public void CheckMoveIndicatorActive()
     {
@@ -372,7 +404,7 @@ public class PlayerController : MonoBehaviour
 
     public void CalculateMovement()
     {
-        if (!_CanMove)
+        if (!_CanMove || _isDigging)
             return;
 
         if (isUsingMouseMovement)

@@ -152,7 +152,7 @@ MonoBehaviour:
   stunTime: 0
   _DataSource: Opossums
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
-  _Health: 18
+  _Health: 24
   _Name: 
   _Attack: 2
   _Money: 10
@@ -162,6 +162,7 @@ MonoBehaviour:
   _DropRate: 0.5
   _enemyAttackRange: 2.5
   _waitForsecondOfCrows: 1
+  _AmountofTrash: 1
   rigid: {fileID: 0}
 --- !u!82 &-3833604232468093450
 AudioSource:

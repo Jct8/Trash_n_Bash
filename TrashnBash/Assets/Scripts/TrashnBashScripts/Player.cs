@@ -212,7 +212,7 @@ public class Player : MonoBehaviour, ICharacterAction
         ////Justin - TODO:Find a better method.
 
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
-        float closestDistance = Mathf.Infinity;
+        //float closestDistance = Mathf.Infinity;
         GameObject closestEnemy = null;
 
         GameObject target = gameObject.GetComponent<PlayerController>().GetLockedOnTarget();
@@ -335,7 +335,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 if (distance < ultimateRange*0.5f)
                 {
                     go.GetComponent<Enemy>()?.TakeDamage(ultimateDamage, true, DamageType.Ultimate);
-                    go.GetComponent<Enemy>().SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
+                    go.GetComponent<Enemy>()?.SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
                 }
             }
         }

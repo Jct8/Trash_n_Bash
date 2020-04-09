@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
     public List<GameObject> UISequences;
+    public Button barricadeCreateBtn;
 
     private int currentSequence = 0;
     private int numEnemiesToKill = 0;
@@ -31,18 +33,16 @@ public class TutorialManager : MonoBehaviour
         uiManager.poisonImg.SetActive(false);
         uiManager.intimidateImg.SetActive(false);
         uiManager.ultImg.SetActive(false);
-        UISequences[currentSequence].SetActive(true);
+
+        StartCoroutine(StartSequence(1.0f));
+        barricadeCreateBtn?.onClick.AddListener(ServiceLocator.Get<UIManager>().enableScreenFadeIn);
     }
 
     private void Update()
     {
         if (numEnemiesToKill <= levelManager.enemyDeathCount && isSpawnStarted)
         {
-            currentSequence++;
-            if (UISequences.Count - 1 >= currentSequence)
-            {
-                UISequences[currentSequence].SetActive(true);
-            }
+            IncrementSequence();
             isSpawnStarted = false;
             ServiceLocator.Get<UIManager>().totalWave = 0;
             ServiceLocator.Get<UIManager>().currentWave = 0;
@@ -54,17 +54,30 @@ public class TutorialManager : MonoBehaviour
         {
             if (barricade.isPlaced == true && isplaced == false)
             {
-                currentSequence++;
-                if (UISequences.Count - 1 >= currentSequence)
-                {
-                    UISequences[currentSequence].SetActive(true);
-                }
+                IncrementSequence();
 
-                barricade.TakeFullDamage() ;
+                barricade.TakeFullDamage();
                 isplaced = true;
             }
         }
-        
+
+
+    }
+
+    IEnumerator StartSequence(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        UISequences[currentSequence].SetActive(true);
+    }
+
+    public void IncrementSequence()
+    {
+        currentSequence++;
+        if (UISequences.Count - 1 >= currentSequence)
+        {
+            UISequences[currentSequence].SetActive(true);
+        }
+
     }
 
     public void LoadMenu()

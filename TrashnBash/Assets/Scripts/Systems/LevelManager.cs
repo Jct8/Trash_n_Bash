@@ -114,7 +114,15 @@ public class LevelManager : MonoBehaviour
 
     public void ResetLevel()
     {
-        ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.GamePlay);
+        if(SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.Tutorial);
+        }
+        else
+        {
+            ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.GamePlay);
+        }
+
 
         UIManager uiManager = ServiceLocator.Get<UIManager>();
         uiManager.enableFadeOut();

@@ -3967,7 +3967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &742626980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5252,6 +5252,7 @@ MonoBehaviour:
   - {fileID: 441104867}
   - {fileID: 968492152}
   - {fileID: 1830760333}
+  barricadeCreateBtn: {fileID: 1544657070}
   enemySpawnManager: {fileID: 1293048788}
 --- !u!4 &966860344
 Transform:

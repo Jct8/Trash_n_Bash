@@ -17,15 +17,15 @@ public class Tower : MonoBehaviour
     public float fireDuration = 0.0f;
 
     private Action _action;
-
+    [Header("Tower Status")]
     public string dataSourceId = "Tower";
     public string name;
-    public float range;
-    public float damage;
-    public float speed;
-    public float health;
-    public float attackRate;
-    public float fullHealth;
+    public float range = 2.0f;
+    public float damage = 10.0f;
+    public float speed = 5.0f;
+    public float health = 100.0f;
+    public float attackRate = 1.0f;
+    public float fullHealth = 50.0f;
     public float shotTime;
     public bool isShooting = true;
     public string specificEnemy = "NONE";
@@ -38,11 +38,7 @@ public class Tower : MonoBehaviour
         dataLoader = ServiceLocator.Get<DataLoader>();
         towerData = dataLoader.GetDataSourceById(dataSourceId) as JsonDataSource;
         name = System.Convert.ToString(towerData.DataDictionary["Name"]);
-        damage = System.Convert.ToSingle(towerData.DataDictionary["Damage"]);
-        speed = System.Convert.ToSingle(towerData.DataDictionary["Speed"]);
-        health = System.Convert.ToSingle(towerData.DataDictionary["Health"]);
-        attackRate = System.Convert.ToSingle(towerData.DataDictionary["AttackRate"]);
-        range = System.Convert.ToSingle(towerData.DataDictionary["Range"]);
+
         audioSource = GetComponent<AudioSource>();
         fullHealth = health / 2.0f;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);

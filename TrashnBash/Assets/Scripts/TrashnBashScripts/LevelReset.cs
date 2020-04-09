@@ -9,6 +9,9 @@ public class LevelReset : MonoBehaviour
 
     private void Awake()
     {
+        if (!App.Instance.hasGameLoaded)
+            return;
+
         ServiceLocator.Get<LevelManager>().ResetLevel();
         ServiceLocator.Get<AudioManager>().musicSource.clip = BGM;
         ServiceLocator.Get<AudioManager>().musicSource.volume = 1.0f;

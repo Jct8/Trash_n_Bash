@@ -36,8 +36,11 @@ public class Tower : MonoBehaviour
     private void Awake()
     {
         dataLoader = ServiceLocator.Get<DataLoader>();
-        towerData = dataLoader.GetDataSourceById(dataSourceId) as JsonDataSource;
-        name = System.Convert.ToString(towerData.DataDictionary["Name"]);
+        if (App.Instance.hasGameLoaded)
+        {
+            towerData = dataLoader.GetDataSourceById(dataSourceId) as JsonDataSource;
+            name = System.Convert.ToString(towerData.DataDictionary["Name"]);
+        }
 
         audioSource = GetComponent<AudioSource>();
         fullHealth = health / 2.0f;

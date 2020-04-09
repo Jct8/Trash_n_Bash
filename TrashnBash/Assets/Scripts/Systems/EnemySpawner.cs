@@ -11,13 +11,12 @@ public class EnemySpawner : MonoBehaviour
     [System.Serializable]
     public class EnemyPath
     {
-        public Transform WayPointsHolder;
         public List<Transform> WayPoints { get; set; }
 
-        public void SetupWaypoints()
+        public void SetupWaypoints(Transform waypointsHolder)
         {
             WayPoints = new List<Transform>();
-            foreach (Transform waypoint in WayPointsHolder)
+            foreach (Transform waypoint in waypointsHolder)
                 WayPoints.Add(waypoint);
         }
     }
@@ -32,14 +31,15 @@ public class EnemySpawner : MonoBehaviour
     public int _currentWave;
     public bool StartOnSceneLoad = true;
 
-    public List<GameObject> _activeEnemies = new List<GameObject>();
+    private List<GameObject> _activeEnemies = new List<GameObject>();
 
-    public EnemyPath _path;
+    private EnemyPath _path;
     private Action OnRecycle;
 
     private void Awake()
     {
-        _path.SetupWaypoints();
+        _path = new EnemyPath();
+        _path.SetupWaypoints(transform.GetChild(0));
 
         if (_UnitPrefeb == null)
         {
@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < _enemiesPerWave; i++)
         {
             GameObject _enemy = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool(_UnitPrefeb.name);
-            _enemy.transform.position = transform.position;
+            _enemy.transform.position = _path.WayPoints[0].transform.position;
             _enemy.SetActive(true);
             OnRecycle = () => Recycle(_enemy);
             _enemy.GetComponent<Enemy>().Initialize(_path, OnRecycle);
@@ -94,22 +94,22 @@ public class EnemySpawner : MonoBehaviour
     {
         Gizmos.color = gizmoColor;
 
-        Gizmos.DrawWireCube(transform.position, Vector3.one);
+        Transform waypointsHolder = transform.GetChild(0);
 
-        if (_path.WayPointsHolder == null)
+        if (waypointsHolder == null)
             return;
 
-        Gizmos.DrawLine(transform.position, _path.WayPointsHolder.GetChild(0).transform.position);
         int i = 0;
-        foreach (Transform child in _path.WayPointsHolder)
+        foreach (Transform child in waypointsHolder)
         {
-            if (i < _path.WayPointsHolder.childCount - 1)
+            if (i < waypointsHolder.childCount - 1)
             {
-                Gizmos.DrawLine(child.transform.position, _path.WayPointsHolder.GetChild(i + 1).transform.position);
-                Gizmos.DrawWireSphere(child.transform.position, 0.25f);
+                Gizmos.DrawLine(child.transform.position, waypointsHolder.GetChild(i + 1).transform.position);
+                Gizmos.DrawSphere(child.transform.position, 0.25f);
             }
 
             i++;
         }
+        Gizmos.DrawSphere(waypointsHolder.GetChild(waypointsHolder.childCount-1).transform.position, 0.25f);
     }
 }

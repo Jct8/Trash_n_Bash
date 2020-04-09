@@ -14,13 +14,15 @@ public class TutorialManager : MonoBehaviour
     private bool isSpawnStarted = false;
 
     private LevelManager levelManager;
-    public EnemySpawnManager enemySpawnManager;
+    private EnemySpawnManager enemySpawnManager;
     private Barricade barricade = null;
 
     private bool isplaced = false;
 
     private void Start()
     {
+        enemySpawnManager = FindObjectOfType<EnemySpawnManager>();
+
         levelManager = ServiceLocator.Get<LevelManager>();
         levelManager.isTutorial = true;
         PlayerController player = levelManager.playerInstance.GetComponent<PlayerController>();

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public List<EnemySpawner> Spawners;
-    public TutorialManager tutorialManager;
+    public List<EnemySpawner> Spawners { get; set; }
+    private TutorialManager tutorialManager;
 
     private void Awake()
     {
         Spawners = new List<EnemySpawner>(GetComponentsInChildren<EnemySpawner>());
+        tutorialManager = FindObjectOfType<TutorialManager>();
     }
 
     void Start()
@@ -25,7 +26,9 @@ public class EnemySpawnManager : MonoBehaviour
 
     public void StartSpawer(EnemySpawner spawner)
     {
-        tutorialManager.AddCount(spawner._numberOfWave * spawner._enemiesPerWave);
+        if (tutorialManager != null)
+            tutorialManager.AddCount(spawner._numberOfWave * spawner._enemiesPerWave);
+        
         spawner.StartSpawner();
     }
 

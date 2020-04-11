@@ -1666,6 +1666,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1508972013, guid: 18c7f0969ba5d0644814a9a3ca291106, type: 3}
+      propertyPath: BGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a3996ddbde71d948945e0ebbb56b910, type: 3}
     - target: {fileID: 8642484305662360738, guid: 18c7f0969ba5d0644814a9a3ca291106,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -3637,11 +3641,6 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.34
       objectReference: {fileID: 0}
-    - target: {fileID: 2988891865678312697, guid: ef81508d82748484898465d7a033ac03,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1802465040374718059, guid: ef81508d82748484898465d7a033ac03,
         type: 3}
       propertyPath: barricadeSpawnPosition
@@ -3711,6 +3710,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -184.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988891865678312697, guid: ef81508d82748484898465d7a033ac03,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef81508d82748484898465d7a033ac03, type: 3}

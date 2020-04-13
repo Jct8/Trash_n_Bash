@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController)), RequireComponent(typeof(Player)), RequireComponent(typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
@@ -34,10 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackCoolDown = 0.4f;
     [SerializeField] private float poisonAttackCoolDown = 3.0f;
     [SerializeField] private float intimidateAttackCoolDown = 5.0f;
-    [SerializeField][Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
-    private float towerHealCostValue = 0.5f;
-    [SerializeField][Tooltip("Amount lost to Tower from healing the player")]
-    private float towerLostCostValue = 1.0f;
+
 
     [Header("Trash Cans")]
     [SerializeField][Tooltip("Timer for digging a trash cans")] private float diggingTime = 2.0f;
@@ -108,6 +106,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        
+
         if(_lockedOnEnemyGO)
         {
             if (_lockedOnEnemyGO.GetComponent<Enemy>().IsDead)
@@ -158,8 +158,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("ResourceSpawner"))
         {
-            _isDigging = true;
-            StartCoroutine(DiggingTrash());
+            if(!_isDigging)
+            {
+                _isDigging = true;
+                StartCoroutine(DiggingTrash());
+            }
+
         }
 
         if (placeUIbutton.isButtonPressed || CheckHoldDownClick("Ground"))
@@ -270,17 +274,6 @@ public class PlayerController : MonoBehaviour
                     _player.IntimidateAttack(_lockedOnEnemyGO);
                 }
                 currentIntimidateAttackCoolDown = Time.time + intimidateAttackCoolDown;
-            }
-        }
-
-        if (CheckHoldDownClick("Tower") && _player.Health < 100.0f)
-        {
-            if (Vector3.Distance(_tower.transform.position, transform.position) < _tower.Getradius())
-            {
-                _tower.fullHealth -= towerHealCostValue;
-                uiManager.UpdateTowerHealth(_tower.fullHealth);
-                _player.restoringHealth(towerLostCostValue);
-                uiManager.UpdatePlayerHealth(_player.health,_player._maxHealth);
             }
         }
 

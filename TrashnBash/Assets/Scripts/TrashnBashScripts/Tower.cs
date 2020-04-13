@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
+    public GameObject signifierGO;
+    public Image signifier;
     public Transform partToRotate;
     public GameObject bulletPrefeb;
     public Transform firePoint;
@@ -33,6 +36,21 @@ public class Tower : MonoBehaviour
     public AudioClip shotSound;
     AudioSource audioSource;
 
+    [SerializeField]
+    [Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
+    private float towerHealCostValue = 30.0f;
+    [SerializeField]
+    [Tooltip("Amount lost to Tower from healing the player")]
+    private float towerLostCostValue = 15.0f;
+    [SerializeField]
+    [Tooltip("Cool Time for regaining Health from Tower")]
+
+    public float minimumPlayerHealth = 30.0f;
+
+    private float totalRegainCoolTime = 25.0f;
+    private float currentRagainCoolTime = 0.0f;
+
+
     private void Awake()
     {
         dataLoader = ServiceLocator.Get<DataLoader>();
@@ -46,6 +64,13 @@ public class Tower : MonoBehaviour
         fullHealth = health / 2.0f;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
+
+    private void Start()
+    {
+        if(signifier)
+         signifier.fillAmount = 0;
+    }
+
     public void Initialize(float dmg, float s, float h, float ar, float r)
     {
         damage = dmg;
@@ -58,6 +83,16 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
+        if (signifierGO)
+            signifierGO.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
+        CheckingClick();
+        
+        if(signifier)
+        if (signifier.fillAmount <= 1)
+        {
+            signifier.fillAmount += 1 / totalRegainCoolTime * Time.deltaTime;
+        }
+
         if (!isShooting)
         {
             return;
@@ -113,6 +148,23 @@ public class Tower : MonoBehaviour
         }
     }
 
+    public void CheckingClick()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit = new RaycastHit();
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.tag == "Tower")
+                {
+                    restoring();
+                }
+            }
+        }
+
+    }
+
     public void Recycle(GameObject obj)
     {
         ServiceLocator.Get<ObjectPoolManager>().RecycleObject(obj);
@@ -151,5 +203,27 @@ public class Tower : MonoBehaviour
     public float Getradius()
     {
         return radius * radius;
+    }
+
+    public void restoring()
+    {
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+        Player player = go.GetComponent<Player>();
+        if (!uiManager || !player)
+            return;
+        if (player.health >= minimumPlayerHealth)
+            return;
+        if (fullHealth <= minimumPlayerHealth)
+            return;
+
+        if (signifier.fillAmount >= 1)
+        {
+            fullHealth -= towerLostCostValue;
+            uiManager.UpdateTowerHealth(fullHealth);
+            player.restoringHealth(towerHealCostValue);
+            uiManager.UpdatePlayerHealth(player.health, player._maxHealth);
+            signifier.fillAmount = 0;
+        }
     }
 }

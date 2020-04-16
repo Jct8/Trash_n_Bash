@@ -933,7 +933,6 @@ MonoBehaviour:
   - {fileID: 1404182249}
   - {fileID: 536443257}
   - {fileID: 111716783}
-  - {fileID: 1701879947}
   barricadeCreateBtn: {fileID: 1248629363}
 --- !u!4 &552895849
 Transform:
@@ -1995,7 +1994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64.66004, y: -34.1}
+  m_AnchoredPosition: {x: -62, y: 51.5}
   m_SizeDelta: {x: 394.2, y: 103}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1242123639
@@ -2077,8 +2076,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.3, y: -16.4}
-  m_SizeDelta: {x: 1955.3, y: 1058.6}
+  m_AnchoredPosition: {x: -4.3, y: -27.6}
+  m_SizeDelta: {x: 1955.3, y: 1080.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1248629363
 MonoBehaviour:
@@ -2441,7 +2440,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press and hold down anywhere to place your barricade
+  m_Text: Press and drag anywhere to place your barricade
 --- !u!222 &1318224555
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3495,7 +3494,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Press and hold on the\n                to assemble your trash"
+  m_Text: "Press on the\n                to assemble your trash"
 --- !u!222 &2050663875
 CanvasRenderer:
   m_ObjectHideFlags: 0

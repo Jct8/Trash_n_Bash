@@ -220,6 +220,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Order.Barricade)
             {
+                if(!_ObjectofBarricade)
+                {
+                    _Order = Order.Tower;
+                    return;
+                }
+
                 LookAt(_ObjectofBarricade.transform.position, _ObjectofBarricade);
                 enemyAbilities.Flying(_ObjectofBarricade.transform);
                 if (isCloseToBarricade(_enemyAttackRange))

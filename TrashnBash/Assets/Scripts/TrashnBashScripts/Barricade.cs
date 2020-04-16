@@ -107,6 +107,7 @@ public class Barricade : MonoBehaviour, IDragHandler , IDropHandler
         if (health <= 0.0f)
         {
             isAlive = false;
+            Destroy(gameObject);
         }
     }
 

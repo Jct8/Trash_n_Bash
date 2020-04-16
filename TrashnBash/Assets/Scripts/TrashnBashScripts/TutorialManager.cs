@@ -56,13 +56,12 @@ public class TutorialManager : MonoBehaviour
         {
             if (barricade.isPlaced == true && isplaced == false)
             {
-                IncrementSequence();
-                barricade.TakeFullDamage();
+                //IncrementSequence();
+                //barricade.TakeFullDamage();
                 isplaced = true;
+                EndTutorial();
             }
         }
-
-
     }
 
     IEnumerator StartSequence(float delay)

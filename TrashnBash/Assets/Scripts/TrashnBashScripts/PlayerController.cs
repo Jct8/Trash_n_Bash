@@ -178,18 +178,18 @@ public class PlayerController : MonoBehaviour
         if (_isHoldingItem)
             return;
 
-        if (Input.GetKeyDown(_RepairButton) || CheckHoldDownClick("Barricade") || repairUIbutton.isButtonPressed)
-        {
-            _RepairBarricade = _player.DetectBarricade();
-            if (_RepairBarricade == null)
-                _isHoldingItem = false;
-            else if (!_isRepairing)
-            {
-                _isRepairing = true;
-                _RepairBarricade.GetComponent<Barricade>().inRangeRepair = true;
-                StartCoroutine(_RepairBarricade.GetComponent<Barricade>().Repair());
-            }
-        }
+        //if (Input.GetKeyDown(_RepairButton) || CheckHoldDownClick("Barricade") || repairUIbutton.isButtonPressed)
+        //{
+        //    _RepairBarricade = _player.DetectBarricade();
+        //    if (_RepairBarricade == null)
+        //        _isHoldingItem = false;
+        //    else if (!_isRepairing)
+        //    {
+        //        _isRepairing = true;
+        //        _RepairBarricade.GetComponent<Barricade>().inRangeRepair = true;
+        //        StartCoroutine(_RepairBarricade.GetComponent<Barricade>().Repair());
+        //    }
+        //}
 
         if (/*(Input.GetKeyDown(_AttackButton) && attackEnabled) ||*/ (autoAttack /*&& CheckCoolDownTimes()*/ && _isTargetLockedOn))
         {

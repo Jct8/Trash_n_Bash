@@ -17,7 +17,7 @@ public class BarricadeSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (currentTime < Time.time)
+        if (currentTime < Time.time && totalBarricades < barricadeLimit)
             signifier.SetActive(true);
         else
             signifier.SetActive(false);

@@ -142,7 +142,7 @@ MonoBehaviour:
     type: 3}
   signifier: {fileID: 3161914439408014698}
   barricadeSpawnPosition: {fileID: 0}
-  barricadeLimit: 4
+  barricadeLimit: 50
   baseBarricadeCost: 10
   spawnCoolDownTime: 5
 --- !u!1001 &2988891865678279243

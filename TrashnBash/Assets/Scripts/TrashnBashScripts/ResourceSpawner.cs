@@ -28,7 +28,7 @@ public class ResourceSpawner : MonoBehaviour
     {
         if(completedCoolTime)
         {
-            if(totalCoolTime < limit)
+            if(totalResourceTaken < limit)
             {
                 GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
 

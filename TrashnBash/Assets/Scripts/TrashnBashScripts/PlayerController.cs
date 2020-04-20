@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             CheckSpawnBarricade();
+            CheckSpawnResource();
         }
 
         //if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("BarricadeSpawner"))
@@ -156,15 +157,15 @@ public class PlayerController : MonoBehaviour
 
         //}
 
-        if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("ResourceSpawner"))
-        {
-            if(!_isDigging)
-            {
-                _isDigging = true;
-                StartCoroutine(DiggingTrash());
-            }
+        //if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("ResourceSpawner"))
+        //{
+        //    if(!_isDigging)
+        //    {
+        //        _isDigging = true;
+        //        StartCoroutine(DiggingTrash());
+        //    }
 
-        }
+        //}
 
         if (placeUIbutton.isButtonPressed || CheckHoldDownClick("Ground"))
         {
@@ -277,21 +278,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(_tower.transform.position, transform.position) < allowedRangeofResource && _Resources.Count > 0)
-        {
-            _tower.GetComponent<Tower>().fullHealth += 10.0f * currentTrashes;
-            if (_tower.GetComponent<Tower>().fullHealth > 100.0f)
-                _tower.GetComponent<Tower>().fullHealth = 100.0f;
-            UIManager uiManager = ServiceLocator.Get<UIManager>();
-            uiManager.UpdateTowerHealth(_tower.GetComponent<Tower>().fullHealth);
-
-            foreach(GameObject trash in _Resources)
-            {
-                Destroy(trash);
-            }
-            _Resources.Clear();
-            currentTrashes = 0;
-        }
         //ActivateTargetLockedOn();
 
     }
@@ -392,6 +378,20 @@ public class PlayerController : MonoBehaviour
             if (go.CompareTag("BarricadeSpawner"))
             {
                 go.GetComponent<BarricadeSpawner>().SpawnBarricade();
+            }
+        }
+    }
+
+    public void CheckSpawnResource()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if(Physics.Raycast(ray, out hit))
+        {
+            GameObject go = hit.transform.gameObject;
+            if(go.CompareTag("ResourceSpawner"))
+            {
+                go.GetComponent<ResourceSpawner>().SpawnResource();
             }
         }
     }

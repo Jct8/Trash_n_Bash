@@ -226,4 +226,12 @@ public class Tower : MonoBehaviour
             signifier.fillAmount = 0;
         }
     }
+
+    public void collecting(float value)
+    {
+        fullHealth += value;
+
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+        uiManager.UpdateTowerHealth(fullHealth);
+    }
 }

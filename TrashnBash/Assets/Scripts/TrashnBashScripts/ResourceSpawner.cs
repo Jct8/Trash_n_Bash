@@ -7,18 +7,20 @@ using UnityEngine.UI;
 public class ResourceSpawner : MonoBehaviour
 {
     [Header("Trash can")]
+    public GameObject ObjectPos;
     public GameObject resourcePrefab;
     public GameObject coolTimeGO;
     public Image coolTimeImage;
     public List<GameObject> trashModels;
     public float totalCoolTime = 15;
-    private float currentCoolTime = 0;
+    public int limit = 3;
     private bool completedCoolTime = false;
+    private int totalResourceTaken = 0;
 
     void Start()
     {
-        currentCoolTime = 0;
         completedCoolTime = false;
+        totalResourceTaken = 0;
         coolTimeImage.fillAmount = 0;
     }
 
@@ -26,18 +28,23 @@ public class ResourceSpawner : MonoBehaviour
     {
         if(completedCoolTime)
         {
-            GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
+            if(totalCoolTime < limit)
+            {
+                GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
 
-            //random trash model
-            UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
-            int randomNumber = UnityEngine.Random.Range(0, trashModels.Count - 1);
-            GameObject resourceModel = Instantiate(trashModels[randomNumber], gameObject.transform.position, Quaternion.identity) as GameObject;
-            resourceModel.transform.parent = resource.transform;
-
-            currentCoolTime = 0;
-            completedCoolTime = false;
-            coolTimeImage.fillAmount = 0;
-            return resource;
+                //random trash model
+                UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+                int randomNumber = UnityEngine.Random.Range(0, trashModels.Count - 1);
+                GameObject resourceModel = Instantiate(trashModels[randomNumber], gameObject.transform.position, Quaternion.identity) as GameObject;
+                resourceModel.transform.parent = resource.transform;
+                totalResourceTaken++;
+                completedCoolTime = false;
+                return resource;
+            }
+            else
+            {
+                return null;
+            }
         }
         else
         {
@@ -52,12 +59,25 @@ public class ResourceSpawner : MonoBehaviour
         if (coolTimeImage.fillAmount >= 1)
         {
             completedCoolTime = true;
-            currentCoolTime += totalCoolTime + Time.time;
 
         }
         else
         {
             coolTimeImage.fillAmount += 1 / totalCoolTime * Time.deltaTime;
         }
+    }
+
+    public void SpawnResource()
+    {
+        if(coolTimeImage.fillAmount >= 1)
+        {
+            GameObject resource = GetResource();
+            if(resource)
+            {
+                resource.transform.position = ObjectPos.transform.position;
+                coolTimeImage.fillAmount = 0;
+            }
+        }
+
     }
 }

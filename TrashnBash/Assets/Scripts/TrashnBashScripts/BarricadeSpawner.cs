@@ -15,6 +15,15 @@ public class BarricadeSpawner : MonoBehaviour
     private int totalBarricades = 0;
     private float currentTime = 0.0f;
 
+    private void Start()
+    {
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            baseBarricadeCost = variableLoader.BarriacdeStats["TrashCost"];
+        }
+    }
+
     private void Update()
     {
         if (currentTime < Time.time && totalBarricades < barricadeLimit)

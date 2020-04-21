@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1508972014}
   - component: {fileID: 1508972013}
-  - component: {fileID: 831801644682057960}
   m_Layer: 0
   m_Name: LevelReset
   m_TagString: Untagged
@@ -45,18 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGM: {fileID: 8300000, guid: 5a17c475460ac5742a65450847a00020, type: 3}
---- !u!114 &831801644682057960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508972012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67574a07849328947badc5071e6f0140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2021528366411692247
 GameObject:
   m_ObjectHideFlags: 0

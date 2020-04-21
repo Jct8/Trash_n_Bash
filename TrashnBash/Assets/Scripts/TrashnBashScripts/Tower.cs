@@ -26,7 +26,7 @@ public class Tower : MonoBehaviour
     public float range = 2.0f;
     public float damage = 10.0f;
     public float speed = 5.0f;
-    public float health = 100.0f;
+    public float MaxHealth = 100.0f;
     public float attackRate = 1.0f;
     public float fullHealth = 50.0f;
     public float shotTime;
@@ -61,24 +61,36 @@ public class Tower : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
-        fullHealth = health / 2.0f;
+        fullHealth = MaxHealth / 2.0f;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
+
+        
+
     }
 
     private void Start()
     {
         if(signifier)
          signifier.fillAmount = 0;
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            MaxHealth = variableLoader.TowerStats["Health"];
+            towerHealCostValue = variableLoader.TowerStats["PlayerHeal"];
+            towerLostCostValue = variableLoader.TowerStats["TrashCost"];
+
+            fullHealth = MaxHealth;
+        }
     }
 
     public void Initialize(float dmg, float s, float h, float ar, float r)
     {
         damage = dmg;
         speed = s;
-        health = h;
+        MaxHealth = h;
         attackRate = ar;
         range = r;
-        fullHealth = health;
+        fullHealth = MaxHealth;
     }
 
     void Update()

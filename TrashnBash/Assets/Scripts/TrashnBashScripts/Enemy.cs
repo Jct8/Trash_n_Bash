@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public Order _Order { get; set; }
 
-    public float fullHealth;
+    public float health;
     public float stunTime = 0.0f;
     private int _CurrentWayPoint = 0;
     private bool _isDetected = false;
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public string Name { get { return _Name; } private set { } }
     public bool IsDead { get { return _IsDead; } set { _IsDead = value; } }
     [Header("Enemy Status")]
-    public float _Health = 1.0f;
+    public float MaxHealth = 18.0f;
     [SerializeField] private string _Name;
     [SerializeField] private float _Attack = 1.0f;
     [SerializeField] private float _Money;
@@ -284,8 +284,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _Agent = GetComponent<NavMeshAgent>();
         _Agent.speed = _Speed;
         _IsDead = false;
-        fullHealth = _Health;
-        healthBar.fillAmount = fullHealth / _Health;
+
+        //Reset Variable
+        health = MaxHealth;
+        healthBar.fillAmount = health / MaxHealth;
         CooltimeBar.fillAmount = 0;
         rigid = gameObject.GetComponent<Rigidbody>();
         _targetIndicator = transform.Find("TargetIndicator").gameObject;
@@ -294,6 +296,20 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _isDetected = false;
         _IsAttacked = false;
         _isPoisoned = false;
+
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            MaxHealth = variableLoader.EnemyStats[_Name]["HP"];
+            _Speed = variableLoader.EnemyStats[_Name]["Speed"];
+            _Attack = variableLoader.EnemyStats[_Name]["Steal"];
+            _Attack = variableLoader.EnemyStats[_Name]["Damage"];
+            _AttackCoolTime = variableLoader.EnemyStats[_Name]["CoolDown"];
+            _enemyAttackRange= variableLoader.EnemyStats[_Name]["Range"];
+
+            health = MaxHealth;
+            healthBar.fillAmount = health / MaxHealth;
+        }
     }
 
     public void Alive()
@@ -302,8 +318,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _IsDead = false;
         _Order = Order.Tower;
         _CurrentWayPoint = 0;
-        fullHealth = _Health;
-        healthBar.fillAmount = fullHealth / _Health;
+        health = MaxHealth;
+        healthBar.fillAmount = health / MaxHealth;
         CooltimeBar.fillAmount = 0;
         rigid.velocity = Vector3.zero;
         _isDetected = false;
@@ -397,7 +413,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             return;
 
         enemyAbilities.PlayDead(player);
-        fullHealth -= Dmg;
+        health -= Dmg;
 
         popUp.GetComponent<TextMesh>().text = Dmg.ToString();
 
@@ -422,7 +438,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
 
-        healthBar.fillAmount = fullHealth / _Health;
+        healthBar.fillAmount = health / MaxHealth;
 
         if (isHero)
         {
@@ -449,7 +465,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 _Order = Order.Fight;
         }
 
-        if (fullHealth <= 0.0f)
+        if (health <= 0.0f)
         {
             if (_IsStolen)
             {

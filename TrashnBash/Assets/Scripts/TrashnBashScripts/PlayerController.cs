@@ -96,12 +96,27 @@ public class PlayerController : MonoBehaviour
         uiManager = ServiceLocator.Get<UIManager>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+
         poisonUIbutton = ServiceLocator.Get<UIManager>()?.poisonImg.GetComponent<UIbutton>();
         intimidateUIbutton = ServiceLocator.Get<UIManager>()?.intimidateImg.GetComponent<UIbutton>();
         ultUIbutton = ServiceLocator.Get<UIManager>()?.ultImg.GetComponent<UIbutton>();
         repairUIbutton = ServiceLocator.Get<UIManager>()?.repairButton.GetComponent<UIbutton>();
         placeUIbutton = ServiceLocator.Get<UIManager>()?.placeButton.GetComponent<UIbutton>();
         attackUIbutton = ServiceLocator.Get<UIManager>()?.basicAttackButton.GetComponent<UIbutton>();
+    }
+
+    private void Start()
+    {
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            moveSpeed = variableLoader.PlayerStats["Speed"];
+            agent.speed = moveSpeed;
+
+            attackCoolDown = variableLoader.PlayerAbilties["Attack"]["Cooldown"];
+            poisonAttackCoolDown = variableLoader.PlayerAbilties["Poison"]["Cooldown"];
+            intimidateAttackCoolDown = variableLoader.PlayerAbilties["Stun"]["Cooldown"];
+        }
     }
 
     private void Update()

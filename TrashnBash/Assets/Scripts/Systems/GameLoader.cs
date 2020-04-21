@@ -13,6 +13,7 @@ public class GameLoader : AsyncLoader
     public GameObject _UIPrefeb;
     public GameObject audioPrefeb;
     public GameObject upgradeStatPrefeb;
+    public GameObject variableLoaderPrefab;
     public List<Component> gameModules = new List<Component>();
 
     protected override void Awake()
@@ -110,6 +111,11 @@ public class GameLoader : AsyncLoader
         _upgradeInstance.transform.SetParent(systemsParent);
         UpgradeStats upgradeComp = _upgradeInstance.GetComponent<UpgradeStats>();
         ServiceLocator.Register<UpgradeStats>(upgradeComp.Initialize());
+
+        GameObject _variableLoaderInstance = GameObject.Instantiate(variableLoaderPrefab);
+        _variableLoaderInstance.transform.SetParent(systemsParent);
+        VariableLoader variableLoader = _variableLoaderInstance.GetComponent<VariableLoader>();
+        ServiceLocator.Register<VariableLoader>(variableLoader.Initialize());
 
         yield return null;
     }

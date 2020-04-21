@@ -10,7 +10,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public float _maxHealth = 100.0f;
     [SerializeField] private float attack = 1.0f;
     [SerializeField] private float intimdateStunTime = 3.0f;
-    [SerializeField] public float attackRange = 20.0f;
+    [SerializeField] public float  attackRange = 20.0f;
     [SerializeField] private float poisonRange = 5.0f;
     [SerializeField] private float poisonDamage = 10.0f;
     [SerializeField] private float poisonTotalTime = 3.0f;
@@ -76,6 +76,22 @@ public class Player : MonoBehaviour, ICharacterAction
         _uiManager.UpdatePlayerHealth(health, _maxHealth);
         //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
         //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
+
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            _maxHealth = variableLoader.PlayerStats["HP"];
+            healedByItem = variableLoader.PickUpStats["HealAmount"];
+
+            attack = variableLoader.PlayerAbilties["Attack"]["Damage"];
+            attackRange = variableLoader.PlayerAbilties["Attack"]["Range"];
+
+            initialPoisonAttackDamage = variableLoader.PlayerAbilties["Poison"]["Damage"];
+            poisonRange = variableLoader.PlayerAbilties["Poison"]["Range"];
+
+            ultimateDamage = variableLoader.PlayerAbilties["Ultimate"]["Damage"];
+            ultimateRange = variableLoader.PlayerAbilties["Ultimate"]["Range"];
+        }
     }
     void Update()
     {

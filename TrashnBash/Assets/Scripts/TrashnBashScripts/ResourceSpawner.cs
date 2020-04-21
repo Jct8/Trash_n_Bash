@@ -22,6 +22,13 @@ public class ResourceSpawner : MonoBehaviour
         completedCoolTime = false;
         totalResourceTaken = 0;
         coolTimeImage.fillAmount = 0;
+
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            limit = (int) variableLoader.TrashCanStats["TrashLimit"];
+            totalCoolTime = variableLoader.TrashCanStats["Cooldown"];
+        }
     }
 
     public GameObject GetResource()

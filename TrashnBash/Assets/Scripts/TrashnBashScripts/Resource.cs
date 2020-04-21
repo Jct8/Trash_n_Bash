@@ -11,6 +11,16 @@ public class Resource : MonoBehaviour, IDragHandler
     public float healValue = 10.0f;
     private bool _CanBePickedUp = true;
     private bool _isPlaced = false;
+
+    private void Start()
+    {
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            healValue = variableLoader.TrashCanStats["Cooldown"];
+        }
+    }
+
     void Update()
     {
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();

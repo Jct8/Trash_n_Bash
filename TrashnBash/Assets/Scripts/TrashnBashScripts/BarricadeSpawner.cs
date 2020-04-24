@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class BarricadeSpawner : MonoBehaviour
 {
     public GameObject barricadePrefab;
     public GameObject signifier;
     public Transform barricadeSpawnPosition;
+    public GameObject trashImgPrefab;
 
     public int barricadeLimit = 5;
     public float baseBarricadeCost = 10.0f;
@@ -14,6 +17,8 @@ public class BarricadeSpawner : MonoBehaviour
 
     private int totalBarricades = 0;
     private float currentTime = 0.0f;
+
+    private bool isDragging = false;
 
     private void Start()
     {
@@ -67,10 +72,19 @@ public class BarricadeSpawner : MonoBehaviour
             GameObject barricade = GetBarricade();
             if (barricade)
             {
-                barricade.transform.position = barricadeSpawnPosition.position;
+                //barricade.transform.position = barricadeSpawnPosition.position;
+                barricade.SetActive(false);
+
+                GameObject trashImg = Instantiate(trashImgPrefab);
+                trashImg.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                trashImg.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                trashImg.GetComponent<DragDrop>().isDragging = true;
+                trashImg.GetComponent<DragDrop>().itemToBeDroped = barricade;
+
                 currentTime = Time.time + spawnCoolDownTime;
             }
         }
     }
 
+    
 }

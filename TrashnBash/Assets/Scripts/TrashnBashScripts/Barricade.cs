@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Barricade : MonoBehaviour, IDragHandler , IDropHandler
+public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDraggableItem
 {
     [SerializeField] private float _Defence  = 10.0f;
     [SerializeField] public float health;
@@ -154,5 +154,17 @@ public class Barricade : MonoBehaviour, IDragHandler , IDropHandler
                 transform.position = ray.origin + ray.direction * distance;
             }
         }
+    }
+
+    public void DropItem()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(ray, out hit))
+        {
+            transform.position = hit.point;
+        }
+        gameObject.SetActive(true);
+        PlaceBarricade();
     }
 }

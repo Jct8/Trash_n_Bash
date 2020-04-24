@@ -519,7 +519,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Space To Skip
+  m_Text: Hold Down To Skip
 --- !u!222 &1312386400
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -571,7 +571,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: https://www.youtube.com/watch?v=FEIFyz8R9Xs
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -609,7 +609,9 @@ MonoBehaviour:
   rawImage: {fileID: 1004475185}
   videoPlayer: {fileID: 1640941348}
   fadeScreen: {fileID: 2075544792}
+  videoToPlay: {fileID: 32900000, guid: db9b23f7ccdd783489676a947465e954, type: 3}
   videoDelayTime: 0.5
+  holdClickTimeMax: 1
 --- !u!1 &1663118885
 GameObject:
   m_ObjectHideFlags: 0

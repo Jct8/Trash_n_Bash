@@ -11,6 +11,8 @@ public class Resource : MonoBehaviour, IDragHandler
     public float healValue = 10.0f;
     private bool _CanBePickedUp = true;
     private bool _isPlaced = false;
+    private Vector3 mousePos;
+    private Vector3 ScreenToWorldPoint;
 
     private void Start()
     {
@@ -24,6 +26,11 @@ public class Resource : MonoBehaviour, IDragHandler
     void Update()
     {
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
+
+        mousePos = Input.mousePosition;
+        ScreenToWorldPoint = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10.0f));
+        transform.position = ScreenToWorldPoint;
+
         if (tower)
         {
             if (Vector3.Distance(transform.position, tower.transform.position) <= allowedRangeofResource)

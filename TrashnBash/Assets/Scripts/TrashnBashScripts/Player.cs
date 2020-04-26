@@ -407,23 +407,6 @@ public class Player : MonoBehaviour, ICharacterAction
         return null;
     }
 
-    public GameObject DetectResourceSpawner()
-    {
-        Collider[] HitColliders = Physics.OverlapSphere(transform.position, attackRange);
-
-        foreach (var go in HitColliders)
-        {
-            Vector3 direction = (go.transform.position - transform.position);
-            float distance = Vector2.Distance(transform.position, go.transform.position);
-            float angle = Vector3.Angle(transform.forward, direction);
-            if (distance < attackRange && go.CompareTag("ResourceSpawner"))
-            {
-                return go.GetComponent<ResourceSpawner>().GetResource();
-            }
-        }
-        return null;
-    }
-
     public void restoringHealth(float value)
     {
         health += value;

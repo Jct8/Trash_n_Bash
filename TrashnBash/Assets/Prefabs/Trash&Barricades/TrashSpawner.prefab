@@ -44,6 +44,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: 1acaaf86318fa854d91d6b1aab1551cb, type: 3}
   - {fileID: 103030, guid: 8b342121ff2be5a45b964062c2ec412f, type: 3}
   totalCoolTime: 15
+  limit: 3
 --- !u!1 &4787189768095951721
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +274,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5474714, guid: 18c7f6b8eb5793f49a8f6d81d2e01b43, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5474714, guid: 18c7f6b8eb5793f49a8f6d81d2e01b43, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 18c7f6b8eb5793f49a8f6d81d2e01b43, type: 3}
 --- !u!4 &7746538991938984895 stripped
 Transform:
@@ -673,6 +679,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
+    - target: {fileID: 129966, guid: 44d893618ee70db4fbea9c13f14a89fb, type: 3}
+      propertyPath: m_Name
+      value: Cereal_2
+      objectReference: {fileID: 0}
     - target: {fileID: 437718, guid: 44d893618ee70db4fbea9c13f14a89fb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5842656
@@ -728,10 +738,6 @@ PrefabInstance:
     - target: {fileID: 437718, guid: 44d893618ee70db4fbea9c13f14a89fb, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.9229615
-      objectReference: {fileID: 0}
-    - target: {fileID: 129966, guid: 44d893618ee70db4fbea9c13f14a89fb, type: 3}
-      propertyPath: m_Name
-      value: Cereal_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44d893618ee70db4fbea9c13f14a89fb, type: 3}

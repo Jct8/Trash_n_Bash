@@ -17,12 +17,17 @@ public class OpossumAbility : MonoBehaviour, IEnemyAbilities
         return;
     }
 
-    public void PlayDead(GameObject player)
+    public void PlayDead()
     {
-        if(_stack == 0)
+        GameObject player = ServiceLocator.Get<LevelManager>().playerInstance;
+
+        if (!player)
+            return;
+
+        if (_stack == 0)
         {
             _stack++;
-            player = GameObject.FindGameObjectWithTag("Player");
+
             gameObject.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
             gameObject.GetComponent<Enemy>().SwitchEnemyDead(true);
             player.GetComponent<PlayerController>().CheckTargetLockedOn();
@@ -32,7 +37,7 @@ public class OpossumAbility : MonoBehaviour, IEnemyAbilities
         return;
     }
 
-    public void PoisonAOE(GameObject player)
+    public void PoisonAOE()
     {
         return;
     }

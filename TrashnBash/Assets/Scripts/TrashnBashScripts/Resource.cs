@@ -27,9 +27,12 @@ public class Resource : MonoBehaviour, IDragHandler
     {
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
 
-        mousePos = Input.mousePosition;
-        ScreenToWorldPoint = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10.0f));
-        transform.position = ScreenToWorldPoint;
+        if(Input.GetMouseButton(0))
+        {
+            mousePos = Input.mousePosition;
+            ScreenToWorldPoint = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10.0f));
+            transform.position = ScreenToWorldPoint;
+        }
 
         if (tower)
         {

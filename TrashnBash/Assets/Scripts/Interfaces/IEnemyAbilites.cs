@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IEnemyAbilities
 {
-    void PoisonAOE(GameObject player);
+    void PoisonAOE();
     void GroupAttack();
     void Flying(Transform wayPoint);
-    void PlayDead(GameObject player);
+    void PlayDead();
 }

@@ -91,11 +91,11 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator SetGameWin()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        GameObject tower = GameObject.FindGameObjectWithTag("Tower");
+        Player player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
+        Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
 
-        _racoonHP = player.GetComponent<Player>().health;
-        _houseHP = tower.GetComponent<Tower>().fullHealth;
+        _racoonHP = player.health;
+        _houseHP = tower.fullHealth;
 
         _GameState = GameState.MainMenu;
         yield return new WaitForSeconds(2.0f);

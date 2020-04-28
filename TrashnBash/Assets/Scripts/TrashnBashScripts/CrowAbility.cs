@@ -91,12 +91,12 @@ public class CrowAbility : MonoBehaviour, IEnemyAbilities
         return;
     }
 
-    public void PoisonAOE(GameObject player)
+    public void PoisonAOE()
     {
         return;
     }
 
-    public void PlayDead(GameObject player)
+    public void PlayDead()
     {
         return;
     }

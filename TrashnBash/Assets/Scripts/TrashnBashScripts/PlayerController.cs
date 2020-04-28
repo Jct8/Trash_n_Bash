@@ -89,9 +89,6 @@ public class PlayerController : MonoBehaviour
     {
         _Resources = new List<GameObject>();
         _controller = gameObject.GetComponent<CharacterController>();
-        _player = gameObject.GetComponent<Player>();
-        GameObject tower = GameObject.FindGameObjectWithTag("Tower");
-        _tower = tower.GetComponent<Tower>();
         _mainCamera = Camera.main;
         uiManager = ServiceLocator.Get<UIManager>();
         agent = GetComponent<NavMeshAgent>();
@@ -108,6 +105,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        _player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
+        _tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
         if (variableLoader.useGoogleSheets)
         {
             moveSpeed = variableLoader.PlayerStats["Speed"];

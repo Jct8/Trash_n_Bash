@@ -31,12 +31,12 @@ public class RatAbility : MonoBehaviour, IEnemyAbilities
         }
     }
 
-    public void PlayDead(GameObject player)
+    public void PlayDead()
     {
         return;
     }
 
-    public void PoisonAOE(GameObject player)
+    public void PoisonAOE()
     {
         return;
     }

@@ -122,9 +122,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
             }
 
-            
-
-            enemyAbilities.PoisonAOE(player);
+            enemyAbilities.PoisonAOE();
 
 
             if (_isPoisoned)
@@ -412,7 +410,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (_IsDead)
             return;
 
-        enemyAbilities.PlayDead(player);
+        enemyAbilities.PlayDead();
         health -= Dmg;
 
         popUp.GetComponent<TextMesh>().text = Dmg.ToString();

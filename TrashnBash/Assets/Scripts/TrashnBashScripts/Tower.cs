@@ -93,7 +93,8 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Player player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
+
         if (signifierGO)
         {
             if (player.GetComponent<Player>()?.health > minimumPlayerHealth)
@@ -158,7 +159,7 @@ public class Tower : MonoBehaviour
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
         fullHealth -= dmg;
-        //Debug.Log("Taken damage: " + dmg);
+
         uiManager.UpdateTowerHealth(fullHealth);
         if (fullHealth <= 0.0f)
         {
@@ -209,15 +210,18 @@ public class Tower : MonoBehaviour
     public void restoring()
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
-        GameObject go = GameObject.FindGameObjectWithTag("Player");
-        Player player = go.GetComponent<Player>();
+        Player player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
+
         if (!uiManager || !player)
             return;
         if (fullHealth < minimumTowerHealth)
             return;
 
+        // Lose Tower's health
         fullHealth -= towerLostCostValue;
         uiManager.UpdateTowerHealth(fullHealth);
+
+        // Heal Player's health
         player.restoringHealth(towerHealCostValue);
         uiManager.UpdatePlayerHealth(player.health, player._maxHealth);
     }

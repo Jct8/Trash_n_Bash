@@ -32,8 +32,12 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
         return;
     }
 
-    public void PoisonAOE(GameObject player)
+    public void PoisonAOE()
     {
+        GameObject player = ServiceLocator.Get<LevelManager>().playerInstance;
+        if (!player)
+            return;
+
         poisonArea.GetComponent<Transform>().localScale = new Vector3(_skunksPoisonRange, 0.00746f, _skunksPoisonRange);
         if (Vector3.Distance(poisonArea.transform.position, player.transform.position) + (_skunksPoisonRange / 2) < _skunksPoisonRange)
         {
@@ -47,7 +51,7 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
         return;
     }
 
-    public void PlayDead(GameObject player)
+    public void PlayDead()
     {
         return;
     }

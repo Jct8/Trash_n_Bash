@@ -15,6 +15,9 @@ public class UpgradeStats : MonoBehaviour
     {
         return this;
     }
+    private void Start()
+    {
+    }
 
     [Header("More Projectiles")]
     public List<float> throwingSpeed;
@@ -40,4 +43,6 @@ public class UpgradeStats : MonoBehaviour
     public List<float> fireDuration;
     public List<float> fireUpgradeCost;
     public List<string> fireDescription;
+
+    
 }

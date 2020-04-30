@@ -17,6 +17,8 @@ TagManager:
   - Resource
   - TutorialManager
   - Wife
+  - Canvas
+  - Restoring
   layers:
   - Default
   - TransparentFX

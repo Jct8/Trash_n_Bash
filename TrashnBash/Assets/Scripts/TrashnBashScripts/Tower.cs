@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Tower : MonoBehaviour
 {
     public GameObject signifierGO;
-    public Image signifier;
     public Transform partToRotate;
     public GameObject bulletPrefeb;
     public Transform firePoint;
@@ -26,7 +25,7 @@ public class Tower : MonoBehaviour
     public float range = 2.0f;
     public float damage = 10.0f;
     public float speed = 5.0f;
-    public float health = 100.0f;
+    public float MaxHealth = 100.0f;
     public float attackRate = 1.0f;
     public float fullHealth = 50.0f;
     public float shotTime;
@@ -44,11 +43,13 @@ public class Tower : MonoBehaviour
     private float towerLostCostValue = 15.0f;
     [SerializeField]
     [Tooltip("Cool Time for regaining Health from Tower")]
-
-    public float minimumPlayerHealth = 30.0f;
-
     private float totalRegainCoolTime = 25.0f;
-    private float currentRagainCoolTime = 0.0f;
+    [SerializeField]
+    [Tooltip("Activate regaining health for Player health")]
+    private float minimumPlayerHealth = 70.0f;
+    [SerializeField]
+    [Tooltip("Inactivate regaining health if the Tower has low Health")]
+    private float minimumTowerHealth = 20.0f;
 
 
     private void Awake()
@@ -61,36 +62,54 @@ public class Tower : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
-        fullHealth = health / 2.0f;
+        fullHealth = MaxHealth / 2.0f;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
+
+        
     }
 
     private void Start()
     {
-        if(signifier)
-         signifier.fillAmount = 0;
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            MaxHealth = variableLoader.TowerStats["Health"];
+            towerHealCostValue = variableLoader.TowerStats["PlayerHeal"];
+            towerLostCostValue = variableLoader.TowerStats["TrashCost"];
+
+            fullHealth = MaxHealth;
+        }
     }
 
     public void Initialize(float dmg, float s, float h, float ar, float r)
     {
         damage = dmg;
         speed = s;
-        health = h;
+        MaxHealth = h;
         attackRate = ar;
         range = r;
-        fullHealth = health;
+        fullHealth = MaxHealth;
     }
 
     void Update()
     {
+        Player player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
+
         if (signifierGO)
-            signifierGO.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
-        CheckingClick();
-        
-        if(signifier)
-        if (signifier.fillAmount <= 1)
         {
-            signifier.fillAmount += 1 / totalRegainCoolTime * Time.deltaTime;
+            if (player.GetComponent<Player>()?.health > minimumPlayerHealth)
+            {
+                signifierGO.SetActive(false);
+            }
+            else
+            {
+                signifierGO.SetActive(true);
+            }
+        }
+
+        if (signifierGO)
+        {
+            signifierGO.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
         }
 
         if (!isShooting)
@@ -140,29 +159,12 @@ public class Tower : MonoBehaviour
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
         fullHealth -= dmg;
-        //Debug.Log("Taken damage: " + dmg);
+
         uiManager.UpdateTowerHealth(fullHealth);
         if (fullHealth <= 0.0f)
         {
             return;
         }
-    }
-
-    public void CheckingClick()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit = new RaycastHit();
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.tag == "Tower")
-                {
-                    restoring();
-                }
-            }
-        }
-
     }
 
     public void Recycle(GameObject obj)
@@ -208,23 +210,20 @@ public class Tower : MonoBehaviour
     public void restoring()
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
-        GameObject go = GameObject.FindGameObjectWithTag("Player");
-        Player player = go.GetComponent<Player>();
+        Player player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
+
         if (!uiManager || !player)
             return;
-        if (player.health >= minimumPlayerHealth)
-            return;
-        if (fullHealth <= minimumPlayerHealth)
+        if (fullHealth < minimumTowerHealth)
             return;
 
-        if (signifier.fillAmount >= 1)
-        {
-            fullHealth -= towerLostCostValue;
-            uiManager.UpdateTowerHealth(fullHealth);
-            player.restoringHealth(towerHealCostValue);
-            uiManager.UpdatePlayerHealth(player.health, player._maxHealth);
-            signifier.fillAmount = 0;
-        }
+        // Lose Tower's health
+        fullHealth -= towerLostCostValue;
+        uiManager.UpdateTowerHealth(fullHealth);
+
+        // Heal Player's health
+        player.restoringHealth(towerHealCostValue);
+        uiManager.UpdatePlayerHealth(player.health, player._maxHealth);
     }
 
     public void collecting(float value)

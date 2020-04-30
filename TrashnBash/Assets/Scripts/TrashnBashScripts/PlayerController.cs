@@ -89,19 +89,33 @@ public class PlayerController : MonoBehaviour
     {
         _Resources = new List<GameObject>();
         _controller = gameObject.GetComponent<CharacterController>();
-        _player = gameObject.GetComponent<Player>();
-        GameObject tower = GameObject.FindGameObjectWithTag("Tower");
-        _tower = tower.GetComponent<Tower>();
         _mainCamera = Camera.main;
         uiManager = ServiceLocator.Get<UIManager>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+
         poisonUIbutton = ServiceLocator.Get<UIManager>()?.poisonImg.GetComponent<UIbutton>();
         intimidateUIbutton = ServiceLocator.Get<UIManager>()?.intimidateImg.GetComponent<UIbutton>();
         ultUIbutton = ServiceLocator.Get<UIManager>()?.ultImg.GetComponent<UIbutton>();
         repairUIbutton = ServiceLocator.Get<UIManager>()?.repairButton.GetComponent<UIbutton>();
         placeUIbutton = ServiceLocator.Get<UIManager>()?.placeButton.GetComponent<UIbutton>();
         attackUIbutton = ServiceLocator.Get<UIManager>()?.basicAttackButton.GetComponent<UIbutton>();
+    }
+
+    private void Start()
+    {
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        _player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
+        _tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
+        if (variableLoader.useGoogleSheets)
+        {
+            moveSpeed = variableLoader.PlayerStats["Speed"];
+            agent.speed = moveSpeed;
+
+            attackCoolDown = variableLoader.PlayerAbilties["Attack"]["Cooldown"];
+            poisonAttackCoolDown = variableLoader.PlayerAbilties["Poison"]["Cooldown"];
+            intimidateAttackCoolDown = variableLoader.PlayerAbilties["Stun"]["Cooldown"];
+        }
     }
 
     private void Update()
@@ -135,6 +149,10 @@ public class PlayerController : MonoBehaviour
         {
             CheckSpawnBarricade();
             CheckSpawnResource();
+        }
+        if(Input.GetMouseButton(0))
+        {
+            CheckRestoring();
         }
 
         //if (Input.GetKeyDown(_PickUpButton) || CheckHoldDownClick("BarricadeSpawner"))
@@ -286,33 +304,6 @@ public class PlayerController : MonoBehaviour
 
     #region Ultility
 
-    private IEnumerator DiggingTrash()
-    {
-        if (_isHoldingItem)
-            yield return null;
-        agent.isStopped = true;
-        yield return new WaitForSeconds(diggingTime);
-        _isDigging = false;
-        agent.isStopped = false;
-        if (limitOfHolding - 1 > currentTrashes)
-        {
-            _Resources.Add(_player.DetectResourceSpawner());
-            currentTrashes++;
-            foreach (GameObject trash in _Resources)
-            {
-                if (trash)
-                {
-                    if (trash.GetComponent<Resource>().CanBePickedUp())
-                    {
-                        trash.GetComponent<Resource>().Pickup(gameObject);
-                    }
-                }
-            }
-
-        }
-        yield return null;
-    }
-
     public void CheckMoveIndicatorActive()
     {
         List<GameObject> particles = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects("MoveIndicator");
@@ -392,6 +383,21 @@ public class PlayerController : MonoBehaviour
             if(go.CompareTag("ResourceSpawner"))
             {
                 go.GetComponent<ResourceSpawner>().SpawnResource();
+            }
+        }
+    }
+
+    public void CheckRestoring()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject go = hit.transform.gameObject;
+            if (go.CompareTag("Restoring"))
+            {
+                GameObject tower = ServiceLocator.Get<LevelManager>().towerInstance;
+                tower.GetComponent<Tower>().restoring();
             }
         }
     }

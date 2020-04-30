@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &7958149691351365883
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108473851434245047}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 40, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3589809411401934993
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signifierGO: {fileID: 108473851434245047}
-  signifier: {fileID: 193342659945231963}
   partToRotate: {fileID: 0}
   bulletPrefeb: {fileID: 0}
   firePoint: {fileID: 0}
@@ -183,7 +195,7 @@ MonoBehaviour:
   range: 10
   damage: 5
   speed: 500
-  health: 100
+  MaxHealth: 100
   attackRate: 0.6
   fullHealth: 0
   shotTime: 0
@@ -192,7 +204,9 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: f1df4a14307925f44b248c7e6ecbeadd, type: 3}
   towerHealCostValue: 30
   towerLostCostValue: 15
-  minimumPlayerHealth: 30
+  totalRegainCoolTime: 25
+  minimumPlayerHealth: 70
+  minimumTowerHealth: 20
 --- !u!82 &3174509829108607209
 AudioSource:
   m_ObjectHideFlags: 0
@@ -391,7 +405,12 @@ PrefabInstance:
     - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
       propertyPath: m_Name
-      value: Signifier
+      value: TowerSignifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Restoring
       objectReference: {fileID: 0}
     - target: {fileID: 5638577900690081499, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
@@ -527,18 +546,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7512835460516700731}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &193342659945231963 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7704550740709643360, guid: af1378b637b06ea48a84c51035fb26d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 7512835460516700731}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &9124223465325788387
 PrefabInstance:
   m_ObjectHideFlags: 0

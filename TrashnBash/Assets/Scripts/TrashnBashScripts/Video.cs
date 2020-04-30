@@ -10,13 +10,19 @@ public class Video : MonoBehaviour
     public RawImage rawImage;
     public VideoPlayer videoPlayer;
     public GameObject fadeScreen;
+    public VideoClip videoToPlay;
 
     public float videoDelayTime;
+    private float holdClickTime = 0.0f;
+    public float holdClickTimeMax = 2.5f;
+
     private bool isStarted = false;
     private bool isLoading = false;
     private Texture texture;
     void Start()
     {
+        videoPlayer.source = VideoSource.VideoClip;
+        videoPlayer.clip = videoToPlay;
         StartCoroutine(Play());
     }
 
@@ -26,11 +32,30 @@ public class Video : MonoBehaviour
         {
             LoadNewLevel();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || CheckHoldDownClick())
         {
             videoPlayer.Pause();
             LoadNewLevel();
         }
+    }
+
+    public bool CheckHoldDownClick()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            holdClickTime += Time.deltaTime;
+            if (holdClickTime > holdClickTimeMax)
+            {
+                holdClickTime = 0.0f;
+                return true;
+
+            }
+        }
+        else
+        {
+            holdClickTime = 0.0f;
+        }
+        return false;
     }
 
     IEnumerator Play()

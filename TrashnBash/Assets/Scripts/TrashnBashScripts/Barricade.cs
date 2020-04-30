@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Barricade : MonoBehaviour, IDragHandler , IDropHandler
+public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDraggableItem
 {
     [SerializeField] private float _Defence  = 10.0f;
     [SerializeField] public float health;
@@ -22,10 +22,11 @@ public class Barricade : MonoBehaviour, IDragHandler , IDropHandler
     public bool isRepairing = false;
     public bool isAlive = true;
     public bool isPlaced = false;
+
     public void PickUp(GameObject playerGO)
     {
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>() ;
-        health = tower.health * _PercentFromTower *0.01f;
+        health = tower.MaxHealth * _PercentFromTower *0.01f;
         _MaxHealth = health;
         if (_MaxHealth != 0.0f)
             healthBar.fillAmount = health / _MaxHealth;
@@ -52,6 +53,17 @@ public class Barricade : MonoBehaviour, IDragHandler , IDropHandler
     private void Awake()
     {
         _MaxHealth = health;
+    }
+
+    private void Start()
+    {
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            health = variableLoader.BarriacdeStats["Health"];
+            _MaxHealth = variableLoader.BarriacdeStats["Health"];
+            _barricadeBuildTime = variableLoader.BarriacdeStats["BuildTime"];
+        }
     }
 
     private void Update()
@@ -142,5 +154,17 @@ public class Barricade : MonoBehaviour, IDragHandler , IDropHandler
                 transform.position = ray.origin + ray.direction * distance;
             }
         }
+    }
+
+    public void DropItem()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(ray, out hit))
+        {
+            transform.position = hit.point;
+        }
+        gameObject.SetActive(true);
+        PlaceBarricade();
     }
 }

@@ -90,6 +90,8 @@ MonoBehaviour:
     type: 3}
   upgradeStatPrefeb: {fileID: 4108997430555201044, guid: a52568174e8e848abae858862102e4db,
     type: 3}
+  variableLoaderPrefab: {fileID: 4842691506749202396, guid: eb81b4dfe368f054baa86ad036f3966f,
+    type: 3}
   gameModules:
   - {fileID: 3941574931967863279}
   - {fileID: 3941574931967863278}

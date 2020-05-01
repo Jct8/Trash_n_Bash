@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDraggableItem
 {
-    [SerializeField] private float _Defence  = 10.0f;
+    [SerializeField] private float _Defence = 10.0f;
     [SerializeField] public float health;
     [SerializeField] private float _PercentFromTower = 5.0f;
     [SerializeField] private float repairTime = 3.0f;
@@ -25,8 +25,8 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
 
     public void PickUp(GameObject playerGO)
     {
-        Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>() ;
-        health = tower.MaxHealth * _PercentFromTower *0.01f;
+        Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
+        health = tower.MaxHealth * _PercentFromTower * 0.01f;
         _MaxHealth = health;
         if (_MaxHealth != 0.0f)
             healthBar.fillAmount = health / _MaxHealth;
@@ -42,7 +42,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
 
         transform.position = playerGO.transform.position;
         transform.position += playerGO.GetComponent<PlayerController>().GetController().transform.forward;
-        transform.position += new Vector3(0.0f, height ,0.0f); 
+        transform.position += new Vector3(0.0f, height, 0.0f);
     }
 
     public bool CanBePickedUp()
@@ -97,7 +97,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         yield return new WaitForSeconds(repairTime);
         if (isRepairing)
         {
-            health = _MaxHealth ;
+            health = _MaxHealth;
             if (_MaxHealth != 0.0f)
                 healthBar.fillAmount = health / _MaxHealth;
         }
@@ -156,15 +156,25 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         }
     }
 
-    public void DropItem()
+    public bool DropItem()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray, out hit))
         {
-            transform.position = hit.point;
+            if (hit.transform.gameObject.CompareTag("Ground"))
+            {
+                transform.position = hit.point;
+                gameObject.SetActive(true);
+                PlaceBarricade();
+                return true;
+            }
+            else
+            {
+                ServiceLocator.Get<GameManager>().barricadeSpawner.ResetBarricade();
+                return false;
+            }
         }
-        gameObject.SetActive(true);
-        PlaceBarricade();
+        return false;
     }
 }

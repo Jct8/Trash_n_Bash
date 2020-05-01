@@ -85,13 +85,14 @@ public class TutorialManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void SetEnemySpawner(List<EnemySpawner> enemySpawner)
+    public void SetEnemySpawner(EnemySpawner enemySpawner)
     {
         isSpawnStarted = true;
-        foreach (var item in enemySpawner)
-        {
-            numEnemiesToKill += item._numberOfWave * item._enemiesPerWave;
-        }
+        numEnemiesToKill += enemySpawner._numberOfWave * enemySpawner._enemiesPerWave;
+        //foreach (var item in enemySpawner)
+        //{
+        //    numEnemiesToKill += item._numberOfWave * item._enemiesPerWave;
+        //}
     }
 
     public void AddCount(int total)

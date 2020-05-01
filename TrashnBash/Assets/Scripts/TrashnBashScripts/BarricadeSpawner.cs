@@ -27,6 +27,7 @@ public class BarricadeSpawner : MonoBehaviour
         {
             baseBarricadeCost = variableLoader.BarriacdeStats["TrashCost"];
         }
+        ServiceLocator.Get<GameManager>().barricadeSpawner = this;
     }
 
     private void Update()
@@ -86,5 +87,10 @@ public class BarricadeSpawner : MonoBehaviour
         }
     }
 
-    
+    public void ResetBarricade()
+    {
+        totalBarricades--;
+        currentTime = Time.time;
+        ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().HealTower(baseBarricadeCost);
+    }
 }

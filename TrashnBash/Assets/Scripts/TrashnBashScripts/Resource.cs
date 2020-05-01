@@ -38,7 +38,7 @@ public class Resource : MonoBehaviour, IDragHandler
         {
             if (Vector3.Distance(transform.position, tower.transform.position) <= allowedRangeofResource)
             {
-                tower.GetComponent<Tower>().collecting(healValue);
+                tower.GetComponent<Tower>().HealTower(healValue);
                 Destroy(gameObject);
             }
         }

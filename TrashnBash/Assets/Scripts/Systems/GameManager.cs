@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int sceneToLoad = 1;
 
     public Dictionary<UpgradeMenu.Upgrade, int> upgradeLevelsDictionary = new Dictionary<UpgradeMenu.Upgrade, int>();
+    public BarricadeSpawner barricadeSpawner;
 
     public enum GameState
     {

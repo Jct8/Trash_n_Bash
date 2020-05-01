@@ -254,8 +254,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: FullUltimate
+      - m_Target: {fileID: 1903811674}
+        m_MethodName: EnableUltAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -265,8 +265,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: EnableUltAttack
+      - m_Target: {fileID: 1903811675}
+        m_MethodName: FullUltimate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1510,6 +1510,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1587170239}
         m_MethodName: StartSpawner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1903811674}
+        m_MethodName: EnablePoisonAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4559,6 +4570,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1903811674}
+        m_MethodName: EnableIntimidateAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &960524322
@@ -5404,15 +5426,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1508972013, guid: 18c7f0969ba5d0644814a9a3ca291106, type: 3}
+      propertyPath: BGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c027f64216705d44b9e6c8eb259af1d, type: 3}
     - target: {fileID: 2021528366411692247, guid: 18c7f0969ba5d0644814a9a3ca291106,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1508972013, guid: 18c7f0969ba5d0644814a9a3ca291106, type: 3}
-      propertyPath: BGM
-      value: 
-      objectReference: {fileID: 8300000, guid: 1c027f64216705d44b9e6c8eb259af1d, type: 3}
     - target: {fileID: 8642484305662360736, guid: 18c7f0969ba5d0644814a9a3ca291106,
         type: 3}
       propertyPath: m_Enabled
@@ -8174,6 +8196,30 @@ Transform:
   m_Father: {fileID: 1831282262}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1903811674 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8788851259781249154, guid: 18c7f0969ba5d0644814a9a3ca291106,
+    type: 3}
+  m_PrefabInstance: {fileID: 1180576857}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd4e04314d69814c96b370194d6a5bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1903811675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5591075033963426850, guid: 18c7f0969ba5d0644814a9a3ca291106,
+    type: 3}
+  m_PrefabInstance: {fileID: 1180576857}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffcb9a6c26fcfbf4bb5e54ae5628280a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1917638739 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1671943395006712, guid: 8ae7718c33e89b042b204b36902c7745,

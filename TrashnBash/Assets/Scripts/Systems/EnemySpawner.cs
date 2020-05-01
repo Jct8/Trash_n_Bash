@@ -35,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
 
     private EnemyPath _path;
     private Action OnRecycle;
+    private TutorialManager tutorialManager;
 
     private void Awake()
     {
@@ -47,10 +48,12 @@ public class EnemySpawner : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+        tutorialManager = FindObjectOfType<TutorialManager>();
     }
 
     public void StartSpawner()
     {
+        tutorialManager?.SetEnemySpawner(this);
         StartCoroutine("BeginWaveSpawn");
     }
 

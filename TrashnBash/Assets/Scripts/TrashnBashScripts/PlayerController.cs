@@ -78,8 +78,8 @@ public class PlayerController : MonoBehaviour
     private UIbutton poisonUIbutton;
     private UIbutton intimidateUIbutton;
     private UIbutton ultUIbutton;
-    private UIbutton repairUIbutton;
-    private UIbutton placeUIbutton;
+    //private UIbutton repairUIbutton;
+    //private UIbutton placeUIbutton;
 
     #endregion
 
@@ -97,8 +97,8 @@ public class PlayerController : MonoBehaviour
         poisonUIbutton = ServiceLocator.Get<UIManager>()?.poisonImg.GetComponent<UIbutton>();
         intimidateUIbutton = ServiceLocator.Get<UIManager>()?.intimidateImg.GetComponent<UIbutton>();
         ultUIbutton = ServiceLocator.Get<UIManager>()?.ultImg.GetComponent<UIbutton>();
-        repairUIbutton = ServiceLocator.Get<UIManager>()?.repairButton.GetComponent<UIbutton>();
-        placeUIbutton = ServiceLocator.Get<UIManager>()?.placeButton.GetComponent<UIbutton>();
+        //repairUIbutton = ServiceLocator.Get<UIManager>()?.repairButton.GetComponent<UIbutton>();
+        //placeUIbutton = ServiceLocator.Get<UIManager>()?.placeButton.GetComponent<UIbutton>();
         attackUIbutton = ServiceLocator.Get<UIManager>()?.basicAttackButton.GetComponent<UIbutton>();
     }
 
@@ -185,15 +185,15 @@ public class PlayerController : MonoBehaviour
 
         //}
 
-        if (placeUIbutton.isButtonPressed || CheckHoldDownClick("Ground"))
-        {
-            if (_isHoldingItem && _Barricade != null)
-            {
-                _isHoldingItem = false;
-                StartCoroutine(PlaceBarricade());
-            }
+        //if (placeUIbutton.isButtonPressed || CheckHoldDownClick("Ground"))
+        //{
+        //    if (_isHoldingItem && _Barricade != null)
+        //    {
+        //        _isHoldingItem = false;
+        //        StartCoroutine(PlaceBarricade());
+        //    }
 
-        }
+        //}
         if (_isHoldingItem)
             return;
 
@@ -415,7 +415,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!attackUIbutton.isButtonPressed && !ultUIbutton.isButtonPressed
             && !poisonUIbutton.isButtonPressed && !intimidateUIbutton.isButtonPressed
-            && !placeUIbutton.isButtonPressed && !repairUIbutton.isButtonPressed)
+            /*&& !placeUIbutton.isButtonPressed && !repairUIbutton.isButtonPressed*/)
             return true;
         return false;
     }

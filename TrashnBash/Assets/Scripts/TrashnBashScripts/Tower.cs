@@ -226,11 +226,12 @@ public class Tower : MonoBehaviour
         uiManager.UpdatePlayerHealth(player.health, player._maxHealth);
     }
 
-    public void collecting(float value)
+    public void HealTower(float value)
     {
         fullHealth += value;
 
         UIManager uiManager = ServiceLocator.Get<UIManager>();
         uiManager.UpdateTowerHealth(fullHealth);
     }
+
 }

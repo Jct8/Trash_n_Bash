@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     //private GameObject _Resource = null;
     private UIManager uiManager;
     private NavMeshAgent agent;
-    public List<GameObject> _Resources;
 
     [Header("Unit Status")]
     [SerializeField] private float moveSpeed = 10.0f;
@@ -87,7 +86,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _Resources = new List<GameObject>();
         _controller = gameObject.GetComponent<CharacterController>();
         _mainCamera = Camera.main;
         uiManager = ServiceLocator.Get<UIManager>();

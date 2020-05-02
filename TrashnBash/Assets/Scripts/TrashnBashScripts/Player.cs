@@ -35,6 +35,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public GameObject hitEffect;
     public GameObject Lighting;
     public GameObject LightingOnGround;
+    public GameObject healingEffect;
     private UIManager _uiManager = null;
     //public GameObject restoreEffect;
 
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public float _poisonCurrentTime;
     public float _poisonTotalTime = 5.0f;
     public GameObject poison;
+    private bool _isStoring = false;
 
     public float UltimateCharge { get { return _ultimateCharge; } private set { } }
     public float Health { get { return health; } private set { } }
@@ -409,7 +411,24 @@ public class Player : MonoBehaviour, ICharacterAction
 
     public void restoringHealth(float value)
     {
+        StartCoroutine(DisplayHealingEffect());
         health += value;
+    }
+
+    private IEnumerator DisplayHealingEffect()
+    {
+        if(!_isStoring)
+        {
+            _isStoring = true;
+            GameObject heal = Instantiate(healingEffect, gameObject.transform.position, Quaternion.identity) as GameObject;
+            yield return new WaitForSeconds(2.0f);
+            _isStoring = false;
+        }
+        else
+        {
+            yield return null;
+        }
+ 
     }
     #endregion
 

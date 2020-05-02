@@ -11,9 +11,11 @@ public class Tower : MonoBehaviour
     public GameObject bulletPrefeb;
     public Transform firePoint;
     public float radius = 2.5f;
+    private GameObject _nearestEnemy;
     private Transform _target;
     private DataLoader dataLoader;
     private JsonDataSource towerData;
+    private UIManager uiManager;
 
     public DamageType damageType = DamageType.Normal;
     public float fireDuration = 0.0f;
@@ -21,7 +23,6 @@ public class Tower : MonoBehaviour
     private Action _action;
     [Header("Tower Status")]
     public string dataSourceId = "Tower";
-    public string name;
     public float range = 2.0f;
     public float damage = 10.0f;
     public float speed = 5.0f;
@@ -70,6 +71,7 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
+        uiManager = ServiceLocator.Get<UIManager>();
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
         if (variableLoader.useGoogleSheets)
         {
@@ -157,9 +159,7 @@ public class Tower : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        UIManager uiManager = ServiceLocator.Get<UIManager>();
         fullHealth -= dmg;
-
         uiManager.UpdateTowerHealth(fullHealth);
         if (fullHealth <= 0.0f)
         {
@@ -176,7 +176,7 @@ public class Tower : MonoBehaviour
     {
         GameObject[] _enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float _shortestDistance = Mathf.Infinity;
-        GameObject _nearestEnemy = null;
+        
         foreach(GameObject enemy in _enemies)
         {
             float _distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -202,17 +202,11 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public float Getradius()
-    {
-        return radius * radius;
-    }
-
     public void restoring()
     {
-        UIManager uiManager = ServiceLocator.Get<UIManager>();
         Player player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
 
-        if (!uiManager || !player)
+        if (!player)
             return;
         if (fullHealth < minimumTowerHealth)
             return;
@@ -229,8 +223,6 @@ public class Tower : MonoBehaviour
     public void HealTower(float value)
     {
         fullHealth += value;
-
-        UIManager uiManager = ServiceLocator.Get<UIManager>();
         uiManager.UpdateTowerHealth(fullHealth);
     }
 

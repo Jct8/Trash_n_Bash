@@ -166,19 +166,10 @@ public class UIManager : MonoBehaviour
         totalWave = 0.0f;
         currentWave = 0.0f;
         yield return new WaitForSeconds(0.5f);
-        player = GameObject.FindGameObjectWithTag("Player");
-        
-        if(player.GetComponent<PlayerController>()._Resources.Count > 0)
-        {
-            foreach (GameObject trash in player.GetComponent<PlayerController>()._Resources)
-            {
-                Destroy(trash);
-            }
-            player.GetComponent<PlayerController>()._Resources.Clear();
-            player.GetComponent<PlayerController>().currentTrashes = 0;
-        }
+        player = ServiceLocator.Get<LevelManager>().playerInstance;
+        tower = ServiceLocator.Get<LevelManager>().towerInstance;
 
-        tower = GameObject.FindGameObjectWithTag("Tower");
+        // Wave reset
         spawners = GameObject.FindGameObjectsWithTag("Spawner");
         foreach (GameObject spawn in spawners)
         {
@@ -186,8 +177,11 @@ public class UIManager : MonoBehaviour
         }
         currentWave = totalWave;
         waveTimerBar.fillAmount = currentWave / totalWave;
+
+        // Animation Reset
         AnimationTexture.SetBool("IsHit", false);
         AnimationTexture.SetFloat("Energy", 0.0f);
+
         UpdatePlayerHealth(player.GetComponent<Player>().health, player.GetComponent<Player>()._maxHealth);
         UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);

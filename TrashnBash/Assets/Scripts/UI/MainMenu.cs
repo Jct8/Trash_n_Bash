@@ -15,6 +15,10 @@ public class MainMenu : MonoBehaviour
     {
         fadeScreen.SetActive(false);
         ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.MainMenu);
+        if(ServiceLocator.Get<AudioManager>().musicSource.isPlaying)
+        {
+            ServiceLocator.Get<AudioManager>().musicSource.Stop();
+        }
     }
     public void OnLevelButtonClick(int level)
     {

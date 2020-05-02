@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public NavMeshAgent _Agent;
 
     public Order _Order { get; set; }
+    //public StateMachine stateMachine;
 
     public float health;
     public float stunTime = 0.0f;
@@ -81,6 +82,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
     #region UnityFunctions
     private void Start()
     {
+        //stateMachine = new StateMachine();
+        //stateMachine.ChangeState(new MoveState(this));
         audioSource = GetComponent<AudioSource>();
         CooltimeBar.fillAmount = 0;
         enemyAbilities = GetComponent<IEnemyAbilities>();
@@ -310,7 +313,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
     }
 
-    public void Alive()
+    public void ResetStatus()
     {
         _Agent.isStopped = false;
         _IsDead = false;

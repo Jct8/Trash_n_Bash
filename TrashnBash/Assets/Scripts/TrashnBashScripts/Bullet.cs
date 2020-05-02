@@ -22,6 +22,11 @@ public class Bullet : MonoBehaviour
         _action += action;
     }
 
+    public void OnDisable()
+    {
+        _action -= _action;
+    }
+
     void Update()
     {
         if(_target == null)
@@ -40,12 +45,6 @@ public class Bullet : MonoBehaviour
 
         //transform.Translate(_direction.normalized * _distanceOfFrame, Space.World);
     }
-
-    //void Hit()
-    //{
-    //    _action?.Invoke();
-    //    _action -= _action;
-    //}
 
     private void OnCollisionEnter(Collision collision)
     {

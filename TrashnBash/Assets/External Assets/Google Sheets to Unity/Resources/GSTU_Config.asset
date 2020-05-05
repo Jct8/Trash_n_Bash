@@ -19,11 +19,7 @@ MonoBehaviour:
   API_Key: 
   PORT: 1024
   gdr:
-<<<<<<< HEAD
-    access_token: ya29.a0Ae4lvC1BB1mpCap3fOXrWS_DSocMDcgkZurM9cLeUZq_Ow433vXpy_ZaRZcZ9CXWZE3CXjwW-OlJZRbKLxvJO0mZulmuCfJTt1NkrgcL5X0n7Fv5sDgm3bQJakJi1so-4iO7nubXhY-7VZLJ8cBJgZLG-U1Rsbg_njB8
-=======
-    access_token: ya29.a0Ae4lvC2jYpmup2pcFzpJVe8ptGYKPzm4PZ65yRszG_-Xtm3CYYqACTPxNv8qL7eOctmH-ntCfaxy9dTwgmWB10QwaTNKY_SsRUixuaVqZR3w3lllr3wwNAlCmx6yTdZqm9XO-PWIePh5kTPzjHZ5k7jzJDUfb7e4s5fS
->>>>>>> JustinBranch
+    access_token: ya29.a0Ae4lvC3kqO9BmbbMxKr7ZPAYX5fT77qGXDZPoyLmGrGsrv4En1jm-XqwGQyDQ6YcqF-pfJrYEvMU8Xs6sWEXuLZTgYRhXj2-8udMqr8gFqNhoIUg3Zrh5efUoXZ4lyCVAlhQgOCJoSoJ8mpFoUc6PYTCUGb0neDazfBp
     refresh_token: 1//06ak9UdC4zPPJCgYIARAAGAYSNwF-L9Ir6LZPqodzIwEzn9O1HT6vCjq6NmEsxcbJImsSrIBBm9Tb93qmE0LTufT9vlVwghIZ2Zk
     token_type: Bearer
     expires_in: 3599

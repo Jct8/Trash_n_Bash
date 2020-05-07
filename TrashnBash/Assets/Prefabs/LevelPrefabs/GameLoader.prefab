@@ -141,11 +141,11 @@ MonoBehaviour:
   - name: Crows
     prefab: {fileID: 3828688314252740787, guid: 8e052acd3dc32504b94cb0e83002661c,
       type: 3}
-    poolSize: 100
+    poolSize: 25
   - name: Opossums
     prefab: {fileID: 6876065404672406170, guid: 0af8d18b2435b9649b41a61af95c702b,
       type: 3}
-    poolSize: 100
+    poolSize: 25
   - name: MoveIndicator
     prefab: {fileID: 4305261768933097057, guid: 6ad03d53575662449a5ffe753893059e,
       type: 3}

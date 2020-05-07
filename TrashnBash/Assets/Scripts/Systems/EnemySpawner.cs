@@ -6,6 +6,11 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public enum EnemyType { Skunks, Opossums, Rats, Crows }; // spelling has to match the object pool manager
+
+    [SerializeField]
+    EnemyType enemyType;
+
     public Color gizmoColor = Color.red;
 
     [System.Serializable]
@@ -20,8 +25,6 @@ public class EnemySpawner : MonoBehaviour
                 WayPoints.Add(waypoint);
         }
     }
-
-    public GameObject _UnitPrefeb;
 
     // It's property for waves
     public int _numberOfWave;
@@ -42,12 +45,6 @@ public class EnemySpawner : MonoBehaviour
         _path = new EnemyPath();
         _path.SetupWaypoints(transform.GetChild(0));
 
-        if (_UnitPrefeb == null)
-        {
-            Debug.LogError("Enemy Spawner disabled: Unit Prefab is NULL");
-            gameObject.SetActive(false);
-            return;
-        }
         tutorialManager = FindObjectOfType<TutorialManager>();
     }
 
@@ -77,7 +74,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _enemiesPerWave; i++)
         {
-            GameObject _enemy = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool(_UnitPrefeb.name);
+            GameObject _enemy = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool(enemyType.ToString());
             _enemy.transform.position = _path.WayPoints[0].transform.position;
             _enemy.SetActive(true);
             OnRecycle = () => Recycle(_enemy);

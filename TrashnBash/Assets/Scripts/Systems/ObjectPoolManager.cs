@@ -140,7 +140,7 @@ public class ObjectPoolManager : MonoBehaviour, IGameModule
         }
 
         // TODO - Dynamic resize of object pool
-        Debug.Log("Object Pool Depleted. No Unused Objects To Return");
+        Debug.LogError("Object Pool Depleted. No Unused Objects To Return");
         return null;
     }
 

@@ -9,7 +9,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        Spawners = new List<EnemySpawner>(GetComponentsInChildren<EnemySpawner>());
+        Spawners = new List<EnemySpawner>(FindObjectsOfType<EnemySpawner>());
         tutorialManager = FindObjectOfType<TutorialManager>();
     }
 

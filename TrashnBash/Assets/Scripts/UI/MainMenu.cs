@@ -66,4 +66,8 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    public void OptionsButton()
+    {
+        ServiceLocator.Get<UIManager>().optionsScreen.GetComponent<OptionsMenu>().ShowOptions();
+    }
 }

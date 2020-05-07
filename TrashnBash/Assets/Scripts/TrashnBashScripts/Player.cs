@@ -45,7 +45,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public AudioClip LightingEffectSound;
     public AudioClip poisonedEffect;
     public AudioSource audioSource;
-
+    public AudioManager audioManager;
 
     public float _ultimateCharge = 0.0f;
     private float ultimateChargeStart = 0.0f;
@@ -73,6 +73,8 @@ public class Player : MonoBehaviour, ICharacterAction
         _maxHealth = health;
         InvokeRepeating("IncrementUltCharge", 10.0f, ultimateChargeTime);
         audioSource = GetComponent<AudioSource>();
+        audioManager = ServiceLocator.Get<AudioManager>();
+
         ultimateChargeStart = _ultimateCharge;
         _uiManager = ServiceLocator.Get<UIManager>();
         _uiManager.UpdatePlayerHealth(health, _maxHealth);
@@ -241,7 +243,8 @@ public class Player : MonoBehaviour, ICharacterAction
         {
             closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true, DamageType.Normal);
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
-            audioSource.PlayOneShot(attackEffect, 0.75f);
+            //audioSource.PlayOneShot(attackEffect, 0.75f);
+            audioManager.PlaySfx(attackEffect);
         }
         yield return null;
     }
@@ -320,13 +323,15 @@ public class Player : MonoBehaviour, ICharacterAction
                 }
             }
         }
-        audioSource.PlayOneShot(poisonEffect, 0.5f);
+        //audioSource.PlayOneShot(poisonEffect, 0.5f);
+        audioManager.PlaySfx(poisonEffect);
         poisonAttack.SetActive(true);
 
         yield return new WaitForSeconds(1.0f);
         poisonIndicator.SetActive(!poisonIndicator.activeSelf);
 
-        audioSource.PlayOneShot(poisonedEffect, 0.2f);
+        //audioSource.PlayOneShot(poisonedEffect, 0.2f);
+        audioManager.PlaySfx(poisonEffect);
         poisonAttack.SetActive(false);
 
         yield return null;
@@ -357,7 +362,8 @@ public class Player : MonoBehaviour, ICharacterAction
                 }
             }
         }
-        audioSource.PlayOneShot(UltimateEffect, 0.95f);
+        //audioSource.PlayOneShot(UltimateEffect, 0.95f);
+        audioManager.PlaySfx(UltimateEffect);
     }
 
     public void IntimidateAttack(GameObject enemy)
@@ -366,7 +372,8 @@ public class Player : MonoBehaviour, ICharacterAction
         {
             Instantiate(Lighting, enemy.transform.position, Quaternion.identity);
             Instantiate(LightingOnGround, gameObject.transform.position, Quaternion.identity);
-            audioSource.PlayOneShot(LightingEffectSound, 0.5f);
+            //audioSource.PlayOneShot(LightingEffectSound, 0.5f);
+            audioManager.PlaySfx(LightingEffectSound);
             enemy.GetComponent<Enemy>()._Order = Order.Stunned;
             enemy.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
         }

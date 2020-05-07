@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public GameObject PresentTextrue;
     public GameObject[] spawners;
     public GameObject pauseScreen;
+    public GameObject optionsScreen;
     public Texture BasicTexture;
     public Texture SickTexture;
     public Texture PowerFulTexture;
@@ -235,4 +236,6 @@ public class UIManager : MonoBehaviour
         }
         yield return null;
     }
+
+    
 }

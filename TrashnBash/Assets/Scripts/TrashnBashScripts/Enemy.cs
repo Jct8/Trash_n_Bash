@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public AudioClip attackEffect;
     private AudioSource audioSource;
+    private AudioManager audioManager;
 
     public string Name { get { return _Name; } private set { } }
     public bool IsDead { get { return _IsDead; } set { _IsDead = value; } }
@@ -85,6 +86,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         //stateMachine = new StateMachine();
         //stateMachine.ChangeState(new MoveState(this));
         audioSource = GetComponent<AudioSource>();
+        audioManager = ServiceLocator.Get<AudioManager>();
         CooltimeBar.fillAmount = 0;
         enemyAbilities = GetComponent<IEnemyAbilities>();
     }
@@ -557,7 +559,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
             player.GetComponent<Player>().TakeDamage(_Attack, false, DamageType.Enemy);
             ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
-        audioSource.PlayOneShot(attackEffect, 0.7f);
+        //audioSource.PlayOneShot(attackEffect, 0.7f);
+        audioManager.PlaySfx(attackEffect);
         if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)
         {
             _Order = Order.Back;
@@ -573,7 +576,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
         GameObject _tower = ServiceLocator.Get<LevelManager>().towerInstance;
         _tower.GetComponent<Tower>().TakeDamage(_Attack);
         _IsStolen = true;
-        audioSource.PlayOneShot(attackEffect, 0.7f);
+        //audioSource.PlayOneShot(attackEffect, 0.7f);
+        audioManager.PlaySfx(attackEffect);
         if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)
             _Order = Order.Back;
         CooltimeBar.fillAmount = 0;

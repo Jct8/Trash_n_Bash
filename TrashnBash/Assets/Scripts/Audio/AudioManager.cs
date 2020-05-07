@@ -20,6 +20,12 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(BeginFadeOut(2.0f));
     }
 
+    public void PlaySfx(AudioClip clip)
+    {
+        sfxSource.clip = clip;
+        sfxSource.Play();
+    }
+
     private IEnumerator BeginFadeOut(float duration)
     {
         var muteMusicSS = audioMixer.FindSnapshot("MuteMusic");
@@ -38,16 +44,22 @@ public class AudioManager : MonoBehaviour
 
     public void SetMasterVolume(float vol)
     {
+        if (vol <= -50.0f)
+            vol = -80.0f;
         audioMixer.SetFloat("Master_Volume", vol);
     }
 
     public void SetMusicVolume(float vol)
     {
+        if (vol <= -50.0f)
+            vol = -80.0f;
         audioMixer.SetFloat("Music_Volume", vol);
     }
 
     public void SetSFXVolume(float vol)
     {
+        if (vol <= -50.0f)
+            vol = -80.0f;
         audioMixer.SetFloat("SFX_Volume", vol);
     }
 }

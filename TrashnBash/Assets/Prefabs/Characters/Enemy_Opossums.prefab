@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 8941732546900928204}
   - component: {fileID: 2386447359825863482}
   m_Layer: 0
-  m_Name: Opossums
+  m_Name: Enemy_Opossums
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,11 +148,11 @@ MonoBehaviour:
     type: 3}
   _targetIndicator: {fileID: 0}
   _Agent: {fileID: 0}
-  fullHealth: 0
+  health: 0
   stunTime: 0
   _DataSource: Opossums
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
-  _Health: 24
+  MaxHealth: 18
   _Name: 
   _Attack: 2
   _Money: 10
@@ -575,6 +575,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1986332374905582975}
     m_Modifications:
+    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.4117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.92156863
+      objectReference: {fileID: 0}
     - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_Name
@@ -695,6 +710,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.014999996
       objectReference: {fileID: 0}
+    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac930b1727b18944bc0983f8f595921, type: 3}
 --- !u!1 &2360622848812669836 stripped
@@ -732,6 +762,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyAttackCoolDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 6461729710976017198, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 611400409186486954, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
         type: 3}
@@ -852,6 +887,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145778786955755337, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.19607843
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c073a7369cd7e428d5eabcbb27ca0b, type: 3}

@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
-        uiManager.attackImg.SetActive(true);
+
         uiManager.poisonImg.SetActive(true);
         uiManager.intimidateImg.SetActive(true);
         uiManager.ultImg.SetActive(true);

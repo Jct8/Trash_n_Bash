@@ -11,7 +11,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100, y: 40, z: 10}
+  m_Size: {x: 100, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &578967850691478033
 MonoBehaviour:
@@ -827,7 +827,7 @@ PrefabInstance:
     - target: {fileID: 5638577900690081499, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3
+      value: 2.06
       objectReference: {fileID: 0}
     - target: {fileID: 5638577900690081499, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
@@ -869,6 +869,38 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305143026417697660, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 853d50ceccaa74ce799158cb7c1cdcef,
+        type: 3}
+    - target: {fileID: 7704550740709643360, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 853d50ceccaa74ce799158cb7c1cdcef,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af1378b637b06ea48a84c51035fb26d3, type: 3}
 --- !u!1 &2007975400182490144 stripped

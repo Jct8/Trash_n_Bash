@@ -602,9 +602,10 @@ public class PlayerController : MonoBehaviour
     #region UI
     public void UpdateUI()
     {
-        float fill = (currentAttackCoolDown - Time.time) / attackCoolDown;
-        fill = Mathf.Clamp(fill, 0.0f, 1.0f);
-        uiManager.UpdateImage(DamageType.Normal, fill);
+        float fill;
+        //    (currentAttackCoolDown - Time.time) / attackCoolDown;
+        //fill = Mathf.Clamp(fill, 0.0f, 1.0f);
+        //uiManager.UpdateImage(DamageType.Normal, fill);
 
         fill = (currentPoisonAttackCoolDown - Time.time) / poisonAttackCoolDown;
         fill = Mathf.Clamp(fill, 0.0f, 1.0f);
@@ -629,12 +630,6 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    public void EnableAttack()
-    {
-        UIManager uiManager = ServiceLocator.Get<UIManager>();
-        uiManager.attackImg.SetActive(true);
-        attackEnabled = true;
-    }
     public void EnablePoisonAttack()
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();

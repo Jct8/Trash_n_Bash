@@ -15,12 +15,12 @@ public class UIManager : MonoBehaviour
     public GameObject PresentTextrue;
     public GameObject[] spawners;
     public GameObject pauseScreen;
+    public GameObject optionsScreen;
     public Texture BasicTexture;
     public Texture SickTexture;
     public Texture PowerFulTexture;
 
     public Image loadingImg;
-    public Image attackCover;
     public Image poisonCover;
     public Image intimidateCover;
     public Image ultCover;
@@ -29,7 +29,6 @@ public class UIManager : MonoBehaviour
     public GameObject fadeDumster;
     public GameObject fadeTutorial;
 
-    public GameObject attackImg;
     public GameObject poisonImg;
     public GameObject intimidateImg;
     public GameObject ultImg;
@@ -140,9 +139,6 @@ public class UIManager : MonoBehaviour
     {
         switch (type)
         {
-            case DamageType.Normal:
-                attackCover.fillAmount = fill;
-                break;
             case DamageType.Poison:
                 poisonCover.fillAmount = fill;
                 break;
@@ -235,4 +231,6 @@ public class UIManager : MonoBehaviour
         }
         yield return null;
     }
+
+    
 }

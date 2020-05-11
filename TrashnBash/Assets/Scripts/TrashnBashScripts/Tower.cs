@@ -34,7 +34,8 @@ public class Tower : MonoBehaviour
     public string specificEnemy = "NONE";
 
     public AudioClip shotSound;
-    AudioSource audioSource;
+    private AudioSource audioSource;
+    private AudioManager audioManager;
 
     [SerializeField]
     [Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
@@ -63,6 +64,7 @@ public class Tower : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+        audioManager = ServiceLocator.Get<AudioManager>();
         fullHealth = MaxHealth / 2.0f;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
 
@@ -154,7 +156,8 @@ public class Tower : MonoBehaviour
         var rb = _bulletGO.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.AddForce(firePoint.up * speed * 3.0f, ForceMode.Force);
-        audioSource.PlayOneShot(shotSound, 1.0f);
+        //audioSource.PlayOneShot(shotSound, 1.0f);
+        audioManager.PlaySfx(shotSound);
     }
 
     public void TakeDamage(float dmg)

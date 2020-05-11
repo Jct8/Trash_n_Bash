@@ -31,7 +31,7 @@ public class TutorialManager : MonoBehaviour
         player.intimidateAttackEnabled = false;
         player.ultimateAttackEnabled = false;
         UIManager uiManager = ServiceLocator.Get<UIManager>();
-        uiManager.attackImg.SetActive(true);
+        //uiManager.attackImg.SetActive(true);
         uiManager.poisonImg.SetActive(false);
         uiManager.intimidateImg.SetActive(false);
         uiManager.ultImg.SetActive(false);
@@ -121,7 +121,7 @@ public class TutorialManager : MonoBehaviour
         GameObject barricadeManager = GameObject.FindGameObjectWithTag("BarricadeSpawner");
         ServiceLocator.Get<LevelManager>().isTutorial = false;
         LevelManager levelManager =  ServiceLocator.Get<LevelManager>();
-        levelManager.playerInstance.GetComponent<PlayerController>().EnableAttack();
+
         levelManager.playerInstance.GetComponent<PlayerController>().EnableIntimidateAttack();
         levelManager.playerInstance.GetComponent<PlayerController>().EnableUltAttack();
         levelManager.playerInstance.GetComponent<PlayerController>().EnablePoisonAttack();

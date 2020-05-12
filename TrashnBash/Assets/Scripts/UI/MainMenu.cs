@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    private int levelToLoad = 1;
+    private string levelToLoad;
     private bool isClicked = false;
     private bool isLoadCutScene = false;
     public GameObject fadeScreen;
@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
             ServiceLocator.Get<AudioManager>().musicSource.Stop();
         }
     }
-    public void OnLevelButtonClick(int level)
+    public void OnLevelButtonClick(string level)
     {
         //if (isLoadCutScene)
         //{

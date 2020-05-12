@@ -19,11 +19,7 @@ MonoBehaviour:
   API_Key: 
   PORT: 1024
   gdr:
-<<<<<<< HEAD
-    access_token: ya29.a0AfH6SMAyOmrLs5ePkld0cQiXk2KSmo5sAJvgXtv5Lv7h5zCCBibZGse0m2gGSOU-_PrzAP_Dy_DU5nBkb2KzCAp2ToupcqFYd5OW-HRSfbtoalEkoZlnYpEc1o-Q8fuj38_PDHTDXQQikHjIgW3o8mcubFzghK0BKnEJTw
-=======
-    access_token: ya29.a0Ae4lvC1SKiu-4F_0VZxXCm97nCFcEANYYj99pFD5R0sl2VpgAaSggnEantch4TG4I2aQFW4cR0NLjVrEjFVfNUzKOIABIVADlxdtsAd07NtsBI2wLioxexouv8rMBW1umCunQxQ--LkKAka9-A8WqPjjpxfcfCPSFB8O
->>>>>>> b163af32303fb08bc6869e7d1abaf141e4ed7d39
+    access_token: ya29.a0AfH6SMBJ1wM7VBBYJiFP2AzcqiMOL5biiJ5atpExP8Q6Jw7zz-aRNeDnuwznWX8EUPe7iqy8RcNIOIKQj62J6jzFSjIYdireAvsXCsw5HvFuX1Jj71dj2-iCvD8ZEKfXZ96uPzwS-nmyavuqeHyIz2-T7evL6TQ2c5_6nA
     refresh_token: 1//06ak9UdC4zPPJCgYIARAAGAYSNwF-L9Ir6LZPqodzIwEzn9O1HT6vCjq6NmEsxcbJImsSrIBBm9Tb93qmE0LTufT9vlVwghIZ2Zk
     token_type: Bearer
     expires_in: 3599

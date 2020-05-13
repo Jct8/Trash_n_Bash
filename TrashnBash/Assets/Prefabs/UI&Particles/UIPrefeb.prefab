@@ -2483,8 +2483,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.085003, y: 3.18}
-  m_SizeDelta: {x: 38.17, y: 39.26}
+  m_AnchoredPosition: {x: -46, y: 14.5}
+  m_SizeDelta: {x: 45.8, y: 51.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4507805750861886739
 CanvasRenderer:
@@ -4135,8 +4135,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 120.8, y: 134}
-  m_SizeDelta: {x: 55.200012, y: 32.899994}
+  m_AnchoredPosition: {x: 169, y: 157.05}
+  m_SizeDelta: {x: 115.3, y: 68.717}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &6454363343600291088
 CanvasRenderer:
@@ -4168,7 +4168,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 40
     m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 0
@@ -4932,7 +4932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7803922, g: 0.34117648, b: 0.34509805, a: 1}
+  m_Color: {r: 0.91372555, g: 0.54901963, b: 0.5568628, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5087,6 +5087,12 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 6d9a6e20a7790014e80fc85003535ede, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dac20fc6874256243a13ed719db457f8, type: 3}
+--- !u!1 &2085521411728653375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8691739911025221529, guid: dac20fc6874256243a13ed719db457f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7236723615393178534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5958446165820755714 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3953781135518477476, guid: dac20fc6874256243a13ed719db457f8,
@@ -5096,12 +5102,6 @@ RectTransform:
 --- !u!95 &2538960165332369255 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5139226306456607937, guid: dac20fc6874256243a13ed719db457f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 7236723615393178534}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2085521411728653375 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8691739911025221529, guid: dac20fc6874256243a13ed719db457f8,
     type: 3}
   m_PrefabInstance: {fileID: 7236723615393178534}
   m_PrefabAsset: {fileID: 0}

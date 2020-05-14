@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa9992ab471d28f47a538d39fc86e874, type: 3}
+  m_Name: Upgrades
+  m_EditorClassIdentifier: 
+  records:
+  - identifier: 1
+    _upgradeType: ExtraProjectiles
+    _description: Your raccoon wife joins in on throwing junk to ward off your enemies
+    _trashCost: 10
+    _modifierValue: 0.2
+    _target: N/A
+    _upgradelevel: 1
+  - identifier: 2
+    _upgradeType: ExtraProjectiles
+    _description: Your raccoon wife joins in on throwing junk to ward off your enemies
+    _trashCost: 20
+    _modifierValue: 0.2
+    _target: N/A
+    _upgradelevel: 2
+  - identifier: 3
+    _upgradeType: Ranged
+    _description: Projectiles can hit targets that are farther away
+    _trashCost: 5
+    _modifierValue: 5
+    _target: N/A
+    _upgradelevel: 1
+  - identifier: 4
+    _upgradeType: BarricadeReductionCost
+    _description: Barricades take less trash to build
+    _trashCost: 10
+    _modifierValue: 1
+    _target: N/A
+    _upgradelevel: 1
+  - identifier: 5
+    _upgradeType: TargetEnemy
+    _description: Target Specific enemies Ie. choose to prioritize firing at rats
+    _trashCost: 5
+    _modifierValue: -1
+    _target: Rats
+    _upgradelevel: 1
+  - identifier: 6
+    _upgradeType: 'FireProjectile '
+    _description: Projectiles will catch enemies on fire, dealing residual damage
+    _trashCost: 10
+    _modifierValue: 1
+    _target: N/A
+    _upgradelevel: 1

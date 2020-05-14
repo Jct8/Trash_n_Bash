@@ -1,0 +1,1 @@
+		[Identifier("#MODEL_NAME#")] #MODEL_NAME_TITLE_CASE# = #MODEL_INDEX#,

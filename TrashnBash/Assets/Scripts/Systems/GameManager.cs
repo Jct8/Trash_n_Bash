@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _GameState = GameState.Loader;
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Barricades, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.BarricadeReductionCost, 0);
         upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ExtraProjectiles, 0);
         upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.FireProjectile, 0);
         upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Ranged, 0);

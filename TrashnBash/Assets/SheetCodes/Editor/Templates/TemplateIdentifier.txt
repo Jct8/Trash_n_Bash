@@ -1,0 +1,18 @@
+namespace SheetCodes
+{
+	//Generated code, do not edit!
+
+	public enum #MODEL_NAME#Identifier
+	{
+		[Identifier("None")] None = 0,
+		/*IDENTIFIERS*/
+	}
+
+	public static class #MODEL_NAME#IdentifierExtension
+	{
+		public static #MODEL_NAME#Record GetRecord(this #MODEL_NAME#Identifier identifier)
+		{
+			return ModelManager.#MODEL_NAME#Model.GetRecord(identifier);
+		}
+	}
+}

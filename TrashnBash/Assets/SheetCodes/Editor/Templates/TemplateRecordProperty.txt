@@ -1,0 +1,2 @@
+		[ColumnName("#PROPERTY_IDENTIFIER#")] [SerializeField] private #PROPERTY_TYPE# _#PROPERTY_NAME_LOWER# = default;
+		public #PROPERTY_TYPE# #PROPERTY_NAME_UPPER# { get { return _#PROPERTY_NAME_LOWER#; } set { if(!CheckEdit()) return; _#PROPERTY_NAME_LOWER# = value; }}

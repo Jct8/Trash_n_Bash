@@ -1,0 +1,32 @@
+		[ColumnName("#PROPERTY_IDENTIFIER#")] [SerializeField] private #REFERENCE_MODEL_NAME#Identifier[] _#PROPERTY_NAME_LOWER# = default;
+		[NonSerialized] private #REFERENCE_MODEL_NAME#Record[] _#PROPERTY_NAME_LOWER#Records = default;
+		public #REFERENCE_MODEL_NAME#Record[] #PROPERTY_NAME_UPPER# 
+		{ 
+			get 
+			{ 
+				if(_#PROPERTY_NAME_LOWER#Records == null)
+				{
+					_#PROPERTY_NAME_LOWER#Records = new #REFERENCE_MODEL_NAME#Record[_#PROPERTY_NAME_LOWER#.Length];
+					for(int i = 0; i < _#PROPERTY_NAME_LOWER#Records.Length; i++)
+						_#PROPERTY_NAME_LOWER#Records[i] = ModelManager.#REFERENCE_MODEL_NAME#Model.GetRecord(_#PROPERTY_NAME_LOWER#[i]);
+				}
+				return _#PROPERTY_NAME_LOWER#Records; 
+			} 
+			set
+			{
+				if(!CheckEdit())
+					return;
+					
+				#REFERENCE_MODEL_NAME#Identifier[] newData = new #REFERENCE_MODEL_NAME#Identifier[value.Length];
+				for(int i = 0; i < value.Length; i++)
+				{
+					#REFERENCE_MODEL_NAME#Record record = value[i];
+					if(record == null)
+						newData[i] = #REFERENCE_MODEL_NAME#Identifier.None;
+					else
+						newData[i] = record.Identifier;
+				}
+				_#PROPERTY_NAME_LOWER# = newData;
+				_#PROPERTY_NAME_LOWER#Records = null;
+			}
+		}

@@ -11,7 +11,7 @@ public class UpgradeMenu : MonoBehaviour
         None,
         ExtraProjectiles,
         Ranged,
-        Barricades,
+        BarricadeReductionCost,
         TargetEnemy,
         FireProjectile
     }
@@ -43,7 +43,7 @@ public class UpgradeMenu : MonoBehaviour
     private void Start()
     {
         gameManager = ServiceLocator.Get<GameManager>();
-        barricadeLevel = gameManager.upgradeLevelsDictionary[Upgrade.Barricades];
+        barricadeLevel = gameManager.upgradeLevelsDictionary[Upgrade.BarricadeReductionCost];
         extraProjectileLevel = gameManager.upgradeLevelsDictionary[Upgrade.ExtraProjectiles];
         fireProjectileLevel = gameManager.upgradeLevelsDictionary[Upgrade.FireProjectile];
         longRangedLevel = gameManager.upgradeLevelsDictionary[Upgrade.Ranged];
@@ -73,7 +73,7 @@ public class UpgradeMenu : MonoBehaviour
                         gameManager.upgradeLevelsDictionary[choosenUpgrade]++;
                     }
                     break;
-                case Upgrade.Barricades:
+                case Upgrade.BarricadeReductionCost:
                     if (upgradeStats.baricadeUpgradeCost.Count >= currentLevel + 1)
                     {
                         UpdateTrashCount(upgradeStats.baricadeUpgradeCost[currentLevel]);
@@ -105,7 +105,7 @@ public class UpgradeMenu : MonoBehaviour
         switch (upgrade)
         {
             case "Barricades":
-                choosenUpgrade = Upgrade.Barricades;
+                choosenUpgrade = Upgrade.BarricadeReductionCost;
                 ChangeColor(barricadeButton);
                 upgradeDescriptionText.text = upgradeStats.barricadeDescription[barricadeLevel];
                 upgradeCostText.text = "Trash Cost:" + upgradeStats.baricadeUpgradeCost[barricadeLevel].ToString();

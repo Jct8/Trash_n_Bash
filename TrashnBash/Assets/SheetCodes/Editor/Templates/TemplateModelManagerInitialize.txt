@@ -1,0 +1,20 @@
+﻿                case DatasheetType.#MODEL_NAME_TITLE_CASE#:
+                    {
+                        if (#MODEL_NAME_CAMEL_CASE#Model != null && !#MODEL_NAME_CAMEL_CASE#Model.Equals(null))
+                        {
+                            Log(string.Format("Sheet Codes: Trying to Initialize {0}. Model is already initialized.", datasheetType));
+                            break;
+                        }
+
+                        #MODEL_NAME_CAMEL_CASE#Model = Resources.Load<#MODEL_NAME_TITLE_CASE#Model>("ScriptableObjects/#MODEL_NAME_TITLE_CASE#");
+                        LoadRequest request;
+                        if (loadRequests.TryGetValue(DatasheetType.#MODEL_NAME_TITLE_CASE#, out request))
+                        {
+                            Log(string.Format("Sheet Codes: Trying to initialize {0} while also async loading. Async load has been canceled.", datasheetType));
+                            loadRequests.Remove(DatasheetType.#MODEL_NAME_TITLE_CASE#);
+                            request.resourceRequest.completed -= OnLoadCompleted_#MODEL_NAME_TITLE_CASE#Model;
+							foreach (Action<bool> callback in request.callbacks)
+								callback(true);
+                        }
+                        break;
+                    }

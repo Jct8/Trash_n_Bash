@@ -1,0 +1,22 @@
+		[ColumnName("#PROPERTY_IDENTIFIER#")] [SerializeField] private #REFERENCE_MODEL_NAME#Identifier _#PROPERTY_NAME_LOWER# = default;
+		[NonSerialized] private #REFERENCE_MODEL_NAME#Record _#PROPERTY_NAME_LOWER#Record = default;
+		public #REFERENCE_MODEL_NAME#Record #PROPERTY_NAME_UPPER# 
+		{ 
+			get 
+			{ 
+				if(_#PROPERTY_NAME_LOWER#Record == null)
+					_#PROPERTY_NAME_LOWER#Record = ModelManager.#REFERENCE_MODEL_NAME#Model.GetRecord(_#PROPERTY_NAME_LOWER#);
+				return _#PROPERTY_NAME_LOWER#Record; 
+			} 
+			set
+			{
+				if(!CheckEdit())
+					return;
+					
+                if (value == null)
+                    _#PROPERTY_NAME_LOWER# = #REFERENCE_MODEL_NAME#Identifier.None;
+                else
+                    _#PROPERTY_NAME_LOWER# = value.Identifier;
+				_#PROPERTY_NAME_LOWER#Record = null;
+			}
+		}

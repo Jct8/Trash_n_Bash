@@ -141,6 +141,17 @@ public class LevelManager : MonoBehaviour
         uiManager.Reset();
         isTutorial = false;
         playerInstance.GetComponent<Player>().health = playerInstance.GetComponent<Player>()._maxHealth;
+
+        CheckUpgrade();
+    }
+
+    public void LoadData()
+    {
+        return;
+    }
+
+    void CheckUpgrade()
+    {
         //Upgrade options
         GameManager gameManager = ServiceLocator.Get<GameManager>();
         UpgradeStats upgradeStats = ServiceLocator.Get<UpgradeStats>();
@@ -150,7 +161,7 @@ public class LevelManager : MonoBehaviour
             towerInstance.GetComponent<Tower>().range += upgradeStats.towerRange[rangedLevel];
         //Barricade Upgrade
         BarricadeSpawner barricadeSpawner = GameObject.FindGameObjectWithTag("BarricadeSpawner")?.GetComponent<BarricadeSpawner>();
-        int barricadeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Barricades] - 1;
+        int barricadeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.BarricadeReductionCost] - 1;
         if (barricadeLevel >= 0 && barricadeSpawner)
             barricadeSpawner.baseBarricadeCost -= upgradeStats.barricadeCostReduction[barricadeLevel];
         //Wife tower Upgrade
@@ -175,10 +186,5 @@ public class LevelManager : MonoBehaviour
 
         //UpdateTowerTrashCount
         towerInstance.GetComponent<Tower>().fullHealth = gameManager._houseHP;
-    }
-
-    public void LoadData()
-    {
-        return;
     }
 }

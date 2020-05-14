@@ -1,0 +1,16 @@
+using System;
+using UnityEngine;
+namespace SheetCodes
+{
+	//Generated code, this script is only generated once and will not be overwritted!
+	//You can add code to this script to iterate your records but don't remove the generated code!
+
+	[Serializable]
+	public class #MODEL_NAME#Model : BaseModel<#MODEL_NAME#Record, #MODEL_NAME#Identifier>
+	{
+		[SerializeField] private #MODEL_NAME#Record[] records = default;
+		protected override #MODEL_NAME#Record[] Records { get { return records; } }
+
+		//Add your code below this line
+	}
+}

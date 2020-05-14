@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using SheetCodes;
 
 public class UpgradeMenu : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class UpgradeMenu : MonoBehaviour
 
     private UpgradeStats upgradeStats;
     private GameManager gameManager;
+    private UpgradesModel upgradesModel;
 
     int barricadeLevel;
     int extraProjectileLevel;
@@ -50,47 +52,59 @@ public class UpgradeMenu : MonoBehaviour
         targetEnemyLevel = gameManager.upgradeLevelsDictionary[Upgrade.TargetEnemy];
         upgradeStats = ServiceLocator.Get<UpgradeStats>();
         trashAvailableText.text = "Trash Available:" + gameManager._houseHP.ToString();
+        upgradesModel = ModelManager.UpgradesModel;
     }
 
     public void Create()
     {
         if (choosenUpgrade != Upgrade.None)
         {
+            UpgradesIdentifier upgradesIdentifier;
             int currentLevel = gameManager.upgradeLevelsDictionary[choosenUpgrade];
             switch (choosenUpgrade)
             {
                 case Upgrade.ExtraProjectiles:
-                    if (upgradeStats.targetEnmeyUpgradeCost.Count <= currentLevel + 1)
+                    upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.ExtraProjectiles, currentLevel + 1);
+                    //if (upgradeStats.targetEnmeyUpgradeCost.Count <= currentLevel + 1)
+                    if (upgradesModel.GetTotalUpgrades(Upgrade.ExtraProjectiles) <= currentLevel + 2)
                     {
-                        UpdateTrashCount(upgradeStats.moreProjectileCost[currentLevel]);
+                        UpdateTrashCount(upgradesModel.GetRecord(upgradesIdentifier).TrashCost);//UpdateTrashCount(upgradeStats.moreProjectileCost[currentLevel]);
                         gameManager.upgradeLevelsDictionary[choosenUpgrade]++;
                     }
                     break;
                 case Upgrade.Ranged:
-                    if (upgradeStats.longRangedCost.Count >= currentLevel + 1)
+                    upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.Ranged, currentLevel + 1);
+                    //if (upgradeStats.longRangedCost.Count >= currentLevel + 1)
+                    if (upgradesModel.GetTotalUpgrades(Upgrade.Ranged) <= currentLevel + 2)
                     {
-                        UpdateTrashCount(upgradeStats.longRangedCost[currentLevel]);
+                        UpdateTrashCount(upgradesModel.GetRecord(upgradesIdentifier).TrashCost);//UpdateTrashCount(upgradeStats.longRangedCost[currentLevel]);
                         gameManager.upgradeLevelsDictionary[choosenUpgrade]++;
                     }
                     break;
                 case Upgrade.BarricadeReductionCost:
-                    if (upgradeStats.baricadeUpgradeCost.Count >= currentLevel + 1)
+                    upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.BarricadeReductionCost, currentLevel + 1);
+                    //if (upgradeStats.baricadeUpgradeCost.Count >= currentLevel + 1)
+                    if (upgradesModel.GetTotalUpgrades(Upgrade.BarricadeReductionCost) <= currentLevel + 2)
                     {
-                        UpdateTrashCount(upgradeStats.baricadeUpgradeCost[currentLevel]);
+                        UpdateTrashCount(upgradesModel.GetRecord(upgradesIdentifier).TrashCost);// UpdateTrashCount(upgradeStats.baricadeUpgradeCost[currentLevel]);
                         gameManager.upgradeLevelsDictionary[choosenUpgrade]++;
                     }
                     break;
                 case Upgrade.TargetEnemy:
-                    if (upgradeStats.targetEnmeyUpgradeCost.Count >= currentLevel + 1)
+                    upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.TargetEnemy, currentLevel + 1);
+                    //if (upgradeStats.targetEnmeyUpgradeCost.Count >= currentLevel + 1)
+                    if (upgradesModel.GetTotalUpgrades(Upgrade.TargetEnemy) <= currentLevel + 2)
                     {
-                        UpdateTrashCount(upgradeStats.targetEnmeyUpgradeCost[currentLevel]);
+                        UpdateTrashCount(upgradesModel.GetRecord(upgradesIdentifier).TrashCost);//UpdateTrashCount(upgradeStats.targetEnmeyUpgradeCost[currentLevel]);
                         gameManager.upgradeLevelsDictionary[choosenUpgrade]++;
                     }
                     break;
                 case Upgrade.FireProjectile:
-                    if (upgradeStats.fireUpgradeCost.Count >= currentLevel + 1)
+                    upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.FireProjectile, currentLevel + 1);
+                    //if (upgradeStats.fireUpgradeCost.Count >= currentLevel + 1)
+                    if (upgradesModel.GetTotalUpgrades(Upgrade.FireProjectile) <= currentLevel + 2)
                     {
-                        UpdateTrashCount(upgradeStats.fireUpgradeCost[currentLevel]);
+                        UpdateTrashCount(upgradesModel.GetRecord(upgradesIdentifier).TrashCost);//UpdateTrashCount(upgradeStats.fireUpgradeCost[currentLevel]);
                         gameManager.upgradeLevelsDictionary[choosenUpgrade]++;
                     }
                     break;
@@ -102,37 +116,43 @@ public class UpgradeMenu : MonoBehaviour
 
     public void ChooseUpgrade(string upgrade)
     {
+        UpgradesIdentifier upgradesIdentifier;
         switch (upgrade)
         {
             case "Barricades":
                 choosenUpgrade = Upgrade.BarricadeReductionCost;
                 ChangeColor(barricadeButton);
-                upgradeDescriptionText.text = upgradeStats.barricadeDescription[barricadeLevel];
-                upgradeCostText.text = "Trash Cost:" + upgradeStats.baricadeUpgradeCost[barricadeLevel].ToString();
+                upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.BarricadeReductionCost, barricadeLevel + 1);
+                upgradeDescriptionText.text = upgradesModel.GetRecord(upgradesIdentifier).Description; // upgradeStats.barricadeDescription[barricadeLevel];
+                upgradeCostText.text = "Trash Cost:" + upgradesModel.GetRecord(upgradesIdentifier).TrashCost;// upgradeStats.baricadeUpgradeCost[barricadeLevel].ToString();
                 break;
             case "ExtraProjectiles":
                 choosenUpgrade = Upgrade.ExtraProjectiles;
                 ChangeColor(moreProjectilesButton);
-                upgradeDescriptionText.text = upgradeStats.moreProjectileDescription[extraProjectileLevel];
-                upgradeCostText.text = "Trash Cost:" + upgradeStats.moreProjectileCost[extraProjectileLevel].ToString();
+                upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.ExtraProjectiles, extraProjectileLevel + 1);
+                upgradeDescriptionText.text = upgradesModel.GetRecord(upgradesIdentifier).Description;//upgradeStats.moreProjectileDescription[extraProjectileLevel];
+                upgradeCostText.text = "Trash Cost:" + upgradesModel.GetRecord(upgradesIdentifier).TrashCost;// upgradeStats.moreProjectileCost[extraProjectileLevel].ToString();
                 break;
             case "FireProjectile":
                 choosenUpgrade = Upgrade.FireProjectile;
                 ChangeColor(fireProjectileButton);
-                upgradeDescriptionText.text = upgradeStats.fireDescription[fireProjectileLevel];
-                upgradeCostText.text = "Trash Cost:" + upgradeStats.fireUpgradeCost[fireProjectileLevel].ToString();
+                upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.FireProjectile, fireProjectileLevel + 1);
+                upgradeDescriptionText.text = upgradesModel.GetRecord(upgradesIdentifier).Description; // upgradeStats.fireDescription[fireProjectileLevel];
+                upgradeCostText.text = "Trash Cost:" + upgradesModel.GetRecord(upgradesIdentifier).TrashCost;// upgradeStats.fireUpgradeCost[fireProjectileLevel].ToString();
                 break;
             case "Ranged":
                 choosenUpgrade = Upgrade.Ranged;
                 ChangeColor(longRangedButton);
-                upgradeDescriptionText.text = upgradeStats.longRangedDescription[longRangedLevel];
-                upgradeCostText.text = "Trash Cost:" + upgradeStats.longRangedCost[longRangedLevel].ToString();
+                upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.Ranged, longRangedLevel + 1);
+                upgradeDescriptionText.text = upgradesModel.GetRecord(upgradesIdentifier).Description;// upgradeStats.longRangedDescription[longRangedLevel];
+                upgradeCostText.text = "Trash Cost:" + upgradesModel.GetRecord(upgradesIdentifier).TrashCost;// upgradeStats.longRangedCost[longRangedLevel].ToString();
                 break;
             case "TargetEnemy":
                 choosenUpgrade = Upgrade.TargetEnemy;
                 ChangeColor(targetEnemyButton);
-                upgradeDescriptionText.text = upgradeStats.targetEnmeyDescription[targetEnemyLevel];
-                upgradeCostText.text = "Trash Cost:" + upgradeStats.targetEnmeyUpgradeCost[targetEnemyLevel].ToString();
+                upgradesIdentifier = upgradesModel.GetUpgradeEnum(Upgrade.TargetEnemy, targetEnemyLevel + 1);
+                upgradeDescriptionText.text = upgradesModel.GetRecord(upgradesIdentifier).Description; // upgradeStats.targetEnmeyDescription[targetEnemyLevel];
+                upgradeCostText.text = "Trash Cost:" + upgradesModel.GetRecord(upgradesIdentifier).TrashCost;// upgradeStats.targetEnmeyUpgradeCost[targetEnemyLevel].ToString();
                 break;
             default:
                 break;

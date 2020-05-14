@@ -11,6 +11,9 @@ namespace SheetCodes
 	[Serializable]
 	public class UpgradesRecord : BaseRecord<UpgradesIdentifier>
 	{
+		[ColumnName("UpgradeLevel")] [SerializeField] private int _upgradelevel = default;
+		public int Upgradelevel { get { return _upgradelevel; } set { if(!CheckEdit()) return; _upgradelevel = value; }}
+
 		[ColumnName("Upgrade Type")] [SerializeField] private string _upgradeType = default;
 		public string UpgradeType { get { return _upgradeType; } set { if(!CheckEdit()) return; _upgradeType = value; }}
 
@@ -25,9 +28,6 @@ namespace SheetCodes
 
 		[ColumnName("Target")] [SerializeField] private string _target = default;
 		public string Target { get { return _target; } set { if(!CheckEdit()) return; _target = value; }}
-
-		[ColumnName("UpgradeLevel")] [SerializeField] private int _upgradelevel = default;
-		public int Upgradelevel { get { return _upgradelevel; } set { if(!CheckEdit()) return; _upgradelevel = value; }}
 		/*PROPERTIES*/
 
         protected bool runtimeEditingEnabled { get { return originalRecord != null; } }

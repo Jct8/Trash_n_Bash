@@ -116,5 +116,17 @@ namespace SheetCodes
             }
             return total;
         }
+        public UpgradesIdentifier GetUpgradeEnum(UpgradeMenu.Upgrade type,int level)
+        {
+            UpgradesIdentifier ret = UpgradesIdentifier.None;
+
+            foreach (var record in Records)
+            {
+                UpgradesRecord rec = record as UpgradesRecord;
+                if (rec.UpgradeType == type.ToString() && rec.Upgradelevel == level)
+                    ret = rec.Identifier;
+            }
+            return ret;
+        }
     }
 }

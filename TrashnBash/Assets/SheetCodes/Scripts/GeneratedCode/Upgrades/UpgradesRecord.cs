@@ -23,11 +23,14 @@ namespace SheetCodes
 		[ColumnName("Trash Cost")] [SerializeField] private float _trashCost = default;
 		public float TrashCost { get { return _trashCost; } set { if(!CheckEdit()) return; _trashCost = value; }}
 
+		[ColumnName("Target")] [SerializeField] private string _target = default;
+		public string Target { get { return _target; } set { if(!CheckEdit()) return; _target = value; }}
+
 		[ColumnName("Modifier Value")] [SerializeField] private float _modifierValue = default;
 		public float ModifierValue { get { return _modifierValue; } set { if(!CheckEdit()) return; _modifierValue = value; }}
 
-		[ColumnName("Target")] [SerializeField] private string _target = default;
-		public string Target { get { return _target; } set { if(!CheckEdit()) return; _target = value; }}
+		[ColumnName("Variable Modified (This doesnt do anything)")] [SerializeField] private string _variableModifiedThisDoesntDoAnything = default;
+		public string VariableModifiedThisDoesntDoAnything { get { return _variableModifiedThisDoesntDoAnything; } set { if(!CheckEdit()) return; _variableModifiedThisDoesntDoAnything = value; }}
 		/*PROPERTIES*/
 
         protected bool runtimeEditingEnabled { get { return originalRecord != null; } }

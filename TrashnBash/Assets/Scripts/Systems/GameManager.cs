@@ -37,6 +37,22 @@ public class GameManager : MonoBehaviour
         upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.FireProjectile, 0);
         upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Ranged, 0);
         upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.TargetEnemy, 0);
+
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ImprovedBarricades, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.BarricadeSpawnRate, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.TrashSpawnRate, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ImprovedPlayerHP, 0);
+        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ImprovedHealing, 0);
+
+        
+    }
+    private void Start()
+    {
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            //_houseHP = variableLoader.TowerStats["Health"];
+        }
     }
 
     public GameManager Initialize()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SheetCodes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,12 @@ public class ResourceSpawner : MonoBehaviour
             limit = (int) variableLoader.TrashCanStats["TrashLimit"];
             totalCoolTime = variableLoader.TrashCanStats["Cooldown"];
         }
+
+        ///////////  Upgrades - Trash Spawn Rate Improved  ///////////
+        int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.TrashSpawnRate];
+        UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.TrashSpawnRate, level);
+        if (level >= 1)
+            totalCoolTime -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
     }
 
     public GameObject GetResource()

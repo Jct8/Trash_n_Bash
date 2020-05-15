@@ -20,7 +20,7 @@ public class VariableLoader : MonoBehaviour
 
     public bool useGoogleSheets = true;
 
-    void Start()
+    void Awake()
     {
         if (!useGoogleSheets) return;
 

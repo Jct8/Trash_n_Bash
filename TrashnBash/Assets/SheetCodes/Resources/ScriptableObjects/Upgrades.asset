@@ -18,40 +18,86 @@ MonoBehaviour:
     _upgradeType: ExtraProjectiles
     _description: Your raccoon wife joins in on throwing junk to ward off your enemies
     _trashCost: 10
-    _modifierValue: 0.2
     _target: N/A
+    _modifierValue: 0.2
+    _variableModifiedThisDoesntDoAnything: Increases Tower Attack speed
   - identifier: 2
     _upgradelevel: 2
     _upgradeType: ExtraProjectiles
     _description: Your raccoon wife joins in on throwing junk to ward off your enemies
     _trashCost: 20
-    _modifierValue: 0.2
     _target: N/A
+    _modifierValue: 0.2
+    _variableModifiedThisDoesntDoAnything: Increases Tower Attack Speed
   - identifier: 3
     _upgradelevel: 1
     _upgradeType: Ranged
     _description: Projectiles can hit targets that are farther away
     _trashCost: 5
-    _modifierValue: 5
     _target: N/A
+    _modifierValue: 5
+    _variableModifiedThisDoesntDoAnything: Increases Tower Range
   - identifier: 4
     _upgradelevel: 1
     _upgradeType: BarricadeReductionCost
     _description: Barricades take less trash to build
     _trashCost: 10
-    _modifierValue: 1
     _target: N/A
+    _modifierValue: 2
+    _variableModifiedThisDoesntDoAnything: Decreases Barricade Cost
   - identifier: 5
     _upgradelevel: 1
     _upgradeType: TargetEnemy
     _description: Target Specific enemies Ie. choose to prioritize firing at rats
     _trashCost: 5
-    _modifierValue: -1
     _target: Rats
+    _modifierValue: -1
+    _variableModifiedThisDoesntDoAnything: Targets rats
   - identifier: 6
     _upgradelevel: 1
     _upgradeType: FireProjectile
     _description: Projectiles will catch enemies on fire, dealing residual damage
     _trashCost: 10
-    _modifierValue: 1
     _target: N/A
+    _modifierValue: 1
+    _variableModifiedThisDoesntDoAnything: Increases fire duration
+  - identifier: 7
+    _upgradelevel: 1
+    _upgradeType: ImprovedBarricades
+    _description: Barricades will distract enemies for a longer period of time
+    _trashCost: 8
+    _target: N/A
+    _modifierValue: 6
+    _variableModifiedThisDoesntDoAnything: Increases Barricade Health
+  - identifier: 8
+    _upgradelevel: 1
+    _upgradeType: BarricadeSpawnRate
+    _description: Barricades can be buillt more frequently
+    _trashCost: 9
+    _target: N/A
+    _modifierValue: 2
+    _variableModifiedThisDoesntDoAnything: Increases spawn rate
+  - identifier: 9
+    _upgradelevel: 1
+    _upgradeType: TrashSpawnRate
+    _description: Trash will appear more frequently
+    _trashCost: 8
+    _target: N/A
+    _modifierValue: 6
+    _variableModifiedThisDoesntDoAnything: Increases spawn rate
+  - identifier: 10
+    _upgradelevel: 1
+    _upgradeType: ImprovedPlayerHP
+    _description: Racoons HP is increased
+    _trashCost: 5
+    _target: N/A
+    _modifierValue: 50
+    _variableModifiedThisDoesntDoAnything: Adds to players max health
+  - identifier: 11
+    _upgradelevel: 1
+    _upgradeType: ImprovedHealing
+    _description: Notification will restore more health
+    _trashCost: 13
+    _target: N/A
+    _modifierValue: 4
+    _variableModifiedThisDoesntDoAnything: Increases healing from tower

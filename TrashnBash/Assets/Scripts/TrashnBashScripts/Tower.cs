@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SheetCodes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -83,6 +84,12 @@ public class Tower : MonoBehaviour
 
             fullHealth = MaxHealth;
         }
+        ///////////  Upgrades - Improved healing  ///////////
+        int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.ImprovedHealing];
+        UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.ImprovedHealing, level);
+        if (level >= 1)
+            towerHealCostValue += ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+        fullHealth = ServiceLocator.Get<GameManager>()._houseHP;
     }
 
     public void Initialize(float dmg, float s, float h, float ar, float r)

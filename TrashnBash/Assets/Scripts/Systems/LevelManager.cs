@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using SheetCodes;
 
 public class LevelManager : MonoBehaviour
 {
@@ -141,44 +142,72 @@ public class LevelManager : MonoBehaviour
         uiManager.Reset();
         isTutorial = false;
         playerInstance.GetComponent<Player>().health = playerInstance.GetComponent<Player>()._maxHealth;
-        //Upgrade options
-        GameManager gameManager = ServiceLocator.Get<GameManager>();
-        UpgradeStats upgradeStats = ServiceLocator.Get<UpgradeStats>();
-        //Long Ranged Upgrade
-        int rangedLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged] - 1;
-        if (rangedLevel >= 0)
-            towerInstance.GetComponent<Tower>().range += upgradeStats.towerRange[rangedLevel];
-        //Barricade Upgrade
-        BarricadeSpawner barricadeSpawner = GameObject.FindGameObjectWithTag("BarricadeSpawner")?.GetComponent<BarricadeSpawner>();
-        int barricadeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Barricades] - 1;
-        if (barricadeLevel >= 0 && barricadeSpawner)
-            barricadeSpawner.baseBarricadeCost -= upgradeStats.barricadeCostReduction[barricadeLevel];
-        //Wife tower Upgrade
-        Tower wife = GameObject.FindGameObjectWithTag("Wife").GetComponent<Tower>();
-        int wifeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.ExtraProjectiles] - 1;
-        if (wifeLevel >= 0)
-        {
-            wife.isShooting = true;
-            wife.attackRate -= upgradeStats.throwingSpeed[wifeLevel];
-        }
-        //Specific Target Upgrade
-        int specficLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.TargetEnemy] - 1;
-        if (specficLevel >= 0)
-            towerInstance.GetComponent<Tower>().specificEnemy = upgradeStats.targetEnemy[specficLevel];
-        // Fire Upgrade
-        int fireLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.FireProjectile] - 1;
-        if (fireLevel >= 0)
-        {
-            towerInstance.GetComponent<Tower>().damageType = DamageType.Poison;
-            towerInstance.GetComponent<Tower>().fireDuration = upgradeStats.fireDuration[fireLevel];
-        }
 
-        //UpdateTowerTrashCount
-        towerInstance.GetComponent<Tower>().fullHealth = gameManager._houseHP;
+        ApplyUpgrades();
     }
 
     public void LoadData()
     {
         return;
+    }
+
+    void ApplyUpgrades()
+    {
+        // Upgrade options
+        GameManager gameManager = ServiceLocator.Get<GameManager>();
+        UpgradesModel upgradesModel = ModelManager.UpgradesModel;
+        UpgradesIdentifier upgradesIdentifier = UpgradesIdentifier.None;
+
+        // Long Ranged Upgrade
+        int rangedLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged] - 1;
+        upgradesIdentifier = upgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.Ranged, rangedLevel + 1);
+        if (rangedLevel >= 0)
+            towerInstance.GetComponent<Tower>().range += upgradesModel.GetRecord(upgradesIdentifier).ModifierValue;// upgradeStats.towerRange[rangedLevel];
+
+        // Barricade Reduction Cost Upgrade
+        // Moved to Barricade Spawner Script
+
+        // Wife tower Upgrade
+        Tower wife = GameObject.FindGameObjectWithTag("Wife").GetComponent<Tower>();
+        int wifeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.ExtraProjectiles] - 1;
+        upgradesIdentifier = upgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.ExtraProjectiles, wifeLevel + 1);
+        if (wifeLevel >= 0)
+        {
+            wife.isShooting = true;
+            wife.attackRate -= upgradesModel.GetRecord(upgradesIdentifier).ModifierValue; //upgradeStats.throwingSpeed[wifeLevel];
+        }
+
+        // Specific Target Upgrade
+        int specficLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.TargetEnemy] - 1;
+        upgradesIdentifier = upgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.TargetEnemy, specficLevel + 1);
+        if (specficLevel >= 0)
+            towerInstance.GetComponent<Tower>().specificEnemy = upgradesModel.GetRecord(upgradesIdentifier).Target;//upgradeStats.targetEnemy[specficLevel];
+
+        // Fire Upgrade
+        int fireLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.FireProjectile] - 1;
+        upgradesIdentifier = upgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.FireProjectile, fireLevel + 1);
+        if (fireLevel >= 0)
+        {
+            towerInstance.GetComponent<Tower>().damageType = DamageType.Poison;
+            towerInstance.GetComponent<Tower>().fireDuration = upgradesModel.GetRecord(upgradesIdentifier).ModifierValue;// upgradeStats.fireDuration[fireLevel];
+        }
+
+        // Improved Barricades
+        // Moved to Barricade Script
+
+        // Barricade Spawn Rate Improved
+        // Moved to Barricade Spawner Script
+
+        // Trash Spawn Rate Improved 
+        // Moved to Resource Spawner Script
+
+        // Improved Player HP
+        // Moved to Player Script
+
+        // Improved healing
+        // Moved to Tower Script
+
+        // UpdateTowerTrashCount
+        towerInstance.GetComponent<Tower>().fullHealth = gameManager._houseHP;
     }
 }

@@ -1,0 +1,19 @@
+﻿                case DatasheetType.#MODEL_NAME_TITLE_CASE#:
+                    {
+                        if (#MODEL_NAME_CAMEL_CASE#Model == null || #MODEL_NAME_CAMEL_CASE#Model.Equals(null))
+                        {
+                            Log(string.Format("Sheet Codes: Trying to unload model {0}. Model is not loaded.", datasheetType));
+                            break;
+                        }
+                        Resources.UnloadAsset(#MODEL_NAME_CAMEL_CASE#Model);
+                        #MODEL_NAME_CAMEL_CASE#Model = null;
+                        LoadRequest request;
+                        if (loadRequests.TryGetValue(DatasheetType.#MODEL_NAME_TITLE_CASE#, out request))
+                        {
+                            loadRequests.Remove(DatasheetType.#MODEL_NAME_TITLE_CASE#);
+                            request.resourceRequest.completed -= OnLoadCompleted_#MODEL_NAME_TITLE_CASE#Model;
+							foreach (Action<bool> callback in request.callbacks)
+								callback(false);
+                        }
+                        break;
+                    }

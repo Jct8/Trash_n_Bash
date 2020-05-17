@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a17585416088b41a646433bc0d868d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  signifierGO: {fileID: 0}
   partToRotate: {fileID: 6840306746066752589}
   bulletPrefeb: {fileID: 7466416969426066422, guid: bbd04011c182cd24a85fa465ce3a8dc5,
     type: 3}
@@ -116,17 +117,21 @@ MonoBehaviour:
   damageType: 0
   fireDuration: 0
   dataSourceId: Tower
-  name: 
-  range: 0
-  damage: 0
-  speed: 0
-  health: 0
-  attackRate: 0
+  range: 10
+  damage: 5
+  speed: 500
+  MaxHealth: 100
+  attackRate: 1
   fullHealth: 0
   shotTime: 0
   isShooting: 0
   specificEnemy: NONE
   shotSound: {fileID: 8300000, guid: f1df4a14307925f44b248c7e6ecbeadd, type: 3}
+  towerHealCostValue: 30
+  towerLostCostValue: 15
+  totalRegainCoolTime: 25
+  minimumPlayerHealth: 70
+  minimumTowerHealth: 20
 --- !u!82 &8698512147066097747
 AudioSource:
   m_ObjectHideFlags: 0

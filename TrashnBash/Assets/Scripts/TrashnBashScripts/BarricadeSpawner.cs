@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using SheetCodes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,6 +29,19 @@ public class BarricadeSpawner : MonoBehaviour
             baseBarricadeCost = variableLoader.BarriacdeStats["TrashCost"];
         }
         ServiceLocator.Get<GameManager>().barricadeSpawner = this;
+
+        ///////////  Upgrades - Barricade Spawn Rate Improved  ///////////
+        int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.BarricadeSpawnRate];
+        UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.BarricadeSpawnRate, level);
+        if (level >= 1)
+            spawnCoolDownTime -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+
+        ///////////  Upgrades - Barricade Reduction Cost Upgrade ///////////
+        int barricadeLevel = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.BarricadeReductionCost];
+        upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.BarricadeReductionCost, barricadeLevel);
+        if (barricadeLevel >= 1)
+            baseBarricadeCost -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue; 
+
     }
 
     private void Update()

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using SheetCodes;
 
 public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDraggableItem
 {
@@ -64,6 +65,12 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
             _MaxHealth = variableLoader.BarriacdeStats["Health"];
             _barricadeBuildTime = variableLoader.BarriacdeStats["BuildTime"];
         }
+        ///////////  Upgrades - Improved Barricades  ///////////
+        int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.ImprovedBarricades];
+        UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.ImprovedBarricades, level);
+        if (level >= 1)
+            health += ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+
     }
 
     private void Update()

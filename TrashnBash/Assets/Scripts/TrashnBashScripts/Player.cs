@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using SheetCodes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,7 +78,6 @@ public class Player : MonoBehaviour, ICharacterAction
 
         ultimateChargeStart = _ultimateCharge;
         _uiManager = ServiceLocator.Get<UIManager>();
-        _uiManager.UpdatePlayerHealth(health, _maxHealth);
         //attack = PlayerPrefs.GetFloat(DAMAGE_KEY, 20.0f);
         //health = PlayerPrefs.GetFloat(HEALTH_KEY, 100.0f);
 
@@ -96,6 +96,14 @@ public class Player : MonoBehaviour, ICharacterAction
             ultimateDamage = variableLoader.PlayerAbilties["Ultimate"]["Damage"];
             ultimateRange = variableLoader.PlayerAbilties["Ultimate"]["Range"];
         }
+        ///////////  Upgrades - Improved Player HP  ///////////
+        int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.ImprovedPlayerHP];
+        UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.ImprovedPlayerHP, level);
+        if (level >= 1)
+            _maxHealth += ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+
+        health = _maxHealth;
+        _uiManager.UpdatePlayerHealth(health, _maxHealth);
     }
     void Update()
     {

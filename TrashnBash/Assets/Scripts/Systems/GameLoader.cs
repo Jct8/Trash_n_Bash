@@ -107,10 +107,10 @@ public class GameLoader : AsyncLoader
         UIManager UIManagerComp = _UIInstance.GetComponent<UIManager>();
         ServiceLocator.Register<UIManager>(UIManagerComp.Initialize());
 
-        GameObject _upgradeInstance = GameObject.Instantiate(upgradeStatPrefeb);
-        _upgradeInstance.transform.SetParent(systemsParent);
-        UpgradeStats upgradeComp = _upgradeInstance.GetComponent<UpgradeStats>();
-        ServiceLocator.Register<UpgradeStats>(upgradeComp.Initialize());
+        //GameObject _upgradeInstance = GameObject.Instantiate(upgradeStatPrefeb);
+        //_upgradeInstance.transform.SetParent(systemsParent);
+        //UpgradeStats upgradeComp = _upgradeInstance.GetComponent<UpgradeStats>();
+        //ServiceLocator.Register<UpgradeStats>(upgradeComp.Initialize());
 
         GameObject _variableLoaderInstance = GameObject.Instantiate(variableLoaderPrefab);
         _variableLoaderInstance.transform.SetParent(systemsParent);

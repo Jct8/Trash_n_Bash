@@ -1,0 +1,18 @@
+﻿                case DatasheetType.#MODEL_NAME_TITLE_CASE#:
+                    {
+                        if (#MODEL_NAME_CAMEL_CASE#Model != null && !#MODEL_NAME_CAMEL_CASE#Model.Equals(null))
+                        {
+                            Log(string.Format("Sheet Codes: Trying to InitializeAsync {0}. Model is already initialized.", datasheetType));
+                            callback(true);
+                            break;
+                        }
+                        if(loadRequests.ContainsKey(DatasheetType.#MODEL_NAME_TITLE_CASE#))
+                        {
+                            loadRequests[DatasheetType.#MODEL_NAME_TITLE_CASE#].callbacks.Add(callback);
+                            break;
+                        }
+                        ResourceRequest request = Resources.LoadAsync<#MODEL_NAME_TITLE_CASE#Model>("ScriptableObjects/#MODEL_NAME_TITLE_CASE#");
+                        loadRequests.Add(DatasheetType.#MODEL_NAME_TITLE_CASE#, new LoadRequest(request, callback));
+                        request.completed += OnLoadCompleted_#MODEL_NAME_TITLE_CASE#Model;
+                        break;
+                    }

@@ -1,0 +1,21 @@
+        private static void OnLoadCompleted_#MODEL_NAME_TITLE_CASE#Model(AsyncOperation operation)
+        {
+            LoadRequest request = loadRequests[DatasheetType.#MODEL_NAME_TITLE_CASE#];
+            #MODEL_NAME_CAMEL_CASE#Model = request.resourceRequest.asset as #MODEL_NAME_TITLE_CASE#Model;
+            loadRequests.Remove(DatasheetType.#MODEL_NAME_TITLE_CASE#);
+            operation.completed -= OnLoadCompleted_#MODEL_NAME_TITLE_CASE#Model;
+            foreach (Action<bool> callback in request.callbacks)
+                callback(true);
+        }
+
+		private static #MODEL_NAME_TITLE_CASE#Model #MODEL_NAME_CAMEL_CASE#Model = default;
+		public static #MODEL_NAME_TITLE_CASE#Model #MODEL_NAME_TITLE_CASE#Model
+        {
+            get
+            {
+                if (#MODEL_NAME_CAMEL_CASE#Model == null)
+                    Initialize(DatasheetType.#MODEL_NAME_TITLE_CASE#);
+
+                return #MODEL_NAME_CAMEL_CASE#Model;
+            }
+        }

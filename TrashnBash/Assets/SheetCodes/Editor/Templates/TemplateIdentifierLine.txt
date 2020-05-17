@@ -1,0 +1,1 @@
+		[Identifier("#RECORD_NAME#")] #RECORD_NAME_TITLE_CASE# = #RECORD_INDEX#,

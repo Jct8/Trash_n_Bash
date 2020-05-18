@@ -13,6 +13,9 @@ public class ResourceSpawner : MonoBehaviour
     public GameObject coolTimeGO;
     public Image coolTimeImage;
     public List<GameObject> trashModels;
+
+    [SerializeField]
+    private float healValue = 10.0f;
     public float totalCoolTime = 15;
     public int limit = 3;
     private bool completedCoolTime = false;
@@ -29,6 +32,7 @@ public class ResourceSpawner : MonoBehaviour
         {
             limit = (int) variableLoader.TrashCanStats["TrashLimit"];
             totalCoolTime = variableLoader.TrashCanStats["Cooldown"];
+            healValue = variableLoader.TrashCanStats["Cooldown"];
         }
 
         ///////////  Upgrades - Trash Spawn Rate Improved  ///////////
@@ -40,31 +44,31 @@ public class ResourceSpawner : MonoBehaviour
 
     public GameObject GetResource()
     {
-        if(completedCoolTime)
-        {
-            if(totalResourceTaken < limit)
-            {
-                GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
+        //if(completedCoolTime)
+        //{
+        //    if(totalResourceTaken < limit)
+        //    {
+        //        GameObject resource = Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
 
-                //random trash model
-                UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
-                int randomNumber = UnityEngine.Random.Range(0, trashModels.Count - 1);
-                GameObject resourceModel = Instantiate(trashModels[randomNumber], gameObject.transform.position, Quaternion.identity) as GameObject;
-                resourceModel.transform.parent = resource.transform;
-                totalResourceTaken++;
-                completedCoolTime = false;
-                return resource;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        else
-        {
-            return null;
-        }
-
+        //        //random trash model
+        //        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+        //        int randomNumber = UnityEngine.Random.Range(0, trashModels.Count - 1);
+        //        GameObject resourceModel = Instantiate(trashModels[randomNumber], gameObject.transform.position, Quaternion.identity) as GameObject;
+        //        resourceModel.transform.parent = resource.transform;
+        //        totalResourceTaken++;
+        //        completedCoolTime = false;
+        //        return resource;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
+        //else
+        //{
+        //    return null;
+        //}
+        return null;
     }
 
     void Update()
@@ -81,16 +85,13 @@ public class ResourceSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnResource()
+    public void GettingResource()
     {
         if(coolTimeImage.fillAmount >= 1)
         {
-            GameObject resource = GetResource();
-            if(resource)
-            {
-                resource.transform.position = ObjectPos.transform.position;
-                coolTimeImage.fillAmount = 0;
-            }
+            Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
+            tower.GetComponent<Tower>().HealTower(healValue);
+            coolTimeImage.fillAmount = 0;
         }
 
     }

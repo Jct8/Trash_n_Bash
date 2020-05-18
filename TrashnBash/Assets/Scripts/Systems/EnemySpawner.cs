@@ -82,7 +82,6 @@ public class EnemySpawner : MonoBehaviour
             _enemy.GetComponent<Enemy>().ResetStatus();
             _activeEnemies.Add(_enemy);
         }
-        ServiceLocator.Get<UIManager>().CountingTimer((float)_enemiesPerWave);
     }
 
     public void ResetSpawner()

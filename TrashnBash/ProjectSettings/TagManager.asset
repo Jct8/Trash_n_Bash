@@ -19,6 +19,7 @@ TagManager:
   - Wife
   - Canvas
   - Restoring
+  - Timer
   layers:
   - Default
   - TransparentFX

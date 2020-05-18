@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public Canvas canvas;
+
     public GameObject player;
     public GameObject tower;
     public Image playerHealthBar;
@@ -34,7 +37,7 @@ public class UIManager : MonoBehaviour
     public GameObject ultImg;
     public GameObject repairButton;
     public GameObject placeButton;
-    public GameObject basicAttackButton;
+    public GameObject timerObject;
 
     public Button pauseButton;
     public Button continueButton;
@@ -43,8 +46,9 @@ public class UIManager : MonoBehaviour
 
     private float _TowerHP;
     private bool IsPower = false;
-    public float totalWave = 0;
-    public float currentWave = 0;
+    public float maximumTimer = 100.0f;
+    public float currentTimer = 0.0f;
+
     private void Start()
     {
         fade.SetActive(false);
@@ -122,8 +126,8 @@ public class UIManager : MonoBehaviour
 
     public UIManager Initialize()
     {
-        totalWave = 0;
-        currentWave = 0;
+        waveTimerBar.fillAmount = 0.0f;
+
         restartButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().Restart);
         continueButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().PauseGame);
         mainmenuButton.onClick.AddListener(ServiceLocator.Get<LevelManager>().ReturnToMainMenu);
@@ -159,20 +163,32 @@ public class UIManager : MonoBehaviour
     public IEnumerator Reset()
     {
         Debug.Log("Start Reset UI");
-        totalWave = 0.0f;
-        currentWave = 0.0f;
+
+        timerObject.SetActive(false);
+
         yield return new WaitForSeconds(0.5f);
         player = ServiceLocator.Get<LevelManager>().playerInstance;
         tower = ServiceLocator.Get<LevelManager>().towerInstance;
 
         // Wave reset
         spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        float time = 0.0f;
         foreach (GameObject spawn in spawners)
         {
-            totalWave += spawn.GetComponent<EnemySpawner>()._numberOfWave;
+            if (spawn.GetComponent<EnemySpawner>()._secondStartDelay < 10.0f)
+                continue;
+            else
+            {
+                if (time < spawn.GetComponent<EnemySpawner>()._secondStartDelay)
+                    time = spawn.GetComponent<EnemySpawner>()._secondStartDelay;
+            }
         }
-        currentWave = totalWave;
-        waveTimerBar.fillAmount = currentWave / totalWave;
+        timerObject.SetActive(true);
+        RectTransform RectCanvas = canvas.GetComponent<RectTransform>();
+        timerObject.transform.position = new Vector3((RectCanvas.rect.width / 2.0f) - 80.0f + time,
+            RectCanvas.rect.height - 40.0f, 0.0f);
+
+        waveTimerBar.fillAmount = 0.0f;
 
         // Animation Reset
         AnimationTexture.SetBool("IsHit", false);
@@ -182,13 +198,27 @@ public class UIManager : MonoBehaviour
         UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
 
+        if(SceneManager.GetActiveScene().buildIndex > 3)
+        {
+            StartTimer();
+        }
         yield return null;
     }
 
-    public void CountingTimer(float value)
+    public void StartTimer()
     {
-        currentWave -= value;
-        waveTimerBar.fillAmount = currentWave / totalWave;
+        StartCoroutine(CountWaveTimer());
+    }
+
+    IEnumerator CountWaveTimer()
+    {
+        while(currentTimer < maximumTimer)
+        {
+            yield return new WaitForSeconds(1.0f);
+            currentTimer += 1.0f;
+            waveTimerBar.fillAmount = currentTimer / maximumTimer;
+            yield return null;
+        }
     }
 
     public void UpdatePlayerHealth(float curr, float max)

@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         ultUIbutton = ServiceLocator.Get<UIManager>()?.ultImg.GetComponent<UIbutton>();
         //repairUIbutton = ServiceLocator.Get<UIManager>()?.repairButton.GetComponent<UIbutton>();
         //placeUIbutton = ServiceLocator.Get<UIManager>()?.placeButton.GetComponent<UIbutton>();
-        attackUIbutton = ServiceLocator.Get<UIManager>()?.basicAttackButton.GetComponent<UIbutton>();
+        //attackUIbutton = ServiceLocator.Get<UIManager>()?.basicAttackButton.GetComponent<UIbutton>();
     }
 
     private void Start()
@@ -380,7 +380,7 @@ public class PlayerController : MonoBehaviour
             GameObject go = hit.transform.gameObject;
             if(go.CompareTag("ResourceSpawner"))
             {
-                go.GetComponent<ResourceSpawner>().SpawnResource();
+                go.GetComponent<ResourceSpawner>().GettingResource();
             }
         }
     }
@@ -411,7 +411,7 @@ public class PlayerController : MonoBehaviour
 
     public bool CheckUIbuttonPressed()
     {
-        if (!attackUIbutton.isButtonPressed && !ultUIbutton.isButtonPressed
+        if (/*!attackUIbutton.isButtonPressed &&*/ !ultUIbutton.isButtonPressed
             && !poisonUIbutton.isButtonPressed && !intimidateUIbutton.isButtonPressed
             /*&& !placeUIbutton.isButtonPressed && !repairUIbutton.isButtonPressed*/)
             return true;

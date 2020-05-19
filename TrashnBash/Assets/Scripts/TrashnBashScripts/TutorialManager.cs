@@ -35,7 +35,8 @@ public class TutorialManager : MonoBehaviour
         uiManager.poisonImg.SetActive(false);
         uiManager.intimidateImg.SetActive(false);
         uiManager.ultImg.SetActive(false);
-
+        uiManager.waveTimerBar.gameObject.SetActive(false);
+        uiManager.timerObject.gameObject.SetActive(false);
         StartCoroutine(StartSequence(1.0f));
         barricadeCreateBtn?.onClick.AddListener(ServiceLocator.Get<UIManager>().enableScreenFadeIn);
     }
@@ -46,9 +47,6 @@ public class TutorialManager : MonoBehaviour
         {
             IncrementSequence();
             isSpawnStarted = false;
-            ServiceLocator.Get<UIManager>().totalWave = 0;
-            ServiceLocator.Get<UIManager>().currentWave = 0;
-            ServiceLocator.Get<UIManager>().currentWave = ServiceLocator.Get<UIManager>().totalWave = numEnemiesToKill;
 
             enemySpawnManager.ResetSpawners();
         }
@@ -125,6 +123,14 @@ public class TutorialManager : MonoBehaviour
         levelManager.playerInstance.GetComponent<PlayerController>().EnableIntimidateAttack();
         levelManager.playerInstance.GetComponent<PlayerController>().EnableUltAttack();
         levelManager.playerInstance.GetComponent<PlayerController>().EnablePoisonAttack();
+
+        UIManager uiManager = ServiceLocator.Get<UIManager>();
+
+        uiManager.waveTimerBar.gameObject.SetActive(true);
+        uiManager.timerObject.gameObject.SetActive(true);
+
+        uiManager.StartTimer();
+
         enemySpawnManager.StartAllSpawners();
     }
 

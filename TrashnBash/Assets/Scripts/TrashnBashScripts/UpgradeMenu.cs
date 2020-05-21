@@ -42,6 +42,8 @@ public class UpgradeMenu : MonoBehaviour
     public Text upgradeDescriptionText;
     public Text trashAvailableText;
 
+    public Text messageText;
+
     private GameManager gameManager;
     private UpgradesModel upgradesModel;
 
@@ -84,7 +86,7 @@ public class UpgradeMenu : MonoBehaviour
 
     public void Create()
     {
-        if (choosenUpgrade != Upgrade.None)
+        if (choosenUpgrade != Upgrade.None )
         {
             int currentLevel = gameManager.upgradeLevelsDictionary[choosenUpgrade];
             ApplyUpgrade(choosenUpgrade, currentLevel);
@@ -195,7 +197,12 @@ public class UpgradeMenu : MonoBehaviour
         var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == enumType);
         var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(Identifier), false);
         var description = ((Identifier)valueAttributes[0]).enumIdentifier;
-        button.GetComponentInChildren<Text>().text = description;
+
+        int maxUpgradeLevel = upgradesModel.GetTotalUpgrades(upgrade);
+        if (maxUpgradeLevel == currentLevel ) // Check if upgrade is max
+            button.GetComponentInChildren<Text>().text = description+ "\n - Max Level.";
+        else
+            button.GetComponentInChildren<Text>().text = description;
     }
 
     private void ApplyUpgrade(Upgrade upgrade, int currentLevel)
@@ -204,16 +211,32 @@ public class UpgradeMenu : MonoBehaviour
         int maxUpgradeLevel = upgradesModel.GetTotalUpgrades(upgrade);
         if (maxUpgradeLevel > currentLevel)
         {
+            if(gameManager._houseHP -upgradesModel.GetRecord(upgradesIdentifier).TrashCost <= 0) // Cannot afford upgrade
+            {
+                messageText.text = "Cannot afford the upgrade";
+                messageText.transform.parent.gameObject.SetActive(true);
+                return;
+            }
+
             UpdateTrashCount(upgradesModel.GetRecord(upgradesIdentifier).TrashCost);
             gameManager.upgradeLevelsDictionary[upgrade]++;
             currentLevel++;
             //Update UI
-            if (maxUpgradeLevel > currentLevel)
+            if (maxUpgradeLevel > currentLevel) // Another upgrade available
             {
                 UpdateUI();
                 upgradesIdentifier = upgradesModel.GetUpgradeEnum(upgrade, currentLevel + 1);
                 DisplayChoosenUpgrade(upgrade, currentLevel);
             }
+            else
+            {
+                UpdateUI(); 
+            }
+        }
+        else
+        {
+            messageText.text = "Maxium Upgrade Already Equiped.";
+            messageText.transform.parent.gameObject.SetActive(true);
         }
     }
 

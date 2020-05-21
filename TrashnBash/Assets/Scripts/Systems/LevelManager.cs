@@ -90,14 +90,33 @@ public class LevelManager : MonoBehaviour
 
     public bool CheckWinCondition()
     {
-        if (enemyDeathCount >= 40)
+        //if (enemyDeathCount >= 40)
+        //{
+        //    if (playerInstance != null)
+        //        playerHealth = playerInstance.GetComponent<Player>().Health;
+        //    if (towerInstance != null)
+        //        towerHealth = towerInstance.GetComponent<Tower>().fullHealth;
+        //    return true;
+        //}
+        int num = 0;
+        if(ServiceLocator.Get<UIManager>().waveTimerBar.fillAmount >= 1)
         {
-            if (playerInstance != null)
-                playerHealth = playerInstance.GetComponent<Player>().Health;
-            if (towerInstance != null)
-                towerHealth = towerInstance.GetComponent<Tower>().fullHealth;
-            return true;
+            List<string> enemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
+            foreach(var enemy in enemies)
+            {
+                List<GameObject> survivedEnemies = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+                foreach(var e in survivedEnemies)
+                {
+                    if(e.tag == "Enemy")
+                    {
+                        num++;
+                    }
+                }
+            }
+            if (num == 0)
+                return true;
         }
+
         return false;
     }
 

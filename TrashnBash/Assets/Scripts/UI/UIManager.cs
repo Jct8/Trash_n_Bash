@@ -183,10 +183,24 @@ public class UIManager : MonoBehaviour
                     time = spawn.GetComponent<EnemySpawner>()._secondStartDelay;
             }
         }
+
+
         timerObject.SetActive(true);
-        RectTransform RectCanvas = canvas.GetComponent<RectTransform>();
-        timerObject.transform.position = new Vector3((RectCanvas.rect.width / 2.0f) - 80.0f + time,
-            RectCanvas.rect.height - 40.0f, 0.0f);
+        GameObject timerImage = timerObject.transform.Find("WaveComing").gameObject;
+
+        if (maximumTimer < time)
+        {
+            maximumTimer += time / 2;
+
+            timerImage.transform.position = new Vector3(timerImage.transform.position.x + time / 2,
+                timerImage.transform.position.y, timerImage.transform.position.z);
+        }
+        else
+        {
+            timerImage.transform.position = new Vector3(timerImage.transform.position.x + time,
+                timerImage.transform.position.y, timerImage.transform.position.z);
+        }
+
 
         waveTimerBar.fillAmount = 0.0f;
 

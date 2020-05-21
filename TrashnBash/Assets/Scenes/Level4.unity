@@ -2075,7 +2075,7 @@ PrefabInstance:
     - target: {fileID: 1508972013, guid: 18c7f0969ba5d0644814a9a3ca291106, type: 3}
       propertyPath: BGM
       value: 
-      objectReference: {fileID: 8300000, guid: 0a3996ddbde71d948945e0ebbb56b910, type: 3}
+      objectReference: {fileID: 8300000, guid: ea7f796996a653f48ba9a595dce2789e, type: 3}
     - target: {fileID: 8642484305662360736, guid: 18c7f0969ba5d0644814a9a3ca291106,
         type: 3}
       propertyPath: m_Enabled

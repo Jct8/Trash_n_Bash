@@ -28,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609625452099822101}
-  m_LocalRotation: {x: -0, y: -0.074711606, z: -0, w: 0.99720526}
+  m_LocalRotation: {x: 0, y: -0.074708894, z: 0, w: 0.9972054}
   m_LocalPosition: {x: 10.23, y: 1.14, z: -6.53}
-  m_LocalScale: {x: 1.7209074, y: 1.0897433, z: 1.7444456}
+  m_LocalScale: {x: 1.7209072, y: 1.0897433, z: 1.7444456}
   m_Children:
   - {fileID: 6840306746066752589}
   - {fileID: 1491843950822020208}
@@ -118,6 +118,8 @@ MonoBehaviour:
   fireDuration: 0
   dataSourceId: Tower
   range: 10
+  rangeBeforeUpgrade: 2
+  rangeAfterUpgrade: 2
   damage: 5
   speed: 500
   MaxHealth: 100
@@ -125,9 +127,11 @@ MonoBehaviour:
   fullHealth: 0
   shotTime: 0
   isShooting: 0
-  specificEnemy: NONE
+  specificEnemy: No Target
   shotSound: {fileID: 8300000, guid: f1df4a14307925f44b248c7e6ecbeadd, type: 3}
   towerHealCostValue: 30
+  towerHealBeforeUpgrade: 30
+  towerHealAfterUpgrade: 30
   towerLostCostValue: 15
   totalRegainCoolTime: 25
   minimumPlayerHealth: 70

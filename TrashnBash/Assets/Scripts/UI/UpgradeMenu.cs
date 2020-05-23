@@ -26,6 +26,8 @@ public class UpgradeMenu : MonoBehaviour
 
     Upgrade choosenUpgrade = Upgrade.None;
 
+    public float minimumTrashToSpend = 15.0f;
+
     public Button longRangedButton;
     public Button fireProjectileButton;
     public Button barricadeButton;
@@ -86,7 +88,7 @@ public class UpgradeMenu : MonoBehaviour
 
     public void Create()
     {
-        if (choosenUpgrade != Upgrade.None )
+        if (choosenUpgrade != Upgrade.None)
         {
             int currentLevel = gameManager.upgradeLevelsDictionary[choosenUpgrade];
             ApplyUpgrade(choosenUpgrade, currentLevel);
@@ -199,8 +201,8 @@ public class UpgradeMenu : MonoBehaviour
         var description = ((Identifier)valueAttributes[0]).enumIdentifier;
 
         int maxUpgradeLevel = upgradesModel.GetTotalUpgrades(upgrade);
-        if (maxUpgradeLevel == currentLevel ) // Check if upgrade is max
-            button.GetComponentInChildren<Text>().text = description+ "\n - Max Level.";
+        if (maxUpgradeLevel == currentLevel) // Check if upgrade is max
+            button.GetComponentInChildren<Text>().text = description + "\n - Max Level.";
         else
             button.GetComponentInChildren<Text>().text = description;
     }
@@ -211,27 +213,30 @@ public class UpgradeMenu : MonoBehaviour
         int maxUpgradeLevel = upgradesModel.GetTotalUpgrades(upgrade);
         if (maxUpgradeLevel > currentLevel)
         {
-            if(gameManager._houseHP -upgradesModel.GetRecord(upgradesIdentifier).TrashCost <= 0) // Cannot afford upgrade
+            if (gameManager._houseHP - upgradesModel.GetRecord(upgradesIdentifier).TrashCost <= minimumTrashToSpend) // Cannot afford upgrade
             {
-                messageText.text = "Cannot afford the upgrade";
+                messageText.text = "Cannot Upgrade. Your trash cannot be less than "+ minimumTrashToSpend+ " after the upgrade.";
                 messageText.transform.parent.gameObject.SetActive(true);
                 return;
             }
 
             UpdateTrashCount(upgradesModel.GetRecord(upgradesIdentifier).TrashCost);
             gameManager.upgradeLevelsDictionary[upgrade]++;
+            gameManager.upgradeEnabled[upgrade] = true;
             currentLevel++;
+            if (upgrade == Upgrade.TargetEnemy) // Add target to list
+            {
+                gameManager.specialTargets.Add(upgradesModel.GetRecord(upgradesIdentifier).Target);
+                gameManager.choosenTarget = upgradesModel.GetRecord(upgradesIdentifier).Target;
+            }
+
             //Update UI
             if (maxUpgradeLevel > currentLevel) // Another upgrade available
             {
-                UpdateUI();
                 upgradesIdentifier = upgradesModel.GetUpgradeEnum(upgrade, currentLevel + 1);
                 DisplayChoosenUpgrade(upgrade, currentLevel);
             }
-            else
-            {
-                UpdateUI(); 
-            }
+            UpdateUI();
         }
         else
         {
@@ -242,7 +247,7 @@ public class UpgradeMenu : MonoBehaviour
 
     private void DisplayChoosenUpgrade(Upgrade upgrade, int level)
     {
-        UpgradesIdentifier upgradesIdentifier = upgradesModel.GetUpgradeEnum(upgrade, level+1);
+        UpgradesIdentifier upgradesIdentifier = upgradesModel.GetUpgradeEnum(upgrade, level + 1);
         if (upgradesIdentifier == UpgradesIdentifier.None)
             upgradesIdentifier = upgradesModel.GetUpgradeEnum(upgrade, level);
 

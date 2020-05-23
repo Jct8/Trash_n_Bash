@@ -16,7 +16,11 @@ public class ResourceSpawner : MonoBehaviour
 
     [SerializeField]
     private float healValue = 10.0f;
-    public float totalCoolTime = 15;
+    public float totalCoolTime = 15.0f;
+    [HideInInspector]
+    public float coolTimeBeforeUpgrade = 15.0f;
+    [HideInInspector]
+    public float coolTimeAfterUpgrade = 15.0f;
     public int limit = 3;
     private bool completedCoolTime = false;
     private int totalResourceTaken = 0;
@@ -38,8 +42,12 @@ public class ResourceSpawner : MonoBehaviour
         ///////////  Upgrades - Trash Spawn Rate Improved  ///////////
         int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.TrashSpawnRate];
         UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.TrashSpawnRate, level);
+        coolTimeBeforeUpgrade = totalCoolTime;
         if (level >= 1)
+        {
             totalCoolTime -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+            coolTimeAfterUpgrade = totalCoolTime;
+        }
     }
 
     public GameObject GetResource()

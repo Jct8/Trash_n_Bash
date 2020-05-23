@@ -13,8 +13,17 @@ public class BarricadeSpawner : MonoBehaviour
     public GameObject trashImgPrefab;
 
     public int barricadeLimit = 5;
-    public float baseBarricadeCost = 10.0f;
     public float spawnCoolDownTime = 5.0f;
+    [HideInInspector]
+    public float spawnCoolDownBeforeUpgrade = 2.0f; //Used for upgrades
+    [HideInInspector]
+    public float spawnCoolDownAfterUpgrade = 2.0f;//Used for upgrades
+
+    public float baseBarricadeCost = 10.0f;
+    [HideInInspector]
+    public float costBeforeUpgrade = 2.0f; //Used for upgrades
+    [HideInInspector]
+    public float costAfterUpgrade = 2.0f;//Used for upgrades
 
     private int totalBarricades = 0;
     private float currentTime = 0.0f;
@@ -32,16 +41,24 @@ public class BarricadeSpawner : MonoBehaviour
 
         ///////////  Upgrades - Barricade Spawn Rate Improved  ///////////
         int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.BarricadeSpawnRate];
+        spawnCoolDownBeforeUpgrade = spawnCoolDownTime;
         UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.BarricadeSpawnRate, level);
         if (level >= 1)
+        {
             spawnCoolDownTime -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+            spawnCoolDownAfterUpgrade = spawnCoolDownTime;
+        }
 
         ///////////  Upgrades - Barricade Reduction Cost Upgrade ///////////
         int barricadeLevel = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.BarricadeReductionCost];
         upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.BarricadeReductionCost, barricadeLevel);
+        costBeforeUpgrade = baseBarricadeCost;
         if (barricadeLevel >= 1)
-            baseBarricadeCost -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue; 
-
+        {
+            baseBarricadeCost -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+            costAfterUpgrade = baseBarricadeCost;
+        }
+        
     }
 
     private void Update()
@@ -106,5 +123,15 @@ public class BarricadeSpawner : MonoBehaviour
         totalBarricades--;
         currentTime = Time.time;
         ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().HealTower(baseBarricadeCost);
+    }
+
+    public void RemoveUpgrade()
+    {
+
+    }
+
+    public void ApplyUpgrade()
+    {
+
     }
 }

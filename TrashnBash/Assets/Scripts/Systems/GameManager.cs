@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public string sceneToLoad = "MainMenu";
 
     public Dictionary<UpgradeMenu.Upgrade, int> upgradeLevelsDictionary = new Dictionary<UpgradeMenu.Upgrade, int>();
+    public Dictionary<UpgradeMenu.Upgrade, bool> upgradeEnabled = new Dictionary<UpgradeMenu.Upgrade, bool>();
+    public List<string> specialTargets = new List<string>();
+    public string choosenTarget = "No Target";
     public BarricadeSpawner barricadeSpawner;
 
     public enum GameState
@@ -32,19 +35,12 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _GameState = GameState.Loader;
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.BarricadeReductionCost, 0);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ExtraProjectiles, 0);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.FireProjectile, 0);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.Ranged, 0);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.TargetEnemy, 0);
-
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ImprovedBarricades, 0);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.BarricadeSpawnRate, 0);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.TrashSpawnRate, 0);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ImprovedPlayerHP, 0);
-        upgradeLevelsDictionary.Add(UpgradeMenu.Upgrade.ImprovedHealing, 0);
-
-        
+        specialTargets.Add("No Target");
+        foreach (UpgradeMenu.Upgrade item in System.Enum.GetValues(typeof(UpgradeMenu.Upgrade)))
+        {
+            upgradeLevelsDictionary.Add(item, 0);
+            upgradeEnabled.Add(item, false);
+        }
     }
     private void Start()
     {
@@ -129,7 +125,6 @@ public class GameManager : MonoBehaviour
             ServiceLocator.Get<UIManager>().StartCoroutine(ServiceLocator.Get<UIManager>().Reset());
             ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
             ServiceLocator.Get<LevelManager>().gameObject.SetActive(true);
-
         }
     }
 

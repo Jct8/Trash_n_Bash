@@ -68,7 +68,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         ///////////  Upgrades - Improved Barricades  ///////////
         int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.ImprovedBarricades];
         UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.ImprovedBarricades, level);
-        if (level >= 1)
+        if (level >= 1 && ServiceLocator.Get<GameManager>().upgradeEnabled[UpgradeMenu.Upgrade.ImprovedBarricades])
             health += ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
 
     }

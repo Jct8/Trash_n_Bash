@@ -178,10 +178,7 @@ public class LevelManager : MonoBehaviour
         UpgradesIdentifier upgradesIdentifier = UpgradesIdentifier.None;
 
         // Long Ranged Upgrade
-        int rangedLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged] - 1;
-        upgradesIdentifier = upgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.Ranged, rangedLevel + 1);
-        if (rangedLevel >= 0)
-            towerInstance.GetComponent<Tower>().range += upgradesModel.GetRecord(upgradesIdentifier).ModifierValue;// upgradeStats.towerRange[rangedLevel];
+        // Moved to tower script
 
         // Barricade Reduction Cost Upgrade
         // Moved to Barricade Spawner Script
@@ -200,7 +197,7 @@ public class LevelManager : MonoBehaviour
         int specficLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.TargetEnemy] - 1;
         upgradesIdentifier = upgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.TargetEnemy, specficLevel + 1);
         if (specficLevel >= 0)
-            towerInstance.GetComponent<Tower>().specificEnemy = upgradesModel.GetRecord(upgradesIdentifier).Target;//upgradeStats.targetEnemy[specficLevel];
+            towerInstance.GetComponent<Tower>().specificEnemy = gameManager.choosenTarget;//upgradesModel.GetRecord(upgradesIdentifier).Target;
 
         // Fire Upgrade
         int fireLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.FireProjectile] - 1;

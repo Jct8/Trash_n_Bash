@@ -446,46 +446,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -540,6 +500,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -630,46 +630,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 34
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 108
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.50980395
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.28255346
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -723,6 +683,46 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 108
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.28255346
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -1530,46 +1530,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 35
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 109
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.77254903
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.5475696
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1623,6 +1583,46 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 109
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.77254903
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.5475696
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -1775,31 +1775,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 31
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 97
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1854,6 +1829,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -2914,31 +2914,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 28
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 93
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2993,6 +2968,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -3053,46 +3053,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.509434
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.37358505
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3147,6 +3107,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.37358505
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -3212,46 +3212,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 37
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.7735849
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.5672958
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3306,6 +3266,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.7735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.5672958
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -3807,16 +3807,6 @@ PrefabInstance:
       propertyPath: BGM
       value: 
       objectReference: {fileID: 8300000, guid: 2da649bbfa374db46bd472d9078f638e, type: 3}
-    - target: {fileID: 3161039926175877391, guid: 18c7f0969ba5d0644814a9a3ca291106,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -14.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 3161039926175877391, guid: 18c7f0969ba5d0644814a9a3ca291106,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.6539998
-      objectReference: {fileID: 0}
     - target: {fileID: 5791203576373228803, guid: 18c7f0969ba5d0644814a9a3ca291106,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3832,26 +3822,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 679908619800503119, guid: 18c7f0969ba5d0644814a9a3ca291106,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 679908619800503119, guid: 18c7f0969ba5d0644814a9a3ca291106,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 679908619800503119, guid: 18c7f0969ba5d0644814a9a3ca291106,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8969306023395958015, guid: 18c7f0969ba5d0644814a9a3ca291106,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 198c9670da36cfb4085004aad21fe1a5, type: 2}
     - target: {fileID: 3753806681937968184, guid: 18c7f0969ba5d0644814a9a3ca291106,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -3982,6 +3952,36 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3161039926175877391, guid: 18c7f0969ba5d0644814a9a3ca291106,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161039926175877391, guid: 18c7f0969ba5d0644814a9a3ca291106,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.6539998
+      objectReference: {fileID: 0}
+    - target: {fileID: 679908619800503119, guid: 18c7f0969ba5d0644814a9a3ca291106,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 679908619800503119, guid: 18c7f0969ba5d0644814a9a3ca291106,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 679908619800503119, guid: 18c7f0969ba5d0644814a9a3ca291106,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969306023395958015, guid: 18c7f0969ba5d0644814a9a3ca291106,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 198c9670da36cfb4085004aad21fe1a5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18c7f0969ba5d0644814a9a3ca291106, type: 3}
 --- !u!4 &527232374 stripped
@@ -4012,6 +4012,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5508785741986681434, guid: e0f02622ac8722949a43f5f79fb7cc39,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 88403c6a433284658b000495f29f97eb, type: 2}
     - target: {fileID: -4216859302048453862, guid: e0f02622ac8722949a43f5f79fb7cc39,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4092,11 +4097,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3dd0c95950fe95341b1a7707abf3e20c, type: 2}
-    - target: {fileID: -5508785741986681434, guid: e0f02622ac8722949a43f5f79fb7cc39,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 88403c6a433284658b000495f29f97eb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f02622ac8722949a43f5f79fb7cc39, type: 3}
 --- !u!1 &530099847
@@ -4186,46 +4186,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.50980395
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.36719716
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4281,6 +4241,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.36719716
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -4312,9 +4312,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 559214613}
+  - component: {fileID: 559214614}
   m_Layer: 0
   m_Name: Wave1
-  m_TagString: Untagged
+  m_TagString: Spawners
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4340,6 +4341,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &559214614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559214612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a0754140eb59e4d9ab6b201eac810b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSpawnTime: 0
+  spawners: []
 --- !u!4 &586220806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -4449,46 +4464,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 23
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 85
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.70585346
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4543,6 +4518,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.70585346
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -4747,46 +4762,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 115
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.50980395
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.3642085
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4840,6 +4815,46 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.3642085
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -5239,46 +5254,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 26
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 91
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5333,6 +5308,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 91
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -5513,46 +5528,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 18
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.70585346
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5607,6 +5582,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.70585346
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -5873,41 +5888,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 43
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.6489396
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5961,6 +5941,41 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.6489396
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -6083,46 +6098,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.77254903
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.55075115
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6176,6 +6151,46 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.77254903
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.55075115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -6514,31 +6529,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 16
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 59
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6593,6 +6583,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -6650,9 +6665,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 989081913}
+  - component: {fileID: 989081914}
   m_Layer: 0
   m_Name: Wave3
-  m_TagString: Untagged
+  m_TagString: Spawners
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6676,6 +6692,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &989081914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989081912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a0754140eb59e4d9ab6b201eac810b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSpawnTime: 0
+  spawners: []
 --- !u!1 &996047769
 GameObject:
   m_ObjectHideFlags: 0
@@ -6820,46 +6850,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.509434
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.37358505
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6914,6 +6904,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.37358505
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -7054,6 +7084,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7134940501021694232, guid: e0f02622ac8722949a43f5f79fb7cc39,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: -5508785741986681434, guid: e0f02622ac8722949a43f5f79fb7cc39,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36cc049df549641aa91f48e000b9c0a9, type: 2}
     - target: {fileID: -4216859302048453862, guid: e0f02622ac8722949a43f5f79fb7cc39,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7109,11 +7149,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7134940501021694232, guid: e0f02622ac8722949a43f5f79fb7cc39,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.19
-      objectReference: {fileID: 0}
     - target: {fileID: -913514344480513731, guid: e0f02622ac8722949a43f5f79fb7cc39,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
@@ -7124,11 +7159,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4ae5dfe85c6d642b7be3d6e513d652b0, type: 2}
-    - target: {fileID: -5508785741986681434, guid: e0f02622ac8722949a43f5f79fb7cc39,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 36cc049df549641aa91f48e000b9c0a9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f02622ac8722949a43f5f79fb7cc39, type: 3}
 --- !u!1 &1102891910
@@ -7351,46 +7381,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 24
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 88
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7445,6 +7435,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -7666,46 +7696,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 33
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 105
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.77254903
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.59860474
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7761,6 +7751,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.77254903
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.59860474
+      objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -7784,46 +7814,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 96
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -7879,6 +7869,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -7969,46 +7999,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.50980395
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.3642085
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8062,6 +8052,46 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.3642085
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -8244,46 +8274,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrowIntro
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.6323692
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8338,6 +8328,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.6323692
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -8434,46 +8464,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.77254903
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.41781723
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8527,6 +8517,46 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.77254903
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.41781723
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -8583,46 +8613,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 62
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8677,6 +8667,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 62
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -8746,9 +8776,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1311157307}
+  - component: {fileID: 1311157308}
   m_Layer: 0
   m_Name: Wave6
-  m_TagString: Untagged
+  m_TagString: Spawners
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8773,6 +8804,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1311157308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311157306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a0754140eb59e4d9ab6b201eac810b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSpawnTime: 0
+  spawners: []
 --- !u!4 &1313472844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -9020,46 +9065,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 47
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.7735849
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.5672958
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9114,6 +9119,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 47
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.7735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.5672958
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -9303,31 +9348,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 21
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 78
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9382,6 +9402,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -9514,46 +9559,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.7735849
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.5672958
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9609,6 +9614,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.7735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.5672958
+      objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -9662,31 +9707,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -9742,6 +9762,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -9894,41 +9939,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.6906122
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9982,6 +9992,41 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.6906122
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -10247,46 +10292,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.50980395
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.28255346
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10342,6 +10347,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.28255346
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -10381,46 +10426,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -10476,6 +10481,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -10740,46 +10785,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.50980395
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.30110553
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10833,6 +10838,46 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.30110553
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -10926,9 +10971,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1713508017}
+  - component: {fileID: 1713508018}
   m_Layer: 0
   m_Name: Wave4
-  m_TagString: Untagged
+  m_TagString: Spawners
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10953,6 +10999,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1713508018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713508016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a0754140eb59e4d9ab6b201eac810b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSpawnTime: 0
+  spawners: []
 --- !u!1 &1721449442
 GameObject:
   m_ObjectHideFlags: 0
@@ -11217,46 +11277,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 29
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 95
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.54908407
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11310,6 +11330,46 @@ PrefabInstance:
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.54908407
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
@@ -11535,46 +11595,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 27
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 92
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11629,6 +11649,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -11798,46 +11858,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.7735849
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.5672958
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11893,6 +11913,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.7735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.5672958
+      objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -11916,46 +11976,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 37
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0.509434
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0.37358505
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -12011,6 +12031,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0.509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0.37358505
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -12397,9 +12457,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2048345652}
+  - component: {fileID: 2048345653}
   m_Layer: 0
   m_Name: Wave5
-  m_TagString: Untagged
+  m_TagString: Spawners
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12424,6 +12485,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2048345653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048345651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a0754140eb59e4d9ab6b201eac810b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSpawnTime: 0
+  spawners: []
 --- !u!1 &2053026326
 GameObject:
   m_ObjectHideFlags: 0
@@ -12989,9 +13064,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2107455240}
+  - component: {fileID: 2107455241}
   m_Layer: 0
   m_Name: Wave2
-  m_TagString: Untagged
+  m_TagString: Spawners
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13018,6 +13094,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2107455241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107455239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a0754140eb59e4d9ab6b201eac810b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSpawnTime: 0
+  spawners: []
 --- !u!1 &2113504038
 GameObject:
   m_ObjectHideFlags: 0
@@ -13059,31 +13149,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -13140,6 +13205,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -13180,46 +13270,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.6323692
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -13275,6 +13325,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.6323692
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -13335,46 +13425,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 22
       objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: enemyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _numberOfWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondBetweenWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _secondStartDelay
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: _enemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.g
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
-        type: 3}
-      propertyPath: gizmoColor.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340579, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13429,6 +13479,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: enemyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _numberOfWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondBetweenWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _secondStartDelay
+      value: 82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: _enemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.g
+      value: 0.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
+        type: 3}
+      propertyPath: gizmoColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883554215747775, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}

@@ -11,6 +11,8 @@ public class BarricadeSpawner : MonoBehaviour
     public GameObject signifier;
     public Transform barricadeSpawnPosition;
     public GameObject trashImgPrefab;
+    public Image coolTimeImage;
+    public Image lockCoolTimeImage;
 
     public int barricadeLimit = 5;
     public float spawnCoolDownTime = 5.0f;
@@ -32,6 +34,7 @@ public class BarricadeSpawner : MonoBehaviour
 
     private void Start()
     {
+        lockCoolTimeImage.gameObject.SetActive(false);
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
         if (variableLoader.useGoogleSheets)
         {
@@ -63,10 +66,14 @@ public class BarricadeSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (currentTime < Time.time && totalBarricades < barricadeLimit)
-            signifier.SetActive(true);
+        signifier.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
+        if (coolTimeImage.fillAmount >= 1 || totalBarricades < barricadeLimit)
+            lockCoolTimeImage.gameObject.SetActive(false);
         else
-            signifier.SetActive(false);
+            lockCoolTimeImage.gameObject.SetActive(true);
+
+        if(coolTimeImage.fillAmount <= 1)
+           coolTimeImage.fillAmount += 1 / spawnCoolDownTime * Time.deltaTime;
     }
 
     public GameObject GetBarricade()
@@ -99,7 +106,7 @@ public class BarricadeSpawner : MonoBehaviour
 
     public void SpawnBarricade()
     {
-        if (currentTime < Time.time)
+        if (coolTimeImage.fillAmount >= 1 && !lockCoolTimeImage.gameObject.activeInHierarchy)
         {
             GameObject barricade = GetBarricade();
             if (barricade)
@@ -115,6 +122,7 @@ public class BarricadeSpawner : MonoBehaviour
 
                 currentTime = Time.time + spawnCoolDownTime;
             }
+            coolTimeImage.fillAmount = 0;
         }
     }
 

@@ -178,7 +178,8 @@ public class Tower : MonoBehaviour
         _bulletGO.SetActive(true);
         _action = () => Recycle(_bulletGO);
         _bulletGO.GetComponent<Bullet>().Initialize(_target,damage,speed, _action);
-        _bulletGO.GetComponent<Bullet>().damageType = damageType;
+        //_bulletGO.GetComponent<Bullet>().damageType = damageType;
+        _bulletGO.GetComponent<Bullet>().SetBulletType(damageType);
         if(fireDuration != 0.0f)
         _bulletGO.GetComponent<Bullet>().fireTotalTime = fireDuration;
         var rb = _bulletGO.GetComponent<Rigidbody>();

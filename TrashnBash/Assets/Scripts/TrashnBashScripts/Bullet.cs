@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     public DamageType damageType = DamageType.Normal;
     public float fireTotalTime = 3.0f;
     public float fireTickTime = 1.0f;
+    public Material normalBulletMaterial;
+    public Material fireBulletMaterial;
 
     public float _speed;
     public float _damage;
@@ -52,12 +54,26 @@ public class Bullet : MonoBehaviour
         if(_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Normal)
         {
             _damageable.TakeDamage(_damage,false, damageType);
-            _action?.Invoke();
+            ResetBullet();
         }
         else if (_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Poison) //fire attack
         {
             collision.gameObject.GetComponent<Enemy>().SetPoison(_damage, fireTickTime, fireTotalTime);
-            _action?.Invoke();
+            ResetBullet();
         }
+    }
+
+    public void SetBulletType(DamageType type)
+    {
+        damageType = type;
+        if(type == DamageType.Poison)
+            GetComponent<Renderer>().material.color = Color.red;
+    }
+
+    void ResetBullet()
+    {
+        damageType = DamageType.Normal;
+        GetComponent<Renderer>().material.color = Color.white;
+        _action?.Invoke();
     }
 }

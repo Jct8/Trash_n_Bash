@@ -130,9 +130,9 @@ public class UpgradeUI : MonoBehaviour
                 case Upgrade.None:
                     break;
                 case Upgrade.ExtraProjectiles:
-                    Tower wife = GameObject.FindGameObjectWithTag("Wife").GetComponent<Tower>();
+                    Tower wife = GameObject.FindGameObjectWithTag("Wife")?.GetComponent<Tower>();
                     int wifeLevel = gameManager.upgradeLevelsDictionary[UpgradeMenu.Upgrade.ExtraProjectiles] - 1;
-                    if (wifeLevel >= 0)
+                    if (wifeLevel >= 0 && wife)
                         wife.isShooting = toggle.isOn;
                     break;
                 case Upgrade.Ranged:

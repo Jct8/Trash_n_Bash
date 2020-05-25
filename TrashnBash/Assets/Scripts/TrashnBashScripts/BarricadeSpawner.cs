@@ -28,8 +28,6 @@ public class BarricadeSpawner : MonoBehaviour
     public float costAfterUpgrade = 2.0f;//Used for upgrades
 
     private int totalBarricades = 0;
-    private float currentTime = 0.0f;
-
     private bool isDragging = false;
 
     private void Start()
@@ -61,19 +59,19 @@ public class BarricadeSpawner : MonoBehaviour
             baseBarricadeCost -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
             costAfterUpgrade = baseBarricadeCost;
         }
-        
+        signifier.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
     }
 
     private void Update()
     {
-        signifier.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
-        if (coolTimeImage.fillAmount >= 1 || totalBarricades < barricadeLimit)
+        if (coolTimeImage.fillAmount >= 1.0f || totalBarricades > barricadeLimit)
             lockCoolTimeImage.gameObject.SetActive(false);
         else
             lockCoolTimeImage.gameObject.SetActive(true);
 
-        if(coolTimeImage.fillAmount <= 1)
-           coolTimeImage.fillAmount += 1 / spawnCoolDownTime * Time.deltaTime;
+        if (coolTimeImage.fillAmount <= 1.0f)
+            coolTimeImage.fillAmount += 1.0f / spawnCoolDownTime * Time.deltaTime;
+
     }
 
     public GameObject GetBarricade()
@@ -106,7 +104,7 @@ public class BarricadeSpawner : MonoBehaviour
 
     public void SpawnBarricade()
     {
-        if (coolTimeImage.fillAmount >= 1 && !lockCoolTimeImage.gameObject.activeInHierarchy)
+        if (coolTimeImage.fillAmount >= 1.0f && !lockCoolTimeImage.gameObject.activeInHierarchy)
         {
             GameObject barricade = GetBarricade();
             if (barricade)
@@ -120,7 +118,6 @@ public class BarricadeSpawner : MonoBehaviour
                 trashImg.GetComponent<DragDrop>().isDragging = true;
                 trashImg.GetComponent<DragDrop>().itemToBeDroped = barricade;
 
-                currentTime = Time.time + spawnCoolDownTime;
             }
             coolTimeImage.fillAmount = 0;
         }
@@ -129,7 +126,7 @@ public class BarricadeSpawner : MonoBehaviour
     public void ResetBarricade()
     {
         totalBarricades--;
-        currentTime = Time.time;
+        coolTimeImage.fillAmount = 1.0f;
         ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().HealTower(baseBarricadeCost);
     }
 

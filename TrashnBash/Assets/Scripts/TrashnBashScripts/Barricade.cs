@@ -71,11 +71,11 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         if (level >= 1 && ServiceLocator.Get<GameManager>().upgradeEnabled[UpgradeMenu.Upgrade.ImprovedBarricades])
             health += ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
 
+        healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
     }
 
     private void Update()
     {
-        healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
     }
 
     public void PlaceBarricade()
@@ -179,6 +179,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
             else
             {
                 ServiceLocator.Get<GameManager>().barricadeSpawner.ResetBarricade();
+                Destroy(gameObject);
                 return false;
             }
         }

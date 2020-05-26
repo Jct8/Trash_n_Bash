@@ -46,8 +46,10 @@ public class UIManager : MonoBehaviour
 
     private float _TowerHP;
     private bool IsPower = false;
-    public float maximumTimer = 100.0f;
+    public float maximumTimer;
     public float currentTimer = 0.0f;
+
+    public List<GameObject> signifiersForWaves = new List<GameObject>();
 
     private void Start()
     {
@@ -164,39 +166,48 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Start Reset UI");
 
-        timerObject.SetActive(false);
+        timerObject.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
         player = ServiceLocator.Get<LevelManager>().playerInstance;
         tower = ServiceLocator.Get<LevelManager>().towerInstance;
 
+        signifiersForWaves.Clear();
+
         // Wave reset
-        spawners = GameObject.FindGameObjectsWithTag("Spawner");
+       
         float time = 0.0f;
+        int getTime = -1;
+        spawners = GameObject.FindGameObjectsWithTag("Spawners");
         foreach (GameObject spawn in spawners)
         {
-            if (spawn.GetComponent<EnemySpawner>()._secondStartDelay < 10.0f)
+            if (maximumTimer < spawn.GetComponent<RegisterSpawnTime>().MaximumSpawnTime)
+                maximumTimer = spawn.GetComponent<RegisterSpawnTime>().MaximumSpawnTime;
+        }
+
+        foreach (GameObject spawn in spawners)
+        {
+
+            if (spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime == getTime) // Prevent to duplicate
                 continue;
             else
             {
-                if (time < spawn.GetComponent<EnemySpawner>()._secondStartDelay)
-                    time = spawn.GetComponent<EnemySpawner>()._secondStartDelay;
+                GameObject signifier = Instantiate(timerObject) as GameObject;
+                signifier.transform.SetParent(canvas.transform);
+                signifier.transform.position = timerObject.transform.position;
+                signifier.transform.rotation = timerObject.transform.rotation;
+                signifiersForWaves.Add(signifier);
             }
+            getTime = spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime;
         }
 
-
-        timerObject.SetActive(true);
-        GameObject timerImage = timerObject.transform.Find("WaveComing").gameObject;
-
-        if (maximumTimer < time)
+        for (int i = 0; i < signifiersForWaves.Count; i++)
         {
-            maximumTimer += time / 2;
+            signifiersForWaves[i].SetActive(true);
+            GameObject timerImage = signifiersForWaves[i].transform.Find("WaveComing").gameObject;
 
-            timerImage.transform.position = new Vector3(timerImage.transform.position.x + time / 2,
-                timerImage.transform.position.y, timerImage.transform.position.z);
-        }
-        else
-        {
+            time = spawners[i].GetComponent<RegisterSpawnTime>().StartSpawnTime;
+
             timerImage.transform.position = new Vector3(timerImage.transform.position.x + time,
                 timerImage.transform.position.y, timerImage.transform.position.z);
         }
@@ -212,10 +223,7 @@ public class UIManager : MonoBehaviour
         UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
         UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
 
-        if(SceneManager.GetActiveScene().buildIndex > 3)
-        {
-            StartTimer();
-        }
+        StartTimer();
         yield return null;
     }
 

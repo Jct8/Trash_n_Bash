@@ -20,6 +20,7 @@ TagManager:
   - Canvas
   - Restoring
   - Timer
+  - Spawners
   layers:
   - Default
   - TransparentFX

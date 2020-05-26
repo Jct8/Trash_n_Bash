@@ -37,7 +37,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3589809411401934993}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalPosition: {x: -0.27, y: 2.73, z: 0.235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3001989385534655974}
@@ -67,7 +67,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4192095275631003661}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.85, z: 0}
+  m_LocalPosition: {x: 0, y: 0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3001989385534655974}
@@ -104,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 6686893779103308463}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7209072, y: 1.0897433, z: 1.7444456}
   m_Children:
   - {fileID: 744479145971346679}
   - {fileID: 9124223465325389411}
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc45e8b73c4aab04ca352e00bd3d4a8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,14 +184,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signifierGO: {fileID: 108473851434245047}
-  partToRotate: {fileID: 0}
-  bulletPrefeb: {fileID: 0}
-  firePoint: {fileID: 0}
+  partToRotate: {fileID: 744479145971346679}
+  bulletPrefeb: {fileID: 7466416969426066422, guid: bbd04011c182cd24a85fa465ce3a8dc5,
+    type: 3}
+  firePoint: {fileID: 3585084762118417815}
   radius: 2.5
   damageType: 0
   fireDuration: 0
   dataSourceId: Tower
   range: 10
+  rangeBeforeUpgrade: 2
+  rangeAfterUpgrade: 2
   damage: 5
   speed: 500
   MaxHealth: 100
@@ -199,9 +202,11 @@ MonoBehaviour:
   fullHealth: 0
   shotTime: 0
   isShooting: 1
-  specificEnemy: NONE
+  specificEnemy: No Target
   shotSound: {fileID: 8300000, guid: f1df4a14307925f44b248c7e6ecbeadd, type: 3}
   towerHealCostValue: 30
+  towerHealBeforeUpgrade: 30
+  towerHealAfterUpgrade: 30
   towerLostCostValue: 15
   totalRegainCoolTime: 25
   minimumPlayerHealth: 70
@@ -329,7 +334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7940001824949302396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.37, z: 0.68}
+  m_LocalPosition: {x: 0, y: 0.273, z: 0.37}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
   - {fileID: 3585084762118417815}
@@ -541,12 +546,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 75
       objectReference: {fileID: 0}
-    - target: {fileID: 7704550740709643360, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2d785464f5d6b45adaf7dfd2e83e4e2d,
-        type: 3}
     - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -557,6 +556,12 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 7704550740709643360, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2d785464f5d6b45adaf7dfd2e83e4e2d,
+        type: 3}
     - target: {fileID: 6305143026417697660, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
       propertyPath: m_Sprite

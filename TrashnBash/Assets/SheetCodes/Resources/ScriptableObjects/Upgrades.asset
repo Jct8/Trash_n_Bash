@@ -53,6 +53,14 @@ MonoBehaviour:
     _target: Rats
     _modifierValue: -1
     _variableModifiedThisDoesntDoAnything: Targets rats
+  - identifier: 12
+    _upgradelevel: 2
+    _upgradeType: TargetEnemy
+    _description: Target Specific enemies Ie. choose to prioritize firing at Skunks
+    _trashCost: 10
+    _target: Skunks
+    _modifierValue: -1
+    _variableModifiedThisDoesntDoAnything: Targets skunks
   - identifier: 6
     _upgradelevel: 1
     _upgradeType: FireProjectile

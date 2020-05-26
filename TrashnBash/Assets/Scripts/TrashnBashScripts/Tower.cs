@@ -25,6 +25,10 @@ public class Tower : MonoBehaviour
     [Header("Tower Status")]
     public string dataSourceId = "Tower";
     public float range = 2.0f;
+    [HideInInspector]
+    public float rangeBeforeUpgrade = 2.0f; //Used for upgrades
+    [HideInInspector]
+    public float rangeAfterUpgrade = 2.0f;//Used for upgrades
     public float damage = 10.0f;
     public float speed = 5.0f;
     public float MaxHealth = 100.0f;
@@ -32,7 +36,7 @@ public class Tower : MonoBehaviour
     public float fullHealth = 50.0f;
     public float shotTime;
     public bool isShooting = true;
-    public string specificEnemy = "NONE";
+    public string specificEnemy = "No Target";
 
     public AudioClip shotSound;
     private AudioSource audioSource;
@@ -40,7 +44,11 @@ public class Tower : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
-    private float towerHealCostValue = 30.0f;
+    public float towerHealCostValue = 30.0f;
+    [HideInInspector]
+    public float towerHealBeforeUpgrade = 30.0f;
+    [HideInInspector]
+    public float towerHealAfterUpgrade = 30.0f;
     [SerializeField]
     [Tooltip("Amount lost to Tower from healing the player")]
     private float towerLostCostValue = 15.0f;
@@ -63,13 +71,11 @@ public class Tower : MonoBehaviour
             towerData = dataLoader.GetDataSourceById(dataSourceId) as JsonDataSource;
             name = System.Convert.ToString(towerData.DataDictionary["Name"]);
         }
-
         audioSource = GetComponent<AudioSource>();
         audioManager = ServiceLocator.Get<AudioManager>();
         fullHealth = MaxHealth / 2.0f;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
 
-        
     }
 
     private void Start()
@@ -87,9 +93,24 @@ public class Tower : MonoBehaviour
         ///////////  Upgrades - Improved healing  ///////////
         int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.ImprovedHealing];
         UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.ImprovedHealing, level);
+        towerHealBeforeUpgrade = towerHealCostValue;
         if (level >= 1)
+        {
             towerHealCostValue += ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+            towerHealAfterUpgrade = towerHealCostValue;
+        }
         fullHealth = ServiceLocator.Get<GameManager>()._houseHP;
+
+        ///////////  Upgrades - Long Ranged Upgrade  ///////////
+        int rangedLevel = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.Ranged] - 1;
+        upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.Ranged, rangedLevel + 1);
+        rangeBeforeUpgrade = range;
+        if (rangedLevel >= 0 && gameObject.CompareTag("Tower"))
+        {
+            range += ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;// upgradeStats.towerRange[rangedLevel];
+            rangeAfterUpgrade = range;
+        }
+
     }
 
     public void Initialize(float dmg, float s, float h, float ar, float r)
@@ -157,7 +178,8 @@ public class Tower : MonoBehaviour
         _bulletGO.SetActive(true);
         _action = () => Recycle(_bulletGO);
         _bulletGO.GetComponent<Bullet>().Initialize(_target,damage,speed, _action);
-        _bulletGO.GetComponent<Bullet>().damageType = damageType;
+        //_bulletGO.GetComponent<Bullet>().damageType = damageType;
+        _bulletGO.GetComponent<Bullet>().SetBulletType(damageType);
         if(fireDuration != 0.0f)
         _bulletGO.GetComponent<Bullet>().fireTotalTime = fireDuration;
         var rb = _bulletGO.GetComponent<Rigidbody>();

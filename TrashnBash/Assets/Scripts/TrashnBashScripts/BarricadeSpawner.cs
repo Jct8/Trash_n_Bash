@@ -11,18 +11,28 @@ public class BarricadeSpawner : MonoBehaviour
     public GameObject signifier;
     public Transform barricadeSpawnPosition;
     public GameObject trashImgPrefab;
+    public Image coolTimeImage;
+    public Image lockCoolTimeImage;
 
     public int barricadeLimit = 5;
-    public float baseBarricadeCost = 10.0f;
     public float spawnCoolDownTime = 5.0f;
+    [HideInInspector]
+    public float spawnCoolDownBeforeUpgrade = 2.0f; //Used for upgrades
+    [HideInInspector]
+    public float spawnCoolDownAfterUpgrade = 2.0f;//Used for upgrades
+
+    public float baseBarricadeCost = 10.0f;
+    [HideInInspector]
+    public float costBeforeUpgrade = 2.0f; //Used for upgrades
+    [HideInInspector]
+    public float costAfterUpgrade = 2.0f;//Used for upgrades
 
     private int totalBarricades = 0;
-    private float currentTime = 0.0f;
-
     private bool isDragging = false;
 
     private void Start()
     {
+        lockCoolTimeImage.gameObject.SetActive(false);
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
         if (variableLoader.useGoogleSheets)
         {
@@ -32,24 +42,36 @@ public class BarricadeSpawner : MonoBehaviour
 
         ///////////  Upgrades - Barricade Spawn Rate Improved  ///////////
         int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.BarricadeSpawnRate];
+        spawnCoolDownBeforeUpgrade = spawnCoolDownTime;
         UpgradesIdentifier upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.BarricadeSpawnRate, level);
         if (level >= 1)
+        {
             spawnCoolDownTime -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+            spawnCoolDownAfterUpgrade = spawnCoolDownTime;
+        }
 
         ///////////  Upgrades - Barricade Reduction Cost Upgrade ///////////
         int barricadeLevel = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.BarricadeReductionCost];
         upgradesIdentifier = ModelManager.UpgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.BarricadeReductionCost, barricadeLevel);
+        costBeforeUpgrade = baseBarricadeCost;
         if (barricadeLevel >= 1)
-            baseBarricadeCost -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue; 
-
+        {
+            baseBarricadeCost -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
+            costAfterUpgrade = baseBarricadeCost;
+        }
+        signifier.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
     }
 
     private void Update()
     {
-        if (currentTime < Time.time && totalBarricades < barricadeLimit)
-            signifier.SetActive(true);
+        if (coolTimeImage.fillAmount >= 1.0f || totalBarricades > barricadeLimit)
+            lockCoolTimeImage.gameObject.SetActive(false);
         else
-            signifier.SetActive(false);
+            lockCoolTimeImage.gameObject.SetActive(true);
+
+        if (coolTimeImage.fillAmount <= 1.0f)
+            coolTimeImage.fillAmount += 1.0f / spawnCoolDownTime * Time.deltaTime;
+
     }
 
     public GameObject GetBarricade()
@@ -82,7 +104,7 @@ public class BarricadeSpawner : MonoBehaviour
 
     public void SpawnBarricade()
     {
-        if (currentTime < Time.time)
+        if (coolTimeImage.fillAmount >= 1.0f && !lockCoolTimeImage.gameObject.activeInHierarchy)
         {
             GameObject barricade = GetBarricade();
             if (barricade)
@@ -96,15 +118,25 @@ public class BarricadeSpawner : MonoBehaviour
                 trashImg.GetComponent<DragDrop>().isDragging = true;
                 trashImg.GetComponent<DragDrop>().itemToBeDroped = barricade;
 
-                currentTime = Time.time + spawnCoolDownTime;
             }
+            coolTimeImage.fillAmount = 0;
         }
     }
 
     public void ResetBarricade()
     {
         totalBarricades--;
-        currentTime = Time.time;
+        coolTimeImage.fillAmount = 1.0f;
         ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().HealTower(baseBarricadeCost);
+    }
+
+    public void RemoveUpgrade()
+    {
+
+    }
+
+    public void ApplyUpgrade()
+    {
+
     }
 }

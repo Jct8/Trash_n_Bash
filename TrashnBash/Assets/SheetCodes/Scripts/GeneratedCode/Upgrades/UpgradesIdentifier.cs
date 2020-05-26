@@ -10,6 +10,7 @@ namespace SheetCodes
 		[Identifier("Long Ranged 1")] LongRanged1 = 3,
 		[Identifier("Barricade Cost Reduction 1")] BarricadeCostReduction1 = 4,
 		[Identifier("Target Specific Enemies 1")] TargetSpecificEnemies1 = 5,
+		[Identifier("Target Specific Enemies 2")] TargetSpecificEnemies2 = 12,
 		[Identifier("Fire Projectiles 1")] FireProjectiles1 = 6,
 		[Identifier("Improved Barricades 1")] ImprovedBarricades1 = 7,
 		[Identifier("Barricade Spawn Rate Improved 1")] BarricadeSpawnRateImproved1 = 8,

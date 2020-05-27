@@ -6049,6 +6049,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaveComing
       objectReference: {fileID: 0}
+    - target: {fileID: 1636927941123850450, guid: 05258cc17f76799409782aa7b3093c31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4515744509220776239, guid: 05258cc17f76799409782aa7b3093c31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6172,12 +6177,27 @@ PrefabInstance:
     - target: {fileID: 5837012481461122140, guid: 05258cc17f76799409782aa7b3093c31,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5837012481461122140, guid: 05258cc17f76799409782aa7b3093c31,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837012481461122140, guid: 05258cc17f76799409782aa7b3093c31,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837012481461122140, guid: 05258cc17f76799409782aa7b3093c31,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837012481461122140, guid: 05258cc17f76799409782aa7b3093c31,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05258cc17f76799409782aa7b3093c31, type: 3}

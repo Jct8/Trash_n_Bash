@@ -165,12 +165,21 @@ public class UIManager : MonoBehaviour
     public IEnumerator Reset()
     {
         Debug.Log("Start Reset UI");
-
+        
         timerObject.SetActive(true);
-
         yield return new WaitForSeconds(0.5f);
+        currentTimer = 0;
+        ServiceLocator.Get<LevelManager>().PlayCancelled = false;
+        waveTimerBar.fillAmount = 0.0f;
+
+
         player = ServiceLocator.Get<LevelManager>().playerInstance;
         tower = ServiceLocator.Get<LevelManager>().towerInstance;
+
+        foreach(var obj in signifiersForWaves)
+        {
+            Destroy(obj);
+        }
 
         signifiersForWaves.Clear();
 
@@ -178,6 +187,8 @@ public class UIManager : MonoBehaviour
        
         float time = 0.0f;
         int getTime = -1;
+        bool overTime = false;
+
         spawners = GameObject.FindGameObjectsWithTag("Spawners");
         foreach (GameObject spawn in spawners)
         {
@@ -199,6 +210,11 @@ public class UIManager : MonoBehaviour
                 signifiersForWaves.Add(signifier);
             }
             getTime = spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime;
+
+            if(spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime > waveTimerBar.GetComponent<RectTransform>().rect.width)
+            {
+                overTime = true;
+            }
         }
 
         for (int i = 0; i < signifiersForWaves.Count; i++)
@@ -207,14 +223,22 @@ public class UIManager : MonoBehaviour
             GameObject timerImage = signifiersForWaves[i].transform.Find("WaveComing").gameObject;
 
             time = spawners[i].GetComponent<RegisterSpawnTime>().StartSpawnTime;
+            if(!overTime)
+            {
+                timerImage.transform.position = new Vector3(timerImage.transform.position.x + time * 1.5f,
+    timerImage.transform.position.y, timerImage.transform.position.z);
+            }
+            else
+            {
+                timerImage.transform.position = new Vector3(timerImage.transform.position.x + time / 1.5f,
+    timerImage.transform.position.y, timerImage.transform.position.z);
+            }
 
-            timerImage.transform.position = new Vector3(timerImage.transform.position.x + time,
-                timerImage.transform.position.y, timerImage.transform.position.z);
         }
 
 
         waveTimerBar.fillAmount = 0.0f;
-
+        timerObject.SetActive(false);
         // Animation Reset
         AnimationTexture.SetBool("IsHit", false);
         AnimationTexture.SetFloat("Energy", 0.0f);
@@ -239,6 +263,8 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             currentTimer += 1.0f;
             waveTimerBar.fillAmount = currentTimer / maximumTimer;
+            if (ServiceLocator.Get<LevelManager>().PlayCancelled)
+                break;
             yield return null;
         }
     }

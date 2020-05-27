@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public float towerHealth = 100.0f;
 
     public bool isTutorial = false;
+    public bool PlayCancelled = false;
 
     public LevelManager Initialize()
     {
@@ -37,14 +38,16 @@ public class LevelManager : MonoBehaviour
         UIManager uiManager = ServiceLocator.Get<UIManager>();
         PauseGame();
         //ResetLevel();
+        PlayCancelled = true;
         uiManager.enableFadeOut();
         uiManager.Reset();
+        
     }
 
     public void ReturnToMainMenu()
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
-
+        PlayCancelled = true;
         uiManager.poisonImg.SetActive(true);
         uiManager.intimidateImg.SetActive(true);
         uiManager.ultImg.SetActive(true);

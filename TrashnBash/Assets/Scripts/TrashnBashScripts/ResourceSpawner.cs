@@ -34,9 +34,9 @@ public class ResourceSpawner : MonoBehaviour
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
         if (variableLoader.useGoogleSheets)
         {
-            limit = (int) variableLoader.TrashCanStats["TrashLimit"];
+            //limit = (int) variableLoader.TrashCanStats["TrashLimit"];
             totalCoolTime = variableLoader.TrashCanStats["Cooldown"];
-            healValue = variableLoader.TrashCanStats["Cooldown"];
+            healValue = variableLoader.TrashCanStats["AmountCollected"];
         }
 
         ///////////  Upgrades - Trash Spawn Rate Improved  ///////////

@@ -16,9 +16,9 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
 
     private bool _CanBePickedUp = true;
     private float _MaxHealth = 0.0f;
+    public float _barricadeBuildTime = 1.0f;
     public Image healthBar;
     public GameObject healthBarGO;
-    public float _barricadeBuildTime = 3.0f;
     public bool inRangeRepair = false;
     public bool isRepairing = false;
     public bool isAlive = true;
@@ -63,7 +63,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         {
             health = variableLoader.BarriacdeStats["Health"];
             _MaxHealth = variableLoader.BarriacdeStats["Health"];
-            _barricadeBuildTime = variableLoader.BarriacdeStats["BuildTime"];
+           // _barricadeBuildTime = variableLoader.BarriacdeStats["BuildTime"];
         }
         ///////////  Upgrades - Improved Barricades  ///////////
         int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.ImprovedBarricades];

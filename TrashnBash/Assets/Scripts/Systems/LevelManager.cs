@@ -93,32 +93,38 @@ public class LevelManager : MonoBehaviour
 
     public bool CheckWinCondition()
     {
-        //if (enemyDeathCount >= 40)
-        //{
-        //    if (playerInstance != null)
-        //        playerHealth = playerInstance.GetComponent<Player>().Health;
-        //    if (towerInstance != null)
-        //        towerHealth = towerInstance.GetComponent<Tower>().fullHealth;
-        //    return true;
-        //}
-        int num = 0;
-        if(ServiceLocator.Get<UIManager>().waveTimerBar.fillAmount >= 1)
+        List<GameObject> survivedEnemies = new List<GameObject>();
+        List<GameObject> enemyspawners = new List<GameObject>();
+
+        // Checking Units
+        List<string> enemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys(); // Get the monster name
+        foreach (var enemy in enemies)
         {
-            List<string> enemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
-            foreach(var enemy in enemies)
+            foreach (var e in ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy)) // Check enemy which is surviving
             {
-                List<GameObject> survivedEnemies = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
-                foreach(var e in survivedEnemies)
+                if (e.tag == "Enemy")
                 {
-                    if(e.tag == "Enemy")
-                    {
-                        num++;
-                    }
+                    survivedEnemies.Add(e);
                 }
+
             }
-            if (num == 0)
-                return true;
         }
+
+        // Checking Spawners
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        foreach(var obj in spawners)
+        {
+            if(obj.GetComponent<EnemySpawner>()._currentWave < obj.GetComponent<EnemySpawner>()._numberOfWave) 
+                // It is represent to they are still spawning
+            {
+                enemyspawners.Add(obj);
+            }
+        }
+        if (enemyspawners.Count == 0 && survivedEnemies.Count == 0) return true; // If no more spawning
+
+
+        enemyspawners.Clear();
+        survivedEnemies.Clear();
 
         return false;
     }

@@ -145,7 +145,7 @@ public class LevelManager : MonoBehaviour
         {
             ServiceLocator.Get<GameManager>().changeGameState(GameManager.GameState.GamePlay);
         }
-
+        ServiceLocator.Get<GameManager>().LoadTowerHP();
 
         UIManager uiManager = ServiceLocator.Get<UIManager>();
         uiManager.enableFadeOut();

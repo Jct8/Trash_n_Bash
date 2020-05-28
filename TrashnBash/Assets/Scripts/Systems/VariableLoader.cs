@@ -24,18 +24,18 @@ public class VariableLoader : MonoBehaviour
     {
         if (!useGoogleSheets) return;
 
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Enemies"), UpdateEnemies);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Enemies"), UpdateEnemies);
 
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Stats", "A3", "B4", "A" , 3), UpdatePlayer);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Stats", "A6", "D10", "A" , 6), UpdatePlayerAbilities);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Stats", "A3", "B4", "A" , 3), UpdatePlayer);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Stats", "A6", "D10", "A" , 6), UpdatePlayerAbilities);
 
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A2", "A3", "A", 2), UpdateTower);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A21", "C22", "A", 21), UpdateTower2);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A21", "C22", "A", 21), UpdatePickUp);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A2", "A3", "A", 2), UpdateTower);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A21", "C22", "A", 21), UpdateTower2);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A21", "C22", "A", 21), UpdatePickUp);
 
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A6", "G10", "A", 6), UpdateTowerUpgrades);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A17", "E18", "A", 18), UpdateTrashCans);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A13", "D14", "A", 13), UpdateBarricades);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A6", "G10", "A", 6), UpdateTowerUpgrades);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A17", "E18", "A", 18), UpdateTrashCans);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A13", "D14", "A", 13), UpdateBarricades);
     }
 
     public VariableLoader Initialize()

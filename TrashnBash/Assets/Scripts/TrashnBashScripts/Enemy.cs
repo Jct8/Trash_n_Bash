@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public GameObject poison;
     public GameObject hitEffect;
 
+    public ParticleSystem stunParticle;
+
     private GameObject player;
     public GameObject _targetIndicator;
     private GameObject _ObjectofBarricade;
@@ -139,6 +141,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 _Agent.isStopped = true;
                 if (stunTime < Time.time)
                 {
+                    stunParticle.Stop();
                     _Agent.isStopped = false;
                     _Order = Order.Fight;
                 }
@@ -492,6 +495,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _IsDead = true;
             _isPoisoned = false;
             _IsAttacked = false;
+            stunParticle.Stop();
         }
     }
 

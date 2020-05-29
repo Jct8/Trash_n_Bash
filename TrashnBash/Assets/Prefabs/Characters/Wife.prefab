@@ -121,7 +121,7 @@ MonoBehaviour:
   rangeBeforeUpgrade: 2
   rangeAfterUpgrade: 2
   damage: 5
-  speed: 500
+  bulletSpeed: 20
   MaxHealth: 100
   attackRate: 1
   fullHealth: 0

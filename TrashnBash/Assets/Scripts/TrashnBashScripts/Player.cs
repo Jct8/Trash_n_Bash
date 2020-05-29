@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, ICharacterAction
     [SerializeField] private float intimdateStunTime = 3.0f;
     [SerializeField] public float  attackRange = 20.0f;
     [SerializeField] private float poisonRange = 5.0f;
+    [SerializeField] private float stunRange = 3.0f;
     [SerializeField] private float poisonDamage = 10.0f;
     [SerializeField] private float poisonTotalTime = 3.0f;
     [SerializeField] private float poisonTickTime = 1.0f;
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour, ICharacterAction
     [Header("Prefab")]
     public GameObject ultimateIndicator;
     public GameObject poisonIndicator;
+    public GameObject stunIndicator;
     public GameObject popUp;
     public GameObject poisonAttack;
     public GameObject hitEffect;
@@ -92,6 +94,8 @@ public class Player : MonoBehaviour, ICharacterAction
 
             initialPoisonAttackDamage = variableLoader.PlayerAbilties["Poison"]["Damage"];
             poisonRange = variableLoader.PlayerAbilties["Poison"]["Range"];
+
+            stunRange = variableLoader.PlayerAbilties["Stun"]["Range"];
 
             ultimateDamage = variableLoader.PlayerAbilties["Ultimate"]["Damage"];
             ultimateRange = variableLoader.PlayerAbilties["Ultimate"]["Range"];
@@ -314,7 +318,7 @@ public class Player : MonoBehaviour, ICharacterAction
         //{
         //   closestEnemy = target;
         //}
-        poisonIndicator.GetComponent<Transform>().localScale = new Vector3(poisonRange + 1.0f, 0.007460861f, poisonRange + 1.0f);
+        poisonIndicator.GetComponent<Transform>().localScale = new Vector3(poisonRange, 0.007460861f, poisonRange);
         poisonIndicator.SetActive(true);
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
 
@@ -324,7 +328,7 @@ public class Player : MonoBehaviour, ICharacterAction
             foreach (var go in gameObjects)
             {
                 float distance = Vector2.Distance(transform.position, go.transform.position);
-                if (distance < poisonRange)
+                if (distance < poisonRange * 0.5f)
                 {
                     go.GetComponent<Enemy>()?.TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
                     go.GetComponent<Enemy>()?.SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
@@ -374,17 +378,44 @@ public class Player : MonoBehaviour, ICharacterAction
         audioManager.PlaySfx(UltimateEffect);
     }
 
-    public void IntimidateAttack(GameObject enemy)
+    public IEnumerator IntimidateAttack(/*GameObject enemy*/)
     {
-        if (enemy && Vector3.Distance(transform.position, enemy.transform.position) < attackRange)
+        //if (enemy && Vector3.Distance(transform.position, enemy.transform.position) < attackRange)
+        //{
+        //    Instantiate(Lighting, enemy.transform.position, Quaternion.identity);
+        //    Instantiate(LightingOnGround, gameObject.transform.position, Quaternion.identity);
+        //    //audioSource.PlayOneShot(LightingEffectSound, 0.5f);
+        //    audioManager.PlaySfx(LightingEffectSound);
+        //    enemy.GetComponent<Enemy>()._Order = Order.Stunned;
+        //    enemy.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
+        //}
+
+        stunIndicator.GetComponent<Transform>().localScale = new Vector3(stunRange, 0.007460861f, stunRange);
+        stunIndicator.SetActive(true);
+        Instantiate(LightingOnGround, gameObject.transform.position, Quaternion.identity);
+        audioManager.PlaySfx(LightingEffectSound);
+
+        List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
+
+        foreach (var enemy in ListOfEnemies)
         {
-            Instantiate(Lighting, enemy.transform.position, Quaternion.identity);
-            Instantiate(LightingOnGround, gameObject.transform.position, Quaternion.identity);
-            //audioSource.PlayOneShot(LightingEffectSound, 0.5f);
-            audioManager.PlaySfx(LightingEffectSound);
-            enemy.GetComponent<Enemy>()._Order = Order.Stunned;
-            enemy.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
+            List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
+            foreach (var go in gameObjects)
+            {
+                if (!go.GetComponent<Enemy>())
+                    continue;
+                float distance = Vector2.Distance(transform.position, go.transform.position);
+                if (distance < stunRange * 0.5f)
+                {
+                    Instantiate(Lighting, go.transform.position, Quaternion.identity);
+                    go.GetComponent<Enemy>()._Order = Order.Stunned;
+                    go.GetComponent<Enemy>().stunParticle.Play() ;
+                    go.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
+                }
+            }
         }
+        yield return new WaitForSeconds(1.0f);
+        stunIndicator.SetActive(false);
     }
     #endregion
 

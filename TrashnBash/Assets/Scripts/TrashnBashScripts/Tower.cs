@@ -30,7 +30,7 @@ public class Tower : MonoBehaviour
     [HideInInspector]
     public float rangeAfterUpgrade = 2.0f;//Used for upgrades
     public float damage = 10.0f;
-    public float speed = 5.0f;
+    public float bulletSpeed = 5.0f;
     public float MaxHealth = 100.0f;
     public float attackRate = 1.0f;
     public float fullHealth = 50.0f;
@@ -116,7 +116,7 @@ public class Tower : MonoBehaviour
     public void Initialize(float dmg, float s, float h, float ar, float r)
     {
         damage = dmg;
-        speed = s;
+        bulletSpeed = s;
         MaxHealth = h;
         attackRate = ar;
         range = r;
@@ -161,7 +161,7 @@ public class Tower : MonoBehaviour
         {
             if(!_target.GetComponent<Enemy>().IsDead)
             {
-                Shoot();
+                Shoot(_target.GetComponent<Enemy>());
                 shotTime = 1.0f / attackRate;
             }
 
@@ -170,21 +170,21 @@ public class Tower : MonoBehaviour
         shotTime -= Time.deltaTime;
     }
 
-    void Shoot()
+    void Shoot(Enemy target)
     {
         GameObject _bulletGO = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool(bulletPrefeb.name);
         _bulletGO.transform.position = firePoint.transform.position;
         _bulletGO.transform.rotation = firePoint.transform.rotation;
         _bulletGO.SetActive(true);
         _action = () => Recycle(_bulletGO);
-        _bulletGO.GetComponent<Bullet>().Initialize(_target,damage,speed, _action);
+        _bulletGO.GetComponent<Bullet>().Initialize(target.transform, damage, bulletSpeed, _action);
         //_bulletGO.GetComponent<Bullet>().damageType = damageType;
         _bulletGO.GetComponent<Bullet>().SetBulletType(damageType);
         if(fireDuration != 0.0f)
-        _bulletGO.GetComponent<Bullet>().fireTotalTime = fireDuration;
-        var rb = _bulletGO.GetComponent<Rigidbody>();
-        rb.velocity = Vector3.zero;
-        rb.AddForce(firePoint.up * speed * 3.0f, ForceMode.Force);
+            _bulletGO.GetComponent<Bullet>().fireTotalTime = fireDuration;
+        //var rb = _bulletGO.GetComponent<Rigidbody>();
+        //rb.velocity = Vector3.zero;
+        //rb.AddForce(firePoint.up * speed * 3.0f, ForceMode.Force);
         //audioSource.PlayOneShot(shotSound, 1.0f);
         audioManager.PlaySfx(shotSound);
     }

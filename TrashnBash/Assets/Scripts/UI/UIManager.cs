@@ -198,17 +198,11 @@ public class UIManager : MonoBehaviour
 
         foreach (GameObject spawn in spawners)
         {
-
-            if (spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime == getTime) // Prevent to duplicate
-                continue;
-            else
-            {
-                GameObject signifier = Instantiate(timerObject) as GameObject;
-                signifier.transform.SetParent(canvas.transform);
-                signifier.transform.position = timerObject.transform.position;
-                signifier.transform.rotation = timerObject.transform.rotation;
-                signifiersForWaves.Add(signifier);
-            }
+            GameObject signifier = Instantiate(timerObject) as GameObject;
+            signifier.transform.SetParent(canvas.transform);
+            signifier.transform.position = timerObject.transform.position;
+            signifier.transform.rotation = timerObject.transform.rotation;
+            signifiersForWaves.Add(signifier);
             getTime = spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime;
 
             if(spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime > waveTimerBar.GetComponent<RectTransform>().rect.width)
@@ -223,15 +217,27 @@ public class UIManager : MonoBehaviour
             GameObject timerImage = signifiersForWaves[i].transform.Find("WaveComing").gameObject;
 
             time = spawners[i].GetComponent<RegisterSpawnTime>().StartSpawnTime;
-            if(!overTime)
+
+
+
+            if (!overTime)
             {
-                timerImage.transform.position = new Vector3(timerImage.transform.position.x + time * 1.5f,
-    timerImage.transform.position.y, timerImage.transform.position.z);
+                signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time * 1.5f,
+signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
             }
             else
             {
-                timerImage.transform.position = new Vector3(timerImage.transform.position.x + time / 1.5f,
-    timerImage.transform.position.y, timerImage.transform.position.z);
+                if(i == 0)
+                {
+                    signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time * 1.5f,
+signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
+                }
+                else
+                {
+                    signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time / 1.5f,
+signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
+                }
+
             }
 
         }

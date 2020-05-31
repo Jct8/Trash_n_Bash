@@ -258,6 +258,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             else if (_Order == Order.Back)
             {
                 _Agent.isStopped = false;
+                CooltimeBar.fillAmount = 0;
                 _Desination = _Path.WayPoints[0];
                 _Agent.SetDestination(_Desination.position);
                 enemyAbilities.Flying(_Desination);
@@ -341,13 +342,19 @@ public class Enemy : MonoBehaviour, ICharacterAction
     #region Check and Ultility Functions
     private bool ChargingCoolDown()
     {
-        CooltimeBar.fillAmount += 1 / (_AttackCoolTime * 60.0f);
+        StartCoroutine(AttackCoolDown());
         if (CooltimeBar.fillAmount >= 1)
         {
             CooltimeBar.fillAmount = 0;
             return true;
         }
         return false;
+    }
+
+    private IEnumerator AttackCoolDown()
+    {
+        yield return new WaitForSeconds(_AttackCoolTime * 0.5f);
+        CooltimeBar.fillAmount += 1 / _AttackCoolTime * Time.deltaTime;
     }
 
     public void SwitchOnTargetIndicator(bool turnOn)

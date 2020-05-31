@@ -328,7 +328,7 @@ public class Player : MonoBehaviour, ICharacterAction
             foreach (var go in gameObjects)
             {
                 float distance = Vector2.Distance(transform.position, go.transform.position);
-                if (distance < poisonRange * 0.5f)
+                if (distance < poisonRange)
                 {
                     go.GetComponent<Enemy>()?.TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
                     go.GetComponent<Enemy>()?.SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);

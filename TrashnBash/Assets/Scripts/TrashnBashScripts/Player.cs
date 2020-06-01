@@ -318,7 +318,7 @@ public class Player : MonoBehaviour, ICharacterAction
         //{
         //   closestEnemy = target;
         //}
-        poisonIndicator.GetComponent<Transform>().localScale = new Vector3(poisonRange, 0.007460861f, poisonRange);
+        poisonIndicator.GetComponent<Transform>().localScale = new Vector3(poisonRange*2.0f, 0.007460861f, poisonRange * 2.0f);
         poisonIndicator.SetActive(true);
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
 
@@ -390,7 +390,7 @@ public class Player : MonoBehaviour, ICharacterAction
         //    enemy.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
         //}
 
-        stunIndicator.GetComponent<Transform>().localScale = new Vector3(stunRange, 0.007460861f, stunRange);
+        stunIndicator.GetComponent<Transform>().localScale = new Vector3(stunRange * 2.0f, 0.007460861f, stunRange * 2.0f);
         stunIndicator.SetActive(true);
         Instantiate(LightingOnGround, gameObject.transform.position, Quaternion.identity);
         audioManager.PlaySfx(LightingEffectSound);
@@ -405,7 +405,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 if (!go.GetComponent<Enemy>())
                     continue;
                 float distance = Vector2.Distance(transform.position, go.transform.position);
-                if (distance < stunRange * 0.5f)
+                if (distance < stunRange)
                 {
                     Instantiate(Lighting, go.transform.position, Quaternion.identity);
                     go.GetComponent<Enemy>()._Order = Order.Stunned;

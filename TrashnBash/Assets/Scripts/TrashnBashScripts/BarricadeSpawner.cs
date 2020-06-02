@@ -37,6 +37,8 @@ public class BarricadeSpawner : MonoBehaviour
         if (variableLoader.useGoogleSheets)
         {
             baseBarricadeCost = variableLoader.BarriacdeStats["TrashCost"];
+            spawnCoolDownTime = variableLoader.BarriacdeStats["CooldownTime"];
+
         }
         ServiceLocator.Get<GameManager>().barricadeSpawner = this;
 

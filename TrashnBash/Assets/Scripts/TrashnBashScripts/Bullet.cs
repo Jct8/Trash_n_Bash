@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Transform _target;
+    public Transform _target;
+
 
     public DamageType damageType = DamageType.Normal;
     public float fireTotalTime = 3.0f;
     public float fireTickTime = 1.0f;
     public Material normalBulletMaterial;
     public Material fireBulletMaterial;
+
+    public ParticleSystem fireParticle;
 
     public float _speed;
     public float _damage;
@@ -33,19 +36,20 @@ public class Bullet : MonoBehaviour
     {
         if(_target == null)
         {
-            _action?.Invoke();
+            //_action?.Invoke();
             return;
         }
 
-        //Vector3 _direction = _target.position - transform.position;
-        //float _distanceOfFrame = _speed * Time.deltaTime;
-        ////if (_direction.magnitude <= _distanceOfFrame)
-        ////{
-        ////    Hit();
-        ////    return;
-        ////}
+        Vector3 _direction = Vector3.Normalize(_target.position - transform.position);
+        //transform.position = _direction * _speed * Time.deltaTime;
+        float _distanceOfFrame = _speed * Time.deltaTime;
+        //if (_direction.magnitude <= _distanceOfFrame)
+        //{
+        //    Hit();
+        //    return;
+        //}
 
-        //transform.Translate(_direction.normalized * _distanceOfFrame, Space.World);
+        transform.Translate(_direction.normalized * _distanceOfFrame, Space.World);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -66,14 +70,20 @@ public class Bullet : MonoBehaviour
     public void SetBulletType(DamageType type)
     {
         damageType = type;
-        if(type == DamageType.Poison)
+        if (type == DamageType.Poison)
+        {
             GetComponent<Renderer>().material.color = Color.red;
+            var pSmain = fireParticle.main;
+            pSmain.simulationSpeed = 10.0f;
+            fireParticle.Play();
+        }
     }
 
     void ResetBullet()
     {
         damageType = DamageType.Normal;
         GetComponent<Renderer>().material.color = Color.white;
+        fireParticle.Stop();
         _action?.Invoke();
     }
 }

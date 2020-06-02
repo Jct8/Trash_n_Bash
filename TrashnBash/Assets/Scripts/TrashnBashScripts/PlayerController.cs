@@ -286,10 +286,10 @@ public class PlayerController : MonoBehaviour
         {
             if (currentIntimidateAttackCoolDown < Time.time)
             {
-                if (_isTargetLockedOn)
-                {
-                    _player.IntimidateAttack(_lockedOnEnemyGO);
-                }
+                //if (_isTargetLockedOn)
+                //{
+                    StartCoroutine(_player.IntimidateAttack(/*_lockedOnEnemyGO*/));
+                //}
                 currentIntimidateAttackCoolDown = Time.time + intimidateAttackCoolDown;
             }
         }

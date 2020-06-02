@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
 
     public float _houseHP = 50.0f;
     public float _racoonHP;
-    public bool _enemySkillActived { get; set; }
     public string sceneToLoad = "MainMenu";
+    public bool _enemySkillActived { get; set; }
 
     public Dictionary<UpgradeMenu.Upgrade, int> upgradeLevelsDictionary = new Dictionary<UpgradeMenu.Upgrade, int>();
     public Dictionary<UpgradeMenu.Upgrade, bool> upgradeEnabled = new Dictionary<UpgradeMenu.Upgrade, bool>();
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public string choosenTarget = "No Target";
     public BarricadeSpawner barricadeSpawner;
 
+    private bool isVaribableLoaded = false;
     public enum GameState
     {
         Loader,
@@ -40,14 +41,6 @@ public class GameManager : MonoBehaviour
         {
             upgradeLevelsDictionary.Add(item, 0);
             upgradeEnabled.Add(item, false);
-        }
-    }
-    private void Start()
-    {
-        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
-        if (variableLoader.useGoogleSheets)
-        {
-            //_houseHP = variableLoader.TowerStats["Health"];
         }
     }
 
@@ -141,5 +134,17 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Stop!");
             }
         }
+    }
+
+    public void LoadTowerHP()
+    {
+        if (isVaribableLoaded)
+            return;
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            _houseHP = variableLoader.TowerStats["Health"];
+        }
+        isVaribableLoaded = true;
     }
 }

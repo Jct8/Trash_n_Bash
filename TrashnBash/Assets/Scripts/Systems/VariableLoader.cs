@@ -24,18 +24,18 @@ public class VariableLoader : MonoBehaviour
     {
         if (!useGoogleSheets) return;
 
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Enemies"), UpdateEnemies);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Enemies"), UpdateEnemies);
 
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Stats", "A3", "B4", "A" , 3), UpdatePlayer);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Stats", "A6", "D10", "A" , 6), UpdatePlayerAbilities);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Stats", "A3", "B4", "A" , 3), UpdatePlayer);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Stats", "A6", "D10", "A" , 6), UpdatePlayerAbilities);
 
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A2", "A3", "A", 2), UpdateTower);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A21", "C22", "A", 21), UpdateTower2);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A21", "C22", "A", 21), UpdatePickUp);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A2", "A3", "A", 2), UpdateTower);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A27", "C28", "A", 27), UpdateTower2);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A27", "C28", "A", 27), UpdatePickUp);
 
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A6", "G10", "A", 6), UpdateTowerUpgrades);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A17", "E18", "A", 18), UpdateTrashCans);
-        SpreadsheetManager.Read(new GSTU_Search(associatedSheet, "Trash", "A13", "D14", "A", 13), UpdateBarricades);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A6", "H16", "A", 6), UpdateTowerUpgrades);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A23", "B24", "A", 23), UpdateTrashCans);
+        SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Trash", "A19", "C20", "A", 19), UpdateBarricades);
     }
 
     public VariableLoader Initialize()
@@ -126,14 +126,14 @@ public class VariableLoader : MonoBehaviour
     void UpdateTower2(GstuSpreadSheet ss)
     {
         float value;
-        TowerStats["PlayerHeal"] = float.TryParse(ss["A22"].value, out value) == true ? value : 0.0f;
-        TowerStats["TrashCost"] = float.TryParse(ss["B22"].value, out value) == true ? value : 0.0f;
+        TowerStats["PlayerHeal"] = float.TryParse(ss["A28"].value, out value) == true ? value : 0.0f;
+        TowerStats["TrashCost"] = float.TryParse(ss["B28"].value, out value) == true ? value : 0.0f;
     }
 
     void UpdatePickUp(GstuSpreadSheet ss)
     {
         float value;
-        PickUpStats["HealAmount"] = float.TryParse(ss["C22"].value, out value) == true ? value : 0.0f;
+        PickUpStats["HealAmount"] = float.TryParse(ss["C28"].value, out value) == true ? value : 0.0f;
     }
 
     void UpdateTowerUpgrades(GstuSpreadSheet ss)
@@ -163,15 +163,15 @@ public class VariableLoader : MonoBehaviour
     void UpdateTrashCans(GstuSpreadSheet ss)
     {
         float value;
-        TrashCanStats["TrashPerDig"] = float.TryParse(ss["A18"].value, out value) == true ? value : 0.0f;
-        TrashCanStats["TrashLimit"] = float.TryParse(ss["B18"].value, out value) == true ? value : 0.0f;
-        TrashCanStats["Cooldown"] = float.TryParse(ss["C18"].value, out value) == true ? value : 0.0f;
+        TrashCanStats["AmountCollected"] = float.TryParse(ss["A24"].value, out value) == true ? value : 0.0f;
+        //TrashCanStats["TrashLimit"] = float.TryParse(ss["B18"].value, out value) == true ? value : 0.0f;
+        TrashCanStats["Cooldown"] = float.TryParse(ss["B24"].value, out value) == true ? value : 0.0f;
     }
     void UpdateBarricades(GstuSpreadSheet ss)
     {
         float value;
-        BarriacdeStats["Health"] = float.TryParse(ss["A14"].value, out value) == true ? value : 0.0f;
-        BarriacdeStats["TrashCost"] = float.TryParse(ss["B14"].value, out value) == true ? value : 0.0f;
-        BarriacdeStats["BuildTime"] = float.TryParse(ss["C14"].value, out value) == true ? value : 0.0f;
+        BarriacdeStats["Health"] = float.TryParse(ss["A20"].value, out value) == true ? value : 0.0f;
+        BarriacdeStats["TrashCost"] = float.TryParse(ss["B20"].value, out value) == true ? value : 0.0f;
+        BarriacdeStats["CooldownTime"] = float.TryParse(ss["C20"].value, out value) == true ? value : 0.0f;
     }
 }

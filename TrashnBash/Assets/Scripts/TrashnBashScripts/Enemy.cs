@@ -424,8 +424,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         if (_IsDead)
             return;
-
-        enemyAbilities.PlayDead();
+        if (Dmg < health)
+        {
+            enemyAbilities.PlayDead();
+        }
         health -= Dmg;
 
         popUp.GetComponent<TextMesh>().text = Dmg.ToString();

@@ -13,9 +13,9 @@ public class UIManager : MonoBehaviour
     public Image playerHealthBar;
     public Image waveTimerBar;
     public Text towerHealthPercentage;
-    public Animator AnimationTexture;
+    //public Animator AnimationTexture;
 
-    public GameObject PresentTextrue;
+    //public GameObject PresentTextrue;
     public GameObject[] spawners;
     public GameObject pauseScreen;
     public GameObject optionsScreen;
@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
         {
             fadeTutorial.GetComponent<Animator>().Play("FadeOut");
         }
-        else if(state == GameManager.GameState.GamePlay)
+        else if (state == GameManager.GameState.GamePlay)
         {
             fadeDumster.GetComponent<Animator>().Play("FadeOut");
         }
@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
             fadeDumster.GetComponent<Animator>().Play("Fade");
             StartCoroutine(unableScreenFade());
         }
- 
+
     }
 
     private IEnumerator unableScreenFade()
@@ -165,7 +165,7 @@ public class UIManager : MonoBehaviour
     public IEnumerator Reset()
     {
         Debug.Log("Start Reset UI");
-        
+
         timerObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         currentTimer = 0;
@@ -176,7 +176,7 @@ public class UIManager : MonoBehaviour
         player = ServiceLocator.Get<LevelManager>().playerInstance;
         tower = ServiceLocator.Get<LevelManager>().towerInstance;
 
-        foreach(var obj in signifiersForWaves)
+        foreach (var obj in signifiersForWaves)
         {
             Destroy(obj);
         }
@@ -184,7 +184,7 @@ public class UIManager : MonoBehaviour
         signifiersForWaves.Clear();
 
         // Wave reset
-       
+
         float time = 0.0f;
         int getTime = -1;
         bool overTime = false;
@@ -205,7 +205,7 @@ public class UIManager : MonoBehaviour
             signifiersForWaves.Add(signifier);
             getTime = spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime;
 
-            if(spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime > waveTimerBar.GetComponent<RectTransform>().rect.width)
+            if (spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime > waveTimerBar.GetComponent<RectTransform>().rect.width)
             {
                 overTime = true;
             }
@@ -223,19 +223,19 @@ public class UIManager : MonoBehaviour
             if (!overTime)
             {
                 signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time * 1.5f,
-signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
+                signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
             }
             else
             {
-                if(i == 0)
+                if (i == 0)
                 {
                     signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time * 1.5f,
-signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
+                    signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
                 }
                 else
                 {
                     signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time / 1.5f,
-signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
+                    signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
                 }
 
             }
@@ -246,8 +246,8 @@ signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform
         waveTimerBar.fillAmount = 0.0f;
         timerObject.SetActive(false);
         // Animation Reset
-        AnimationTexture.SetBool("IsHit", false);
-        AnimationTexture.SetFloat("Energy", 0.0f);
+        //AnimationTexture.SetBool("IsHit", false);
+        //AnimationTexture.SetFloat("Energy", 0.0f);
 
         UpdatePlayerHealth(player.GetComponent<Player>().health, player.GetComponent<Player>()._maxHealth);
         UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
@@ -264,7 +264,7 @@ signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform
 
     IEnumerator CountWaveTimer()
     {
-        while(currentTimer < maximumTimer)
+        while (currentTimer < maximumTimer)
         {
             yield return new WaitForSeconds(1.0f);
             currentTimer += 1.0f;
@@ -292,29 +292,29 @@ signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform
         if (curr >= 80.0f)
         {
             IsPower = true;
-            PresentTextrue.GetComponent<RawImage>().texture = PowerFulTexture;
+            //PresentTextrue.GetComponent<RawImage>().texture = PowerFulTexture;
         }
         else
         {
             IsPower = false;
-            PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
+            //PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
         }
 
-        AnimationTexture.SetFloat("Energy", curr);
+        //AnimationTexture.SetFloat("Energy", curr);
     }
 
     public IEnumerator HitAnimation()
     {
         if (!IsPower)
         {
-            AnimationTexture.SetBool("IsHit", true);
-            PresentTextrue.GetComponent<RawImage>().texture = SickTexture;
+            //AnimationTexture.SetBool("IsHit", true);
+            //PresentTextrue.GetComponent<RawImage>().texture = SickTexture;
             yield return new WaitForSeconds(1.0f);
-            PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
-            AnimationTexture.SetBool("IsHit", false);
+            //PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
+            //AnimationTexture.SetBool("IsHit", false);
         }
         yield return null;
     }
 
-    
+
 }

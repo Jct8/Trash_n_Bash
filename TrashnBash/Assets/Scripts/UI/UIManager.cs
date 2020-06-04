@@ -223,21 +223,12 @@ public class UIManager : MonoBehaviour
             if (!overTime)
             {
                 signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time * 1.5f,
-                signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
+signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
             }
             else
             {
-                if (i == 0)
-                {
-                    signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time * 1.5f,
-                    signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
-                }
-                else
-                {
-                    signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time / 1.5f,
-                    signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
-                }
-
+                signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + (time / maximumTimer) * (waveTimerBar.GetComponent<RectTransform>().rect.width),
+  signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
             }
 
         }

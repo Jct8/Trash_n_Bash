@@ -61,8 +61,6 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnWave(_currentWave);
             _currentWave++;
-            if (ServiceLocator.Get<UIManager>().waveTimerBar.fillAmount >= 0.9)
-                break;
             yield return new WaitForSeconds(_secondBetweenWave);
         }
     }

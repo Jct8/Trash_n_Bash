@@ -186,53 +186,25 @@ public class UIManager : MonoBehaviour
         // Wave reset
 
         float time = 0.0f;
-        int getTime = -1;
-        bool overTime = false;
 
-        spawners = GameObject.FindGameObjectsWithTag("Spawners");
-        foreach (GameObject spawn in spawners)
+        RegisterSpawnTime[] registerSpawnTimes = FindObjectsOfType<RegisterSpawnTime>();
+        foreach (RegisterSpawnTime registerSpawnTime in registerSpawnTimes)
         {
-            if (maximumTimer < spawn.GetComponent<RegisterSpawnTime>().MaximumSpawnTime)
-                maximumTimer = spawn.GetComponent<RegisterSpawnTime>().MaximumSpawnTime;
+            if (maximumTimer < registerSpawnTime.MaximumSpawnTime)
+                maximumTimer = registerSpawnTime.MaximumSpawnTime;
         }
 
-        foreach (GameObject spawn in spawners)
+        foreach (RegisterSpawnTime registerSpawnTime in registerSpawnTimes)
         {
-            GameObject signifier = Instantiate(timerObject) as GameObject;
-            signifier.transform.SetParent(canvas.transform);
-            signifier.transform.position = timerObject.transform.position;
-            signifier.transform.rotation = timerObject.transform.rotation;
+            GameObject signifier = Instantiate(timerObject, timerObject.transform.position, timerObject.transform.rotation, canvas.transform) as GameObject;
             signifiersForWaves.Add(signifier);
-            getTime = spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime;
 
-            if (spawn.GetComponent<RegisterSpawnTime>().StartSpawnTime > waveTimerBar.GetComponent<RectTransform>().rect.width)
-            {
-                overTime = true;
-            }
+            RectTransform rectTransform = waveTimerBar.GetComponent<RectTransform>();
+            float barWidth = waveTimerBar.GetComponent<RectTransform>().rect.width;
+            float xPos = Mathf.Lerp(rectTransform.position.x - barWidth / 2, rectTransform.position.x + barWidth / 2, registerSpawnTime.StartSpawnTime / maximumTimer);
+
+            signifier.transform.position = new Vector3(xPos, waveTimerBar.transform.position.y + 20f);
         }
-
-        for (int i = 0; i < signifiersForWaves.Count; i++)
-        {
-            signifiersForWaves[i].SetActive(true);
-            GameObject timerImage = signifiersForWaves[i].transform.Find("WaveComing").gameObject;
-
-            time = spawners[i].GetComponent<RegisterSpawnTime>().StartSpawnTime;
-
-
-
-            if (!overTime)
-            {
-                signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + time * 1.5f,
-signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
-            }
-            else
-            {
-                signifiersForWaves[i].transform.localPosition = new Vector3(signifiersForWaves[i].transform.localPosition.x + (time / maximumTimer) * (waveTimerBar.GetComponent<RectTransform>().rect.width),
-  signifiersForWaves[i].transform.localPosition.y, signifiersForWaves[i].transform.localPosition.z);
-            }
-
-        }
-
 
         waveTimerBar.fillAmount = 0.0f;
         timerObject.SetActive(false);

@@ -172,7 +172,7 @@ public class UpgradeUI : MonoBehaviour
                     if (fireLevel >= 0)
                     {
                         if (toggle.isOn)
-                            towerFire.GetComponent<Tower>().damageType = DamageType.Poison;
+                            towerFire.GetComponent<Tower>().damageType = DamageType.Fire;
                         else
                             towerFire.GetComponent<Tower>().damageType = DamageType.Normal;
                     }

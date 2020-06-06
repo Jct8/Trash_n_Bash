@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
 {
     public Transform _target;
 
-
     public DamageType damageType = DamageType.Normal;
     public float fireTotalTime = 3.0f;
     public float fireTickTime = 1.0f;
@@ -52,7 +51,7 @@ public class Bullet : MonoBehaviour
         transform.Translate(_direction.normalized * _distanceOfFrame, Space.World);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         var _damageable = collision.gameObject.GetComponent<ICharacterAction>();
         if(_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Normal)
@@ -60,9 +59,9 @@ public class Bullet : MonoBehaviour
             _damageable.TakeDamage(_damage,false, damageType);
             ResetBullet();
         }
-        else if (_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Poison) //fire attack
+        else if (_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Fire) //fire attack
         {
-            collision.gameObject.GetComponent<Enemy>().SetPoison(_damage, fireTickTime, fireTotalTime);
+            collision.gameObject.GetComponent<Enemy>().SetFire(_damage, fireTickTime, fireTotalTime);
             ResetBullet();
         }
     }
@@ -70,13 +69,18 @@ public class Bullet : MonoBehaviour
     public void SetBulletType(DamageType type)
     {
         damageType = type;
-        if (type == DamageType.Poison)
+        if (type == DamageType.Fire)
         {
             GetComponent<Renderer>().material.color = Color.red;
             var pSmain = fireParticle.main;
-            pSmain.simulationSpeed = 10.0f;
+            fireParticle.Simulate(1.0f);
             fireParticle.Play();
+            pSmain.simulationSpeed = _speed;
+            GetComponent<TrailRenderer>().enabled = true;
         }
+        else
+            GetComponent<TrailRenderer>().enabled = false;
+
     }
 
     void ResetBullet()
@@ -84,6 +88,7 @@ public class Bullet : MonoBehaviour
         damageType = DamageType.Normal;
         GetComponent<Renderer>().material.color = Color.white;
         fireParticle.Stop();
+        GetComponent<TrailRenderer>().enabled = false;
         _action?.Invoke();
     }
 }

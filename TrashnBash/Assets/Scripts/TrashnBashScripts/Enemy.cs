@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public GameObject poison;
     public GameObject hitEffect;
 
+    public ParticleSystem fireEffect;
     public ParticleSystem stunParticle;
 
     private GameObject player;
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private bool _IsStolen = false;
     private bool _IsAttacked = false;
     private bool _isPoisoned = false;
+    private bool _isOnFire = false;
     public string _DataSource;
 
     public AudioClip attackEffect;
@@ -70,8 +72,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _poisonTotalTime = 0.0f;
     private float _poisonTickTime = 0.0f;
     private float _poisonCurrentDuration = 0.0f;
+
+    private float _FireDamage = 0.0f;
+    private float _FireTotalTime = 0.0f;
+    private float _FireTickTime = 0.0f;
+    private float _FireCurrentDuration = 0.0f;
+
     private int numOfRats = 0;
-    
+
     [Header("Etc")]
     public Rigidbody rigid;
     public Action killed;
@@ -115,9 +123,9 @@ public class Enemy : MonoBehaviour, ICharacterAction
         {
             if (_targetIndicator.activeSelf && _Order != Order.Stunned)
             {
-                if(_Name == "Crows")
+                if (_Name == "Crows")
                 {
-                    if(gameObject.GetComponent<CrowAbility>()._isLanding)
+                    if (gameObject.GetComponent<CrowAbility>()._isLanding)
                     {
                         _Order = Order.Fight;
                     }
@@ -134,6 +142,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
             if (_isPoisoned)
                 CheckPoison();
+            if (_isOnFire)
+                CheckFire();
 
             if (_Order == Order.Stunned)
             {
@@ -226,7 +236,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Order.Barricade)
             {
-                if(!_ObjectofBarricade)
+                if (!_ObjectofBarricade)
                 {
                     _Order = Order.Tower;
                     return;
@@ -312,7 +322,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Attack = variableLoader.EnemyStats[_Name]["Steal"];
             _Attack = variableLoader.EnemyStats[_Name]["Damage"];
             _AttackCoolTime = variableLoader.EnemyStats[_Name]["CoolDown"];
-            _enemyAttackRange= variableLoader.EnemyStats[_Name]["Range"];
+            _enemyAttackRange = variableLoader.EnemyStats[_Name]["Range"];
 
             health = MaxHealth;
             healthBar.fillAmount = health / MaxHealth;
@@ -401,13 +411,13 @@ public class Enemy : MonoBehaviour, ICharacterAction
         yield return new WaitForSeconds(_waitForsecondOfCrows);
         if (_Order == Order.Tower)
         {
-            if(ChargingCoolDown())
+            if (ChargingCoolDown())
             {
                 StartCoroutine("TowerAttack");
             }
 
         }
-        if(_Order == Order.Barricade)
+        if (_Order == Order.Barricade)
         {
             if (ChargingCoolDown())
             {
@@ -435,21 +445,18 @@ public class Enemy : MonoBehaviour, ICharacterAction
         switch (type)
         {
             case DamageType.Normal:
-                {
-                    popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 0.0f);
-                    GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
-                    break;
-                }
+                popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 0.0f);
+                GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
+                break;
             case DamageType.Poison:
-                {
-                    popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
-                    break;
-                }
+                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
+                break;
             case DamageType.Ultimate:
-                {
-                    popUp.GetComponent<TextMesh>().color = new Color(0.0f, 0.0f, 1.0f);
-                    break;
-                }
+                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 0.0f, 1.0f);
+                break;
+            case DamageType.Fire:
+                popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 0.0f);
+                break;
         }
         Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
 
@@ -494,7 +501,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 }
                 _IsStolen = false;
             }
-            if(gameObject.activeInHierarchy)
+            if (gameObject.activeInHierarchy)
             {
                 StartCoroutine("DeathAnimation");
             }
@@ -537,6 +544,35 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         poison.SetActive(_isPoisoned);
     }
+
+    private void CheckFire()
+    {
+        if (_FireCurrentDuration < Time.time)
+        {
+            _FireCurrentDuration = Time.time + _FireTickTime;
+            TakeDamage(_FireDamage, false, DamageType.Fire);
+        }
+        if (_FireTotalTime < Time.time)
+        {
+            _isOnFire = false;
+            fireEffect.Stop();
+            return;
+        }
+    }
+
+    public void SetFire(float damage, float tickTime, float totalTime)
+    {
+        if (_isOnFire)
+            return;
+        _FireDamage = damage;
+        _FireTickTime = tickTime;
+        _FireCurrentDuration = Time.time;
+        _FireTotalTime = Time.time + totalTime;
+        _isOnFire = true;
+
+        fireEffect.Play();
+    }
+
     #endregion
 
     #region Attacks

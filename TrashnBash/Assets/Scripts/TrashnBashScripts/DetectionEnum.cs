@@ -19,5 +19,6 @@ public enum DamageType
     Ultimate,
     Enemy,
     Skunks,
-    Loading
+    Loading,
+    Fire
 }

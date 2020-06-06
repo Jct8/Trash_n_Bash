@@ -213,7 +213,7 @@ public class LevelManager : MonoBehaviour
         upgradesIdentifier = upgradesModel.GetUpgradeEnum(UpgradeMenu.Upgrade.FireProjectile, fireLevel + 1);
         if (fireLevel >= 0)
         {
-            towerInstance.GetComponent<Tower>().damageType = DamageType.Poison;
+            towerInstance.GetComponent<Tower>().damageType = DamageType.Fire;
             towerInstance.GetComponent<Tower>().fireDuration = upgradesModel.GetRecord(upgradesIdentifier).ModifierValue;// upgradeStats.fireDuration[fireLevel];
         }
 

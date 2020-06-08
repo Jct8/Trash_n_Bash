@@ -123,22 +123,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
         {
             if (_targetIndicator.activeSelf && _Order != Order.Stunned)
             {
-                if (_Name == "Crows")
-                {
-                    if (gameObject.GetComponent<CrowAbility>()._isLanding)
-                    {
-                        _Order = Order.Fight;
-                    }
-                }
-                else
-                {
-                    _Order = Order.Fight;
-                }
-
+                _Order = Order.Fight;
             }
 
             enemyAbilities.PoisonAOE();
-
+            enemyAbilities.Flying(_Desination);
 
             if (_isPoisoned)
                 CheckPoison();
@@ -160,7 +149,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             else if (_Order == Order.Tower)
             {
                 _Agent.SetDestination(_Desination.position);
-                enemyAbilities.Flying(_Desination);
+
                 if ((isInRangeOfWayPoint(_Desination, _EndDistance)))
                 {
 
@@ -168,7 +157,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     {
                         if (_Name == "Crows")
                         {
-                            StartCoroutine("wait");
+                            StartCoroutine(wait());
                         }
                         else
                         {
@@ -248,7 +237,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 {
                     if (_Name == "Crows")
                     {
-                        StartCoroutine("wait");
+                        StartCoroutine(wait());
                     }
                     else
                     {
@@ -413,7 +402,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         {
             if (ChargingCoolDown())
             {
-                StartCoroutine("TowerAttack");
+                StartCoroutine(TowerAttack());
             }
 
         }
@@ -492,7 +481,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             if (_IsStolen)
             {
                 float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f);
-                if (randomNumber > _DropRate)
+                if (randomNumber == _DropRate)
                 {
                     for (int i = 0; i < _AmountofTrash; i++)
                     {

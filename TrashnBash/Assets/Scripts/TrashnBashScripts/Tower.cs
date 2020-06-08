@@ -161,7 +161,8 @@ public class Tower : MonoBehaviour
         {
             if(!_target.GetComponent<Enemy>().IsDead)
             {
-                Shoot(_target.GetComponent<Enemy>());
+                if(_target.GetComponent<Collider>().enabled)
+                    Shoot(_target.GetComponent<Enemy>());
                 shotTime = 1.0f / attackRate;
             }
 
@@ -178,14 +179,9 @@ public class Tower : MonoBehaviour
         _bulletGO.SetActive(true);
         _action = () => Recycle(_bulletGO);
         _bulletGO.GetComponent<Bullet>().Initialize(target.transform, damage, bulletSpeed, _action);
-        //_bulletGO.GetComponent<Bullet>().damageType = damageType;
         _bulletGO.GetComponent<Bullet>().SetBulletType(damageType);
         if(fireDuration != 0.0f)
             _bulletGO.GetComponent<Bullet>().fireTotalTime = fireDuration;
-        //var rb = _bulletGO.GetComponent<Rigidbody>();
-        //rb.velocity = Vector3.zero;
-        //rb.AddForce(firePoint.up * speed * 3.0f, ForceMode.Force);
-        //audioSource.PlayOneShot(shotSound, 1.0f);
         audioManager.PlaySfx(shotSound);
     }
 

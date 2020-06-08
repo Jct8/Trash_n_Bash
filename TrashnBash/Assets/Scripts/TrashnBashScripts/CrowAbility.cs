@@ -8,35 +8,47 @@ public class CrowAbility : MonoBehaviour, IEnemyAbilities
     [SerializeField][Tooltip("Value how much height can Crow land")] private float _minimumHeight = 0.5f;
     [SerializeField][Tooltip("Value how much range can Crow reach each way-point")] private float _inRangeOfWaypoint = 4.0f;
     public GameObject _crowGO = null;
-    public LayerMask groundLayers;
 
     private Rigidbody rb = null;
     private Order order = 0;
-    public bool _isLanding = false;
-    private bool _isRising = false;
 
     public void Flying(Transform wayPoint)
     {
         order = gameObject.GetComponent<Enemy>()._Order;
-        if(order != Order.Fight || order != Order.Stunned)
+        switch (order)
         {
-            if (Vector3.Distance(wayPoint.position,_crowGO.transform.position) > _inRangeOfWaypoint)
-            {
-                if (!_isLanding)
+            case Order.Tower:
                 {
-                    rb.velocity = Vector3.zero;
-                    _crowGO.transform.position = new Vector3(gameObject.transform.position.x, _maximumRaising, gameObject.transform.position.z);
+
+                    if (Vector3.Distance(wayPoint.position, _crowGO.transform.position) > _inRangeOfWaypoint)
+                    {
+                        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+                        rb.velocity = Vector3.zero;
+                        _crowGO.transform.position = new Vector3(gameObject.transform.position.x, _maximumRaising, gameObject.transform.position.z);
+                    }
+                    else
+                    {
+                        StartCoroutine(Land());
+                    }
+                    break;
                 }
-                else
-                    _isRising = true;
-            }
-            else
-                _isLanding = true;
+            case Order.Barricade:
+            case Order.Stunned:
+            case Order.Fight:
+                {
+                    if (_crowGO.transform.position.y > _minimumHeight)
+                        StartCoroutine(Land());
+                    break;
+                }
+            case Order.Back:
+                {
+
+                    if (_crowGO.transform.position.y < _maximumRaising)
+                        StartCoroutine(Raise());
+                    break;
+                }
         }
-        else
-        {
-            _isLanding = true;
-        }
+
     }
 
     void Start()
@@ -46,43 +58,23 @@ public class CrowAbility : MonoBehaviour, IEnemyAbilities
         _crowGO.transform.position = new Vector3(gameObject.transform.position.x, _maximumRaising, gameObject.transform.position.z);
     }
 
-    void Update()
+    private IEnumerator Land()
     {
-        order = gameObject.GetComponent<Enemy>()._Order;
-        if(order != Order.Fight || order != Order.Stunned)
+        gameObject.GetComponent<CapsuleCollider>().enabled = true;
+        while (_crowGO?.transform.position.y > _minimumHeight)
         {
-            if (_isLanding) // When Crow reaches to the object: Tower and barricade
-            {
-                if (_crowGO?.transform.position.y >= _minimumHeight)
-                {
-                    _crowGO?.transform.Translate(Vector3.down * Time.deltaTime);
-                }
-            }
-
-            if (_isRising) // When Crow succeed to break the tower or the barricade
-            {
-                if (_crowGO.transform.position.y < _maximumRaising)
-                {
-                    _crowGO.transform.Translate(new Vector3(0.0f, _maximumRaising, 0.0f) * Time.deltaTime);
-                }
-                else
-                {
-                    _isLanding = false;
-                    _isRising = false;
-                }
-                if (_crowGO.transform.position.y > _maximumRaising) // if Crow's height exceeds over maximum height, matches height correctly
-                    _crowGO.transform.Translate(new Vector3(0.0f, _maximumRaising, 0.0f) * Time.deltaTime);
-
-            }
+            _crowGO?.transform.Translate(Vector3.down * Time.deltaTime);
+            yield return new WaitForSeconds(0.5f);
         }
-        else // When Crow takes damage by the player
+    }
+
+    private IEnumerator Raise()
+    {
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        while (_crowGO?.transform.position.y < _maximumRaising)
         {
-            _isLanding = false;
-            _isRising = false;
-            if (_crowGO?.transform.position.y >= _minimumHeight)
-            {
-                _crowGO?.transform.Translate(Vector3.down * Time.deltaTime);
-            }
+            _crowGO?.transform.Translate(Vector3.up * Time.deltaTime);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

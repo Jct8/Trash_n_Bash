@@ -35,18 +35,12 @@ public class Bullet : MonoBehaviour
     {
         if(_target == null)
         {
-            //_action?.Invoke();
             return;
         }
 
         Vector3 _direction = Vector3.Normalize(_target.position - transform.position);
-        //transform.position = _direction * _speed * Time.deltaTime;
+
         float _distanceOfFrame = _speed * Time.deltaTime;
-        //if (_direction.magnitude <= _distanceOfFrame)
-        //{
-        //    Hit();
-        //    return;
-        //}
 
         transform.Translate(_direction.normalized * _distanceOfFrame, Space.World);
     }

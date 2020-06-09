@@ -4469,8 +4469,6 @@ MonoBehaviour:
   playerHealthBar: {fileID: 8353211050998763825}
   waveTimerBar: {fileID: 1806014561390239901}
   towerHealthPercentage: {fileID: 6187951834896247026}
-  AnimationTexture: {fileID: 0}
-  PresentTextrue: {fileID: 0}
   spawners: []
   pauseScreen: {fileID: 6617459380522681112}
   optionsScreen: {fileID: 8052166585110428182}
@@ -6371,6 +6369,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521874943543155165, guid: 05258cc17f76799409782aa7b3093c31,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 5521874943543155165, guid: 05258cc17f76799409782aa7b3093c31,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521874943543155165, guid: 05258cc17f76799409782aa7b3093c31,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521874943543155165, guid: 05258cc17f76799409782aa7b3093c31,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.896049
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05258cc17f76799409782aa7b3093c31, type: 3}

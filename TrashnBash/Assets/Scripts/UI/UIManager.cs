@@ -201,7 +201,7 @@ public class UIManager : MonoBehaviour
 
             RectTransform rectTransform = waveTimerBar.GetComponent<RectTransform>();
             float barWidth = waveTimerBar.GetComponent<RectTransform>().rect.width;
-            float xPos = Mathf.Lerp(rectTransform.position.x - barWidth / 2, rectTransform.position.x + barWidth / 2, registerSpawnTime.StartSpawnTime / maximumTimer);
+            float xPos = Mathf.Lerp(rectTransform.position.x - barWidth, rectTransform.position.x + barWidth, registerSpawnTime.StartSpawnTime / maximumTimer);
 
             signifier.transform.position = new Vector3(xPos, waveTimerBar.transform.position.y + 20f);
         }

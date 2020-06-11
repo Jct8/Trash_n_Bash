@@ -603,7 +603,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
             ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
         StartCoroutine(characterSound.PlaySound(0));
-        audioManager.PlaySfx(attackEffect);
         if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)
         {
             _Order = Order.Back;
@@ -620,7 +619,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _tower.GetComponent<Tower>().TakeDamage(_Attack);
         _IsStolen = true;
         StartCoroutine(characterSound.PlaySound(0));
-        audioManager.PlaySfx(attackEffect);
         if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)
             _Order = Order.Back;
         CooltimeBar.fillAmount = 0;

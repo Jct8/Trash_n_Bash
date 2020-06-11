@@ -20,9 +20,10 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(BeginFadeOut(2.0f));
     }
 
-    public void PlaySfx(AudioClip clip)
+    public void PlaySfx(AudioClip clip, float volume = 1.0f)
     {
         sfxSource.clip = clip;
+        sfxSource.volume = volume;
         sfxSource.Play();
     }
 

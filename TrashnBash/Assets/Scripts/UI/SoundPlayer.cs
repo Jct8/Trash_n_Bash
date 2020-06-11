@@ -14,52 +14,52 @@ public class SoundPlayer : MonoBehaviour, ICharacterSound
     public AudioClip BarricadePlace;
     public AudioClip BarricadeBuild;
 
-    private AudioSource source { get { return GetComponent<AudioSource>(); } }
-
     public IEnumerator PlaySound(int id)
     {
+        AudioManager audioManager = ServiceLocator.Get<AudioManager>();
+
         switch (id)
         {
             case 0:
                 {
                     yield return new WaitForSeconds(0.2f);
-                    source.PlayOneShot(Attack);
+                    audioManager.PlaySfx(Attack);
                     break;
                 }
             case 1:
                 {
                     yield return new WaitForSeconds(0.2f);
-                    source.PlayOneShot(TakeDamage);
+                    audioManager.PlaySfx(TakeDamage);
                     break;
                 }
             case 2:
                 {
                     yield return new WaitForSeconds(0.2f);
-                    source.PlayOneShot(PoisonSound);
+                    audioManager.PlaySfx(PoisonSound);
                     break;
                 }
             case 3:
                 {
                     yield return new WaitForSeconds(0.2f);
-                    source.PlayOneShot(PoisonTickSound);
+                    audioManager.PlaySfx(PoisonTickSound);
                     break;
                 }
             case 4:
                 {
                     yield return new WaitForSeconds(0.2f);
-                    source.PlayOneShot(BarricadeTake);
+                    audioManager.PlaySfx(BarricadeTake);
                     break;
                 }
             case 5:
                 {
                     yield return new WaitForSeconds(0.2f);
-                    source.PlayOneShot(BarricadePlace);
+                    audioManager.PlaySfx(BarricadePlace);
                     break;
                 }
             case 6:
                 {
                     yield return new WaitForSeconds(0.2f);
-                    source.PlayOneShot(BarricadeBuild);
+                    audioManager.PlaySfx(BarricadeBuild);
                     break;
                 }
             default:

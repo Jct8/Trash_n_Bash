@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         switch (_GameState)
         {
             case GameState.Loader:
+                ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
                 break;
             case GameState.MainMenu:
                 break;
@@ -116,7 +117,6 @@ public class GameManager : MonoBehaviour
         {
             ServiceLocator.Get<UIManager>().gameObject.SetActive(true);
             ServiceLocator.Get<UIManager>().StartCoroutine(ServiceLocator.Get<UIManager>().Reset());
-            ServiceLocator.Get<AudioManager>().gameObject.SetActive(true);
             ServiceLocator.Get<LevelManager>().gameObject.SetActive(true);
         }
     }

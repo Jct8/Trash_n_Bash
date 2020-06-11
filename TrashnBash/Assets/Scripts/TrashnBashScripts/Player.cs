@@ -342,15 +342,11 @@ public class Player : MonoBehaviour, ICharacterAction
                 }
             }
         }
-        //audioSource.PlayOneShot(poisonEffect, 0.5f);
         audioManager.PlaySfx(poisonEffect);
         poisonAttack.SetActive(true);
 
         yield return new WaitForSeconds(1.0f);
         poisonIndicator.SetActive(!poisonIndicator.activeSelf);
-
-        //audioSource.PlayOneShot(poisonedEffect, 0.2f);
-        audioManager.PlaySfx(poisonEffect);
         poisonAttack.SetActive(false);
 
         yield return null;
@@ -400,7 +396,7 @@ public class Player : MonoBehaviour, ICharacterAction
         stunIndicator.GetComponent<Transform>().localScale = new Vector3(stunRange * 2.0f, 0.007460861f, stunRange * 2.0f);
         stunIndicator.SetActive(true);
         Instantiate(LightingOnGround, gameObject.transform.position, Quaternion.identity);
-        audioManager.PlaySfx(LightingEffectSound);
+        audioManager.PlaySfx(LightingEffectSound, 0.5f);
 
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
 

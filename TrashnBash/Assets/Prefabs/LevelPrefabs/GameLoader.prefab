@@ -113,6 +113,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c1662dfd4677cc498a7143bd796f004, type: 2}
   - {fileID: 11400000, guid: b637bc66f8360764aa4affbd9e397330, type: 2}
   - {fileID: 11400000, guid: 5c1c0514ed0b8004a878a730f6438c68, type: 2}
+  - {fileID: 11400000, guid: 55ad76f0ec3ecf942af6aef94c22e971, type: 2}
 --- !u!114 &3941574931967863278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +149,10 @@ MonoBehaviour:
     poolSize: 25
   - name: MoveIndicator
     prefab: {fileID: 4305261768933097057, guid: 6ad03d53575662449a5ffe753893059e,
+      type: 3}
+    poolSize: 10
+  - name: BigRaccoon
+    prefab: {fileID: 5110960924001791372, guid: ad9b67b2f924e704d897e47760a0c2d4,
       type: 3}
     poolSize: 10
 --- !u!1 &4074085256402838628

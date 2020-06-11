@@ -24,6 +24,8 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
     public bool isAlive = true;
     public bool isPlaced = false;
 
+    ICharacterSound characterSound;
+
     public void PickUp(GameObject playerGO)
     {
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
@@ -54,10 +56,12 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
     private void Awake()
     {
         _MaxHealth = health;
+        characterSound = GetComponent<ICharacterSound>();
     }
 
     private void Start()
     {
+        characterSound = GetComponent<ICharacterSound>();
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
         if (variableLoader.useGoogleSheets)
         {
@@ -85,6 +89,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         isPlaced = true;
         GetComponent<NavMeshObstacle>().enabled = true;
         GetComponent<NavMeshObstacle>().carving = true;
+        StartCoroutine(characterSound.PlaySound(6));
     }
 
     public bool CheckRepairValid(Transform playerTransform)
@@ -160,7 +165,10 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
             {
                 transform.position = ray.origin + ray.direction * distance;
             }
+
+            StartCoroutine(characterSound.PlaySound(5));
         }
+
     }
 
     public bool DropItem()

@@ -63,6 +63,9 @@ public class Player : MonoBehaviour, ICharacterAction
 
     public float UltimateCharge { get { return _ultimateCharge; } private set { } }
     public float Health { get { return health; } private set { } }
+
+    ICharacterSound characterSound;
+
     #endregion
 
     #region UnityFunctions
@@ -153,6 +156,7 @@ public class Player : MonoBehaviour, ICharacterAction
         health = hp;
         _maxHealth = health;
         ultimateChargeStart = _ultimateCharge;
+        characterSound = GetComponent<ICharacterSound>();
     }
 
     public void ResetPlayer()
@@ -160,6 +164,7 @@ public class Player : MonoBehaviour, ICharacterAction
         poison.SetActive(false);
         _maxHealth = health;
         ultimateChargeStart = _ultimateCharge;
+        characterSound = GetComponent<ICharacterSound>();
     }
 
     //public void SaveData(float dmg, float hp)
@@ -180,6 +185,7 @@ public class Player : MonoBehaviour, ICharacterAction
         _poisonCurrentTime = Time.time;
         _poisonTotalTime = Time.time + total;
         _ispoisoned = true;
+        StartCoroutine(characterSound.PlaySound(2));
         poison.SetActive(_ispoisoned);
     }
 
@@ -188,6 +194,7 @@ public class Player : MonoBehaviour, ICharacterAction
         if (_poisonCurrentTime < Time.time)
         {
             _poisonCurrentTime = Time.time + _poisonTickTime;
+            StartCoroutine(characterSound.PlaySound(3));
             TakeDamage(_poisonDamage, false, DamageType.Skunks);
         }
         if (_poisonTotalTime < Time.time)

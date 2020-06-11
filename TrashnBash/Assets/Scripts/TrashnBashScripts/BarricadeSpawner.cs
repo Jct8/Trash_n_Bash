@@ -30,8 +30,12 @@ public class BarricadeSpawner : MonoBehaviour
     private int totalBarricades = 0;
     private bool isDragging = false;
 
+    ICharacterSound characterSound;
+
     private void Start()
     {
+        characterSound = GetComponent<ICharacterSound>();
+
         lockCoolTimeImage.gameObject.SetActive(false);
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
         if (variableLoader.useGoogleSheets)
@@ -119,7 +123,7 @@ public class BarricadeSpawner : MonoBehaviour
                 trashImg.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
                 trashImg.GetComponent<DragDrop>().isDragging = true;
                 trashImg.GetComponent<DragDrop>().itemToBeDroped = barricade;
-
+                StartCoroutine(characterSound.PlaySound(4));
             }
             coolTimeImage.fillAmount = 0;
         }

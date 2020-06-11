@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 4287360367347998676}
   - component: {fileID: -7843373993880456553}
   - component: {fileID: 1772315475092756036}
+  - component: {fileID: 3941358854931468929}
   m_Layer: 0
   m_Name: Enemy_Skunks
   m_TagString: Enemy
@@ -357,6 +358,22 @@ MonoBehaviour:
   _skunksPoisonRange: 5
   _skunksPoisonTotaltime: 3
   poisonArea: {fileID: 1623258127465319001}
+--- !u!114 &3941358854931468929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110960924001791372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e5e0807c8846e84699d93ffb46cd26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack: {fileID: 0}
+  TakeDamage: {fileID: 0}
+  PoisonSound: {fileID: 8300000, guid: 4931064c4e2aa4c4abf1e3721b40ccb7, type: 3}
+  PoisonTickSound: {fileID: 8300000, guid: 7312ad21e88000241be086147a510942, type: 3}
 --- !u!1 &5416218835026228155
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,11 +646,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7759828449410312193}
     m_Modifications:
-    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyHealth
-      objectReference: {fileID: 0}
     - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_Color.r
@@ -648,6 +660,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.92156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyHealth
       objectReference: {fileID: 0}
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
@@ -802,6 +819,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4973128973231283096}
     m_Modifications:
+    - target: {fileID: 19800002, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_Name
       value: CFX4 Fire
@@ -861,10 +882,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.47966
-      objectReference: {fileID: 0}
-    - target: {fileID: 19800002, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_IsActive
@@ -1074,11 +1091,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 342672411064212200}
     m_Modifications:
-    - target: {fileID: 2049476926243463847, guid: c9f391fb4eab85742b60a943363b3732,
-        type: 3}
-      propertyPath: m_Name
-      value: PoisionParticle
-      objectReference: {fileID: 0}
     - target: {fileID: 1809057394092238291, guid: c9f391fb4eab85742b60a943363b3732,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1133,6 +1145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049476926243463847, guid: c9f391fb4eab85742b60a943363b3732,
+        type: 3}
+      propertyPath: m_Name
+      value: PoisionParticle
       objectReference: {fileID: 0}
     - target: {fileID: 7849409788160601981, guid: c9f391fb4eab85742b60a943363b3732,
         type: 3}
@@ -1306,6 +1323,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c073a7369cd7e428d5eabcbb27ca0b, type: 3}
+--- !u!1 &728480896903345829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7432037585748413601, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7872278175545702916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3788476874278443306 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6461729710976017198, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
@@ -1318,9 +1341,3 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &728480896903345829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7432037585748413601, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
-    type: 3}
-  m_PrefabInstance: {fileID: 7872278175545702916}
-  m_PrefabAsset: {fileID: 0}

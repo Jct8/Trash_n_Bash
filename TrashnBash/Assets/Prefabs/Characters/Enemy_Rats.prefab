@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5118566301055973398}
   - component: {fileID: -3833604232468093450}
   - component: {fileID: -8552737092046902306}
+  - component: {fileID: 3889687170434332699}
   m_Layer: 0
   m_Name: Enemy_Rats
   m_TagString: Enemy
@@ -275,6 +276,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limit: 3
+--- !u!114 &3889687170434332699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876065404672406170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e5e0807c8846e84699d93ffb46cd26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack: {fileID: 8300000, guid: 71a5c50e60f2514489d1a18682a802b6, type: 3}
+  TakeDamage: {fileID: 8300000, guid: 704eaa0c4d8323d45bb873f50a485e0b, type: 3}
+  PoisonSound: {fileID: 8300000, guid: 4931064c4e2aa4c4abf1e3721b40ccb7, type: 3}
+  PoisonTickSound: {fileID: 8300000, guid: 7312ad21e88000241be086147a510942, type: 3}
 --- !u!1 &7435411569412823581
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,11 +559,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6105141686796337774}
     m_Modifications:
-    - target: {fileID: 2049476926243463847, guid: c9f391fb4eab85742b60a943363b3732,
-        type: 3}
-      propertyPath: m_Name
-      value: PoisionParticle
-      objectReference: {fileID: 0}
     - target: {fileID: 1809057394092238291, guid: c9f391fb4eab85742b60a943363b3732,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -602,6 +614,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2049476926243463847, guid: c9f391fb4eab85742b60a943363b3732,
+        type: 3}
+      propertyPath: m_Name
+      value: PoisionParticle
+      objectReference: {fileID: 0}
     - target: {fileID: 7849409788160601981, guid: c9f391fb4eab85742b60a943363b3732,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -647,6 +664,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 783344098662007957}
     m_Modifications:
+    - target: {fileID: 19800002, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_Name
       value: CFX4 Fire
@@ -706,10 +727,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.1356935
-      objectReference: {fileID: 0}
-    - target: {fileID: 19800002, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_IsActive
@@ -813,11 +830,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1986332374905582975}
     m_Modifications:
-    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyHealth
-      objectReference: {fileID: 0}
     - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_Color.r
@@ -832,6 +844,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.92156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyHealth
       objectReference: {fileID: 0}
     - target: {fileID: 4765580551792181899, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}

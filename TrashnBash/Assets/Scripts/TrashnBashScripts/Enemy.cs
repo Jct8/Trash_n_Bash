@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public Rigidbody rigid;
     public Action killed;
     IEnemyAbilities enemyAbilities;
+    ICharacterSound characterSound;
 
     private bool _barricadeAlive;
     private bool _barricadePlaced;
@@ -99,6 +100,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         audioManager = ServiceLocator.Get<AudioManager>();
         CooltimeBar.fillAmount = 0;
         enemyAbilities = GetComponent<IEnemyAbilities>();
+        characterSound = GetComponent<ICharacterSound>();
     }
 
     private void OnEnable()
@@ -352,7 +354,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     private IEnumerator AttackCoolDown()
     {
-        yield return new WaitForSeconds(_AttackCoolTime * 0.5f);
+        yield return new WaitForSeconds(_AttackCoolTime);
         CooltimeBar.fillAmount += 1 / _AttackCoolTime * Time.deltaTime;
     }
 
@@ -428,7 +430,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             enemyAbilities.PlayDead();
         }
         health -= Dmg;
-
+        StartCoroutine(characterSound.PlaySound(1));
         popUp.GetComponent<TextMesh>().text = Dmg.ToString();
 
         switch (type)
@@ -509,6 +511,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (_poisonCurrentDuration < Time.time)
         {
             _poisonCurrentDuration = Time.time + _poisonTickTime;
+
+            StartCoroutine(characterSound.PlaySound(3));
             TakeDamage(_poisonDamage, true, DamageType.Poison);
         }
         if (_poisonTotalTime < Time.time)
@@ -530,7 +534,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _poisonCurrentDuration = Time.time;
         _poisonTotalTime = Time.time + totalTime;
         _isPoisoned = true;
-
+        StartCoroutine(characterSound.PlaySound(2));
         poison.SetActive(_isPoisoned);
     }
 
@@ -573,6 +577,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _IsAttacked = true;
         if (_ObjectofBarricade?.GetComponent<Barricade>().isAlive == true)
         {
+            StartCoroutine(characterSound.PlaySound(0));
             _ObjectofBarricade?.GetComponent<Barricade>().TakeDamage(_Attack);
         }
         else
@@ -597,7 +602,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             player.GetComponent<Player>().TakeDamage(_Attack, false, DamageType.Enemy);
             ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
-        //audioSource.PlayOneShot(attackEffect, 0.7f);
+        StartCoroutine(characterSound.PlaySound(0));
         audioManager.PlaySfx(attackEffect);
         if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)
         {
@@ -614,7 +619,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         GameObject _tower = ServiceLocator.Get<LevelManager>().towerInstance;
         _tower.GetComponent<Tower>().TakeDamage(_Attack);
         _IsStolen = true;
-        //audioSource.PlayOneShot(attackEffect, 0.7f);
+        StartCoroutine(characterSound.PlaySound(0));
         audioManager.PlaySfx(attackEffect);
         if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)
             _Order = Order.Back;

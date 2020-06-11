@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public bool intimidateAttackEnabled = true;
     public bool ultimateAttackEnabled = true;
     public bool autoAttack = true;
+    public bool isUsingUltimate = false;
 
     private UIbutton attackUIbutton;
     private UIbutton poisonUIbutton;
@@ -79,6 +80,8 @@ public class PlayerController : MonoBehaviour
     private UIbutton ultUIbutton;
     //private UIbutton repairUIbutton;
     //private UIbutton placeUIbutton;
+
+    private Animator animator;
 
     #endregion
 
@@ -98,6 +101,7 @@ public class PlayerController : MonoBehaviour
         //repairUIbutton = ServiceLocator.Get<UIManager>()?.repairButton.GetComponent<UIbutton>();
         //placeUIbutton = ServiceLocator.Get<UIManager>()?.placeButton.GetComponent<UIbutton>();
         //attackUIbutton = ServiceLocator.Get<UIManager>()?.basicAttackButton.GetComponent<UIbutton>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -118,8 +122,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
-
         if(_lockedOnEnemyGO)
         {
             if (_lockedOnEnemyGO.GetComponent<Enemy>().IsDead)
@@ -221,6 +223,9 @@ public class PlayerController : MonoBehaviour
         {
             if (currentPoisonAttackCoolDown < Time.time)
             {
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fleas") && !isUsingUltimate)
+                    animator.SetTrigger("Fleas");
+
                 StartCoroutine(_player.PoisonAttack());
                 currentPoisonAttackCoolDown = Time.time + poisonAttackCoolDown;
             }
@@ -267,6 +272,8 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetKeyDown(_UltimateButton) || ultUIbutton.isButtonPressed) && ultimateAttackEnabled)
         {
             //_player.UltimateAttack();
+            //if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Ultimate"))
+            //    animator.SetTrigger("Ultimate");
             ultUIbutton.isButtonPressed = false;
             StartCoroutine(_player.UltimateAttack());
         }
@@ -290,6 +297,8 @@ public class PlayerController : MonoBehaviour
                 //{
                     StartCoroutine(_player.IntimidateAttack(/*_lockedOnEnemyGO*/));
                 //}
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Intimidate") && !isUsingUltimate)
+                    animator.SetTrigger("Intimidate");
                 currentIntimidateAttackCoolDown = Time.time + intimidateAttackCoolDown;
             }
         }
@@ -458,10 +467,14 @@ public class PlayerController : MonoBehaviour
                         GameObject moveIndicator = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool("MoveIndicator");
                         moveIndicator.transform.position = agent.destination;
                         moveIndicator.SetActive(true);
+                        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("RunCycle") && !isUsingUltimate)
+                            animator.SetTrigger("Run");
                         return;
                     }
                 }
             }
+
+            
 
             //Attack target
             if (_isTargetLockedOn)
@@ -474,7 +487,15 @@ public class PlayerController : MonoBehaviour
                 transform.LookAt(look);
                 if (Vector3.Distance(transform.position, agent.destination) < _player.attackRange)
                     agent.isStopped = true;
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Scratch") && !isUsingUltimate)
+                    animator.SetTrigger("Scratch");
                 return;
+            }
+
+            if (agent.velocity.magnitude <= 0.2f)
+            {
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("IdleCycle") && !isUsingUltimate)
+                    animator.SetTrigger("Idle");
             }
             return;
         }

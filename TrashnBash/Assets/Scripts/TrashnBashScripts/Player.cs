@@ -11,7 +11,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public float _maxHealth = 100.0f;
     [SerializeField] private float attack = 1.0f;
     [SerializeField] private float intimdateStunTime = 3.0f;
-    [SerializeField] public float  attackRange = 20.0f;
+    [SerializeField] public float attackRange = 20.0f;
     [SerializeField] private float poisonRange = 5.0f;
     [SerializeField] private float stunRange = 3.0f;
     [SerializeField] private float poisonDamage = 10.0f;
@@ -61,10 +61,12 @@ public class Player : MonoBehaviour, ICharacterAction
     public GameObject poison;
     private bool _isStoring = false;
 
+
     public float UltimateCharge { get { return _ultimateCharge; } private set { } }
     public float Health { get { return health; } private set { } }
 
     ICharacterSound characterSound;
+    private Animator animator;
 
     #endregion
 
@@ -111,6 +113,7 @@ public class Player : MonoBehaviour, ICharacterAction
 
         health = _maxHealth;
         _uiManager.UpdatePlayerHealth(health, _maxHealth);
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -213,16 +216,16 @@ public class Player : MonoBehaviour, ICharacterAction
         switch (type)
         {
             case DamageType.Enemy:
-                {
-                    popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 1.0f);
-                    GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
-                    break;
-                }
+            {
+                popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 1.0f);
+                GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
+                break;
+            }
             case DamageType.Skunks:
-                {
-                    popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
-                    break;
-                }
+            {
+                popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
+                break;
+            }
         }
         //popUp.transform.Rotate(new Vector3(90.0f, 180.0f, 0.0f));
         Instantiate(popUp, transform.position, Camera.main.transform.rotation, transform);
@@ -325,7 +328,7 @@ public class Player : MonoBehaviour, ICharacterAction
         //{
         //   closestEnemy = target;
         //}
-        poisonIndicator.GetComponent<Transform>().localScale = new Vector3(poisonRange*2.0f, 0.007460861f, poisonRange * 2.0f);
+        poisonIndicator.GetComponent<Transform>().localScale = new Vector3(poisonRange * 2.0f, 0.007460861f, poisonRange * 2.0f);
         poisonIndicator.SetActive(true);
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();
 
@@ -359,6 +362,8 @@ public class Player : MonoBehaviour, ICharacterAction
         ////Justin - TODO:Find a better method.
         ultimateIndicator.GetComponent<Transform>().localScale = new Vector3(ultimateRange, 0.007460861f, ultimateRange);
         ultimateIndicator.SetActive(true);
+        animator.SetTrigger("Ultimate");
+        GetComponent<PlayerController>().isUsingUltimate = true;
         yield return new WaitForSeconds(ultimateDelay);
 
         ultimateIndicator.SetActive(false);
@@ -370,7 +375,7 @@ public class Player : MonoBehaviour, ICharacterAction
             foreach (var go in gameObjects)
             {
                 float distance = Vector2.Distance(transform.position, go.transform.position);
-                if (distance < ultimateRange*0.5f)
+                if (distance < ultimateRange * 0.5f)
                 {
                     go.GetComponent<Enemy>()?.TakeDamage(ultimateDamage, true, DamageType.Ultimate);
                     go.GetComponent<Enemy>()?.SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
@@ -379,6 +384,7 @@ public class Player : MonoBehaviour, ICharacterAction
         }
         //audioSource.PlayOneShot(UltimateEffect, 0.95f);
         audioManager.PlaySfx(UltimateEffect);
+        GetComponent<PlayerController>().isUsingUltimate = false;
     }
 
     public IEnumerator IntimidateAttack(/*GameObject enemy*/)
@@ -412,7 +418,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 {
                     Instantiate(Lighting, go.transform.position, Quaternion.identity);
                     go.GetComponent<Enemy>()._Order = Order.Stunned;
-                    go.GetComponent<Enemy>().stunParticle.Play() ;
+                    go.GetComponent<Enemy>().stunParticle.Play();
                     go.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
                 }
             }
@@ -466,7 +472,7 @@ public class Player : MonoBehaviour, ICharacterAction
 
     private IEnumerator DisplayHealingEffect()
     {
-        if(!_isStoring)
+        if (!_isStoring)
         {
             _isStoring = true;
             GameObject heal = Instantiate(healingEffect, gameObject.transform.position, Quaternion.identity) as GameObject;
@@ -477,7 +483,7 @@ public class Player : MonoBehaviour, ICharacterAction
         {
             yield return null;
         }
- 
+
     }
     #endregion
 

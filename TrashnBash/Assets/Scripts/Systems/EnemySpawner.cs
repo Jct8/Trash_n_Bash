@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public enum EnemyType { Skunks, Opossums, Rats, Crows }; // spelling has to match the object pool manager
+    public enum EnemyType { Skunks, Opossums, Rats, Crows, BigRaccoon }; // spelling has to match the object pool manager
 
     [SerializeField]
     EnemyType enemyType;

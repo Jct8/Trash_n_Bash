@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60521d08d0b910e429f65fb77e3fbecf, type: 3}
   m_Name: BigRaccoonJsonData
   m_EditorClassIdentifier: 
-  JsonTextAsset: {fileID: 0}
+  JsonTextAsset: {fileID: 4900000, guid: 99a7472cbc984a04191db20fee07b75d, type: 3}

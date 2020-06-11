@@ -116,6 +116,16 @@ public class VariableLoader : MonoBehaviour
         EnemyStats["Skunks"] ["Range"] =      float.TryParse(ss["Skunks", "Range"].value, out value) == true ? value : 0.0f;
         EnemyStats["Skunks"] ["Power lvl"] =  float.TryParse(ss["Skunks", "Power lvl"].value, out value) == true ? value : 0.0f;
         EnemyStats["Skunks"]["w/ Ability"] = float.TryParse(ss["Skunks", "w/ Ability"].value, out value) == true ? value : 0.0f;
+
+        EnemyStats["BigRaccoon"] = new Dictionary<string, float>();
+        EnemyStats["BigRaccoon"]["HP"] = float.TryParse(ss["BigRaccoon", "HP"].value, out value) == true ? value : 0.0f;
+        EnemyStats["BigRaccoon"]["Speed"] = float.TryParse(ss["BigRaccoon", "Speed"].value, out value) == true ? value : 0.0f;
+        EnemyStats["BigRaccoon"]["Steal"] = float.TryParse(ss["BigRaccoon", "Steal Amount"].value, out value) == true ? value : 0.0f;
+        EnemyStats["BigRaccoon"]["Damage"] = float.TryParse(ss["BigRaccoon", "Damage"].value, out value) == true ? value : 0.0f;
+        EnemyStats["BigRaccoon"]["CoolDown"] = float.TryParse(ss["BigRaccoon", "Cool downs"].value, out value) == true ? value : 0.0f;
+        EnemyStats["BigRaccoon"]["Range"] = float.TryParse(ss["BigRaccoon", "Range"].value, out value) == true ? value : 0.0f;
+        EnemyStats["BigRaccoon"]["Power lvl"] = float.TryParse(ss["BigRaccoon", "Power lvl"].value, out value) == true ? value : 0.0f;
+        EnemyStats["BigRaccoon"]["w/ Ability"] = float.TryParse(ss["BigRaccoon", "w/ Ability"].value, out value) == true ? value : 0.0f;
     }
 
     void UpdateTower(GstuSpreadSheet ss)

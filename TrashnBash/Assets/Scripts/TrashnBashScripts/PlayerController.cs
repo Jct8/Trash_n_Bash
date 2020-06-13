@@ -443,6 +443,9 @@ public class PlayerController : MonoBehaviour
                 Quaternion newDirection = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Lerp(transform.rotation, newDirection, Time.deltaTime * turnSpeed);
             }
+            if(agent.velocity.magnitude > 0.2f)
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("RunCycle") && !isUsingUltimate)
+                    animator.SetTrigger("Run");
 
             if (Input.GetKeyDown(_ClickMovementButton))
             {
@@ -467,8 +470,7 @@ public class PlayerController : MonoBehaviour
                         GameObject moveIndicator = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool("MoveIndicator");
                         moveIndicator.transform.position = agent.destination;
                         moveIndicator.SetActive(true);
-                        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("RunCycle") && !isUsingUltimate)
-                            animator.SetTrigger("Run");
+                        
                         return;
                     }
                 }

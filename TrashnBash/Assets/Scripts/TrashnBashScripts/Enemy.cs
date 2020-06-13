@@ -89,6 +89,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private bool _barricadeAlive;
     private bool _barricadePlaced;
 
+    private Animator animator;
+
     #endregion
 
     #region UnityFunctions
@@ -101,6 +103,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         CooltimeBar.fillAmount = 0;
         enemyAbilities = GetComponent<IEnemyAbilities>();
         characterSound = GetComponent<ICharacterSound>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -140,18 +143,21 @@ public class Enemy : MonoBehaviour, ICharacterAction
             {
                 CooltimeBar.fillAmount = 0;
                 _Agent.isStopped = true;
+                if (animator)
+                    animator.speed = 0.0f;
                 if (stunTime < Time.time)
                 {
                     stunParticle.Stop();
                     _Agent.isStopped = false;
                     _Order = Order.Fight;
+                    if (animator)
+                        animator.speed = 1.0f;
                 }
                 return;
             }
             else if (_Order == Order.Tower)
             {
                 _Agent.SetDestination(_Desination.position);
-
                 if ((isInRangeOfWayPoint(_Desination, _EndDistance)))
                 {
 
@@ -168,11 +174,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
                                 StartCoroutine("TowerAttack");
                             }
                         }
-
+                        if (animator)
+                            animator.SetBool("Attacking", true);
                     }
                     else
                     {
                         _CurrentWayPoint++;
+                        if (animator)
+                            animator.SetBool("Attacking", false);
                     }
 
                 }
@@ -213,6 +222,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Order.Fight)
             {
+                if (animator)
+                    animator.SetBool("Attacking", true);
                 LookAt(player.transform.position, player);
                 if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
                 {
@@ -227,6 +238,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Order.Barricade)
             {
+                if (animator)
+                    animator.SetBool("Attacking", true);
                 if (!_ObjectofBarricade)
                 {
                     _Order = Order.Tower;
@@ -258,6 +271,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Order.Back)
             {
+                if (animator)
+                    animator.SetBool("Attacking", false);
                 _Agent.isStopped = false;
                 CooltimeBar.fillAmount = 0;
                 _Desination = _Path.WayPoints[0];
@@ -322,6 +337,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public void ResetStatus()
     {
+        if (animator)
+            animator.SetBool("Dead", false);
         _Agent.isStopped = false;
         _IsDead = false;
         _Order = Order.Tower;
@@ -646,9 +663,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public IEnumerator DeathAnimation()
     {
+        if (animator)
+        {
+            animator.speed = 1.0f;
+            animator.SetBool("Dead", true);
+        }
         _Agent.isStopped = true;
-        yield return new WaitForSeconds(0.5f);
         ServiceLocator.Get<LevelManager>().IncreaseEnemyDeathCount(1);
+        yield return new WaitForSeconds(3.0f);
         killed?.Invoke();
         yield return null;
     }

@@ -42,6 +42,8 @@ public class Tower : MonoBehaviour
     private AudioSource audioSource;
     private AudioManager audioManager;
 
+    private Animator animator = null;
+
     [SerializeField]
     [Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
     public float towerHealCostValue = 30.0f;
@@ -75,7 +77,7 @@ public class Tower : MonoBehaviour
         audioManager = ServiceLocator.Get<AudioManager>();
         fullHealth = MaxHealth / 2.0f;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
-
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -148,7 +150,7 @@ public class Tower : MonoBehaviour
         {
             return;
         }
-        if(_target == null)
+        if (_target == null)
         {
             return;
         }
@@ -157,12 +159,15 @@ public class Tower : MonoBehaviour
         Vector3 _rotation = _lookRotation.eulerAngles;
         partToRotate.rotation = Quaternion.Euler(_rotation.x + 10.0f, _rotation.y, _rotation.z);
 
-        if(shotTime <= 0.0f)
+        if (shotTime <= 0.0f)
         {
-            if(!_target.GetComponent<Enemy>().IsDead)
+            if (!_target.GetComponent<Enemy>().IsDead)
             {
-                if(_target.GetComponent<Collider>().enabled)
-                    Shoot(_target.GetComponent<Enemy>());
+                if (_target.GetComponent<Collider>().enabled)
+                    if (animator)
+                        animator.SetTrigger("Throw");
+                    else
+                        Shoot(_target.GetComponent<Enemy>());
                 shotTime = 1.0f / attackRate;
             }
 
@@ -180,9 +185,17 @@ public class Tower : MonoBehaviour
         _action = () => Recycle(_bulletGO);
         _bulletGO.GetComponent<Bullet>().Initialize(target.transform, damage, bulletSpeed, _action);
         _bulletGO.GetComponent<Bullet>().SetBulletType(damageType);
-        if(fireDuration != 0.0f)
+
+        if (fireDuration != 0.0f)
             _bulletGO.GetComponent<Bullet>().fireTotalTime = fireDuration;
         audioManager.PlaySfx(shotSound);
+    }
+
+    void ShootAnimation()
+    {
+        if (!_target.GetComponent<Enemy>().IsDead)
+            Shoot(_target.GetComponent<Enemy>());
+        // if (_target.GetComponent<Collider>().enabled)
     }
 
     public void TakeDamage(float dmg)
@@ -204,8 +217,8 @@ public class Tower : MonoBehaviour
     {
         GameObject[] _enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float _shortestDistance = Mathf.Infinity;
-        
-        foreach(GameObject enemy in _enemies)
+
+        foreach (GameObject enemy in _enemies)
         {
             float _distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             string name = enemy.GetComponent<Enemy>().Name;
@@ -220,7 +233,7 @@ public class Tower : MonoBehaviour
                 _nearestEnemy = enemy;
             }
         }
-        if(_nearestEnemy != null && _shortestDistance <= range)
+        if (_nearestEnemy != null && _shortestDistance <= range)
         {
             _target = _nearestEnemy.transform;
         }

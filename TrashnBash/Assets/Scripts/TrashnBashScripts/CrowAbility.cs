@@ -58,6 +58,12 @@ public class CrowAbility : MonoBehaviour, IEnemyAbilities
         _crowGO.transform.position = new Vector3(gameObject.transform.position.x, _maximumRaising, gameObject.transform.position.z);
     }
 
+    void Update()
+    {
+        if (gameObject.GetComponent<Enemy>().IsDead)
+            StartCoroutine(Land());
+    }
+
     private IEnumerator Land()
     {
         gameObject.GetComponent<CapsuleCollider>().enabled = true;

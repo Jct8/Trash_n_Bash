@@ -39,7 +39,7 @@ public class OpossumAbility : MonoBehaviour, IEnemyAbilities
             gameObject.GetComponent<Enemy>().SwitchEnemyDead(true);
             player.GetComponent<PlayerController>().CheckTargetLockedOn();
             player.GetComponent<PlayerController>().ActivateTargetLockedOn();
-            StartCoroutine("castingTimeforOpossum");
+            StartCoroutine(castingTimeforOpossum());
         }
         return;
     }
@@ -51,17 +51,11 @@ public class OpossumAbility : MonoBehaviour, IEnemyAbilities
 
     private IEnumerator castingTimeforOpossum()
     {
-        animator.SetBool("isPlayDead", true);
-        animator.SetBool("isWakeUp", false);
+        animator.SetBool("Dead", true);
         yield return new WaitForSeconds(castingTime);
-        animator.SetBool("isPlayDead", false);
-        animator.SetBool("isWakeUp", true);
+        animator.SetBool("Dead", false);
         gameObject.GetComponent<Enemy>().SwitchEnemyDead(false);
         gameObject.GetComponent<Enemy>()._Agent.isStopped = false;
-
-        yield return new WaitForSeconds(0.5f);
-        animator.SetBool("isWakeUp", false);
-        yield return null;
     }
 
     private void OnEnable()

@@ -347,11 +347,11 @@ public class Player : MonoBehaviour, ICharacterAction
         }
         audioManager.PlaySfx(poisonEffect);
         poisonAttack.SetActive(true);
-
+        GetComponent<PlayerController>().isUsingAbility = true;
         yield return new WaitForSeconds(1.0f);
         poisonIndicator.SetActive(!poisonIndicator.activeSelf);
         poisonAttack.SetActive(false);
-
+        GetComponent<PlayerController>().isUsingAbility = false;
         yield return null;
     }
 
@@ -363,6 +363,7 @@ public class Player : MonoBehaviour, ICharacterAction
         ultimateIndicator.GetComponent<Transform>().localScale = new Vector3(ultimateRange, 0.007460861f, ultimateRange);
         ultimateIndicator.SetActive(true);
         animator.SetTrigger("Ultimate");
+        GetComponent<PlayerController>().isUsingAbility = true;
         GetComponent<PlayerController>().isUsingUltimate = true;
         yield return new WaitForSeconds(ultimateDelay);
 
@@ -384,6 +385,8 @@ public class Player : MonoBehaviour, ICharacterAction
         }
         //audioSource.PlayOneShot(UltimateEffect, 0.95f);
         audioManager.PlaySfx(UltimateEffect);
+        yield return new WaitUntil(() =>  animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+        GetComponent<PlayerController>().isUsingAbility = false;
         GetComponent<PlayerController>().isUsingUltimate = false;
     }
 
@@ -398,7 +401,7 @@ public class Player : MonoBehaviour, ICharacterAction
         //    enemy.GetComponent<Enemy>()._Order = Order.Stunned;
         //    enemy.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
         //}
-
+        GetComponent<PlayerController>().isUsingAbility = true;
         stunIndicator.GetComponent<Transform>().localScale = new Vector3(stunRange * 2.0f, 0.007460861f, stunRange * 2.0f);
         stunIndicator.SetActive(true);
         Instantiate(LightingOnGround, gameObject.transform.position, Quaternion.identity);
@@ -425,6 +428,7 @@ public class Player : MonoBehaviour, ICharacterAction
         }
         yield return new WaitForSeconds(1.0f);
         stunIndicator.SetActive(false);
+        GetComponent<PlayerController>().isUsingAbility = false;
     }
     #endregion
 

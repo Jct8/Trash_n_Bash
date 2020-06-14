@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _RepairBarricade = null;
     //private GameObject _Resource = null;
     private UIManager uiManager;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     [Header("Unit Status")]
     [SerializeField] private float moveSpeed = 10.0f;
@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Trash Cans")]
-    [SerializeField][Tooltip("Timer for digging a trash cans")] private float diggingTime = 2.0f;
-    [SerializeField][Tooltip("Limit to get trashes from a trash cans")] private int limitOfHolding = 3;
+    [SerializeField] [Tooltip("Timer for digging a trash cans")] private float diggingTime = 2.0f;
+    [SerializeField] [Tooltip("Limit to get trashes from a trash cans")] private int limitOfHolding = 3;
     private bool _isDigging = false;
     public int currentTrashes = 0;
 
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     private bool _isHoldingItem = false;
     private bool _isRepairing = false;
     private bool _CanMove = true;
-   
+
     private float currentAttackCoolDown = 0.0f;
     private float currentPoisonAttackCoolDown = 0.0f;
     private float currentIntimidateAttackCoolDown = 0.0f;
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public bool intimidateAttackEnabled = true;
     public bool ultimateAttackEnabled = true;
     public bool autoAttack = true;
+    public bool isUsingAbility = false;
     public bool isUsingUltimate = false;
 
     private UIbutton attackUIbutton;
@@ -122,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(_lockedOnEnemyGO)
+        if (_lockedOnEnemyGO)
         {
             if (_lockedOnEnemyGO.GetComponent<Enemy>().IsDead)
             {
@@ -133,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
         ActivateTargetLockedOn();
 
-        if(!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             CalculateMovement();
 
         if (_isRepairing)
@@ -142,15 +143,17 @@ public class PlayerController : MonoBehaviour
         }
         UpdateUI();
 
+        if (isUsingAbility)
+            agent.isStopped = true;
 
         CheckMoveIndicatorActive();
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             CheckSpawnBarricade();
             CheckSpawnResource();
         }
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             CheckRestoring();
         }
@@ -224,10 +227,14 @@ public class PlayerController : MonoBehaviour
             if (currentPoisonAttackCoolDown < Time.time)
             {
                 if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fleas") && !isUsingUltimate)
+                {
+                    agent.isStopped = true;
+                    isUsingAbility = true;
                     animator.SetTrigger("Fleas");
+                    StartCoroutine(_player.PoisonAttack());
+                    currentPoisonAttackCoolDown = Time.time + poisonAttackCoolDown;
+                }
 
-                StartCoroutine(_player.PoisonAttack());
-                currentPoisonAttackCoolDown = Time.time + poisonAttackCoolDown;
             }
         }
 
@@ -293,12 +300,13 @@ public class PlayerController : MonoBehaviour
         {
             if (currentIntimidateAttackCoolDown < Time.time)
             {
-                //if (_isTargetLockedOn)
-                //{
-                    StartCoroutine(_player.IntimidateAttack(/*_lockedOnEnemyGO*/));
-                //}
                 if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Intimidate") && !isUsingUltimate)
+                {
+                    isUsingAbility = true;
+                    agent.isStopped = true;
                     animator.SetTrigger("Intimidate");
+                    StartCoroutine(_player.IntimidateAttack(/*_lockedOnEnemyGO*/));
+                }
                 currentIntimidateAttackCoolDown = Time.time + intimidateAttackCoolDown;
             }
         }
@@ -384,10 +392,10 @@ public class PlayerController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
-        if(Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit))
         {
             GameObject go = hit.transform.gameObject;
-            if(go.CompareTag("ResourceSpawner"))
+            if (go.CompareTag("ResourceSpawner"))
             {
                 go.GetComponent<ResourceSpawner>().GettingResource();
             }
@@ -443,9 +451,14 @@ public class PlayerController : MonoBehaviour
                 Quaternion newDirection = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Lerp(transform.rotation, newDirection, Time.deltaTime * turnSpeed);
             }
-            if(agent.velocity.magnitude > 0.2f)
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("RunCycle") && !isUsingUltimate)
-                    animator.SetTrigger("Run");
+
+            if (isUsingAbility)
+            {
+                agent.isStopped = true;
+                return;
+            }
+
+            
 
             if (Input.GetKeyDown(_ClickMovementButton))
             {
@@ -453,7 +466,7 @@ public class PlayerController : MonoBehaviour
                 RaycastHit hit = new RaycastHit();
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (/*(hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("PickUp")) &&*/ 
+                    if (/*(hit.transform.gameObject.CompareTag("Ground") || hit.transform.gameObject.CompareTag("PickUp")) &&*/
                         CheckUIbuttonPressed() && (hit.transform.gameObject.CompareTag("Ground")))
                     {
                         agent.isStopped = true;
@@ -470,18 +483,16 @@ public class PlayerController : MonoBehaviour
                         GameObject moveIndicator = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool("MoveIndicator");
                         moveIndicator.transform.position = agent.destination;
                         moveIndicator.SetActive(true);
-                        
+
                         return;
                     }
                 }
             }
 
-            
-
             //Attack target
             if (_isTargetLockedOn)
             {
-                if(_lockedOnEnemyGO)
+                if (_lockedOnEnemyGO)
                     agent.SetDestination(_lockedOnEnemyGO.transform.position);
                 agent.isStopped = false;
                 Vector3 look = agent.destination;
@@ -489,14 +500,18 @@ public class PlayerController : MonoBehaviour
                 transform.LookAt(look);
                 if (Vector3.Distance(transform.position, agent.destination) < _player.attackRange)
                     agent.isStopped = true;
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Scratch") && !isUsingUltimate)
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Scratch") && !isUsingAbility)
                     animator.SetTrigger("Scratch");
                 return;
             }
-
-            if (agent.velocity.magnitude <= 0.2f)
+            if (agent.velocity.magnitude > 0.1f)
             {
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("IdleCycle") && !isUsingUltimate)
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("RunCycle") && !isUsingAbility)
+                    animator.SetTrigger("Run");
+            }
+            if (agent.velocity.magnitude <= 0.1f)
+            {
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("IdleCycle") && !isUsingAbility)
                     animator.SetTrigger("Idle");
             }
             return;
@@ -583,7 +598,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.gameObject.CompareTag("Enemy"))
             {
-                if(!hit.transform.gameObject.GetComponent<Enemy>().IsDead)
+                if (!hit.transform.gameObject.GetComponent<Enemy>().IsDead)
                 {
                     _lockedOnEnemyGO = hit.transform.gameObject;
                 }

@@ -339,6 +339,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
     {
         if (animator)
             animator.SetBool("Dead", false);
+        healthBarGO.SetActive(true);
         _Agent.isStopped = false;
         _IsDead = false;
         _Order = Order.Tower;
@@ -592,7 +593,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         //_ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
         _Agent.isStopped = true;
         _IsAttacked = true;
-        if (_ObjectofBarricade?.GetComponent<Barricade>().isAlive == true)
+        if (_ObjectofBarricade?.GetComponent<Barricade>()?.isAlive == true)
         {
             StartCoroutine(characterSound.PlaySound(0));
             _ObjectofBarricade?.GetComponent<Barricade>().TakeDamage(_Attack);
@@ -669,6 +670,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             animator.SetBool("Dead", true);
         }
         _Agent.isStopped = true;
+        healthBarGO.SetActive(false);
         ServiceLocator.Get<LevelManager>().IncreaseEnemyDeathCount(1);
         yield return new WaitForSeconds(3.0f);
         killed?.Invoke();

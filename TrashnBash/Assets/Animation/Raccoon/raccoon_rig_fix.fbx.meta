@@ -1,12 +1,14 @@
 fileFormatVersion: 2
-guid: a5e97b00b200b3143b82d23718b6df96
+guid: ecc92e87f64d14d45a998ef5f2029167
 ModelImporter:
   serializedVersion: 25
-  internalIDToNameTable:
+  internalIDToNameTable: []
+  externalObjects:
   - first:
-      74: 1827226128182048838
-    second: Take 001
-  externalObjects: {}
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Raccoon_mat
+    second: {fileID: 2100000, guid: e20649c9a4c2fb140ba22ea89ec43b70, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -26,43 +28,14 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Ultimate
-      takeName: Take 001
-      internalID: 1827226128182048838
-      firstFrame: 0
-      lastFrame: 38
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -98,7 +71,17 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 46a1a6eb99246a04d831c8e168382269
+  - 369a72a7463fa884b8e3e7da9d90feb0
+  - 50b4f8bbf07fa1648bac079a30c9dcf8
+  - 924bce8c16bb7d74ead8f77a0cc3639e
+  - 77dc90c1d39ecc645af138ec6bd7c2d1
+  - d1fd51769716e6f419c19c6f11bb834e
+  - ee2db41607aae674987cd754aa8a2303
+  - 403c85a8ec8dfbd4e9fdd06d725efdf4
+  - b57ec7a0b3670704fb642c481281a1aa
+  - 778449d2ce179b34ea519e167d13190c
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -115,7 +98,7 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2

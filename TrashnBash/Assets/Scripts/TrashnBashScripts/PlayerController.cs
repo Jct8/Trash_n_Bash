@@ -123,6 +123,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!_player.isAlive)
+            return;
         if (_lockedOnEnemyGO)
         {
             if (_lockedOnEnemyGO.GetComponent<Enemy>().IsDead)
@@ -452,7 +454,7 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, newDirection, Time.deltaTime * turnSpeed);
             }
 
-            if (isUsingAbility)
+            if (isUsingAbility || isUsingUltimate)
             {
                 agent.isStopped = true;
                 return;
@@ -498,11 +500,13 @@ public class PlayerController : MonoBehaviour
                 Vector3 look = agent.destination;
                 look.y = transform.position.y;
                 transform.LookAt(look);
-                if (Vector3.Distance(transform.position, agent.destination) < _player.attackRange)
+                if (Vector3.Distance(transform.position, agent.destination) < _player.attackRange && !isUsingUltimate)
+                {
                     agent.isStopped = true;
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Scratch") && !isUsingAbility)
-                    animator.SetTrigger("Scratch");
-                return;
+                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Scratch") && !isUsingAbility)
+                        animator.SetTrigger("Scratch");
+                    return;
+                }
             }
             if (agent.velocity.magnitude > 0.1f)
             {

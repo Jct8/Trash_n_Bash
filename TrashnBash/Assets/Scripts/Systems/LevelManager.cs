@@ -84,8 +84,14 @@ public class LevelManager : MonoBehaviour
         {
             return false;
         }
-        if (playerInstance.GetComponent<Player>().Health <= 0.0f || towerInstance.GetComponent<Tower>().fullHealth <= 0.0f)
+        if (playerInstance.GetComponent<Player>().Health <= 0.0f )
         {
+            ServiceLocator.Get<UIManager>().endPanel.EnableFaintedRaccoonText(true);
+            return true;
+        }
+        if( towerInstance.GetComponent<Tower>().fullHealth <= 0.0f)
+        {
+            ServiceLocator.Get<UIManager>().endPanel.EnableLoseText(true);
             return true;
         }
         return false;
@@ -120,8 +126,11 @@ public class LevelManager : MonoBehaviour
                 enemyspawners.Add(obj);
             }
         }
-        if (enemyspawners.Count == 0 && survivedEnemies.Count == 0) return true; // If no more spawning
-
+        if (enemyspawners.Count == 0 && survivedEnemies.Count == 0)
+        {
+            ServiceLocator.Get<UIManager>().endPanel.EnableWinText(true);
+            return true; // If no more spawning
+        }
 
         enemyspawners.Clear();
         survivedEnemies.Clear();

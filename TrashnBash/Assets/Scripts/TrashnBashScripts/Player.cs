@@ -60,7 +60,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public float _poisonTotalTime = 5.0f;
     public GameObject poison;
     private bool _isStoring = false;
-
+    public bool isAlive = true;
 
     public float UltimateCharge { get { return _ultimateCharge; } private set { } }
     public float Health { get { return health; } private set { } }
@@ -164,6 +164,9 @@ public class Player : MonoBehaviour, ICharacterAction
 
     public void ResetPlayer()
     {
+        if (animator)
+            animator.SetBool("Dead", false);
+        isAlive = true;
         poison.SetActive(false);
         _maxHealth = health;
         ultimateChargeStart = _ultimateCharge;
@@ -211,6 +214,15 @@ public class Player : MonoBehaviour, ICharacterAction
     public void TakeDamage(float damage, bool isHero, DamageType type)
     {
         health -= damage;
+        if (health <= 0 && isAlive)
+        {
+            if (animator && !animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            {
+                animator.SetBool("Dead", true);
+                animator.SetTrigger("DeathTrigger");
+            }
+            isAlive = false;
+        }
         _uiManager.UpdatePlayerHealth(health, _maxHealth);
         popUp.GetComponent<TextMesh>().text = damage.ToString();
         switch (type)
@@ -500,7 +512,11 @@ public class Player : MonoBehaviour, ICharacterAction
 
     public IEnumerator DeathAnimation()
     {
-        throw new System.NotImplementedException();
+        //if (animator && !animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        //    animator.SetBool("Dead", true);
+        //isAlive = false;
+        //yield return new WaitForSeconds(3.0f);
+        yield return null;
     }
 
     #endregion

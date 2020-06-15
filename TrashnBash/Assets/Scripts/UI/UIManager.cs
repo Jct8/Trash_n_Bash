@@ -39,6 +39,8 @@ public class UIManager : MonoBehaviour
     public GameObject placeButton;
     public GameObject timerObject;
 
+    public EndScreen endPanel;
+
     public Button pauseButton;
     public Button continueButton;
     public Button restartButton;

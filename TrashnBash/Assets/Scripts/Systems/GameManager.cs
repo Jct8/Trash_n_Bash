@@ -63,41 +63,56 @@ public class GameManager : MonoBehaviour
                 if (ServiceLocator.Get<LevelManager>().CheckLoseCondition())
                 {
                     _GameState = GameState.GameLose;
+                    StartCoroutine(DelayEnding(3.0f));
                 }
                 else if (ServiceLocator.Get<LevelManager>().CheckWinCondition())
                 {
                     _GameState = GameState.GameWin;
+                    StartCoroutine(DelayEnding(3.0f));
                 }
                 break;
             case GameState.Tutorial:
                 if (ServiceLocator.Get<LevelManager>().CheckLoseCondition())
                 {
                     _GameState = GameState.GameLose;
+                    StartCoroutine(DelayEnding(3.0f));
                 }
                 else if (ServiceLocator.Get<LevelManager>().CheckWinCondition())
                 {
                     _GameState = GameState.GameWin;
+                    StartCoroutine(DelayEnding(3.0f));
                 }
                 break;
-            case GameState.GameWin:
-                StartCoroutine(SetGameWin());
-                break;
-            case GameState.GameLose:
-                StartCoroutine(SetGameOver());
-                break;
+            //case GameState.GameWin:
+            //    StartCoroutine(SetGameWin());
+            //    break;
+            //case GameState.GameLose:
+            //    StartCoroutine(SetGameOver());
+            //    break;
         }
     }
 
-    public IEnumerator SetGameOver()
+    IEnumerator DelayEnding(float delay)
     {
-        _GameState = GameState.MainMenu;
-        yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("GameOver");
+        yield return new WaitForSeconds(delay);
+        Time.timeScale = 0.0f;
+        ServiceLocator.Get<UIManager>().endPanel.gameObject.SetActive(true);
         yield return null;
     }
 
-    public IEnumerator SetGameWin()
+    public void SetGameOver()
     {
+        Time.timeScale = 1.0f;
+        ServiceLocator.Get<UIManager>().endPanel.gameObject.SetActive(false);
+        _GameState = GameState.MainMenu;
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public void SetGameWin()
+    {
+        Time.timeScale = 1.0f;
+        ServiceLocator.Get<UIManager>().endPanel.gameObject.SetActive(false);
+
         Player player = ServiceLocator.Get<LevelManager>().playerInstance.GetComponent<Player>();
         Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
 
@@ -105,9 +120,7 @@ public class GameManager : MonoBehaviour
         _houseHP = tower.fullHealth;
 
         _GameState = GameState.MainMenu;
-        yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("UpgradeMenu");
-        yield return null;
     }
 
     public void changeGameState(GameState state)

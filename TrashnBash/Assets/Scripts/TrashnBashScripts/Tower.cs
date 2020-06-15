@@ -193,19 +193,21 @@ public class Tower : MonoBehaviour
 
     void ShootAnimation()
     {
-        if (!_target.GetComponent<Enemy>().IsDead)
-            Shoot(_target.GetComponent<Enemy>());
+        if(_target.GetComponent<Enemy>())
+            if (!_target.GetComponent<Enemy>().IsDead)
+                Shoot(_target.GetComponent<Enemy>());
         // if (_target.GetComponent<Collider>().enabled)
     }
 
     public void TakeDamage(float dmg)
     {
-        fullHealth -= dmg;
-        uiManager.UpdateTowerHealth(fullHealth);
         if (fullHealth <= 0.0f)
-        {
             return;
-        }
+        fullHealth -= dmg;
+        if (fullHealth <= 0.0f)
+            fullHealth = 0.0f;
+        uiManager.UpdateTowerHealth(fullHealth);
+        return;
     }
 
     public void Recycle(GameObject obj)

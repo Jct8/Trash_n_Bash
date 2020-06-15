@@ -512,7 +512,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             if (gameObject.activeInHierarchy)
             {
-                StartCoroutine("DeathAnimation");
+                StartCoroutine(DeathAnimation());
             }
             if (!_IsDead)
                 player.GetComponent<Player>().IncrementUltCharge();

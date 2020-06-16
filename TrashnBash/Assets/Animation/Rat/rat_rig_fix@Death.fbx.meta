@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 93394fb02b7926c4d8542f12501ea73d
+guid: 2a56ee217bd661546a875a50ea619f61
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: StealingStart
+      name: Death
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 0
-      lastFrame: 61
+      firstFrame: 1
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 83c576969741d7549b97732780c65fc7
+guid: 425639a747def0f4abaeb0af822f3c22
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
@@ -35,10 +35,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: StealingStart
+      name: Stealing
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 0
+      firstFrame: 1
       lastFrame: 61
       wrapMode: 0
       orientationOffsetY: 0
@@ -46,8 +46,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

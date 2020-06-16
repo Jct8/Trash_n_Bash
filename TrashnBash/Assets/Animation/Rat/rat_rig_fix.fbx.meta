@@ -1,12 +1,14 @@
 fileFormatVersion: 2
-guid: 4e976658f5828b348a0ed6e14d9ffb43
+guid: 3fb9221a972d51c47808a6c0e55e7a48
 ModelImporter:
   serializedVersion: 25
-  internalIDToNameTable:
+  internalIDToNameTable: []
+  externalObjects:
   - first:
-      74: 1827226128182048838
-    second: Take 001
-  externalObjects: {}
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rat_MAT
+    second: {fileID: 2100000, guid: 60a82311c4521fb419555b46cb61a1fc, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -33,36 +35,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: WalkCycle
-      takeName: Take 001
-      internalID: 1827226128182048838
-      firstFrame: 0
-      lastFrame: 19.9
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -98,7 +71,16 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 4ad760e516e61c448b9608c1cfddb32c
+  - a2104c43abc94e64896b8980d5ace879
+  - 6d4499f879ec67240a2cda1e5f514b4e
+  - 65f7917d5ce99674f868fdc99839f751
+  - 93394fb02b7926c4d8542f12501ea73d
+  - 4e976658f5828b348a0ed6e14d9ffb43
+  - 2a56ee217bd661546a875a50ea619f61
+  - 425639a747def0f4abaeb0af822f3c22
+  - c6655f9cc8b529444b04513d7a794436
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 37e1374dde004744980306a3b1d6eae4
+guid: 39c7dbf40a41a094f8041b67ec3c5359
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
@@ -35,19 +35,19 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: WalkCycle
+      name: Death
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 0
-      lastFrame: 21
+      firstFrame: 1
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

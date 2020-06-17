@@ -222,16 +222,19 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Order.Fight)
             {
-                if (animator)
-                    animator.SetBool("Attacking", true);
+                
                 LookAt(player.transform.position, player);
                 if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
                 {
+                    if (animator)
+                        animator.SetBool("Attacking", true);
                     if (ChargingCoolDown())
                         StartCoroutine("Attack");
                 }
                 else
                 {
+                    if (animator)
+                        animator.SetBool("Attacking", false);
                     CooltimeBar.fillAmount = 0;
                     _IsAttacked = false;
                 }

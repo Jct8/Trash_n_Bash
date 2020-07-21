@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public AudioClip poisonedEffect;
     public AudioSource audioSource;
     public AudioManager audioManager;
+    public ParticleSystem basicHitParticle;
 
     public float _ultimateCharge = 0.0f;
     private float ultimateChargeStart = 0.0f;
@@ -279,6 +280,7 @@ public class Player : MonoBehaviour, ICharacterAction
             gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
             //audioSource.PlayOneShot(attackEffect, 0.75f);
             audioManager.PlaySfx(attackEffect);
+            basicHitParticle.Play();
         }
         yield return null;
     }

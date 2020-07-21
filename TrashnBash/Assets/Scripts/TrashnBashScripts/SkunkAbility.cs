@@ -8,10 +8,22 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
     [SerializeField][Tooltip("Value to damage poison for Skunk")] private float _skunksPoisonDamage = 1.0f;
     [SerializeField][Tooltip("Area of poison for Skunk")] private float _skunksPoisonRange = 5.0f;
     [SerializeField][Tooltip("Total time for poison skill")] private float _skunksPoisonTotaltime = 3.0f;
+
     public GameObject poisonArea;
+    public ParticleSystem poisonParticle;
+    private float skunkCooldown = 3.0f;
+    private float currentSkunkCooldown = 3.0f;
     private void Start()
     {
         poisonArea.SetActive(false);
+        VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
+        if (variableLoader.useGoogleSheets)
+        {
+            _skunksPoisonDamage = variableLoader.EnemyStats["Skunks"]["Damage"];
+            _skunksPoisonRange = variableLoader.EnemyStats["Skunks"]["Range"];
+            skunkCooldown = variableLoader.EnemyStats["Skunks"]["CoolDown"];
+        }
+        
     }
 
     private void Update()
@@ -19,9 +31,11 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if(player)
         {
-            if (Vector3.Distance(poisonArea.transform.position, player.transform.position) + (_skunksPoisonRange / 2) >= _skunksPoisonRange)
+            if (Vector3.Distance(poisonArea.transform.position, player.transform.position)  >= _skunksPoisonRange)
             {
                 poisonArea.SetActive(false);
+                if (poisonParticle.isPlaying)
+                    poisonParticle.Stop();
             }
         }
 
@@ -39,10 +53,21 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
             return;
 
         poisonArea.GetComponent<Transform>().localScale = new Vector3(_skunksPoisonRange, 0.00746f, _skunksPoisonRange);
-        if (Vector3.Distance(poisonArea.transform.position, player.transform.position) + (_skunksPoisonRange / 2) < _skunksPoisonRange)
+        if (Vector3.Distance(poisonArea.transform.position, player.transform.position) < _skunksPoisonRange )
         {
-            poisonArea.SetActive(true);
-            player.GetComponent<Player>().SetPoisoned(_skunksPoisonDamage, _skunksPoisonTickTime, _skunksPoisonTotaltime);
+            //poisonArea.SetActive(true);
+            if(!poisonParticle.isPlaying)
+            {
+                var pSmain = poisonParticle.main;
+                poisonParticle.Simulate(1.0f);
+                poisonParticle.Play();
+            }
+            if(currentSkunkCooldown < Time.time)
+            {
+                currentSkunkCooldown = Time.time + skunkCooldown;
+                /// Updated to divide total damage by skunk tick time to 
+                player.GetComponent<Player>().SetPoisoned(_skunksPoisonDamage / _skunksPoisonTickTime, 1.0f, _skunksPoisonTotaltime);
+            }
         }
     }
 

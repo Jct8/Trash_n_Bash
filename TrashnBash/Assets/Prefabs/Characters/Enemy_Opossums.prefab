@@ -721,6 +721,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -732,6 +733,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1092,10 +1094,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.4, z: 0}
+  m_Radius: 0.58
+  m_Height: 2.33
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!54 &5603668075225190310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1392,6 +1394,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1403,6 +1406,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1681,11 +1685,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6105141686796337774}
     m_Modifications:
-    - target: {fileID: 2049476926243463847, guid: c9f391fb4eab85742b60a943363b3732,
-        type: 3}
-      propertyPath: m_Name
-      value: PoisionParticle
-      objectReference: {fileID: 0}
     - target: {fileID: 1809057394092238291, guid: c9f391fb4eab85742b60a943363b3732,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1740,6 +1739,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049476926243463847, guid: c9f391fb4eab85742b60a943363b3732,
+        type: 3}
+      propertyPath: m_Name
+      value: PoisionParticle
       objectReference: {fileID: 0}
     - target: {fileID: 7849409788160601981, guid: c9f391fb4eab85742b60a943363b3732,
         type: 3}
@@ -1887,6 +1891,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHealth
       objectReference: {fileID: 0}
+    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_Color.r
@@ -2017,21 +2036,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.014999996
       objectReference: {fileID: 0}
-    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1882707692898787558, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac930b1727b18944bc0983f8f595921, type: 3}
 --- !u!1 &2360622848812669836 stripped
@@ -2055,7 +2059,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6654592791355059588
@@ -2065,13 +2069,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 829039368253067328}
     m_Modifications:
+    - target: {fileID: 100000, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_Name
       value: CFX4 Fire
-      objectReference: {fileID: 0}
-    - target: {fileID: 19800002, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2129,10 +2133,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.73853916
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 10800000, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: m_BoundingSphereOverride.y
       value: 111.2
@@ -2142,6 +2142,10 @@ PrefabInstance:
       value: 114.399994
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -2166,16 +2170,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7752017960949593503}
     m_Modifications:
-    - target: {fileID: 7432037585748413601, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyAttackCoolDown
-      objectReference: {fileID: 0}
-    - target: {fileID: 6461729710976017198, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.5882353
-      objectReference: {fileID: 0}
     - target: {fileID: 611400409186486954, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2301,6 +2295,16 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.19607843
       objectReference: {fileID: 0}
+    - target: {fileID: 6461729710976017198, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432037585748413601, guid: 11c073a7369cd7e428d5eabcbb27ca0b,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyAttackCoolDown
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c073a7369cd7e428d5eabcbb27ca0b, type: 3}
 --- !u!1 &675839354999168363 stripped
@@ -2318,7 +2322,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8777633051376273571
@@ -2328,16 +2332,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1986332374905582975}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: d82224d5af610f74895ad1d29a0a96c0,
-        type: 3}
-      propertyPath: m_Name
-      value: Opossum
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: d82224d5af610f74895ad1d29a0a96c0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d82224d5af610f74895ad1d29a0a96c0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2413,6 +2407,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 832c0b01a9c22b647a63ff4753b3df30, type: 2}
+    - target: {fileID: -927199367670048503, guid: d82224d5af610f74895ad1d29a0a96c0,
+        type: 3}
+      propertyPath: m_Name
+      value: Opossum
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d82224d5af610f74895ad1d29a0a96c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d82224d5af610f74895ad1d29a0a96c0, type: 3}
 --- !u!4 &4371550546966569913 stripped

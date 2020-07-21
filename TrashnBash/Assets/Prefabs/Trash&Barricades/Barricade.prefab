@@ -60,6 +60,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -71,6 +72,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -120,6 +122,8 @@ MonoBehaviour:
   isRepairing: 0
   isAlive: 1
   isPlaced: 0
+  destroyParticlePrefab: {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3,
+    type: 3}
 --- !u!208 &3128932119553863145
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -162,11 +166,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7626825810756298206}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 5c68bc0737833456283f7ffaf22eb9cd,
-        type: 3}
-      propertyPath: m_Name
-      value: Barricade
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5c68bc0737833456283f7ffaf22eb9cd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,6 +236,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.3647218
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5c68bc0737833456283f7ffaf22eb9cd,
+        type: 3}
+      propertyPath: m_Name
+      value: Barricade
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c68bc0737833456283f7ffaf22eb9cd, type: 3}
 --- !u!4 &5000269829282916857 stripped
@@ -252,6 +256,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7626825810756298206}
     m_Modifications:
+    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3950074785538151765, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_Color.r
@@ -267,12 +281,7 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 681328844454112408, guid: 2ac930b1727b18944bc0983f8f595921,
+    - target: {fileID: 4172796567598621667, guid: 2ac930b1727b18944bc0983f8f595921,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -387,11 +396,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 4172796567598621667, guid: 2ac930b1727b18944bc0983f8f595921,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac930b1727b18944bc0983f8f595921, type: 3}
 --- !u!1 &3534976058428351828 stripped
@@ -415,6 +419,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

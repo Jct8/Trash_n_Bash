@@ -23,6 +23,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
     public bool isRepairing = false;
     public bool isAlive = true;
     public bool isPlaced = false;
+    public GameObject destroyParticlePrefab;
 
     ICharacterSound characterSound;
 
@@ -67,7 +68,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         {
             health = variableLoader.BarriacdeStats["Health"];
             _MaxHealth = variableLoader.BarriacdeStats["Health"];
-           // _barricadeBuildTime = variableLoader.BarriacdeStats["BuildTime"];
+            // _barricadeBuildTime = variableLoader.BarriacdeStats["BuildTime"];
         }
         ///////////  Upgrades - Improved Barricades  ///////////
         int level = ServiceLocator.Get<GameManager>().upgradeLevelsDictionary[UpgradeMenu.Upgrade.ImprovedBarricades];
@@ -131,7 +132,14 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         if (health <= 0.0f)
         {
             isAlive = false;
+            if (destroyParticlePrefab)
+            {
+                GameObject go = Instantiate(destroyParticlePrefab);
+                go.transform.position = transform.position;
+                go.transform.rotation = transform.rotation;
+            }
             Destroy(gameObject);
+
         }
     }
 

@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
     private GameObject _RepairBarricade = null;
     //private GameObject _Resource = null;
     private UIManager uiManager;
+    [HideInInspector]
     public NavMeshAgent agent;
+    public GameObject enemyClickParticlePrefab;
 
     [Header("Unit Status")]
     [SerializeField] private float moveSpeed = 10.0f;
@@ -79,8 +81,6 @@ public class PlayerController : MonoBehaviour
     private UIbutton poisonUIbutton;
     private UIbutton intimidateUIbutton;
     private UIbutton ultUIbutton;
-    //private UIbutton repairUIbutton;
-    //private UIbutton placeUIbutton;
 
     private Animator animator;
 
@@ -460,8 +460,6 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-            
-
             if (Input.GetKeyDown(_ClickMovementButton))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -605,6 +603,7 @@ public class PlayerController : MonoBehaviour
                 if (!hit.transform.gameObject.GetComponent<Enemy>().IsDead)
                 {
                     _lockedOnEnemyGO = hit.transform.gameObject;
+                    GameObject go = Instantiate(enemyClickParticlePrefab, _lockedOnEnemyGO.transform);
                 }
                 else
                 {

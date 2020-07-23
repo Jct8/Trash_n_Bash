@@ -155,10 +155,16 @@ MonoBehaviour:
   Attack: {fileID: 0}
   TakeDamage: {fileID: 0}
   PoisonSound: {fileID: 0}
+  PoisonTickSound2: {fileID: 0}
   PoisonTickSound: {fileID: 0}
   BarricadeTake: {fileID: 0}
-  BarricadePlace: {fileID: 8300000, guid: 27a906734a20b6147808c0db61fd2cca, type: 3}
-  BarricadeBuild: {fileID: 8300000, guid: f687e0c2bb276fd4d80466355768fd61, type: 3}
+  BarricadePlace: {fileID: 8300000, guid: 239bd42b4745a414cb4dfb1342961dd3, type: 3}
+  BarricadeBuild: {fileID: 8300000, guid: 0acc7a4a4450b7047b01b7a1cfbcee05, type: 3}
+  PickingUpItem: {fileID: 0}
+  RestoringHealth: {fileID: 0}
+  TowerStealing: {fileID: 0}
+  BarricadeDamage: {fileID: 8300000, guid: 0c58ebdf15333b947ae7e4fdd053ccda, type: 3}
+  BarricadeRepair: {fileID: 8300000, guid: 20d7f23ab1e32974f8cb8d6a2c44f1c9, type: 3}
 --- !u!1001 &8499380744831715
 PrefabInstance:
   m_ObjectHideFlags: 0

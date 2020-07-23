@@ -7,15 +7,24 @@ public class ButtonSound : MonoBehaviour
 {
     public AudioClip sound;
 
-    private Button button { get { return GetComponent<Button>(); } }
-    void Start()
-    {
-        button.onClick.AddListener(() => PlaySound());
-    }
+    public AudioClip buttonUp;
+    public AudioClip buttonDown;
 
     void PlaySound()
     {
         AudioManager audioManager = ServiceLocator.Get<AudioManager>();
         audioManager.PlaySfx(sound);
+    }
+
+    public void ButtonUP()
+    {
+        AudioManager audioManager = ServiceLocator.Get<AudioManager>();
+        audioManager.PlaySfx(buttonUp);
+    }
+
+    public void ButtonDown()
+    {
+        AudioManager audioManager = ServiceLocator.Get<AudioManager>();
+        audioManager.PlaySfx(buttonDown);
     }
 }

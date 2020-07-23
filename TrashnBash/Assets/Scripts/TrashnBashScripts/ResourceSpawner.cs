@@ -23,12 +23,10 @@ public class ResourceSpawner : MonoBehaviour
     public float coolTimeAfterUpgrade = 15.0f;
     public int limit = 3;
     private bool completedCoolTime = false;
-    private int totalResourceTaken = 0;
 
     void Start()
     {
         completedCoolTime = false;
-        totalResourceTaken = 0;
         coolTimeImage.fillAmount = 0;
 
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();

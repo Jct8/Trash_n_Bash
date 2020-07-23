@@ -187,8 +187,6 @@ public class UIManager : MonoBehaviour
 
         // Wave reset
 
-        float time = 0.0f;
-
         RegisterSpawnTime[] registerSpawnTimes = FindObjectsOfType<RegisterSpawnTime>();
         foreach (RegisterSpawnTime registerSpawnTime in registerSpawnTimes)
         {

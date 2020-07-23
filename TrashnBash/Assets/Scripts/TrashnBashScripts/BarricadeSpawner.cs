@@ -28,7 +28,6 @@ public class BarricadeSpawner : MonoBehaviour
     public float costAfterUpgrade = 2.0f;//Used for upgrades
 
     private int totalBarricades = 0;
-    private bool isDragging = false;
 
     ICharacterSound characterSound;
 
@@ -123,7 +122,7 @@ public class BarricadeSpawner : MonoBehaviour
                 trashImg.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
                 trashImg.GetComponent<DragDrop>().isDragging = true;
                 trashImg.GetComponent<DragDrop>().itemToBeDroped = barricade;
-                StartCoroutine(characterSound.PlaySound(4));
+                StartCoroutine(characterSound.BarricadeSound(0));
             }
             coolTimeImage.fillAmount = 0;
         }

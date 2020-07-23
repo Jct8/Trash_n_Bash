@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Trash Cans")]
     [SerializeField] [Tooltip("Timer for digging a trash cans")] private float diggingTime = 2.0f;
-    [SerializeField] [Tooltip("Limit to get trashes from a trash cans")] private int limitOfHolding = 3;
     private bool _isDigging = false;
     public int currentTrashes = 0;
 
@@ -76,6 +75,9 @@ public class PlayerController : MonoBehaviour
     public bool autoAttack = true;
     public bool isUsingAbility = false;
     public bool isUsingUltimate = false;
+
+    public float stunTime = 0.0f;
+    private float _timer = 0.0f;
 
     private UIbutton attackUIbutton;
     private UIbutton poisonUIbutton;
@@ -123,6 +125,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        _timer += Time.deltaTime;
+
+        if(stunTime > 0.0f)
+        {
+            if(_timer > 1.0f)
+            {
+                stunTime--;
+                if (stunTime < 0.0f)
+                    stunTime = 0.0f;
+                _timer = 0.0f;
+                return;
+            }
+        }
+
         if (!_player.isAlive)
             return;
         if (_lockedOnEnemyGO)

@@ -39,6 +39,9 @@ public class Tower : MonoBehaviour
     public string specificEnemy = "No Target";
 
     public AudioClip shotSound;
+    public AudioClip shotSound2;
+    public AudioClip takedamage;
+
     private AudioSource audioSource;
     private AudioManager audioManager;
 
@@ -54,9 +57,9 @@ public class Tower : MonoBehaviour
     [SerializeField]
     [Tooltip("Amount lost to Tower from healing the player")]
     private float towerLostCostValue = 15.0f;
-    [SerializeField]
-    [Tooltip("Cool Time for regaining Health from Tower")]
-    private float totalRegainCoolTime = 25.0f;
+    //[SerializeField]
+    //[Tooltip("Cool Time for regaining Health from Tower")]
+    //private float totalRegainCoolTime = 25.0f;
     [SerializeField]
     [Tooltip("Activate regaining health for Player health")]
     private float minimumPlayerHealth = 70.0f;
@@ -178,6 +181,7 @@ public class Tower : MonoBehaviour
 
     void Shoot(Enemy target)
     {
+        audioManager.PlaySfx(shotSound);
         GameObject _bulletGO = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool(bulletPrefeb.name);
         _bulletGO.transform.position = firePoint.transform.position;
         _bulletGO.transform.rotation = firePoint.transform.rotation;
@@ -188,7 +192,7 @@ public class Tower : MonoBehaviour
 
         if (fireDuration != 0.0f)
             _bulletGO.GetComponent<Bullet>().fireTotalTime = fireDuration;
-        audioManager.PlaySfx(shotSound);
+        audioManager.PlaySfx(shotSound2);
     }
 
     void ShootAnimation()
@@ -201,6 +205,7 @@ public class Tower : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        audioManager.PlaySfx(takedamage);
         if (fullHealth <= 0.0f)
             return;
         fullHealth -= dmg;

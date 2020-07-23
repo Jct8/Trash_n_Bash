@@ -11,6 +11,16 @@ public enum Order
     Stunned
 }
 
+public enum Boss_Order
+{
+    Fight,
+    StunAttack,
+    PoisonAttack,
+    Back,
+    Waiting,
+    Stunned
+}
+
 public enum DamageType
 {
     Normal,

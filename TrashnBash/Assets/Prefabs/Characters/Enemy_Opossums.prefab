@@ -1160,11 +1160,10 @@ MonoBehaviour:
   fireEffect: {fileID: 6654592791340511814}
   stunParticle: {fileID: 7517734541485582640}
   _targetIndicator: {fileID: 0}
-  _Agent: {fileID: 0}
+  _Agent: {fileID: 460433491431228598}
   health: 0
   stunTime: 0
   _DataSource: Opossums
-  attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
   MaxHealth: 18
   _Name: 
   _Attack: 2
@@ -1191,6 +1190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castingTime: 3
   animator: {fileID: 2386447359825863482}
+  playdead: {fileID: 8300000, guid: cb2e4778363a47540808100dd03df0c8, type: 3}
+  wakeup: {fileID: 8300000, guid: a0d9911d0498c1c498a2d2834eab8eff, type: 3}
 --- !u!95 &2386447359825863482
 Animator:
   serializedVersion: 3
@@ -1222,13 +1223,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5e0807c8846e84699d93ffb46cd26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: {fileID: 8300000, guid: 76969cface8e1d842a25be12f63fca45, type: 3}
-  TakeDamage: {fileID: 8300000, guid: 57d561e1d651c564993c5dbc3589662f, type: 3}
+  Attack: {fileID: 8300000, guid: 0feba251447943a4ba0e1d38c6e55858, type: 3}
+  TakeDamage: {fileID: 8300000, guid: b082db3f97a7f5f488298cf6a172a055, type: 3}
   PoisonSound: {fileID: 8300000, guid: 4931064c4e2aa4c4abf1e3721b40ccb7, type: 3}
-  PoisonTickSound: {fileID: 8300000, guid: 7312ad21e88000241be086147a510942, type: 3}
-  BarricadeTake: {fileID: 0}
+  PoisonTickSound2: {fileID: 8300000, guid: 404404c24f4a3ba4db7ce8b5cc2b1fba, type: 3}
+  PoisonTickSound: {fileID: 8300000, guid: 06ec10cd04bacaf4caa7589094f0be8a, type: 3}
   BarricadePlace: {fileID: 0}
   BarricadeBuild: {fileID: 0}
+  PickingUpItem: {fileID: 0}
+  RestoringHealth: {fileID: 0}
+  TowerStealing: {fileID: 8300000, guid: 69029754054f99143abf428874d0ce78, type: 3}
+  BarricadeDamage: {fileID: 0}
+  BarricadeRepair: {fileID: 0}
 --- !u!1 &6947675590144192527
 GameObject:
   m_ObjectHideFlags: 0

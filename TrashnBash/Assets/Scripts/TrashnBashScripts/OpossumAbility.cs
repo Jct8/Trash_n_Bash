@@ -7,12 +7,7 @@ public class OpossumAbility : MonoBehaviour, IEnemyAbilities
     [SerializeField][Tooltip("Casting time to Play Dead")] private float castingTime = 4.0f;
     private int _stack = 0;
     public Animator animator;
-
-    void Start()
-    {
-        animator.SetBool("isWakeUp", true);
-        animator.SetBool("isPlayDead", false);
-    }
+    public AudioClip playdead, wakeup;
 
     public void Flying(Transform wayPoint)
     {
@@ -51,8 +46,11 @@ public class OpossumAbility : MonoBehaviour, IEnemyAbilities
 
     private IEnumerator castingTimeforOpossum()
     {
+        AudioManager audioManager = ServiceLocator.Get<AudioManager>();
+        audioManager.PlaySfx(playdead);
         animator.SetBool("Dead", true);
         yield return new WaitForSeconds(castingTime);
+        audioManager.PlaySfx(wakeup);
         animator.SetBool("Dead", false);
         gameObject.GetComponent<Enemy>().SwitchEnemyDead(false);
         gameObject.GetComponent<Enemy>()._Agent.isStopped = false;

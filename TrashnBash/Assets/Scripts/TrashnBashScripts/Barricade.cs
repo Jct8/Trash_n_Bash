@@ -90,7 +90,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         isPlaced = true;
         GetComponent<NavMeshObstacle>().enabled = true;
         GetComponent<NavMeshObstacle>().carving = true;
-        StartCoroutine(characterSound.PlaySound(6));
+        StartCoroutine(characterSound.BarricadeSound(0));
     }
 
     public bool CheckRepairValid(Transform playerTransform)
@@ -107,6 +107,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
     public IEnumerator Repair()
     {
         isRepairing = true;
+        StartCoroutine(characterSound.BarricadeSound(3));
         yield return new WaitForSeconds(repairTime);
         if (isRepairing)
         {
@@ -127,6 +128,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
     public void TakeDamage(float dmg)
     {
         health -= dmg;
+        StartCoroutine(characterSound.BarricadeSound(2));
         if (_MaxHealth != 0.0f)
             healthBar.fillAmount = health / _MaxHealth;
         if (health <= 0.0f)
@@ -174,7 +176,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
                 transform.position = ray.origin + ray.direction * distance;
             }
 
-            StartCoroutine(characterSound.PlaySound(5));
+            StartCoroutine(characterSound.BarricadeSound(1));
         }
 
     }

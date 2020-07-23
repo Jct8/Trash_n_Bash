@@ -11,6 +11,7 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
 
     public GameObject poisonArea;
     public ParticleSystem poisonParticle;
+    public AudioClip fartEffect;
     private float skunkCooldown = 3.0f;
     private float currentSkunkCooldown = 3.0f;
     private void Start()
@@ -52,6 +53,8 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
         if (!player)
             return;
 
+        AudioManager audioManager = ServiceLocator.Get<AudioManager>();
+
         poisonArea.GetComponent<Transform>().localScale = new Vector3(_skunksPoisonRange, 0.00746f, _skunksPoisonRange);
         if (Vector3.Distance(poisonArea.transform.position, player.transform.position) < _skunksPoisonRange )
         {
@@ -64,6 +67,7 @@ public class SkunkAbility : MonoBehaviour, IEnemyAbilities
             }
             if(currentSkunkCooldown < Time.time)
             {
+                audioManager.PlaySfx(fartEffect);
                 currentSkunkCooldown = Time.time + skunkCooldown;
                 /// Updated to divide total damage by skunk tick time to 
                 player.GetComponent<Player>().SetPoisoned(_skunksPoisonDamage / _skunksPoisonTickTime, 1.0f, _skunksPoisonTotaltime);

@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 
 public interface ICharacterSound
 {
-    IEnumerator PlaySound(int id);
+    IEnumerator BasicSound(int id);
+    IEnumerator BarricadeSound(int id);
 }

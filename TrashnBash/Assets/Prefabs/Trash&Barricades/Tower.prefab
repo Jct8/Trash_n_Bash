@@ -134,6 +134,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -145,6 +146,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -203,7 +205,9 @@ MonoBehaviour:
   shotTime: 0
   isShooting: 1
   specificEnemy: No Target
-  shotSound: {fileID: 8300000, guid: f1df4a14307925f44b248c7e6ecbeadd, type: 3}
+  shotSound: {fileID: 8300000, guid: 9e18503f0c21d2e4885d81e6be7970b2, type: 3}
+  shotSound2: {fileID: 8300000, guid: 70b5c5caced98fc4385ee5ec7aebb93e, type: 3}
+  takedamage: {fileID: 8300000, guid: 40c1dab2635d5584592d229c0a8b646d, type: 3}
   towerHealCostValue: 30
   towerHealBeforeUpgrade: 30
   towerHealAfterUpgrade: 30
@@ -363,6 +367,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -374,6 +379,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -406,15 +412,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3881583059690077307}
     m_Modifications:
-    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
-      propertyPath: m_Name
-      value: TowerSignifier
+      propertyPath: m_LocalScale.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
-      propertyPath: m_TagString
-      value: Restoring
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 5638577900690081499, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
@@ -521,48 +552,23 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7704550740709643360, guid: af1378b637b06ea48a84c51035fb26d3,
+    - target: {fileID: 6305143026417697660, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2d785464f5d6b45adaf7dfd2e83e4e2d,
         type: 3}
-    - target: {fileID: 6305143026417697660, guid: af1378b637b06ea48a84c51035fb26d3,
+    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_Name
+      value: TowerSignifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Restoring
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704550740709643360, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
       propertyPath: m_Sprite
       value: 

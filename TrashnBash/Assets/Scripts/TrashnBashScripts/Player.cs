@@ -37,6 +37,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public GameObject poisonAttack;
     public GameObject hitEffect;
     public GameObject Lighting;
+    
     public GameObject LightingOnGround;
     public GameObject healingEffect;
     private UIManager _uiManager = null;
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public AudioSource audioSource;
     public AudioManager audioManager;
     public ParticleSystem basicHitParticle;
+    public ParticleSystem stunParticle;
 
     public float _ultimateCharge = 0.0f;
     private float ultimateChargeStart = 0.0f;
@@ -135,7 +137,7 @@ public class Player : MonoBehaviour, ICharacterAction
             GameObject tower = ServiceLocator.Get<LevelManager>().towerInstance;
             item.gameObject.SetActive(false);
             tower.GetComponent<Tower>().fullHealth += healedByItem;
-
+            StartCoroutine(characterSound.BasicSound(5));
             if (tower.GetComponent<Tower>().fullHealth > 100.0f)
             {
                 tower.GetComponent<Tower>().fullHealth = 100.0f;
@@ -192,7 +194,7 @@ public class Player : MonoBehaviour, ICharacterAction
         _poisonCurrentTime = Time.time;
         _poisonTotalTime = Time.time + total;
         _ispoisoned = true;
-        StartCoroutine(characterSound.PlaySound(2));
+        StartCoroutine(characterSound.BasicSound(2));
         poison.SetActive(_ispoisoned);
     }
 
@@ -201,7 +203,7 @@ public class Player : MonoBehaviour, ICharacterAction
         if (_poisonCurrentTime < Time.time)
         {
             _poisonCurrentTime = Time.time + _poisonTickTime;
-            StartCoroutine(characterSound.PlaySound(3));
+            StartCoroutine(characterSound.BasicSound(3));
             TakeDamage(_poisonDamage, false, DamageType.Skunks);
         }
         if (_poisonTotalTime < Time.time)
@@ -215,6 +217,7 @@ public class Player : MonoBehaviour, ICharacterAction
     public void TakeDamage(float damage, bool isHero, DamageType type)
     {
         health -= damage;
+        StartCoroutine(characterSound.BasicSound(1));
         if (health <= 0 && isAlive)
         {
             if (animator && !animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
@@ -494,7 +497,9 @@ public class Player : MonoBehaviour, ICharacterAction
         {
             _isStoring = true;
             GameObject heal = Instantiate(healingEffect, gameObject.transform.position, Quaternion.identity) as GameObject;
-            yield return new WaitForSeconds(2.0f);
+            StartCoroutine(characterSound.BasicSound(6));
+
+            yield return new WaitForSeconds(1.0f);
             _isStoring = false;
         }
         else

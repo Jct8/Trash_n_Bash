@@ -10,7 +10,6 @@ public class Resource : MonoBehaviour, IDragHandler
     public float allowedRangeofResource = 1.2f;
     public float healValue = 10.0f;
     private bool _CanBePickedUp = true;
-    private bool _isPlaced = false;
     private Vector3 mousePos;
     private Vector3 ScreenToWorldPoint;
 

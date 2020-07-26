@@ -62,11 +62,14 @@ public class Tower : MonoBehaviour
     //private float totalRegainCoolTime = 25.0f;
     [SerializeField]
     [Tooltip("Activate regaining health for Player health")]
-    private float minimumPlayerHealth = 70.0f;
+    public float minimumPlayerHealth = 70.0f;
     [SerializeField]
     [Tooltip("Inactivate regaining health if the Tower has low Health")]
     private float minimumTowerHealth = 20.0f;
 
+    // for tutorial2
+    Tutorial2 tutorial2;
+    public bool enablePlayerRegainHealth = true;
 
     private void Awake()
     {
@@ -116,6 +119,7 @@ public class Tower : MonoBehaviour
             rangeAfterUpgrade = range;
         }
 
+        tutorial2 = FindObjectOfType<Tutorial2>()?.GetComponent<Tutorial2>();
     }
 
     public void Initialize(float dmg, float s, float h, float ar, float r)
@@ -134,7 +138,7 @@ public class Tower : MonoBehaviour
 
         if (signifierGO)
         {
-            if (player.GetComponent<Player>()?.health > minimumPlayerHealth)
+            if (player.GetComponent<Player>()?.health > minimumPlayerHealth || !enablePlayerRegainHealth)
             {
                 signifierGO.SetActive(false);
             }
@@ -266,6 +270,10 @@ public class Tower : MonoBehaviour
         // Heal Player's health
         player.restoringHealth(towerHealCostValue);
         uiManager.UpdatePlayerHealth(player.health, player._maxHealth);
+
+        // Update tutorial2
+        if (tutorial2)
+            tutorial2.usedHeal = true;
     }
 
     public void HealTower(float value)

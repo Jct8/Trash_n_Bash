@@ -90,6 +90,9 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
         isPlaced = true;
         GetComponent<NavMeshObstacle>().enabled = true;
         GetComponent<NavMeshObstacle>().carving = true;
+        Tutorial2 tutorial2 = GameObject.FindObjectOfType<Tutorial2>();
+        if(tutorial2)
+            tutorial2.barricadePlaced = true;
         StartCoroutine(characterSound.BarricadeSound(0));
     }
 

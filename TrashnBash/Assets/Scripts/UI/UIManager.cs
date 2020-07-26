@@ -29,8 +29,8 @@ public class UIManager : MonoBehaviour
     public Image ultCover;
     public Image repairIcon;
     public GameObject fade;
-    public GameObject fadeDumster;
-    public GameObject fadeTutorial;
+    //public GameObject fadeDumster;
+    //public GameObject fadeTutorial;
 
     public GameObject poisonImg;
     public GameObject intimidateImg;
@@ -52,12 +52,13 @@ public class UIManager : MonoBehaviour
     public float currentTimer = 0.0f;
 
     public List<GameObject> signifiersForWaves = new List<GameObject>();
+    public List<float> waveTimes = new List<float>();
 
     private void Start()
     {
         fade.SetActive(false);
-        fadeDumster.SetActive(false);
-        fadeTutorial.SetActive(false);
+        //fadeDumster.SetActive(false);
+        //fadeTutorial.SetActive(false);
     }
 
     public void enableFadeOut()
@@ -77,31 +78,31 @@ public class UIManager : MonoBehaviour
     {
         GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
 
-        if (state == GameManager.GameState.Tutorial)
-        {
-            fadeTutorial.GetComponent<Animator>().Play("FadeOut");
-        }
-        else if (state == GameManager.GameState.GamePlay)
-        {
-            fadeDumster.GetComponent<Animator>().Play("FadeOut");
-        }
+        //if (state == GameManager.GameState.Tutorial)
+        //{
+        //    fadeTutorial.GetComponent<Animator>().Play("FadeOut");
+        //}
+        //else if (state == GameManager.GameState.GamePlay)
+        //{
+        //    fadeDumster.GetComponent<Animator>().Play("FadeOut");
+        //}
     }
     public void enableScreenFadeIn()
     {
         GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
 
-        if (state == GameManager.GameState.Tutorial)
-        {
-            fadeTutorial.SetActive(true);
-            fadeTutorial.GetComponent<Animator>().Play("Fade");
-            StartCoroutine(unableScreenFade());
-        }
-        else if (state == GameManager.GameState.GamePlay)
-        {
-            fadeDumster.SetActive(true);
-            fadeDumster.GetComponent<Animator>().Play("Fade");
-            StartCoroutine(unableScreenFade());
-        }
+        //if (state == GameManager.GameState.Tutorial)
+        //{
+        //    fadeTutorial.SetActive(true);
+        //    fadeTutorial.GetComponent<Animator>().Play("Fade");
+        //    StartCoroutine(unableScreenFade());
+        //}
+        //else if (state == GameManager.GameState.GamePlay)
+        //{
+        //    fadeDumster.SetActive(true);
+        //    fadeDumster.GetComponent<Animator>().Play("Fade");
+        //    StartCoroutine(unableScreenFade());
+        //}
 
     }
 
@@ -113,16 +114,16 @@ public class UIManager : MonoBehaviour
 
         GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
 
-        if (state == GameManager.GameState.Tutorial)
-        {
-            fadeTutorial.SetActive(false);
-        }
-        else if (state == GameManager.GameState.GamePlay)
-        {
-            fadeDumster.SetActive(false);
-        }
+        //if (state == GameManager.GameState.Tutorial)
+        //{
+        //    fadeTutorial.SetActive(false);
+        //}
+        //else if (state == GameManager.GameState.GamePlay)
+        //{
+        //    fadeDumster.SetActive(false);
+        //}
     }
-    private IEnumerator unableFade()
+    public IEnumerator unableFade()
     {
         yield return new WaitForSeconds(2.1f);
         fade.SetActive(false);
@@ -166,7 +167,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator Reset()
     {
-        Debug.Log("Start Reset UI");
+        //Debug.Log("Start Reset UI");
 
         timerObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
@@ -183,6 +184,7 @@ public class UIManager : MonoBehaviour
             Destroy(obj);
         }
 
+        waveTimes.Clear();
         signifiersForWaves.Clear();
 
         // Wave reset
@@ -202,9 +204,10 @@ public class UIManager : MonoBehaviour
             RectTransform rectTransform = waveTimerBar.GetComponent<RectTransform>();
             float barWidth = waveTimerBar.GetComponent<RectTransform>().rect.width;
             float xPos = Mathf.Lerp(rectTransform.position.x - barWidth, rectTransform.position.x + barWidth, registerSpawnTime.StartSpawnTime / maximumTimer);
-
+            waveTimes.Add(registerSpawnTime.StartSpawnTime / maximumTimer); // used for tutorial
             signifier.transform.position = new Vector3(xPos, waveTimerBar.transform.position.y + 20f);
         }
+        waveTimes.Sort();
 
         waveTimerBar.fillAmount = 0.0f;
         timerObject.SetActive(false);

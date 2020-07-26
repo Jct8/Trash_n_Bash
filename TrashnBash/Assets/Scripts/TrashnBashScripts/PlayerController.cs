@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _ClickTowerButton = KeyCode.Mouse0;
 
     private bool _isTargetLockedOn = false;
+    public bool IsLockedOn { get { return _isTargetLockedOn; } set { } }
     private bool _isHoldingItem = false;
     private bool _isRepairing = false;
     private bool _CanMove = true;
@@ -75,6 +76,11 @@ public class PlayerController : MonoBehaviour
     public bool autoAttack = true;
     public bool isUsingAbility = false;
     public bool isUsingUltimate = false;
+
+    // For tutorial
+    public bool usedFleasAbility = false;
+    public bool usedStunAbility = false;
+    public bool enableControls = true;
 
     public float stunTime = 0.0f;
     private float _timer = 0.0f;
@@ -139,7 +145,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (!_player.isAlive)
+        if (!_player.isAlive || !enableControls)
             return;
         if (_lockedOnEnemyGO)
         {
@@ -246,6 +252,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fleas") && !isUsingUltimate)
                 {
+                    usedFleasAbility = true;
                     agent.isStopped = true;
                     isUsingAbility = true;
                     animator.SetTrigger("Fleas");
@@ -320,6 +327,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Intimidate") && !isUsingUltimate)
                 {
+                    usedStunAbility = true;
                     isUsingAbility = true;
                     agent.isStopped = true;
                     animator.SetTrigger("Intimidate");
@@ -687,22 +695,22 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    public void EnablePoisonAttack()
+    public void EnablePoisonAttack(bool enable = true)
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
-        uiManager.poisonImg.SetActive(true);
-        poisonAttackEnabled = true;
+        uiManager.poisonImg.SetActive(enable);
+        poisonAttackEnabled = enable;
     }
-    public void EnableIntimidateAttack()
+    public void EnableIntimidateAttack(bool enable = true)
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
-        uiManager.intimidateImg.SetActive(true);
-        intimidateAttackEnabled = true;
+        uiManager.intimidateImg.SetActive(enable);
+        intimidateAttackEnabled = enable;
     }
-    public void EnableUltAttack()
+    public void EnableUltAttack(bool enable = true)
     {
         UIManager uiManager = ServiceLocator.Get<UIManager>();
-        uiManager.ultImg.SetActive(true);
-        ultimateAttackEnabled = true;
+        uiManager.ultImg.SetActive(enable);
+        ultimateAttackEnabled = enable;
     }
 }

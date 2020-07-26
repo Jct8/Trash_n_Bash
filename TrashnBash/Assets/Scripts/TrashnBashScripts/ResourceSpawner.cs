@@ -24,6 +24,10 @@ public class ResourceSpawner : MonoBehaviour
     public int limit = 3;
     private bool completedCoolTime = false;
 
+    // For tutorial
+    Tutorial2 tutorial2;
+    public bool enableSpawnResources = true;
+
     void Start()
     {
         completedCoolTime = false;
@@ -46,6 +50,8 @@ public class ResourceSpawner : MonoBehaviour
             totalCoolTime -= ModelManager.UpgradesModel.GetRecord(upgradesIdentifier).ModifierValue;
             coolTimeAfterUpgrade = totalCoolTime;
         }
+        tutorial2 = GameObject.FindObjectOfType<Tutorial2>()?.GetComponent<Tutorial2>();
+
     }
 
     public GameObject GetResource()
@@ -79,6 +85,10 @@ public class ResourceSpawner : MonoBehaviour
 
     void Update()
     {
+        if(!enableSpawnResources)
+        {
+            coolTimeImage.fillAmount = 0.0f;
+        }
         coolTimeGO.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
         if (coolTimeImage.fillAmount >= 1)
         {
@@ -98,6 +108,10 @@ public class ResourceSpawner : MonoBehaviour
             Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
             tower.GetComponent<Tower>().HealTower(healValue);
             coolTimeImage.fillAmount = 0;
+
+            // For tutorial
+            if (tutorial2)
+                tutorial2.usedTrashToHeal = true;
         }
 
     }

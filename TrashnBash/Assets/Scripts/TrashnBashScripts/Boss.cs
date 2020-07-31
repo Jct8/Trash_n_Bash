@@ -580,6 +580,7 @@ public class Boss : MonoBehaviour, ICharacterAction
         {
             Instantiate(Lighting, player.transform.position, Quaternion.identity);
             player.GetComponent<Player>().stunParticle.Play();
+            player.GetComponent<PlayerController>().isStunned = true;
             player.GetComponent<PlayerController>().stunTime = Time.time + _stunSkillTime;
         }
         

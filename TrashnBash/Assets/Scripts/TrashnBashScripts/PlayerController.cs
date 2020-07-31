@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
     public bool enableControls = true;
 
     public float stunTime = 0.0f;
+    public bool isStunned = false;
     private float _timer = 0.0f;
 
     private UIbutton attackUIbutton;
@@ -132,15 +133,26 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        if(stunTime < Time.time)
-        {
-            agent.isStopped = false;
-        }
-        else
+        //if (stunTime < Time.time)
+        //{
+        //    agent.isStopped = false;
+        //}
+        //else
+        //{
+        //    agent.isStopped = true;
+        //    return;
+        //}
+
+        if (isStunned)
         {
             agent.isStopped = true;
-            return;
+            if (stunTime < Time.time)
+                isStunned = false;
+            else
+                return;
         }
+        
+
 
         if (!_player.isAlive || !enableControls)
             return;
@@ -308,7 +320,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else if(_lockedOnEnemyGO.CompareTag("Boss"))
                     {
-                        _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(true);
+                        _lockedOnEnemyGO.GetComponent<Boss>()?.SwitchOnTargetIndicator(true);
                     }
 
                 }

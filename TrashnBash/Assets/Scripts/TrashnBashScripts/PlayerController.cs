@@ -131,29 +131,38 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _timer += Time.deltaTime;
 
-        if(stunTime > 0.0f)
+        if(stunTime < Time.time)
         {
-            if(_timer > 1.0f)
-            {
-                stunTime--;
-                if (stunTime < 0.0f)
-                    stunTime = 0.0f;
-                _timer = 0.0f;
-                return;
-            }
+            agent.isStopped = false;
+        }
+        else
+        {
+            agent.isStopped = true;
+            return;
         }
 
         if (!_player.isAlive || !enableControls)
             return;
         if (_lockedOnEnemyGO)
         {
-            if (_lockedOnEnemyGO.GetComponent<Enemy>().IsDead)
+            if(_lockedOnEnemyGO.CompareTag("Enemy"))
             {
-                _lockedOnEnemyGO = null;
-                _isTargetLockedOn = false;
+                if (_lockedOnEnemyGO.GetComponent<Enemy>().IsDead)
+                {
+                    _lockedOnEnemyGO = null;
+                    _isTargetLockedOn = false;
+                }
             }
+            else if(_lockedOnEnemyGO.CompareTag("Boss"))
+            {
+                if (_lockedOnEnemyGO.GetComponent<Boss>().IsDead)
+                {
+                    _lockedOnEnemyGO = null;
+                    _isTargetLockedOn = false;
+                }
+            }
+
         }
 
         ActivateTargetLockedOn();
@@ -293,7 +302,15 @@ public class PlayerController : MonoBehaviour
                 {
                     //Select
                     _isTargetLockedOn = true;
-                    _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
+                    if(_lockedOnEnemyGO.CompareTag("Enemy"))
+                    {
+                        _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(true);
+                    }
+                    else if(_lockedOnEnemyGO.CompareTag("Boss"))
+                    {
+                        _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(true);
+                    }
+
                 }
                 else
                     _isTargetLockedOn = false;
@@ -609,7 +626,14 @@ public class PlayerController : MonoBehaviour
             else
             {
                 //Deselect
-                _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
+                if(_lockedOnEnemyGO.CompareTag("Enemy"))
+                {
+                    _lockedOnEnemyGO.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
+                }
+                else if(_lockedOnEnemyGO.CompareTag("Boss"))
+                {
+                    _lockedOnEnemyGO.GetComponent<Boss>()?.SwitchOnTargetIndicator(false);
+                }
                 _isTargetLockedOn = false;
                 _lockedOnEnemyGO = null;
             }
@@ -634,6 +658,18 @@ public class PlayerController : MonoBehaviour
                     _lockedOnEnemyGO = null;
                 }
             }
+            else if (hit.transform.gameObject.CompareTag("Boss"))
+            {
+                if (!hit.transform.gameObject.GetComponent<Boss>().IsDead)
+                {
+                    _lockedOnEnemyGO = hit.transform.gameObject;
+                    GameObject go = Instantiate(enemyClickParticlePrefab, _lockedOnEnemyGO.transform);
+                }
+                else
+                {
+                    _lockedOnEnemyGO = null;
+                }
+            }
             else
                 _lockedOnEnemyGO = null;
         }
@@ -641,11 +677,20 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchAutoLock(GameObject enemy)
     {
-        _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
-
-        _lockedOnEnemyGO = enemy;
-        _isTargetLockedOn = true;
-        _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(true);
+        if(enemy.CompareTag("Enemy"))
+        {
+            _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(false);
+            _lockedOnEnemyGO = enemy;
+            _isTargetLockedOn = true;
+            _lockedOnEnemyGO?.GetComponent<Enemy>()?.SwitchOnTargetIndicator(true);
+        }
+        else if (enemy.CompareTag("Boss"))
+        {
+            _lockedOnEnemyGO?.GetComponent<Boss>()?.SwitchOnTargetIndicator(false);
+            _lockedOnEnemyGO = enemy;
+            _isTargetLockedOn = true;
+            _lockedOnEnemyGO?.GetComponent<Boss>()?.SwitchOnTargetIndicator(true);
+        }
     }
 
     #endregion

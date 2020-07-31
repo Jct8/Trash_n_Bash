@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour, ICharacterAction
     public GameObject CoolTimeGO;
     public GameObject popUp;
     public GameObject poison;
-    public ParticleSystem hitEffect;
+    public GameObject hitEffect;
     public GameObject Lighting;
 
     public ParticleSystem fireEffect;
@@ -44,6 +44,7 @@ public class Boss : MonoBehaviour, ICharacterAction
     private bool _IsAttacked = false;
     private bool _isPoisoned = false;
     private bool _isOnFire = false;
+    private bool _startSummon = false;
     public string _DataSource;
 
     public AudioClip attackEffect;
@@ -61,8 +62,8 @@ public class Boss : MonoBehaviour, ICharacterAction
     [SerializeField] private float _AttackCoolTime = 3.0f;
     [SerializeField] private float _enemyAttackRange = 4.0f;
 
-    [SerializeField] private float _totalPoisonAttackCooltime = 15.0f;
-    [SerializeField] private float _totalStunAttackCooltime = 30.0f;
+    [SerializeField] private float _totalPoisonAttackCooltime = 10.0f;
+    [SerializeField] private float _totalStunAttackCooltime = 5.0f;
 
     [SerializeField] private float _PoisonSkillDamage = 2.0f;
     [SerializeField] private float _PoisonSkillRange = 5.0f;
@@ -70,13 +71,19 @@ public class Boss : MonoBehaviour, ICharacterAction
     [SerializeField] private float _TotalPoisonSkillTime = 3.0f;
 
     [SerializeField] private float _stunSkillRange = 3.0f;
-    [SerializeField] private float _stunSkillTime = 2.0f;
+    [SerializeField] private float _stunSkillTime = 3.0f;
+
+    [Header("Summoning Enemy")]
+    [SerializeField] private int _enemyPerSummoning = 5;
+    [SerializeField] private float _delayingTospawn = 5.0f;
+    [SerializeField] private float _delayingToSpawn_Second = 10.0f;
+    [SerializeField] private int _HowManySpawn = 3;
 
     private float _currentPoisonAttackCooltime = 0.0f;
     private float _currentStunAttackCooltime = 0.0f;
 
     private bool _waitingBehaviour = false;
-
+    private int current = 0;
     private float timer = 0.0f;
 
     private float _EndDistance = 3.0f;
@@ -96,6 +103,7 @@ public class Boss : MonoBehaviour, ICharacterAction
     [Header("Etc")]
     public Rigidbody rigid;
     public Action killed;
+    private Action OnRecycle;
     IEnemyAbilities enemyAbilities;
     ICharacterSound characterSound;
 
@@ -158,29 +166,34 @@ public class Boss : MonoBehaviour, ICharacterAction
             else if (_Order == Boss_Order.Fight)
             {
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
-                _waitingBehaviour = false;
-                if (healthBar.fillAmount <= 0.666f)
+                if (healthBar.fillAmount <= 0.666f && !_waitingBehaviour)
                 {
                     _Order = Boss_Order.Back;
                     return;
+                }
+                else if(healthBar.fillAmount <= 0.333f)
+                {
+                    if(!_startSummon)
+                    {
+                        StartCoroutine(beginSummon_InSecond());
+                        _startSummon = true;
+                    }
                 }
 
 
                 LookAt(player.transform.position, player);
                 if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
                 {
-                    if (animator)
-                        animator.SetTrigger("Scratch");
-                    if (ChargingCoolDown())
-                        StartCoroutine("Attack");
                     int random = UnityEngine.Random.Range(1, 100);
-                    if(random > 50 && _currentPoisonAttackCooltime == _totalPoisonAttackCooltime)
+                    if (random > 50 && _currentPoisonAttackCooltime == _totalPoisonAttackCooltime)
                     {
+                        Debug.Log("Posion");
                         _Order = Boss_Order.PoisonAttack;
                         CooltimeBar.fillAmount = 0;
                     }
-                    else if(random <= 50 && _currentStunAttackCooltime == _totalStunAttackCooltime)
+                    else if (random <= 50 && _currentStunAttackCooltime == _totalStunAttackCooltime)
                     {
+                        Debug.Log("Stun");
                         _Order = Boss_Order.StunAttack;
                         CooltimeBar.fillAmount = 0;
                     }
@@ -188,6 +201,11 @@ public class Boss : MonoBehaviour, ICharacterAction
                     {
                         _Order = Boss_Order.Fight;
                     }
+                    if (animator)
+                        animator.SetTrigger("Scratch");
+                    if (ChargingCoolDown())
+                        StartCoroutine("Attack");
+
                 }
                 else
                 {
@@ -205,6 +223,7 @@ public class Boss : MonoBehaviour, ICharacterAction
                     StartCoroutine(PoisonAttack());
                     _poisonIndicator.SetActive(false);
                     _Order = Boss_Order.Fight;
+                    _currentPoisonAttackCooltime = 0;
                 }
                 else
                 {
@@ -220,6 +239,8 @@ public class Boss : MonoBehaviour, ICharacterAction
                     StartCoroutine(IntimidateAttack());
                     _stunIndicator.SetActive(false);
                     _Order = Boss_Order.Fight;
+                    _currentStunAttackCooltime = 0;
+                    _currentPoisonAttackCooltime = 0;
                 }
                 else
                 {
@@ -243,6 +264,11 @@ public class Boss : MonoBehaviour, ICharacterAction
             {
                 gameObject.GetComponent<CapsuleCollider>().enabled = false;
                 _waitingBehaviour = true;
+                if(!_startSummon)
+                {
+                    StartCoroutine(beginSummon());
+                    _startSummon = true;
+                }
 
                 // TODO : In this behaviour, The Boss summons his coworkers. 
                 // Waiting until his coworkers are zero, then change behavior to attack to the player.
@@ -259,10 +285,10 @@ public class Boss : MonoBehaviour, ICharacterAction
             {
 
                 if (_totalPoisonAttackCooltime > _currentPoisonAttackCooltime)
-                    _currentPoisonAttackCooltime += 1.0f / _totalPoisonAttackCooltime;
+                    _currentPoisonAttackCooltime += 1.0f;
 
                 if (_totalStunAttackCooltime > _currentStunAttackCooltime)
-                    _currentStunAttackCooltime += 1.0f / _totalStunAttackCooltime;
+                    _currentStunAttackCooltime += 1.0f;
 
                 timer = 0.0f;
             }
@@ -296,10 +322,10 @@ public class Boss : MonoBehaviour, ICharacterAction
         rigid = gameObject.GetComponent<Rigidbody>();
         _targetIndicator = transform.Find("TargetIndicator").gameObject;
 
-        gameObject.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+        gameObject.GetComponent<Boss>().SwitchOnTargetIndicator(false);
         _IsAttacked = false;
         _isPoisoned = false;
-
+        _startSummon = false;
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
         if (variableLoader.useGoogleSheets)
         {
@@ -354,17 +380,17 @@ public class Boss : MonoBehaviour, ICharacterAction
         {
             if (_Order == Boss_Order.Fight)
             {
-                yield return new WaitForSeconds(_AttackCoolTime);
+                yield return new WaitForSeconds(_AttackCoolTime / 2);
                 CooltimeBar.fillAmount += 1 / _AttackCoolTime * Time.deltaTime;
             }
             else if (_Order == Boss_Order.PoisonAttack)
             {
-                yield return new WaitForSeconds(_AttackCoolTime * 2.0f);
+                yield return new WaitForSeconds(_AttackCoolTime);
                 CooltimeBar.fillAmount += 1 / _AttackCoolTime * 2.0f * Time.deltaTime;
             }
             else if (_Order == Boss_Order.StunAttack)
             {
-                yield return new WaitForSeconds(_AttackCoolTime * 3.0f);
+                yield return new WaitForSeconds(_AttackCoolTime * 1.5f);
                 CooltimeBar.fillAmount += 1 / _AttackCoolTime * 3.0f * Time.deltaTime;
             }
         }
@@ -401,14 +427,10 @@ public class Boss : MonoBehaviour, ICharacterAction
     #region TakeDamage
     public void TakeDamage(float Dmg, bool isHero, DamageType type)
     {
-        if (_waitingBehaviour)
+        if (_Order == Boss_Order.Back || _Order == Boss_Order.Waiting)
             return;
         if (_IsDead)
             return;
-        if (Dmg < health)
-        {
-            enemyAbilities.PlayDead();
-        }
         health -= Dmg;
         StartCoroutine(characterSound.BasicSound(1));
         popUp.GetComponent<TextMesh>().text = Dmg.ToString();
@@ -417,7 +439,7 @@ public class Boss : MonoBehaviour, ICharacterAction
         {
             case DamageType.Normal:
                 popUp.GetComponent<TextMesh>().color = new Color(1.0f, 0.0f, 0.0f);
-                hitEffect.Play();
+                GameObject hit = Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject;
                 break;
             case DamageType.Poison:
                 popUp.GetComponent<TextMesh>().color = new Color(0.0f, 1.0f, 0.0f);
@@ -511,7 +533,7 @@ public class Boss : MonoBehaviour, ICharacterAction
     }
 
     #endregion
-
+    
     #region Attacks
 
     public IEnumerator Attack()
@@ -578,6 +600,68 @@ public class Boss : MonoBehaviour, ICharacterAction
         }
 
         return false;
+    }
+
+    private IEnumerator beginSummon()
+    {
+
+        while(current < _HowManySpawn)
+        {
+            Summoning();
+            current++;
+            yield return new WaitForSeconds(_delayingTospawn);
+        }
+        _Agent.isStopped = true;
+        _Order = Boss_Order.Fight;
+        _startSummon = false;
+        gameObject.GetComponent<CapsuleCollider>().enabled = true;
+
+    }
+
+    private IEnumerator beginSummon_InSecond()
+    {
+        while (0 < health)
+        {
+            Summoning();
+            yield return new WaitForSeconds(_delayingToSpawn_Second);
+        }
+    }
+
+    private void Summoning()
+    {
+        for (int i = 0; i < _enemyPerSummoning; i++)
+        {
+            float random = UnityEngine.Random.Range(0.0f, 10.0f);
+            GameObject _enemy = null;
+            if (random >= 0.0f && random < 2.5f)
+            {
+                _enemy = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool("Rats");
+            }
+            else if (random >= 2.5f && random < 5.0f)
+            {
+                _enemy = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool("Crows");
+            }
+            else if (random >= 5.0f && random < 7.5f)
+            {
+                _enemy = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool("Opossums");
+            }
+            else if (random >= 7.5f && random <= 10.0f)
+            {
+                _enemy = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool("Skunks");
+            }
+
+            _enemy.transform.position = _Path.WayPoints[0].transform.position;
+            _enemy.SetActive(true);
+            OnRecycle = () => Recycle(_enemy);
+            _enemy.GetComponent<Enemy>().Initialize(_Path, OnRecycle, Order.Tower);
+            _enemy.GetComponent<Enemy>().ResetStatus();
+        }
+    }
+
+
+    public void Recycle(GameObject obj)
+    {
+        ServiceLocator.Get<ObjectPoolManager>().RecycleObject(obj);
     }
     #endregion
 

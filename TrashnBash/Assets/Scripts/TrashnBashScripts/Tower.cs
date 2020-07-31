@@ -168,22 +168,36 @@ public class Tower : MonoBehaviour
 
         if (shotTime <= 0.0f)
         {
-            if (!_target.GetComponent<Enemy>().IsDead)
+            if(_target.CompareTag("Boss"))
             {
-                if (_target.GetComponent<Collider>().enabled)
-                    if (animator)
-                        animator.SetTrigger("Throw");
-                    else
-                        Shoot(_target.GetComponent<Enemy>());
-                shotTime = 1.0f / attackRate;
+                if (!_target.GetComponent<Boss>().IsDead)
+                {
+                    if (_target.GetComponent<Collider>().enabled)
+                        if (animator)
+                            animator.SetTrigger("Throw");
+                        else
+                            Shoot(_target.gameObject);
+                    shotTime = 1.0f / attackRate;
+                }
             }
-
+            else if(_target.CompareTag("Enemy"))
+            {
+                if (!_target.GetComponent<Enemy>().IsDead)
+                {
+                    if (_target.GetComponent<Collider>().enabled)
+                        if (animator)
+                            animator.SetTrigger("Throw");
+                        else
+                            Shoot(_target.gameObject);
+                    shotTime = 1.0f / attackRate;
+                }
+            }
         }
 
         shotTime -= Time.deltaTime;
     }
 
-    void Shoot(Enemy target)
+    void Shoot(GameObject target)
     {
         audioManager.PlaySfx(shotSound);
         GameObject _bulletGO = ServiceLocator.Get<ObjectPoolManager>().GetObjectFromPool(bulletPrefeb.name);
@@ -203,7 +217,7 @@ public class Tower : MonoBehaviour
     {
         if(_target.GetComponent<Enemy>())
             if (!_target.GetComponent<Enemy>().IsDead)
-                Shoot(_target.GetComponent<Enemy>());
+                Shoot(_target.gameObject);
         // if (_target.GetComponent<Collider>().enabled)
     }
 
@@ -227,6 +241,7 @@ public class Tower : MonoBehaviour
     void UpdateTarget()
     {
         GameObject[] _enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject _boss = GameObject.FindGameObjectWithTag("Boss");
         float _shortestDistance = Mathf.Infinity;
 
         foreach (GameObject enemy in _enemies)
@@ -242,6 +257,21 @@ public class Tower : MonoBehaviour
             {
                 _shortestDistance = _distanceToEnemy;
                 _nearestEnemy = enemy;
+            }
+        }
+        if(_boss)
+        {
+            float _distanceToEnemy = Vector3.Distance(transform.position, _boss.transform.position);
+            string name = _boss.GetComponent<Boss>().Name;
+            if (_distanceToEnemy < _shortestDistance)
+            {
+                _shortestDistance = _distanceToEnemy;
+                _nearestEnemy = _boss;
+            }
+            if ((name == specificEnemy) && _distanceToEnemy <= range)
+            {
+                _shortestDistance = _distanceToEnemy;
+                _nearestEnemy = _boss;
             }
         }
         if (_nearestEnemy != null && _shortestDistance <= range)

@@ -83,12 +83,6 @@ public class GameManager : MonoBehaviour
                     StartCoroutine(DelayEnding(3.0f));
                 }
                 break;
-            //case GameState.GameWin:
-            //    StartCoroutine(SetGameWin());
-            //    break;
-            //case GameState.GameLose:
-            //    StartCoroutine(SetGameOver());
-            //    break;
         }
     }
 
@@ -120,6 +114,7 @@ public class GameManager : MonoBehaviour
         _houseHP = tower.fullHealth;
 
         _GameState = GameState.MainMenu;
+        currentlevel++;
         SceneManager.LoadScene("UpgradeMenu");
     }
 

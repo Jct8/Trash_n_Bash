@@ -48,12 +48,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         var _damageable = collision.gameObject.GetComponent<ICharacterAction>();
-        if(_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Normal)
+        if(_damageable != null && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss")) && damageType == DamageType.Normal)
         {
             _damageable.TakeDamage(_damage,false, damageType);
             ResetBullet();
         }
-        else if (_damageable != null && collision.gameObject.CompareTag("Enemy") && damageType == DamageType.Fire) //fire attack
+        else if (_damageable != null && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss")) && damageType == DamageType.Fire) //fire attack
         {
             collision.gameObject.GetComponent<Enemy>().SetFire(_damage, fireTickTime, fireTotalTime);
             ResetBullet();

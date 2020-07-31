@@ -112,7 +112,10 @@ public class LevelManager : MonoBehaviour
                 {
                     survivedEnemies.Add(e);
                 }
-
+                if (e.tag == "Boss")
+                {
+                    survivedEnemies.Add(e);
+                }
             }
         }
 

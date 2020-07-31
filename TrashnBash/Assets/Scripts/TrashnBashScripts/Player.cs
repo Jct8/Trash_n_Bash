@@ -279,8 +279,17 @@ public class Player : MonoBehaviour, ICharacterAction
 
         if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
         {
-            closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true, DamageType.Normal);
-            gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
+            if(closestEnemy.CompareTag("Enemy"))
+            {
+                closestEnemy?.GetComponent<Enemy>()?.TakeDamage(attack, true, DamageType.Normal);
+                gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
+            }
+            else if(closestEnemy.CompareTag("Boss"))
+            {
+                closestEnemy?.GetComponent<Boss>()?.TakeDamage(attack, true, DamageType.Normal);
+                gameObject.GetComponent<PlayerController>().SwitchAutoLock(closestEnemy);
+            }
+
             //audioSource.PlayOneShot(attackEffect, 0.75f);
             audioManager.PlaySfx(attackEffect);
             basicHitParticle.Play();
@@ -357,8 +366,17 @@ public class Player : MonoBehaviour, ICharacterAction
                 float distance = Vector2.Distance(transform.position, go.transform.position);
                 if (distance < poisonRange)
                 {
-                    go.GetComponent<Enemy>()?.TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
-                    go.GetComponent<Enemy>()?.SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+                    if(go.CompareTag("Enemy"))
+                    {
+                        go.GetComponent<Enemy>()?.TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
+                        go.GetComponent<Enemy>()?.SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+                    }
+                    else if(go.CompareTag("Boss"))
+                    {
+                        go.GetComponent<Boss>()?.TakeDamage(initialPoisonAttackDamage, true, DamageType.Poison);
+                        go.GetComponent<Boss>()?.SetPoison(poisonDamage, poisonTickTime, poisonTotalTime);
+                    }
+
                 }
             }
         }
@@ -395,8 +413,17 @@ public class Player : MonoBehaviour, ICharacterAction
                 float distance = Vector2.Distance(transform.position, go.transform.position);
                 if (distance < ultimateRange * 0.5f)
                 {
-                    go.GetComponent<Enemy>()?.TakeDamage(ultimateDamage, true, DamageType.Ultimate);
-                    go.GetComponent<Enemy>()?.SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
+                    if (go.CompareTag("Enemy"))
+                    {
+                        go.GetComponent<Enemy>()?.TakeDamage(ultimateDamage, true, DamageType.Ultimate);
+                        go.GetComponent<Enemy>()?.SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
+                    }
+                    else if(go.CompareTag("Boss"))
+                    {
+                        go.GetComponent<Boss>()?.TakeDamage(ultimateDamage, true, DamageType.Ultimate);
+                        go.GetComponent<Boss>()?.SetPoison(ultimateTickDamage, ultimateTickTime, ultimateTotalTime);
+                    }
+
                 }
             }
         }
@@ -431,16 +458,33 @@ public class Player : MonoBehaviour, ICharacterAction
             List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
             foreach (var go in gameObjects)
             {
-                if (!go.GetComponent<Enemy>())
-                    continue;
-                float distance = Vector2.Distance(transform.position, go.transform.position);
-                if (distance < stunRange)
+                if(go.CompareTag("Enemy"))
                 {
-                    Instantiate(Lighting, go.transform.position, Quaternion.identity);
-                    go.GetComponent<Enemy>()._Order = Order.Stunned;
-                    go.GetComponent<Enemy>().stunParticle.Play();
-                    go.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
+                    if (!go.GetComponent<Enemy>())
+                        continue;
+                    float distance = Vector2.Distance(transform.position, go.transform.position);
+                    if (distance < stunRange)
+                    {
+                        Instantiate(Lighting, go.transform.position, Quaternion.identity);
+                        go.GetComponent<Enemy>()._Order = Order.Stunned;
+                        go.GetComponent<Enemy>().stunParticle.Play();
+                        go.GetComponent<Enemy>().stunTime = Time.time + intimdateStunTime;
+                    }
                 }
+                else if(go.CompareTag("Boss"))
+                {
+                    if (!go.GetComponent<Boss>())
+                        continue;
+                    float distance = Vector2.Distance(transform.position, go.transform.position);
+                    if (distance < stunRange)
+                    {
+                        Instantiate(Lighting, go.transform.position, Quaternion.identity);
+                        go.GetComponent<Boss>()._Order = Boss_Order.Stunned;
+                        go.GetComponent<Boss>().stunParticle.Play();
+                        go.GetComponent<Boss>().stunTime = Time.time + intimdateStunTime;
+                    }
+                }
+
             }
         }
         yield return new WaitForSeconds(1.0f);

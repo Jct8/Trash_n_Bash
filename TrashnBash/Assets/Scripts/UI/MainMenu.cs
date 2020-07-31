@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     private bool isClicked = false;
     private bool isLoadCutScene = false;
     public GameObject fadeScreen;
-
+    public List<GameObject> buttons;
     void Start()
     {
         fadeScreen.SetActive(false);
@@ -18,6 +18,15 @@ public class MainMenu : MonoBehaviour
         if(ServiceLocator.Get<AudioManager>().musicSource.isPlaying)
         {
             ServiceLocator.Get<AudioManager>().musicSource.Stop();
+        }
+
+        foreach(var button in buttons)
+        {
+            button.SetActive(false);
+        }
+        for (int i = 0; i < ServiceLocator.Get<GameManager>().currentlevel + 1; ++i)
+        {
+            buttons[i].SetActive(true);
         }
     }
     public void OnLevelButtonClick(string level)

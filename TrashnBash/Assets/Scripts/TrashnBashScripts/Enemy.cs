@@ -294,7 +294,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     #region Initiliaztion
 
-    public void Initialize(EnemySpawner.EnemyPath path, Action Recycle)
+    public void Initialize(EnemySpawner.EnemyPath path, Action Recycle, Order order = Order.Tower)
     {
         poison.SetActive(_isPoisoned);
         _Path = path;
@@ -304,7 +304,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         _Name = System.Convert.ToString(_EnemyData.DataDictionary["Name"]);
 
-        _Order = Order.Tower;
+        _Order = order;
 
         _Agent = GetComponent<NavMeshAgent>();
         _Agent.speed = _Speed;

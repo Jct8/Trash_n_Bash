@@ -21,6 +21,9 @@ TagManager:
   - Restoring
   - Timer
   - Spawners
+  - FxTemporaire
+  - Stage
+  - Boss
   layers:
   - Default
   - TransparentFX

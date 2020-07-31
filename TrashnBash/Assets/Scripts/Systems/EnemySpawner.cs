@@ -78,8 +78,16 @@ public class EnemySpawner : MonoBehaviour
             _enemy.transform.position = _path.WayPoints[0].transform.position;
             _enemy.SetActive(true);
             OnRecycle = () => Recycle(_enemy);
-            _enemy.GetComponent<Enemy>().Initialize(_path, OnRecycle);
-            _enemy.GetComponent<Enemy>().ResetStatus();
+            if(enemyType != EnemyType.BigRaccoon)
+            {
+                _enemy.GetComponent<Enemy>().Initialize(_path, OnRecycle);
+                _enemy.GetComponent<Enemy>().ResetStatus();
+            }
+            else
+            {
+                _enemy.GetComponent<Boss>().Initialize(_path, OnRecycle);
+                _enemy.GetComponent<Boss>().ResetStatus();
+            }
             _activeEnemies.Add(_enemy);
         }
     }

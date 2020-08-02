@@ -46,6 +46,7 @@ public class Tower : MonoBehaviour
     private AudioManager audioManager;
 
     private Animator animator = null;
+    private HapticFeedback hapticFeedback= null;
 
     [SerializeField]
     [Tooltip("Amount healed from Tower and  Trash cost to heal from Tower")]
@@ -120,6 +121,7 @@ public class Tower : MonoBehaviour
         }
 
         tutorial2 = FindObjectOfType<Tutorial2>()?.GetComponent<Tutorial2>();
+        hapticFeedback = GetComponent<HapticFeedback>();
     }
 
     public void Initialize(float dmg, float s, float h, float ar, float r)
@@ -300,6 +302,8 @@ public class Tower : MonoBehaviour
         // Heal Player's health
         player.restoringHealth(towerHealCostValue);
         uiManager.UpdatePlayerHealth(player.health, player._maxHealth);
+
+        hapticFeedback?.Activate();
 
         // Update tutorial2
         if (tutorial2)

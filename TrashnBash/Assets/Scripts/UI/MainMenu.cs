@@ -45,6 +45,7 @@ public class MainMenu : MonoBehaviour
     public void LoadCutScene()
     {
         isLoadCutScene = true;
+        ServiceLocator.Get<GameManager>().videoNumbertoPlay = 1;
     }
 
     public void OnQuitClick()

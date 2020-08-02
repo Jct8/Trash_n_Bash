@@ -48,6 +48,26 @@ MonoBehaviour:
   coolTimeBeforeUpgrade: 15
   coolTimeAfterUpgrade: 15
   limit: 3
+  enableSpawnResources: 1
+--- !u!114 &6572009562300233124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007975400182490144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 2
+  durationInMilliSeconds: 50
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 10
+  pattern2DurationInMilliseconds: 20
+  sleep2DurationInMilliseconds: 10
 --- !u!1 &4787189768095951721
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,11 +157,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: dd88e52e5cf404e378f2bcce9f143b34,
-        type: 3}
-      propertyPath: m_Name
-      value: Trashcan_Lid_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: dd88e52e5cf404e378f2bcce9f143b34,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -212,6 +227,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2257
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: dd88e52e5cf404e378f2bcce9f143b34,
+        type: 3}
+      propertyPath: m_Name
+      value: Trashcan_Lid_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd88e52e5cf404e378f2bcce9f143b34, type: 3}
 --- !u!4 &5713860854528842876 stripped
@@ -227,11 +247,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: f7a165ea1c5ff4273895d0f30876ae81,
-        type: 3}
-      propertyPath: m_Name
-      value: Takeout_Box_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f7a165ea1c5ff4273895d0f30876ae81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,6 +317,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2257
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f7a165ea1c5ff4273895d0f30876ae81,
+        type: 3}
+      propertyPath: m_Name
+      value: Takeout_Box_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7a165ea1c5ff4273895d0f30876ae81, type: 3}
 --- !u!4 &5260900466365725966 stripped
@@ -317,11 +337,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 5abcba7a81ee543b387a56e8d906008e,
-        type: 3}
-      propertyPath: m_Name
-      value: Soda_Can_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5abcba7a81ee543b387a56e8d906008e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -392,6 +407,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2257
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5abcba7a81ee543b387a56e8d906008e,
+        type: 3}
+      propertyPath: m_Name
+      value: Soda_Can_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5abcba7a81ee543b387a56e8d906008e, type: 3}
 --- !u!4 &6744550252315782710 stripped
@@ -407,11 +427,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 07ac3151bb1d54537bf94a31272e2d09,
-        type: 3}
-      propertyPath: m_Name
-      value: Trashcan_Body_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 07ac3151bb1d54537bf94a31272e2d09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -482,6 +497,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5696313
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 07ac3151bb1d54537bf94a31272e2d09,
+        type: 3}
+      propertyPath: m_Name
+      value: Trashcan_Body_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07ac3151bb1d54537bf94a31272e2d09, type: 3}
 --- !u!1 &7681776626685469865 stripped
@@ -503,10 +523,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 130340176f5f44f5ebbc36f02c03e9ab,
+    - target: {fileID: -8600819303336145984, guid: 130340176f5f44f5ebbc36f02c03e9ab,
         type: 3}
-      propertyPath: m_Name
-      value: Banana_Peel_01
+      propertyPath: m_LocalPosition.x
+      value: -0.054
+      objectReference: {fileID: 0}
+    - target: {fileID: -8600819303336145984, guid: 130340176f5f44f5ebbc36f02c03e9ab,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.298
+      objectReference: {fileID: 0}
+    - target: {fileID: -8600819303336145984, guid: 130340176f5f44f5ebbc36f02c03e9ab,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.024
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 130340176f5f44f5ebbc36f02c03e9ab,
         type: 3}
@@ -578,20 +608,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2257
       objectReference: {fileID: 0}
-    - target: {fileID: -8600819303336145984, guid: 130340176f5f44f5ebbc36f02c03e9ab,
+    - target: {fileID: -927199367670048503, guid: 130340176f5f44f5ebbc36f02c03e9ab,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.054
-      objectReference: {fileID: 0}
-    - target: {fileID: -8600819303336145984, guid: 130340176f5f44f5ebbc36f02c03e9ab,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.298
-      objectReference: {fileID: 0}
-    - target: {fileID: -8600819303336145984, guid: 130340176f5f44f5ebbc36f02c03e9ab,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.024
+      propertyPath: m_Name
+      value: Banana_Peel_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 130340176f5f44f5ebbc36f02c03e9ab, type: 3}
@@ -608,11 +628,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 89c45b5a47dc143b190a4577abd6399d,
-        type: 3}
-      propertyPath: m_Name
-      value: Bottle_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89c45b5a47dc143b190a4577abd6399d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -683,6 +698,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2257
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 89c45b5a47dc143b190a4577abd6399d,
+        type: 3}
+      propertyPath: m_Name
+      value: Bottle_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89c45b5a47dc143b190a4577abd6399d, type: 3}
 --- !u!4 &1238032897807200488 stripped
@@ -698,15 +718,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
-    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
-      propertyPath: m_Name
-      value: Signifier
+      propertyPath: m_SizeDelta.x
+      value: 75
       objectReference: {fileID: 0}
-    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
-      propertyPath: m_TagString
-      value: ResourceSpawner
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 5638577900690081499, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
@@ -813,33 +843,23 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 3146471247522011951, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184206808818332230, guid: af1378b637b06ea48a84c51035fb26d3,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7704550740709643360, guid: af1378b637b06ea48a84c51035fb26d3,
+    - target: {fileID: 6305143026417697660, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 853d50ceccaa74ce799158cb7c1cdcef,
         type: 3}
-    - target: {fileID: 6305143026417697660, guid: af1378b637b06ea48a84c51035fb26d3,
+    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_Name
+      value: Signifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621098200348653964, guid: af1378b637b06ea48a84c51035fb26d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: ResourceSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704550740709643360, guid: af1378b637b06ea48a84c51035fb26d3,
         type: 3}
       propertyPath: m_Sprite
       value: 
@@ -868,7 +888,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8326758264242485595
@@ -878,11 +898,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7746538993245780232}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 814b512f34f4f442fbf09e102eb97a8a,
-        type: 3}
-      propertyPath: m_Name
-      value: Trash_Bag_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 814b512f34f4f442fbf09e102eb97a8a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -952,6 +967,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2257
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 814b512f34f4f442fbf09e102eb97a8a,
+        type: 3}
+      propertyPath: m_Name
+      value: Trash_Bag_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 814b512f34f4f442fbf09e102eb97a8a, type: 3}

@@ -7,6 +7,15 @@ public class UIbutton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public bool isButtonPressed;
 
+    public enum ButtonType
+    {
+        Poison,
+        Intimidate,
+        Ult,
+        Other
+    }
+    public ButtonType buttonType = ButtonType.Other;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         isButtonPressed = true;

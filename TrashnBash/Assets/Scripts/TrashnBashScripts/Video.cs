@@ -10,7 +10,9 @@ public class Video : MonoBehaviour
     public RawImage rawImage;
     public VideoPlayer videoPlayer;
     public GameObject fadeScreen;
-    public VideoClip videoToPlay;
+    public VideoClip videoClip1;
+    public VideoClip videoClip2;
+    private VideoClip videoClipToBePlayed;
 
     public float videoDelayTime;
     private float holdClickTime = 0.0f;
@@ -18,24 +20,49 @@ public class Video : MonoBehaviour
 
     private bool isStarted = false;
     private bool isLoading = false;
+    private string videoToBePlayed = "cutscene1final.mp4";
+    private string video1 = "cutscene1final.mp4";
+    private string video2 = "cutscene2final.mp4";
+
     private Texture texture;
     void Start()
     {
-        videoPlayer.source = VideoSource.VideoClip;
-        videoPlayer.clip = videoToPlay;
-        StartCoroutine(Play());
+        if(ServiceLocator.Get<GameManager>().videoNumbertoPlay == 1)
+        {
+            videoToBePlayed = video1;
+            videoClipToBePlayed = videoClip1;
+        }
+        else if (ServiceLocator.Get<GameManager>().videoNumbertoPlay == 2)
+        {
+            videoToBePlayed = video2;
+            videoClipToBePlayed = videoClip2;
+        }
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.isEditor)
+        {
+            videoPlayer.source = VideoSource.VideoClip;
+            videoPlayer.clip = videoClipToBePlayed;
+            StartCoroutine(Play());
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            StartCoroutine(PlayVideoCoroutine());
+        }
     }
 
     private void Update()
     {
-        if (isStarted && !videoPlayer.isPlaying)
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.isEditor)
         {
-            LoadNewLevel();
-        }
-        if (Input.GetKeyDown(KeyCode.Space) || CheckHoldDownClick())
-        {
-            videoPlayer.Pause();
-            LoadNewLevel();
+            if (isStarted && !videoPlayer.isPlaying)
+            {
+                LoadNewLevel();
+            }
+            if (Input.GetKeyDown(KeyCode.Space) || CheckHoldDownClick())
+            {
+                videoPlayer.Pause();
+                LoadNewLevel();
+            }
         }
     }
 
@@ -56,6 +83,14 @@ public class Video : MonoBehaviour
             holdClickTime = 0.0f;
         }
         return false;
+    }
+
+    IEnumerator PlayVideoCoroutine()
+    {
+        Handheld.PlayFullScreenMovie(videoToBePlayed, Color.white, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.Fill); ;
+        yield return new WaitForEndOfFrame();
+        Debug.Log("Video playback completed.");
+        LoadNewLevel();
     }
 
     IEnumerator Play()

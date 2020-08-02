@@ -91,6 +91,14 @@ public class PlayerController : MonoBehaviour
     private UIbutton intimidateUIbutton;
     private UIbutton ultUIbutton;
 
+    private HapticFeedback hapticPoisonAbility;
+    private HapticFeedback hapticIntimidateAbility;
+    private HapticFeedback hapticUltAbility;
+
+    //public Action onUsePoisonAbility;
+    //public Action onUseIntimidateAbility;
+    //public Action onUseUltAbility;
+
     private Animator animator;
 
     #endregion
@@ -108,9 +116,7 @@ public class PlayerController : MonoBehaviour
         poisonUIbutton = ServiceLocator.Get<UIManager>()?.poisonImg.GetComponent<UIbutton>();
         intimidateUIbutton = ServiceLocator.Get<UIManager>()?.intimidateImg.GetComponent<UIbutton>();
         ultUIbutton = ServiceLocator.Get<UIManager>()?.ultImg.GetComponent<UIbutton>();
-        //repairUIbutton = ServiceLocator.Get<UIManager>()?.repairButton.GetComponent<UIbutton>();
-        //placeUIbutton = ServiceLocator.Get<UIManager>()?.placeButton.GetComponent<UIbutton>();
-        //attackUIbutton = ServiceLocator.Get<UIManager>()?.basicAttackButton.GetComponent<UIbutton>();
+
         animator = GetComponent<Animator>();
     }
 
@@ -128,6 +134,9 @@ public class PlayerController : MonoBehaviour
             poisonAttackCoolDown = variableLoader.PlayerAbilties["Poison"]["Cooldown"];
             intimidateAttackCoolDown = variableLoader.PlayerAbilties["Stun"]["Cooldown"];
         }
+        hapticPoisonAbility = poisonUIbutton.gameObject.GetComponent<HapticFeedback>();
+        hapticIntimidateAbility = intimidateUIbutton.gameObject.GetComponent<HapticFeedback>();
+        hapticUltAbility = ultUIbutton.gameObject.GetComponent<HapticFeedback>();
     }
 
     private void Update()
@@ -151,8 +160,6 @@ public class PlayerController : MonoBehaviour
             else
                 return;
         }
-        
-
 
         if (!_player.isAlive || !enableControls)
             return;
@@ -278,6 +285,7 @@ public class PlayerController : MonoBehaviour
                     isUsingAbility = true;
                     animator.SetTrigger("Fleas");
                     StartCoroutine(_player.PoisonAttack());
+                    hapticPoisonAbility?.Activate();
                     currentPoisonAttackCoolDown = Time.time + poisonAttackCoolDown;
                 }
 
@@ -336,6 +344,8 @@ public class PlayerController : MonoBehaviour
             //if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Ultimate"))
             //    animator.SetTrigger("Ultimate");
             ultUIbutton.isButtonPressed = false;
+            if (_player._ultimateCharge >= 100.0f)
+                hapticUltAbility?.Activate();
             StartCoroutine(_player.UltimateAttack());
         }
 
@@ -360,6 +370,7 @@ public class PlayerController : MonoBehaviour
                     isUsingAbility = true;
                     agent.isStopped = true;
                     animator.SetTrigger("Intimidate");
+                    hapticIntimidateAbility?.Activate();
                     StartCoroutine(_player.IntimidateAttack(/*_lockedOnEnemyGO*/));
                 }
                 currentIntimidateAttackCoolDown = Time.time + intimidateAttackCoolDown;

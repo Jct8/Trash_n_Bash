@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7626825810756298207}
   - component: {fileID: 3128932119553863145}
   - component: {fileID: -7213441008141091330}
+  - component: {fileID: 183921273501180722}
   m_Layer: 9
   m_Name: Barricade
   m_TagString: Barricade
@@ -157,7 +158,6 @@ MonoBehaviour:
   PoisonSound: {fileID: 0}
   PoisonTickSound2: {fileID: 0}
   PoisonTickSound: {fileID: 0}
-  BarricadeTake: {fileID: 0}
   BarricadePlace: {fileID: 8300000, guid: 239bd42b4745a414cb4dfb1342961dd3, type: 3}
   BarricadeBuild: {fileID: 8300000, guid: 0acc7a4a4450b7047b01b7a1cfbcee05, type: 3}
   PickingUpItem: {fileID: 0}
@@ -165,6 +165,25 @@ MonoBehaviour:
   TowerStealing: {fileID: 0}
   BarricadeDamage: {fileID: 8300000, guid: 0c58ebdf15333b947ae7e4fdd053ccda, type: 3}
   BarricadeRepair: {fileID: 8300000, guid: 20d7f23ab1e32974f8cb8d6a2c44f1c9, type: 3}
+--- !u!114 &183921273501180722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626825810756298202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 2
+  durationInMilliSeconds: 50
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 10
+  pattern2DurationInMilliseconds: 20
+  sleep2DurationInMilliseconds: 10
 --- !u!1001 &8499380744831715
 PrefabInstance:
   m_ObjectHideFlags: 0

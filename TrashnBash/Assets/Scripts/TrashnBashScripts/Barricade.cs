@@ -25,6 +25,8 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
     public bool isPlaced = false;
     public GameObject destroyParticlePrefab;
 
+    private HapticFeedback hapticFeedback;
+
     ICharacterSound characterSound;
 
     public void PickUp(GameObject playerGO)
@@ -195,6 +197,8 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
                 transform.position = hit.point;
                 gameObject.SetActive(true);
                 PlaceBarricade();
+                hapticFeedback = GetComponent<HapticFeedback>();
+                hapticFeedback?.Activate();
                 return true;
             }
             else

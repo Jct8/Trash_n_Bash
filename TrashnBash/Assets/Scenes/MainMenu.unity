@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 80939508}
   - component: {fileID: 80939511}
   - component: {fileID: 80939512}
+  - component: {fileID: 80939513}
   m_Layer: 5
   m_Name: Button - Tutorial
   m_TagString: Stage
@@ -271,12 +272,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 743132486}
+        m_MethodName: LoadCutScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: Level1
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 743132486}
         m_MethodName: OnLevelButtonClick
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Level1
           m_BoolArgument: 0
@@ -376,6 +388,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &80939513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80939506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &151572340
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,6 +514,7 @@ GameObject:
   - component: {fileID: 273089318}
   - component: {fileID: 273089321}
   - component: {fileID: 273089322}
+  - component: {fileID: 273089323}
   m_Layer: 5
   m_Name: Button - Quit
   m_TagString: Untagged
@@ -660,6 +691,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &273089323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273089316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &732616694
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +723,7 @@ GameObject:
   - component: {fileID: 732616696}
   - component: {fileID: 732616699}
   - component: {fileID: 732616700}
+  - component: {fileID: 732616701}
   m_Layer: 5
   m_Name: Button - Options
   m_TagString: Untagged
@@ -850,6 +900,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &732616701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732616694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &743132481
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,6 +1210,7 @@ GameObject:
   - component: {fileID: 1214064762}
   - component: {fileID: 1214064765}
   - component: {fileID: 1214064766}
+  - component: {fileID: 1214064767}
   m_Layer: 5
   m_Name: Button - Upgrades
   m_TagString: Untagged
@@ -1318,6 +1387,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1214064767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214064760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &1410094668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,6 +1645,7 @@ GameObject:
   - component: {fileID: 1855965014}
   - component: {fileID: 1855965017}
   - component: {fileID: 1855965018}
+  - component: {fileID: 1855965019}
   m_Layer: 5
   m_Name: Button - Level 3
   m_TagString: Stage
@@ -1744,6 +1832,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1855965019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855965012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &1967639153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,6 +1938,7 @@ GameObject:
   - component: {fileID: 2001460425}
   - component: {fileID: 2001460428}
   - component: {fileID: 2001460429}
+  - component: {fileID: 2001460430}
   m_Layer: 5
   m_Name: Button - Level 2
   m_TagString: Stage
@@ -1901,17 +2008,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 743132486}
-        m_MethodName: LoadCutScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 743132486}
         m_MethodName: OnLevelButtonClick
         m_Mode: 5
@@ -2018,6 +2114,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2001460430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001460423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &2003176061
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,6 +2301,7 @@ GameObject:
   - component: {fileID: 2073796880}
   - component: {fileID: 2073796883}
   - component: {fileID: 2073796884}
+  - component: {fileID: 2073796885}
   m_Layer: 5
   m_Name: Button - Level 4
   m_TagString: Stage
@@ -2373,3 +2488,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2073796885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073796878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1

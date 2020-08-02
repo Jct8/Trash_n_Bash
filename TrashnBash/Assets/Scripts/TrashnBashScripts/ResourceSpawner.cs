@@ -23,6 +23,7 @@ public class ResourceSpawner : MonoBehaviour
     public float coolTimeAfterUpgrade = 15.0f;
     public int limit = 3;
     private bool completedCoolTime = false;
+    private HapticFeedback hapticFeedback;
 
     // For tutorial
     Tutorial2 tutorial2;
@@ -51,7 +52,6 @@ public class ResourceSpawner : MonoBehaviour
             coolTimeAfterUpgrade = totalCoolTime;
         }
         tutorial2 = GameObject.FindObjectOfType<Tutorial2>()?.GetComponent<Tutorial2>();
-
     }
 
     public GameObject GetResource()
@@ -108,7 +108,8 @@ public class ResourceSpawner : MonoBehaviour
             Tower tower = ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>();
             tower.GetComponent<Tower>().HealTower(healValue);
             coolTimeImage.fillAmount = 0;
-
+            hapticFeedback = GetComponent<HapticFeedback>();
+            hapticFeedback?.Activate();
             // For tutorial
             if (tutorial2)
                 tutorial2.usedTrashToHeal = true;

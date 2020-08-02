@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameState _GameState { get; set; }
 
+    public int videoNumbertoPlay = 1;
     public int currentlevel;
     public int highScore;
     private float coolTime = 10.0f;
@@ -115,7 +116,16 @@ public class GameManager : MonoBehaviour
 
         _GameState = GameState.MainMenu;
         currentlevel++;
-        SceneManager.LoadScene("UpgradeMenu");
+        if (SceneManager.GetActiveScene().name == "Level4")
+        {
+            sceneToLoad = "MainMenu";
+            videoNumbertoPlay = 2;
+            SceneManager.LoadScene("CutScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("UpgradeMenu");
+        }
     }
 
     public void changeGameState(GameState state)

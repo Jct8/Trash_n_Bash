@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 27454709}
   - component: {fileID: 27454713}
   - component: {fileID: 27454712}
+  - component: {fileID: 27454714}
   m_Layer: 5
   m_Name: CreateButton
   m_TagString: Untagged
@@ -296,6 +297,24 @@ MonoBehaviour:
   sound: {fileID: 0}
   buttonUp: {fileID: 8300000, guid: 4b5badefc46b9da42beb66c9d7b78fa4, type: 3}
   buttonDown: {fileID: 8300000, guid: 4b5badefc46b9da42beb66c9d7b78fa4, type: 3}
+--- !u!114 &27454714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27454707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &34142280
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +327,7 @@ GameObject:
   - component: {fileID: 34142284}
   - component: {fileID: 34142283}
   - component: {fileID: 34142282}
+  - component: {fileID: 34142285}
   m_Layer: 5
   m_Name: BarricadeButton
   m_TagString: Untagged
@@ -426,6 +446,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34142280}
   m_CullTransparentMesh: 0
+--- !u!114 &34142285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34142280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &62364231
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +662,7 @@ GameObject:
   - component: {fileID: 119628066}
   - component: {fileID: 119628065}
   - component: {fileID: 119628064}
+  - component: {fileID: 119628067}
   m_Layer: 5
   m_Name: TargetEnemyButton
   m_TagString: Untagged
@@ -742,6 +781,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119628062}
   m_CullTransparentMesh: 0
+--- !u!114 &119628067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119628062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &165790681
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +955,7 @@ GameObject:
   - component: {fileID: 231157605}
   - component: {fileID: 231157604}
   - component: {fileID: 231157603}
+  - component: {fileID: 231157606}
   m_Layer: 5
   m_Name: HPBtn
   m_TagString: Untagged
@@ -1016,6 +1074,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231157601}
   m_CullTransparentMesh: 0
+--- !u!114 &231157606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231157601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &243955120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1182,7 @@ GameObject:
   - component: {fileID: 260281968}
   - component: {fileID: 260281967}
   - component: {fileID: 260281966}
+  - component: {fileID: 260281969}
   m_Layer: 5
   m_Name: ImprovedBarricadeBtn
   m_TagString: Untagged
@@ -1224,6 +1301,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260281964}
   m_CullTransparentMesh: 0
+--- !u!114 &260281969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260281964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &340369433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1548,7 @@ GameObject:
   - component: {fileID: 455085707}
   - component: {fileID: 455085706}
   - component: {fileID: 455085705}
+  - component: {fileID: 455085708}
   m_Layer: 5
   m_Name: TrashSpawnBtn
   m_TagString: Untagged
@@ -1571,6 +1667,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455085703}
   m_CullTransparentMesh: 0
+--- !u!114 &455085708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455085703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &508556552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,6 +1773,7 @@ GameObject:
   - component: {fileID: 555046040}
   - component: {fileID: 555046044}
   - component: {fileID: 555046043}
+  - component: {fileID: 555046045}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1820,6 +1935,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &555046045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555046038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &566173692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,6 +2119,7 @@ GameObject:
   - component: {fileID: 682576358}
   - component: {fileID: 682576357}
   - component: {fileID: 682576356}
+  - component: {fileID: 682576359}
   m_Layer: 5
   m_Name: LongRangedButton
   m_TagString: Untagged
@@ -2104,6 +2238,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682576354}
   m_CullTransparentMesh: 0
+--- !u!114 &682576359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682576354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &690723511
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,6 +2750,7 @@ GameObject:
   - component: {fileID: 935764111}
   - component: {fileID: 935764110}
   - component: {fileID: 935764109}
+  - component: {fileID: 935764112}
   m_Layer: 5
   m_Name: MoreProjectileButton
   m_TagString: Untagged
@@ -2716,6 +2869,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935764107}
   m_CullTransparentMesh: 0
+--- !u!114 &935764112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935764107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &1055641430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2884,6 +3055,7 @@ GameObject:
   - component: {fileID: 1221370930}
   - component: {fileID: 1221370929}
   - component: {fileID: 1221370928}
+  - component: {fileID: 1221370931}
   m_Layer: 5
   m_Name: HealingBtn
   m_TagString: Untagged
@@ -3002,6 +3174,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221370926}
   m_CullTransparentMesh: 0
+--- !u!114 &1221370931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221370926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &1246800986
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,7 +3273,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2126929491}
   m_HandleRect: {fileID: 2126929490}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 0.0000002597977
   m_Size: 0.5621816
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3451,6 +3641,7 @@ GameObject:
   - component: {fileID: 1391646849}
   - component: {fileID: 1391646848}
   - component: {fileID: 1391646847}
+  - component: {fileID: 1391646850}
   m_Layer: 5
   m_Name: BarricadeSpawnBtn
   m_TagString: Untagged
@@ -3569,6 +3760,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391646845}
   m_CullTransparentMesh: 0
+--- !u!114 &1391646850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391646845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &1472286353
 GameObject:
   m_ObjectHideFlags: 0
@@ -3737,6 +3946,7 @@ GameObject:
   - component: {fileID: 1516498593}
   - component: {fileID: 1516498592}
   - component: {fileID: 1516498591}
+  - component: {fileID: 1516498594}
   m_Layer: 5
   m_Name: FireProjectileButton
   m_TagString: Untagged
@@ -3855,6 +4065,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516498589}
   m_CullTransparentMesh: 0
+--- !u!114 &1516498594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516498589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 20
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 0
+  repetitions: 1
 --- !u!1 &1545918719
 GameObject:
   m_ObjectHideFlags: 0

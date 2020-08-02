@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 3967539500894694525}
   - component: {fileID: 7747634888746512579}
   - component: {fileID: 3174509829108607209}
+  - component: {fileID: 2249257500907714650}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -212,9 +213,9 @@ MonoBehaviour:
   towerHealBeforeUpgrade: 30
   towerHealAfterUpgrade: 30
   towerLostCostValue: 15
-  totalRegainCoolTime: 25
   minimumPlayerHealth: 70
   minimumTowerHealth: 20
+  enablePlayerRegainHealth: 1
 --- !u!82 &3174509829108607209
 AudioSource:
   m_ObjectHideFlags: 0
@@ -311,6 +312,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2249257500907714650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686893779103308463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829f7fd0b1653ea448bd7b6520eaf92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hapticType: 1
+  durationInMilliSeconds: 50
+  delay: 0
+  patternDurationInMilliseconds: 20
+  sleepDurationInMilliseconds: 10
+  pattern2DurationInMilliseconds: 20
+  sleep2DurationInMilliseconds: 10
 --- !u!1 &7940001824949302396
 GameObject:
   m_ObjectHideFlags: 0

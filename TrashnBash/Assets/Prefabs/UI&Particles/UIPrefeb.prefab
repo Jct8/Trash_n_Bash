@@ -510,7 +510,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &861506245893663220
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,7 +917,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &1277589689689907887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1105,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 279112334151271181}
+  - {fileID: 3017250585980439809}
   - {fileID: 2094157549032695256}
   - {fileID: 2185808472844365070}
   - {fileID: 8973029246818904419}
@@ -1411,7 +1413,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &1651138856391940086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,7 +2577,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &3855648420293561330
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,7 +2756,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1eb72c3a0da53b34e9d471a3568f0629, type: 3}
+  m_Sprite: {fileID: -345366501715090378, guid: d65803d121580cc4bac40df2dce1ad14,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2833,7 +2838,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &4227972916874789422
 GameObject:
   m_ObjectHideFlags: 0
@@ -3187,17 +3193,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4503582711061047014}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 279112334151271181}
+  m_LocalScale: {x: 0.77172, y: 0.77172, z: 0.77172}
+  m_Children:
+  - {fileID: 279112334151271181}
+  m_Father: {fileID: 4253463044262439671}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46, y: 14.5}
-  m_SizeDelta: {x: 45.8, y: 51.4}
+  m_AnchoredPosition: {x: -333.747, y: 76.70508}
+  m_SizeDelta: {x: 100.2393, y: 51.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4507805750861886739
 CanvasRenderer:
@@ -3226,7 +3233,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 65f2d684c2f91274d898edd69ca23806, type: 3}
+  m_Sprite: {fileID: 7406310913184505499, guid: d65803d121580cc4bac40df2dce1ad14,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3532,7 +3540,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &4927192271358480108
 GameObject:
   m_ObjectHideFlags: 0
@@ -4370,7 +4379,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 29955d861b16ca94ebeab95d34ca3443, type: 3}
+  m_Sprite: {fileID: -6968587357679336588, guid: d65803d121580cc4bac40df2dce1ad14,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4473,7 +4483,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &5981971334127681075
 GameObject:
   m_ObjectHideFlags: 0
@@ -4583,7 +4594,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 200
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!114 &3657773747107788730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5309,7 +5321,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 500
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!114 &5982727207007046407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5501,7 +5514,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &6768042190399911438
 GameObject:
   m_ObjectHideFlags: 0
@@ -5881,18 +5895,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7109584674892058398}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.77172, y: 0.77172, z: 0.77172}
-  m_Children:
-  - {fileID: 3017250585980439809}
-  m_Father: {fileID: 4253463044262439671}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3017250585980439809}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 124, y: 77.9}
-  m_SizeDelta: {x: 115.3, y: 68.717}
+  m_AnchoredPosition: {x: 138.31, y: -52.8}
+  m_SizeDelta: {x: 128.65239, y: 68.717}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &6454363343600291088
 CanvasRenderer:
@@ -5923,12 +5936,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 32
     m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 2
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -6541,7 +6554,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 200
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &8486628583003322243
 GameObject:
   m_ObjectHideFlags: 0
@@ -6762,7 +6776,8 @@ MonoBehaviour:
   delay: 0
   patternDurationInMilliseconds: 20
   sleepDurationInMilliseconds: 0
-  repetitions: 1
+  pattern2DurationInMilliseconds: 0
+  sleep2DurationInMilliseconds: 0
 --- !u!1 &8987762209087233037
 GameObject:
   m_ObjectHideFlags: 0

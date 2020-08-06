@@ -214,10 +214,13 @@ public class UIManager : MonoBehaviour
         // Animation Reset
         //AnimationTexture.SetBool("IsHit", false);
         //AnimationTexture.SetFloat("Energy", 0.0f);
+        if(player && tower)
+        {
+            UpdatePlayerHealth(player.GetComponent<Player>().health, player.GetComponent<Player>()._maxHealth);
+            UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
+            UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
+        }
 
-        UpdatePlayerHealth(player.GetComponent<Player>().health, player.GetComponent<Player>()._maxHealth);
-        UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
-        UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
 
         StartTimer();
         yield return null;

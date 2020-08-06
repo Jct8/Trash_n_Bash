@@ -24,10 +24,12 @@ public class MainMenu : MonoBehaviour
         {
             button.SetActive(false);
         }
-        for (int i = 0; i < ServiceLocator.Get<GameManager>().currentlevel + 1; ++i)
+
+        for (int i = 0; i < ServiceLocator.Get<GameManager>().currentlevel+1; i++)
         {
             buttons[i].SetActive(true);
         }
+
     }
     public void OnLevelButtonClick(string level)
     {

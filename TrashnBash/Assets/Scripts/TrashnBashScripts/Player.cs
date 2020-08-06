@@ -400,6 +400,7 @@ public class Player : MonoBehaviour, ICharacterAction
         animator.SetTrigger("Ultimate");
         GetComponent<PlayerController>().isUsingAbility = true;
         GetComponent<PlayerController>().isUsingUltimate = true;
+        StartCoroutine(ServiceLocator.Get<GameManager>().ShakeCamera(0.6f));
         yield return new WaitForSeconds(ultimateDelay);
 
         ultimateIndicator.SetActive(false);

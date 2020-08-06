@@ -27,11 +27,6 @@ public class GameManager : MonoBehaviour
     private Vector3 _camPos;
     private float getDeltaTime { set; get; }
 
-    [Header("Shaking camera")]
-    private Vector3 originPos;
-    public float shakeAmount = 0.7f;
-    public float decrFactor = 1.0f;
-
     private bool _isCameraUsing = false;
 
     private bool isVaribableLoaded = false;
@@ -75,13 +70,13 @@ public class GameManager : MonoBehaviour
                 if (ServiceLocator.Get<LevelManager>().CheckLoseCondition())
                 {
                     _GameState = GameState.GameLose;
-                    StartCoroutine(ZoomInAndOut(0.5f, true));
+                    StartCoroutine(ZoomInAndOut(1.0f, true));
                     StartCoroutine(DelayEnding(3.0f));
                 }
                 else if (ServiceLocator.Get<LevelManager>().CheckWinCondition())
                 {
                     _GameState = GameState.GameWin;
-                    StartCoroutine(ZoomInAndOut(0.5f, false));
+                    StartCoroutine(ZoomInAndOut(1.0f, false));
                     StartCoroutine(DelayEnding(3.0f));
                 }
                 break;
@@ -173,7 +168,7 @@ public class GameManager : MonoBehaviour
        
     }
 
-    public IEnumerator ShakeCamera(float duration)
+    public IEnumerator ShakeCamera(float duration, float shakeAmount, float decreaseFactor)
     {
         if (_isCameraUsing)
             yield return null;
@@ -181,12 +176,12 @@ public class GameManager : MonoBehaviour
         {
             _isCameraUsing = true;
             _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-            originPos = _camera.transform.localPosition;
+            Vector3 originPos = _camera.transform.localPosition;
             float current = 0.0f;
             while (current < duration)
             {
                 _camera.transform.localPosition = originPos + Random.insideUnitSphere * shakeAmount;
-                current += Time.deltaTime * decrFactor;
+                current += Time.deltaTime * decreaseFactor;
                 yield return new WaitForSeconds(0.01f);
             }
 
@@ -200,6 +195,7 @@ public class GameManager : MonoBehaviour
     IEnumerator DelayEnding(float delay)
     {
         yield return new WaitForSeconds(delay);
+        yield return new WaitUntil(() => { return !_isCameraUsing; });
         StartCoroutine(ServiceLocator.Get<UIManager>().Reset());
         Time.timeScale = 0.0f;
         ServiceLocator.Get<UIManager>().endPanel.gameObject.SetActive(true);

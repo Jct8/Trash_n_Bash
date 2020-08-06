@@ -29,6 +29,11 @@ public class Player : MonoBehaviour, ICharacterAction
     public const string DAMAGE_KEY = "Damage";
     public const string HEALTH_KEY = "Health";
 
+    [Header("Shaking camera for Ultimate")]
+    [SerializeField] private float _duration = 2.0f;
+    [SerializeField] private float _shakeAmount = 0.7f;
+    [SerializeField] private float _decrFactor = 1.0f;
+
     [Header("Prefab")]
     public GameObject ultimateIndicator;
     public GameObject poisonIndicator;
@@ -400,7 +405,7 @@ public class Player : MonoBehaviour, ICharacterAction
         animator.SetTrigger("Ultimate");
         GetComponent<PlayerController>().isUsingAbility = true;
         GetComponent<PlayerController>().isUsingUltimate = true;
-        StartCoroutine(ServiceLocator.Get<GameManager>().ShakeCamera(0.6f));
+        StartCoroutine(ServiceLocator.Get<GameManager>().ShakeCamera(_duration,_shakeAmount,_decrFactor));
         yield return new WaitForSeconds(ultimateDelay);
 
         ultimateIndicator.SetActive(false);

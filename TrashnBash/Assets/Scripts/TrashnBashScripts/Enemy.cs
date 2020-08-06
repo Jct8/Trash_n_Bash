@@ -494,7 +494,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     _isDetected = true;
                 }
             }
-            if (_isDetected)
+            if (_isDetected && _Order != Order.Stunned)
                 _Order = Order.Fight;
         }
 

@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2174418654736368603}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3479372579389927280
 GameObject:
@@ -60,7 +60,7 @@ RectTransform:
   m_Children:
   - {fileID: 7245692065567234901}
   m_Father: {fileID: 2174418654736368603}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -23.301, y: -41.862003, z: 31.753002}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -119,6 +119,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2988891865677883609}
+  - {fileID: 450071460276722431}
   - {fileID: 809617367300342587}
   - {fileID: 912379530}
   - {fileID: 7346679626910362420}
@@ -180,10 +181,15 @@ MonoBehaviour:
   Attack: {fileID: 0}
   TakeDamage: {fileID: 0}
   PoisonSound: {fileID: 0}
+  PoisonTickSound2: {fileID: 0}
   PoisonTickSound: {fileID: 0}
-  BarricadeTake: {fileID: 8300000, guid: 55b142ffa95fc3249ba4b2da90d0ac1b, type: 3}
   BarricadePlace: {fileID: 0}
   BarricadeBuild: {fileID: 0}
+  PickingUpItem: {fileID: 0}
+  RestoringHealth: {fileID: 0}
+  TowerStealing: {fileID: 0}
+  BarricadeDamage: {fileID: 0}
+  BarricadeRepair: {fileID: 0}
 --- !u!1 &5052833834784592952
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,17 +245,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5052833834784592952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 35a91977a46404377bcafe59676edb5f, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
@@ -259,6 +264,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7169381689722407828
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,17 +320,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7169381689722407828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.57254905}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 35a91977a46404377bcafe59676edb5f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -334,6 +339,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8260161611147394213
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,17 +394,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8260161611147394213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.7411765}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 35a91977a46404377bcafe59676edb5f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -408,6 +413,97 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &122794449517985044
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2174418654736368603}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.53
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.39
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.71507406
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6990487
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -91.299
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+        type: 3}
+      propertyPath: m_Name
+      value: Dumpster_OPEN_With_Garbage_01 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a2fcf08299b61824baf5e8a2c1cbe3be, type: 3}
+--- !u!4 &450071460276722431 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a2fcf08299b61824baf5e8a2c1cbe3be,
+    type: 3}
+  m_PrefabInstance: {fileID: 122794449517985044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2988891865678279243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -415,18 +511,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2174418654736368603}
     m_Modifications:
-    - target: {fileID: 100018, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
-      propertyPath: m_Name
-      value: Trashcan3
-      objectReference: {fileID: 0}
-    - target: {fileID: 100018, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 100018, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
@@ -462,6 +546,18 @@ PrefabInstance:
     - target: {fileID: 100016, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
+      propertyPath: m_Name
+      value: Trashcan3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: fedbd75f24167ac4390debcecd50ccbe, type: 3}
       propertyPath: m_LocalRotation.x
@@ -554,11 +650,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2174418654736368603}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 91c54a33f00b8453292c6b8bfbabe830,
-        type: 3}
-      propertyPath: m_Name
-      value: Dumpster_OPEN_With_Garbage_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 91c54a33f00b8453292c6b8bfbabe830,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -597,7 +688,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 91c54a33f00b8453292c6b8bfbabe830,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 91c54a33f00b8453292c6b8bfbabe830,
         type: 3}
@@ -628,6 +719,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 91c54a33f00b8453292c6b8bfbabe830,
+        type: 3}
+      propertyPath: m_Name
+      value: Dumpster_OPEN_With_Garbage_01
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 91c54a33f00b8453292c6b8bfbabe830,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91c54a33f00b8453292c6b8bfbabe830, type: 3}

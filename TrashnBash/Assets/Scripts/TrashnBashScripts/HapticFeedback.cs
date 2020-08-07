@@ -54,7 +54,9 @@ public class HapticFeedback : MonoBehaviour
                     button.onClick.AddListener(delegate { Vibrate(parameters, repetitions); });
                     break;
                 default:
+#if UNITY_ANDROID && !UNITY_EDITOR
                     Handheld.Vibrate();
+#endif
                     break;
             }
         }

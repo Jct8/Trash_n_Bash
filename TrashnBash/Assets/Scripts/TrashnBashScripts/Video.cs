@@ -87,7 +87,9 @@ public class Video : MonoBehaviour
 
     IEnumerator PlayVideoCoroutine()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
         Handheld.PlayFullScreenMovie(videoToBePlayed, Color.white, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.Fill); ;
+#endif
         yield return new WaitForEndOfFrame();
         Debug.Log("Video playback completed.");
         LoadNewLevel();

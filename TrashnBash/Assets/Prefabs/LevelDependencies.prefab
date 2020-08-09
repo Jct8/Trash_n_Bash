@@ -99,6 +99,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -110,6 +111,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -132,9 +134,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &3781949977820463998
 GameObject:
@@ -177,7 +179,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3781949977820463998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
@@ -192,7 +194,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3781949977820463998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
@@ -334,7 +336,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8642484305662360671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -768656878, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_EventMask:
@@ -498,11 +500,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 433153776155563319}
     m_Modifications:
-    - target: {fileID: 6686893779103308463, guid: d0a9fcdf559c7844a99164abd7aeb437,
-        type: 3}
-      propertyPath: m_Name
-      value: Tower
-      objectReference: {fileID: 0}
     - target: {fileID: 3881583059690077307, guid: d0a9fcdf559c7844a99164abd7aeb437,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -558,6 +555,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6686893779103308463, guid: d0a9fcdf559c7844a99164abd7aeb437,
+        type: 3}
+      propertyPath: m_Name
+      value: Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747634888746512579, guid: d0a9fcdf559c7844a99164abd7aeb437,
+        type: 3}
+      propertyPath: lowPlayerHealthPulse
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0a9fcdf559c7844a99164abd7aeb437, type: 3}
 --- !u!4 &4768857451748374871 stripped
@@ -573,10 +580,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 433153776155563319}
     m_Modifications:
-    - target: {fileID: 4473401949322046555, guid: db02aa316148c134697875e590fe91c6,
+    - target: {fileID: 1011058151224188264, guid: db02aa316148c134697875e590fe91c6,
         type: 3}
-      propertyPath: m_Name
-      value: Player
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1011058151224188264, guid: db02aa316148c134697875e590fe91c6,
+        type: 3}
+      propertyPath: turnSpeed
+      value: 20.88
       objectReference: {fileID: 0}
     - target: {fileID: 3502200499049515719, guid: db02aa316148c134697875e590fe91c6,
         type: 3}
@@ -633,6 +645,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3550494672785064418, guid: db02aa316148c134697875e590fe91c6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 92a89afb33762b649b4a9875ee86ca38, type: 2}
     - target: {fileID: 4208394709829915080, guid: db02aa316148c134697875e590fe91c6,
         type: 3}
       propertyPath: health
@@ -643,21 +660,11 @@ PrefabInstance:
       propertyPath: _ultimateCharge
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1011058151224188264, guid: db02aa316148c134697875e590fe91c6,
+    - target: {fileID: 4473401949322046555, guid: db02aa316148c134697875e590fe91c6,
         type: 3}
-      propertyPath: moveSpeed
-      value: 5
+      propertyPath: m_Name
+      value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1011058151224188264, guid: db02aa316148c134697875e590fe91c6,
-        type: 3}
-      propertyPath: turnSpeed
-      value: 20.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550494672785064418, guid: db02aa316148c134697875e590fe91c6,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 92a89afb33762b649b4a9875ee86ca38, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db02aa316148c134697875e590fe91c6, type: 3}
 --- !u!4 &5145949042189053741 stripped

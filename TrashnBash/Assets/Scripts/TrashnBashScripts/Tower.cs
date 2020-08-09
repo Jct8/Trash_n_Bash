@@ -64,6 +64,8 @@ public class Tower : MonoBehaviour
     [SerializeField]
     [Tooltip("Activate regaining health for Player health")]
     public float minimumPlayerHealth = 70.0f;
+    [Tooltip("Activate Pulse when Player health is low")]
+    public float lowPlayerHealthForPulse = 45.0f;
     [SerializeField]
     [Tooltip("Inactivate regaining health if the Tower has low Health")]
     private float minimumTowerHealth = 20.0f;
@@ -71,6 +73,8 @@ public class Tower : MonoBehaviour
     // for tutorial2
     Tutorial2 tutorial2;
     public bool enablePlayerRegainHealth = true;
+    // Health Signifier pulse
+    Animator animatorHealthSignifier;
 
     private void Awake()
     {
@@ -122,6 +126,7 @@ public class Tower : MonoBehaviour
 
         tutorial2 = FindObjectOfType<Tutorial2>()?.GetComponent<Tutorial2>();
         hapticFeedback = GetComponent<HapticFeedback>();
+        animatorHealthSignifier = signifierGO != null ? signifierGO.GetComponent<Animator>(): null;
     }
 
     public void Initialize(float dmg, float s, float h, float ar, float r)
@@ -147,12 +152,17 @@ public class Tower : MonoBehaviour
             else
             {
                 signifierGO.SetActive(true);
+                if (player?.health < lowPlayerHealthForPulse)
+                    animatorHealthSignifier.SetBool("isPulsing", true);
+                else
+                    animatorHealthSignifier.SetBool("isPulsing", false);
             }
         }
 
         if (signifierGO)
         {
             signifierGO.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
+
         }
 
         if (!isShooting)

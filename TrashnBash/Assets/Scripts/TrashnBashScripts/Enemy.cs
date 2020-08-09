@@ -90,6 +90,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     private Animator animator;
 
+    private float waitDelay = 0.0f;
+
     #endregion
 
     #region UnityFunctions
@@ -164,16 +166,16 @@ public class Enemy : MonoBehaviour, ICharacterAction
                     {
                         if (_Name == "Crows")
                         {
-                            StartCoroutine(wait());
+                            Wait();
                         }
                         else
                         {
                             if (ChargingCoolDown())
                             {
-                                StartCoroutine("TowerAttack");
+                                TowerAttack();
                             }
                         }
-                        if (animator)
+                        if (animator && _Name != "Crows")
                             animator.SetBool("Attacking", true);
                     }
                     else
@@ -221,7 +223,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Order.Fight)
             {
-                
+
                 LookAt(player.transform.position, player);
                 if (isInRangeOfWayPoint(player.transform, _enemyAttackRange))
                 {
@@ -240,10 +242,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Order.Barricade)
             {
-                if (animator)
+                if (animator && _Name != "Crows")
                     animator.SetBool("Attacking", true);
                 if (!_ObjectofBarricade)
                 {
+                    waitDelay = _waitForsecondOfCrows;
                     _Order = Order.Tower;
                     return;
                 }
@@ -254,7 +257,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 {
                     if (_Name == "Crows")
                     {
-                        StartCoroutine(wait());
+                        Wait();
                     }
                     else
                     {
@@ -265,10 +268,10 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 if (!_ObjectofBarricade.GetComponent<Barricade>().isAlive)
                 {
                     _ObjectofBarricade = null;
-                    if (_Name == "Crows")
-                        _Order = Order.Back;
-                    else
-                        _Order = Order.Tower;
+                    if (animator)
+                        animator.SetBool("Attacking", false);
+                    _Order = Order.Tower;
+                    waitDelay = _waitForsecondOfCrows;
                 }
             }
             else if (_Order == Order.Back)
@@ -322,6 +325,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _IsAttacked = false;
         _isPoisoned = false;
 
+        waitDelay = _waitForsecondOfCrows;
+
         VariableLoader variableLoader = ServiceLocator.Get<VariableLoader>();
         if (variableLoader.useGoogleSheets)
         {
@@ -355,6 +360,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         _IsStolen = false;
         _IsAttacked = false;
         poison.SetActive(_isPoisoned);
+        waitDelay = _waitForsecondOfCrows;
         player = ServiceLocator.Get<LevelManager>().playerInstance;
     }
 
@@ -417,25 +423,36 @@ public class Enemy : MonoBehaviour, ICharacterAction
         transform.LookAt(obj);
     }
 
-    private IEnumerator wait()
+    private void Wait()
     {
-        yield return new WaitForSeconds(_waitForsecondOfCrows);
-        if (_Order == Order.Tower)
+        waitDelay -= Time.deltaTime;
+        if (waitDelay < 0.0f)
         {
-            if (ChargingCoolDown())
+            //waitDelay = Time.time + _waitForsecondOfCrows;
+            if (animator)
+                animator.SetBool("Attacking", true);
+            if (_Order == Order.Tower)
             {
-                StartCoroutine(TowerAttack());
+                if (ChargingCoolDown())
+                {
+                    TowerAttack();
+                }
+
+            }
+            if (_Order == Order.Barricade)
+            {
+                if (ChargingCoolDown())
+                {
+                    BarricadeAttack();
+                }
             }
 
         }
-        if (_Order == Order.Barricade)
+        else
         {
-            if (ChargingCoolDown())
-            {
-                BarricadeAttack();
-            }
+            if (animator)
+                animator.SetBool("Attacking", false);
         }
-
     }
 
     #endregion
@@ -592,6 +609,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
     public void BarricadeAttack()
     {
+        if (animator)
+            animator.SetBool("Attacking", true);
         //_ObjectofBarricade = GameObject.FindGameObjectWithTag("Barricade");
         _Agent.isStopped = true;
         _IsAttacked = true;
@@ -602,14 +621,12 @@ public class Enemy : MonoBehaviour, ICharacterAction
         }
         else
         {
-            if (_Name == "Crows")
-                _Order = Order.Back;
-            else
-                _Order = Order.Tower;
+            _Order = Order.Tower;
             _ObjectofBarricade = null;
             _Agent.isStopped = false;
             _IsAttacked = false;
             CooltimeBar.fillAmount = 0;
+            waitDelay = _waitForsecondOfCrows;
         }
     }
 
@@ -632,7 +649,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
         yield return null;
     }
 
-    public IEnumerator TowerAttack()
+    public void TowerAttack()
     {
         StartCoroutine(characterSound.BasicSound(4));
         _IsAttacked = true;
@@ -643,7 +660,8 @@ public class Enemy : MonoBehaviour, ICharacterAction
             _Order = Order.Back;
         CooltimeBar.fillAmount = 0;
         _IsAttacked = false;
-        yield return null;
+        waitDelay = _waitForsecondOfCrows;
+        //yield return null;
     }
 
     bool FrontAttack(Transform target)

@@ -2675,6 +2675,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2050656591652795887, guid: 18c7f0969ba5d0644814a9a3ca291106,
+        type: 3}
+      propertyPath: lowPlayerHealthPulse
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 4768857451748374871, guid: 18c7f0969ba5d0644814a9a3ca291106,
         type: 3}
       propertyPath: m_LocalPosition.x

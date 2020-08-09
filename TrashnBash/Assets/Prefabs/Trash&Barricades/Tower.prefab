@@ -13,6 +13,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 100, y: 80, z: 60}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &929760418540119217
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108473851434245047}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4963111ef3ac6d848bbb65c076c5bbbc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3589809411401934993
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +233,7 @@ MonoBehaviour:
   towerHealAfterUpgrade: 30
   towerLostCostValue: 15
   minimumPlayerHealth: 70
+  lowPlayerHealthPulse: 40
   minimumTowerHealth: 20
   enablePlayerRegainHealth: 1
 --- !u!82 &3174509829108607209

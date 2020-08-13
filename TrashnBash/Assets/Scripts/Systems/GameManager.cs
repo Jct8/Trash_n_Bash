@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private Vector3 _camPos;
     private float getDeltaTime { set; get; }
 
-    private bool _isCameraUsing = false;
+    public bool _isCameraUsing = false;
 
     private bool isVaribableLoaded = false;
     public enum GameState

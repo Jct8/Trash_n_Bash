@@ -17,9 +17,6 @@ public class UIManager : MonoBehaviour
     public GameObject[] spawners;
     public GameObject pauseScreen;
     public GameObject optionsScreen;
-    public Texture BasicTexture;
-    public Texture SickTexture;
-    public Texture PowerFulTexture;
 
     public Image loadingImg;
     public Image poisonCover;
@@ -98,11 +95,21 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator UltimateAnimation(float timer)
     {
+        yield return new WaitUntil(() => { return ServiceLocator.Get<GameManager>()._isCameraUsing; });
         ultiRaccoon.SetActive(true);
-        ultiRaccoon.GetComponent<Animator>().Play("RaccoonAnimation");
-        yield return new WaitForSeconds(timer);
-        ultiRaccoon.GetComponent<Animator>().Play("Disappear");
-        yield return new WaitForSeconds(1.0f);
+        Time.timeScale = 0.0f;
+        ultiRaccoon.GetComponent<Animator>().SetTrigger("RaccoonAnimation");
+
+        yield return new WaitUntil(() => ultiRaccoon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f
+          && ultiRaccoon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("RaccoonAnimation"));
+
+        yield return new WaitForSecondsRealtime(timer / 2.0f);
+
+        ultiRaccoon.GetComponent<Animator>().SetTrigger("Disappear");
+        yield return new WaitUntil(() => ultiRaccoon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f
+        && ultiRaccoon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Disappear"));
+
+        Time.timeScale = 1.0f;
         ultiRaccoon.SetActive(false);
         halfBlackScreen.SetActive(false);
         yield return null;
@@ -197,7 +204,6 @@ public class UIManager : MonoBehaviour
         {
             UpdatePlayerHealth(player.GetComponent<Player>().health, player.GetComponent<Player>()._maxHealth);
             UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
-            UpdateUltimatePercentage(player.GetComponent<Player>().UltimateCharge);
         }
 
 
@@ -232,37 +238,5 @@ public class UIManager : MonoBehaviour
     {
         towerHealthPercentage.text = curr.ToString();
     }
-
-    public void UpdateUltimatePercentage(float curr)
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        if (curr >= 80.0f)
-        {
-            IsPower = true;
-            //PresentTextrue.GetComponent<RawImage>().texture = PowerFulTexture;
-        }
-        else
-        {
-            IsPower = false;
-            //PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
-        }
-
-        //AnimationTexture.SetFloat("Energy", curr);
-    }
-
-    public IEnumerator HitAnimation()
-    {
-        if (!IsPower)
-        {
-            //AnimationTexture.SetBool("IsHit", true);
-            //PresentTextrue.GetComponent<RawImage>().texture = SickTexture;
-            yield return new WaitForSeconds(1.0f);
-            //PresentTextrue.GetComponent<RawImage>().texture = BasicTexture;
-            //AnimationTexture.SetBool("IsHit", false);
-        }
-        yield return null;
-    }
-
 
 }

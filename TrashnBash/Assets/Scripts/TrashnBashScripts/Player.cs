@@ -265,9 +265,6 @@ public class Player : MonoBehaviour, ICharacterAction
         {
             _ultimateCharge = 100.0f;
         }
-
-        UIManager uiManager = ServiceLocator.Get<UIManager>();
-        uiManager.UpdateUltimatePercentage(_ultimateCharge);
     }
 
     public IEnumerator Attack()

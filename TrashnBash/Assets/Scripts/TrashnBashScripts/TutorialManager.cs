@@ -38,7 +38,6 @@ public class TutorialManager : MonoBehaviour
         uiManager.waveTimerBar.gameObject.SetActive(false);
         uiManager.timerObject.gameObject.SetActive(false);
         StartCoroutine(StartSequence(1.0f));
-        barricadeCreateBtn?.onClick.AddListener(ServiceLocator.Get<UIManager>().enableScreenFadeIn);
     }
 
     private void Update()

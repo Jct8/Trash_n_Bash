@@ -407,7 +407,7 @@ public class Player : MonoBehaviour, ICharacterAction
         GetComponent<PlayerController>().isUsingUltimate = true;
         StartCoroutine(ServiceLocator.Get<GameManager>().ShakeCamera(_duration,_shakeAmount,_decrFactor));
         yield return new WaitForSeconds(ultimateDelay);
-
+        _uiManager.enableFadeOut(true);
         ultimateIndicator.SetActive(false);
         _ultimateCharge = 0.0f;
         List<string> ListOfEnemies = ServiceLocator.Get<ObjectPoolManager>().GetKeys();

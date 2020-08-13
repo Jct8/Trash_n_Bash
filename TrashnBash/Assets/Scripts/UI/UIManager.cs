@@ -13,9 +13,7 @@ public class UIManager : MonoBehaviour
     public Image playerHealthBar;
     public Image waveTimerBar;
     public Text towerHealthPercentage;
-    //public Animator AnimationTexture;
 
-    //public GameObject PresentTextrue;
     public GameObject[] spawners;
     public GameObject pauseScreen;
     public GameObject optionsScreen;
@@ -29,8 +27,7 @@ public class UIManager : MonoBehaviour
     public Image ultCover;
     public Image repairIcon;
     public GameObject fade;
-    //public GameObject fadeDumster;
-    //public GameObject fadeTutorial;
+
 
     public GameObject poisonImg;
     public GameObject intimidateImg;
@@ -54,79 +51,61 @@ public class UIManager : MonoBehaviour
     public List<GameObject> signifiersForWaves = new List<GameObject>();
     public List<float> waveTimes = new List<float>();
 
+    [Header("Ultimate")]
+    public GameObject halfBlackScreen;
+    public GameObject fadeWhite;
+    public GameObject ultiRaccoon;
+    [SerializeField] private float ultimateAnimationTimer = 2.0f;
+
     private void Start()
     {
         fade.SetActive(false);
-        //fadeDumster.SetActive(false);
-        //fadeTutorial.SetActive(false);
+        ultiRaccoon.SetActive(false);
+        halfBlackScreen.SetActive(false);
+        fadeWhite.SetActive(false);
     }
 
-    public void enableFadeOut()
+    public void enableFadeOut(bool ulti = false)
     {
-        fade.SetActive(true);
-        fade.GetComponent<Animator>().Play("FadeOut");
-        StartCoroutine("unableFade");
+        if(ulti)
+        {
+            fadeWhite.SetActive(true);
+            fadeWhite.GetComponent<Animator>().Play("FadeOut");
+            halfBlackScreen.SetActive(true);
+            StartCoroutine(unableFadeForUltimate());
+            StartCoroutine(UltimateAnimation(ultimateAnimationTimer));
+
+        }
+        else
+        {
+            fade.SetActive(true);
+            fade.GetComponent<Animator>().Play("FadeOut");
+            StartCoroutine("unableFade");
+        }
     }
 
-    public void enableFadeIn()
-    {
-        fade.SetActive(true);
-        fade.GetComponent<Animator>().Play("Fade");
-        StartCoroutine("unableFade");
-    }
-    public void enableScreenFadeOut()
-    {
-        GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
-
-        //if (state == GameManager.GameState.Tutorial)
-        //{
-        //    fadeTutorial.GetComponent<Animator>().Play("FadeOut");
-        //}
-        //else if (state == GameManager.GameState.GamePlay)
-        //{
-        //    fadeDumster.GetComponent<Animator>().Play("FadeOut");
-        //}
-    }
-    public void enableScreenFadeIn()
-    {
-        GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
-
-        //if (state == GameManager.GameState.Tutorial)
-        //{
-        //    fadeTutorial.SetActive(true);
-        //    fadeTutorial.GetComponent<Animator>().Play("Fade");
-        //    StartCoroutine(unableScreenFade());
-        //}
-        //else if (state == GameManager.GameState.GamePlay)
-        //{
-        //    fadeDumster.SetActive(true);
-        //    fadeDumster.GetComponent<Animator>().Play("Fade");
-        //    StartCoroutine(unableScreenFade());
-        //}
-
-    }
-
-    private IEnumerator unableScreenFade()
-    {
-        yield return new WaitForSeconds(1.1f);
-        ServiceLocator.Get<UIManager>().enableScreenFadeOut();
-        yield return new WaitForSeconds(1.9f);
-
-        GameManager.GameState state = ServiceLocator.Get<GameManager>()._GameState;
-
-        //if (state == GameManager.GameState.Tutorial)
-        //{
-        //    fadeTutorial.SetActive(false);
-        //}
-        //else if (state == GameManager.GameState.GamePlay)
-        //{
-        //    fadeDumster.SetActive(false);
-        //}
-    }
     public IEnumerator unableFade()
     {
         yield return new WaitForSeconds(2.1f);
         fade.SetActive(false);
+    }
+
+    public IEnumerator unableFadeForUltimate()
+    {
+        yield return new WaitForSeconds(0.3f);
+        fadeWhite.SetActive(false);
+    }
+
+    public IEnumerator UltimateAnimation(float timer)
+    {
+        ultiRaccoon.SetActive(true);
+        ultiRaccoon.GetComponent<Animator>().Play("RaccoonAnimation");
+        yield return new WaitForSeconds(timer);
+        ultiRaccoon.GetComponent<Animator>().Play("Disappear");
+        yield return new WaitForSeconds(1.0f);
+        ultiRaccoon.SetActive(false);
+        halfBlackScreen.SetActive(false);
+        yield return null;
     }
 
     public UIManager Initialize()

@@ -770,6 +770,9 @@ MonoBehaviour:
   ultimateChargeTime: 1
   ultimateDelay: 2
   healedByItem: 5
+  _duration: 2
+  _shakeAmount: 0.7
+  _decrFactor: 1
   ultimateIndicator: {fileID: 6043743588640519989}
   poisonIndicator: {fileID: 3732666586655969396}
   stunIndicator: {fileID: 4845212022887780997}
@@ -827,7 +830,6 @@ MonoBehaviour:
   poisonAttackCoolDown: 3
   intimidateAttackCoolDown: 5
   diggingTime: 2
-  limitOfHolding: 3
   currentTrashes: 0
   _AttackButton: 323
   _PoisonAttackButton: 101
@@ -850,7 +852,11 @@ MonoBehaviour:
   autoAttack: 1
   isUsingAbility: 0
   isUsingUltimate: 0
+  usedFleasAbility: 0
+  usedStunAbility: 0
+  enableControls: 1
   stunTime: 0
+  isStunned: 0
 --- !u!54 &2115016952094743300
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1116,7 +1122,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ae5dfe85c6d642b7be3d6e513d652b0, type: 2}
+  - {fileID: 2100000, guid: ca43e4322cebccf41937ac8b376b57ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1745,6 +1751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SkunksPoisionParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604466517703206917, guid: 2340f2d3af73d6c4c8795578db2459e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9018886227885515677, guid: 2340f2d3af73d6c4c8795578db2459e8,
         type: 3}

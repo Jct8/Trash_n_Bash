@@ -725,7 +725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4326862239630657327
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1874,7 +1874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &862157130282304188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5292,9 +5292,6 @@ MonoBehaviour:
   spawners: []
   pauseScreen: {fileID: 6617459380522681112}
   optionsScreen: {fileID: 8052166585110428182}
-  BasicTexture: {fileID: 2800000, guid: 6d9a6e20a7790014e80fc85003535ede, type: 3}
-  SickTexture: {fileID: 2800000, guid: 61b8d89328ba0724f97a3f365237866a, type: 3}
-  PowerFulTexture: {fileID: 2800000, guid: 1a9a729c0ef70954e87bcde742137b6b, type: 3}
   loadingImg: {fileID: 3743710292194702085}
   poisonCover: {fileID: 2408891335787222109}
   intimidateCover: {fileID: 165214943241434486}
@@ -7366,7 +7363,7 @@ PrefabInstance:
     - target: {fileID: 4515744509220776239, guid: 05258cc17f76799409782aa7b3093c31,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 4515744509220776239, guid: 05258cc17f76799409782aa7b3093c31,
         type: 3}

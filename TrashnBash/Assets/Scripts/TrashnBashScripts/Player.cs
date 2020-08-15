@@ -279,7 +279,7 @@ public class Player : MonoBehaviour, ICharacterAction
 
         closestEnemy = target;
 
-        if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) < attackRange)
+        if (closestEnemy && Vector3.Distance(transform.position, closestEnemy.transform.position) <= attackRange)
         {
             if(closestEnemy.CompareTag("Enemy"))
             {
@@ -365,8 +365,8 @@ public class Player : MonoBehaviour, ICharacterAction
             List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
             foreach (var go in gameObjects)
             {
-                float distance = Vector2.Distance(transform.position, go.transform.position);
-                if (distance < poisonRange)
+                float distance = Vector3.Distance(transform.position, go.transform.position);
+                if (distance <= poisonRange)
                 {
                     if(go.CompareTag("Enemy"))
                     {
@@ -413,8 +413,8 @@ public class Player : MonoBehaviour, ICharacterAction
             List<GameObject> gameObjects = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(enemy);
             foreach (var go in gameObjects)
             {
-                float distance = Vector2.Distance(transform.position, go.transform.position);
-                if (distance < ultimateRange * 0.5f)
+                float distance = Vector3.Distance(transform.position, go.transform.position);
+                if (distance <= ultimateRange * 0.5f)
                 {
                     if (go.CompareTag("Enemy"))
                     {
@@ -465,7 +465,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 {
                     if (!go.GetComponent<Enemy>())
                         continue;
-                    float distance = Vector2.Distance(transform.position, go.transform.position);
+                    float distance = Vector3.Distance(transform.position, go.transform.position);
                     if (distance < stunRange)
                     {
                         Instantiate(Lighting, go.transform.position, Quaternion.identity);
@@ -478,7 +478,7 @@ public class Player : MonoBehaviour, ICharacterAction
                 {
                     if (!go.GetComponent<Boss>())
                         continue;
-                    float distance = Vector2.Distance(transform.position, go.transform.position);
+                    float distance = Vector3.Distance(transform.position, go.transform.position);
                     if (distance < stunRange)
                     {
                         Instantiate(Lighting, go.transform.position, Quaternion.identity);

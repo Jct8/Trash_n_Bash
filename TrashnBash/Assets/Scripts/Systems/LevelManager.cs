@@ -86,7 +86,7 @@ public class LevelManager : MonoBehaviour
         }
         if (playerInstance.GetComponent<Player>().Health <= 0.0f )
         {
-            ServiceLocator.Get<UIManager>().endPanel.EnableFaintedRaccoonText(true);
+            ServiceLocator.Get<UIManager>().endPanel.EnableLoseText(true);
             return true;
         }
         if( towerInstance.GetComponent<Tower>().fullHealth <= 0.0f)

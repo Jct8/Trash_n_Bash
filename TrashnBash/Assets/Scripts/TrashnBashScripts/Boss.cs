@@ -543,7 +543,6 @@ public class Boss : MonoBehaviour, ICharacterAction
         if (FrontAttack(player.transform) && !_IsDead)
         {
             player.GetComponent<Player>().TakeDamage(_Attack, false, DamageType.Enemy);
-            ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
         StartCoroutine(characterSound.BasicSound(0));
         CooltimeBar.fillAmount = 0;

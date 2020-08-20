@@ -184,14 +184,18 @@ public class UIManager : MonoBehaviour
 
         foreach (RegisterSpawnTime registerSpawnTime in registerSpawnTimes)
         {
-            GameObject signifier = Instantiate(timerObject, timerObject.transform.position, timerObject.transform.rotation, canvas.transform) as GameObject;
+            RectTransform rectTransform = waveTimerBar.GetComponent<RectTransform>();
+            GameObject signifier = Instantiate(timerObject, rectTransform.localPosition, timerObject.transform.rotation, canvas.transform) as GameObject;
             signifiersForWaves.Add(signifier);
 
-            RectTransform rectTransform = waveTimerBar.GetComponent<RectTransform>();
             float barWidth = waveTimerBar.GetComponent<RectTransform>().rect.width;
-            float xPos = Mathf.Lerp(rectTransform.position.x - barWidth, rectTransform.position.x + barWidth, registerSpawnTime.StartSpawnTime / maximumTimer);
+            float barHeight = waveTimerBar.GetComponent<RectTransform>().rect.height;
+            float xPos = Mathf.Lerp(rectTransform.localPosition.x- barWidth / 2.0f, rectTransform.localPosition.x + barWidth/2.0f, registerSpawnTime.StartSpawnTime / maximumTimer);
             waveTimes.Add(registerSpawnTime.StartSpawnTime / maximumTimer); // used for tutorial
-            signifier.transform.position = new Vector3(xPos, waveTimerBar.transform.position.y + 20f);
+            float yPos = rectTransform.anchoredPosition.y + 120.0f + (barHeight * canvas.scaleFactor);
+
+
+            signifier.transform.localPosition = new Vector3(xPos, yPos);
         }
         waveTimes.Sort();
 
@@ -220,13 +224,16 @@ public class UIManager : MonoBehaviour
     {
         while (currentTimer < maximumTimer)
         {
+            if (ServiceLocator.Get<LevelManager>().PlayCancelled)
+                break;
+            if (ServiceLocator.Get<LevelManager>().CheckWinCondition() || ServiceLocator.Get<LevelManager>().CheckLoseCondition())
+                break;
             yield return new WaitForSeconds(1.0f);
             currentTimer += 1.0f;
             waveTimerBar.fillAmount = currentTimer / maximumTimer;
-            if (ServiceLocator.Get<LevelManager>().PlayCancelled)
-                break;
-            yield return null;
+
         }
+        currentTimer = 0.0f;
     }
 
     public void UpdatePlayerHealth(float curr, float max)

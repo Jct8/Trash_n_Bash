@@ -201,10 +201,10 @@ public class UpgradeMenu : MonoBehaviour
         var description = ((Identifier)valueAttributes[0]).enumIdentifier;
 
         int maxUpgradeLevel = upgradesModel.GetTotalUpgrades(upgrade);
-        if (maxUpgradeLevel == currentLevel) // Check if upgrade is max
-            button.GetComponentInChildren<Text>().text = description + "\n - Max Level.";
-        else
-            button.GetComponentInChildren<Text>().text = description;
+        //if (maxUpgradeLevel == currentLevel) // Check if upgrade is max
+        //    button.GetComponentInChildren<Text>().text = description + "\n - Max Level.";
+        //else
+        //    button.GetComponentInChildren<Text>().text = description;
     }
 
     private void ApplyUpgrade(Upgrade upgrade, int currentLevel)

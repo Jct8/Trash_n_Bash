@@ -637,7 +637,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
         if (FrontAttack(player.transform) && !_IsDead)
         {
             player.GetComponent<Player>().TakeDamage(_Attack, false, DamageType.Enemy);
-            ServiceLocator.Get<UIManager>().StartCoroutine("HitAnimation");
         }
         StartCoroutine(characterSound.BasicSound(0));
         if (_Order != Order.Fight && !ServiceLocator.Get<LevelManager>().isTutorial)

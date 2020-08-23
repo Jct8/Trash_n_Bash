@@ -70,6 +70,9 @@ public class UIManager : MonoBehaviour
             fadeWhite.GetComponent<Animator>().Play("FadeOut");
             halfBlackScreen.SetActive(true);
             StartCoroutine(unableFadeForUltimate());
+
+            ultiRaccoon.SetActive(true);
+            ultiRaccoon.GetComponent<Animator>().SetTrigger("RaccoonAnimation");
             StartCoroutine(UltimateAnimation(ultimateAnimationTimer));
 
         }
@@ -95,24 +98,25 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator UltimateAnimation(float timer)
     {
-        yield return new WaitUntil(() => { return ServiceLocator.Get<GameManager>()._isCameraUsing; });
-        ultiRaccoon.SetActive(true);
         Time.timeScale = 0.0f;
-        ultiRaccoon.GetComponent<Animator>().SetTrigger("RaccoonAnimation");
 
         yield return new WaitUntil(() => ultiRaccoon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f
           && ultiRaccoon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("RaccoonAnimation"));
 
-        yield return new WaitForSecondsRealtime(timer / 2.0f);
-
+        yield return new WaitForSecondsRealtime(timer * 0.5f);
+        
         ultiRaccoon.GetComponent<Animator>().SetTrigger("Disappear");
+
         yield return new WaitUntil(() => ultiRaccoon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f
         && ultiRaccoon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Disappear"));
+        EndofAnimation();
+    }
 
+    public void EndofAnimation()
+    {
         Time.timeScale = 1.0f;
         ultiRaccoon.SetActive(false);
         halfBlackScreen.SetActive(false);
-        yield return null;
     }
 
     public UIManager Initialize()

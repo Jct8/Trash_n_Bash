@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     public Button continueButton;
     public Button restartButton;
     public Button mainmenuButton;
+    Image image;
 
     private float _TowerHP;
     private bool IsPower = false;

@@ -8,6 +8,16 @@ using Upgrade = UpgradeMenu.Upgrade;
 
 public class UpgradeUI : MonoBehaviour
 {
+    [System.Serializable]
+    public class SpriteMapping
+    {
+        public Upgrade upgradeType;
+        public Sprite sprite;
+    }
+
+    public List<SpriteMapping> buttonSprites = new List<SpriteMapping>();
+    private Dictionary<Upgrade, Sprite> buttonSpritesDictionary = new Dictionary<Upgrade, Sprite>();
+
     public GameObject upgradeExample;
     public Transform upgradeHolder;
     public Text upgradeDescriptionText;
@@ -20,6 +30,11 @@ public class UpgradeUI : MonoBehaviour
 
     private void OnEnable()
     {
+        foreach (var item in buttonSprites)
+        {
+            if (!buttonSpritesDictionary.ContainsKey(item.upgradeType))
+                buttonSpritesDictionary.Add(item.upgradeType, item.sprite);
+        }
         upgradesModel = ModelManager.UpgradesModel;
         gameManager = ServiceLocator.Get<GameManager>();
         foreach (var upgrade in gameManager.upgradeLevelsDictionary)
@@ -32,7 +47,12 @@ public class UpgradeUI : MonoBehaviour
 
                 // Update button text
                 Button button = go.GetComponentInChildren<Button>();
-                UpdateButtonText(button, upgrade.Key);
+                //UpdateButtonText(button, upgrade.Key);
+                Image buttonImage = button.gameObject.GetComponent<Image>();
+                buttonImage.sprite = buttonSpritesDictionary[upgrade.Key];
+                buttonImage.type = Image.Type.Simple;
+                buttonImage.preserveAspect = true;
+
                 button.onClick.AddListener(() => DisplayChoosenUpgrade(upgrade.Key));
 
                 // Update Drop Down

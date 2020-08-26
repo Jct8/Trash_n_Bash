@@ -237,6 +237,9 @@ public class GameManager : MonoBehaviour
             case "Level4":
                 currentlevel = 4;
                 break;
+            case "Level5":
+                currentlevel = 5;
+                break;
             default:
                 currentlevel++;
                 break;

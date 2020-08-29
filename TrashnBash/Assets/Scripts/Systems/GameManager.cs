@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        if (SceneManager.GetActiveScene().name == "Level4")
+        if (SceneManager.GetActiveScene().name == "Level5")
         {
             sceneToLoad = "MainMenu";
             videoNumbertoPlay = 2;

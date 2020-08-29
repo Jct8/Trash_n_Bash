@@ -26,7 +26,7 @@ public class UpgradeUI : MonoBehaviour
     private UpgradesModel upgradesModel;
 
     Dictionary<Upgrade, GameObject> listOfUpgrades = new Dictionary<Upgrade, GameObject>();
-    int counter = 0;
+    float counter = 0.5f;
 
     private void OnEnable()
     {
@@ -43,7 +43,7 @@ public class UpgradeUI : MonoBehaviour
             {
                 GameObject go = Instantiate(upgradeExample, upgradeHolder) as GameObject;
                 float size = upgradeExample.GetComponent<RectTransform>().rect.height;
-                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y - counter * size, go.transform.position.z);
+                go.transform.localPosition = new Vector3(go.transform.localPosition.x,/* go.transform.localPosition.y -*/- counter * size, go.transform.localPosition.z);
 
                 // Update button text
                 Button button = go.GetComponentInChildren<Button>();
@@ -78,7 +78,7 @@ public class UpgradeUI : MonoBehaviour
                 else
                     toggle.gameObject.SetActive(false);
 
-                counter++;
+                counter+=1.0f;
                 listOfUpgrades.Add(upgrade.Key, go);
             }
             else if (listOfUpgrades.ContainsKey(upgrade.Key) && upgrade.Key == Upgrade.TargetEnemy)

@@ -16,13 +16,13 @@ public class OptionsMenu : MonoBehaviour
     void Start()
     {
         audioManager = ServiceLocator.Get<AudioManager>();
-        masterSlider.onValueChanged.AddListener(audioManager.SetMasterVolume);
-        musicSlider.onValueChanged.AddListener(audioManager.SetMusicVolume);
-        sfxSlider.onValueChanged.AddListener(audioManager.SetSFXVolume);
+        masterSlider?.onValueChanged.AddListener(audioManager.SetMasterVolume);
+        musicSlider?.onValueChanged.AddListener(audioManager.SetMusicVolume);
+        sfxSlider?.onValueChanged.AddListener(audioManager.SetSFXVolume);
 
-        audioManager.SetMasterVolume(masterSlider.value);
-        audioManager.SetMusicVolume(musicSlider.value);
-        audioManager.SetSFXVolume(sfxSlider.value);
+        if(masterSlider) audioManager.SetMasterVolume(masterSlider.value);
+        if(musicSlider) audioManager.SetMusicVolume(musicSlider.value);
+        if(sfxSlider) audioManager.SetSFXVolume(sfxSlider.value);
     }
 
     public void ShowOptions()

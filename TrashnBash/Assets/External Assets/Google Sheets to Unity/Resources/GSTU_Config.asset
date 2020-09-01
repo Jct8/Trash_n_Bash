@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c84b370c07161d418509239739a9524, type: 3}
   m_Name: GSTU_Config
   m_EditorClassIdentifier: Assembly-CSharp:GoogleSheetsToUnity:GoogleSheetsToUnityConfig
-  CLIENT_ID: 229497991476-bl769fr2h96ok1vgg0q5e580ge2s4ac2.apps.googleusercontent.com
-  CLIENT_SECRET: aJ-ZjJkXsQ4wFCc41F0aaWff
+  CLIENT_ID: 
+  CLIENT_SECRET: 
   ACCESS_TOKEN: 
   REFRESH_TOKEN: 1/kqepo9i9qIVDShLRC2c0kJgb-3DYKJevwVTF6LAfGGM
   API_Key: AIzaSyBl-LAtobc3PisYlay8lv4Fhn5QU5n6ci0
-  PORT: 1024
+  PORT: 0
   gdr:
     access_token: ya29.a0AfH6SMB6yfBtqbMSZBdEyKAMoMLP_276qhQyl1kw2_DT-Qut6CsmxmniQW65kbYbSjJMfQf6LMvskjDxfbjAeoMmPOgulEaRuElRcUEYOnr3UtVJuOOboEcV2CJLErUD2Npf65j_G1_JifnIhVmZBu0tGxEC421-zZzLEA
     refresh_token: 1//06ak9UdC4zPPJCgYIARAAGAYSNwF-L9Ir6LZPqodzIwEzn9O1HT6vCjq6NmEsxcbJImsSrIBBm9Tb93qmE0LTufT9vlVwghIZ2Zk

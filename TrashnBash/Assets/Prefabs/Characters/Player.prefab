@@ -770,8 +770,8 @@ MonoBehaviour:
   ultimateChargeTime: 1
   ultimateDelay: 2
   healedByItem: 5
-  _duration: 2
-  _shakeAmount: 0.7
+  _duration: 1
+  _shakeAmount: 0.2
   _decrFactor: 1
   ultimateIndicator: {fileID: 6043743588640519989}
   poisonIndicator: {fileID: 3732666586655969396}

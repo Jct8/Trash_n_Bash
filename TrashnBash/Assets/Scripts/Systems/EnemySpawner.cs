@@ -70,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
         ServiceLocator.Get<ObjectPoolManager>().RecycleObject(obj);
     }
 
-    private void SpawnWave(int waveNumber)
+    public void SpawnWave(int waveNumber)
     {
         for (int i = 0; i < _enemiesPerWave; i++)
         {

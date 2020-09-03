@@ -134,7 +134,14 @@ public class LevelManager : MonoBehaviour
             ServiceLocator.Get<UIManager>().endPanel.EnableWinText(true);
             return true; // If no more spawning
         }
+        else
+        {
+            foreach(var obj in enemyspawners)
+            {
+                Debug.Log("Who is: " + obj.name);
+            }
 
+        }
         enemyspawners.Clear();
         survivedEnemies.Clear();
 

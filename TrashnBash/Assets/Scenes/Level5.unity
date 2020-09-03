@@ -2267,7 +2267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &559214613
 Transform:
   m_ObjectHideFlags: 0
@@ -4011,7 +4011,7 @@ GameObject:
   - component: {fileID: 1391456368}
   - component: {fileID: 1391456369}
   m_Layer: 0
-  m_Name: Enemies Wave 1
+  m_Name: EnemiesWave1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

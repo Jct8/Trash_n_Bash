@@ -307,8 +307,21 @@ public class PlayerController : MonoBehaviour
                 if (_lockedOnEnemyGO != null && prevTarget != _lockedOnEnemyGO)
                 {
                     //Deselect
-                    prevTarget?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
-                    _lockedOnEnemyGO.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
+                    if(prevTarget.CompareTag("Boss") && _lockedOnEnemyGO.CompareTag("Enemy"))
+                    {
+                        prevTarget?.GetComponent<Boss>().SwitchOnTargetIndicator(false);
+                        _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
+                    }
+                    else if(prevTarget.CompareTag("Enemy") && _lockedOnEnemyGO.CompareTag("Enemy"))
+                    {
+                        prevTarget?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                        _lockedOnEnemyGO?.GetComponent<Enemy>().SwitchOnTargetIndicator(true);
+                    }
+                    else if (prevTarget.CompareTag("Enemy") && _lockedOnEnemyGO.CompareTag("Boss"))
+                    {
+                        prevTarget?.GetComponent<Enemy>().SwitchOnTargetIndicator(false);
+                        _lockedOnEnemyGO?.GetComponent<Boss>().SwitchOnTargetIndicator(true);
+                    }
                 }
                 else
                 {

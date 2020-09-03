@@ -13,6 +13,7 @@ public enum Order
 
 public enum Boss_Order
 {
+    Move,
     Fight,
     StunAttack,
     PoisonAttack,

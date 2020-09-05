@@ -284,6 +284,7 @@ public class Tutorial2 : MonoBehaviour
             Time.timeScale = 1.0f;
             playerHealthButtonMaskImage.SetActive(false);
             handPointAtTowerHealth.SetActive(false);
+            currentSequence++;
         }
     }
 }

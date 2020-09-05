@@ -55,7 +55,12 @@ public class Bullet : MonoBehaviour
         }
         else if (_damageable != null && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss")) && damageType == DamageType.Fire) //fire attack
         {
-            collision.gameObject.GetComponent<Enemy>().SetFire(_damage, fireTickTime, fireTotalTime);
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if(enemy)
+                enemy.SetFire(_damage, fireTickTime, fireTotalTime);
+            Boss boss = collision.gameObject.GetComponent<Boss>();
+            if (boss)
+                boss.SetFire(_damage, fireTickTime, fireTotalTime);
             ResetBullet();
         }
     }

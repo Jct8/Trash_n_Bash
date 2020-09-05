@@ -4468,7 +4468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d936f08f0d6c394a8a1413a45ef4166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumTrashToSpend: 15
+  minimumTrashToSpend: 20
   longRangedButton: {fileID: 682576356}
   fireProjectileButton: {fileID: 1516498591}
   barricadeButton: {fileID: 34142282}

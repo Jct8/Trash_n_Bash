@@ -355,6 +355,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
         poison.SetActive(_isPoisoned);
         waitDelay = _waitForsecondOfCrows;
         player = ServiceLocator.Get<LevelManager>().playerInstance;
+        if (animator)
+        {
+            animator.SetBool("Dead", false);
+            animator.speed = 1.0f;
+        }
     }
 
     #endregion
@@ -454,7 +459,14 @@ public class Enemy : MonoBehaviour, ICharacterAction
     public void TakeDamage(float Dmg, bool isHero, DamageType type)
     {
         if (_IsDead)
+        {
+            if (animator)
+            {
+                animator.speed = 1.0f;
+                animator.SetBool("Dead", true);
+            }
             return;
+        }
         if (Dmg < health)
         {
             enemyAbilities.PlayDead();
@@ -507,6 +519,11 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         if (health <= 0.0f)
         {
+            if (animator)
+            {
+                animator.speed = 1.0f;
+                animator.SetBool("Dead", true);
+            }
             if (_IsStolen)
             {
                 float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f);

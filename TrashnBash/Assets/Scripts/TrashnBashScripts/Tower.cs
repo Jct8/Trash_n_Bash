@@ -230,6 +230,9 @@ public class Tower : MonoBehaviour
         if(_target.GetComponent<Enemy>())
             if (!_target.GetComponent<Enemy>().IsDead)
                 Shoot(_target.gameObject);
+        if (_target.GetComponent<Boss>())
+            if (!_target.GetComponent<Boss>().IsDead)
+                Shoot(_target.gameObject);
         // if (_target.GetComponent<Collider>().enabled)
     }
 

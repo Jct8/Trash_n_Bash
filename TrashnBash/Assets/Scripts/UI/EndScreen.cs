@@ -23,7 +23,7 @@ public class EndScreen : MonoBehaviour
 
     public void EnableFaintedRaccoonText(bool enabled)
     {
-        faintedRaccoonText.SetActive(enabled);
+        loseTrashText.SetActive(enabled);
     }
 
     public void EnableLoseText(bool enabled)

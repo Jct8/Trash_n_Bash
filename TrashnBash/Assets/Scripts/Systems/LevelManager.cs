@@ -99,6 +99,9 @@ public class LevelManager : MonoBehaviour
 
     public bool CheckWinCondition()
     {
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+        if (boss && boss.GetComponent<Boss>().IsDead) return true;
+
         List<GameObject> survivedEnemies = new List<GameObject>();
         List<GameObject> enemyspawners = new List<GameObject>();
 
@@ -133,14 +136,6 @@ public class LevelManager : MonoBehaviour
         {
             ServiceLocator.Get<UIManager>().endPanel.EnableWinText(true);
             return true; // If no more spawning
-        }
-        else
-        {
-            foreach(var obj in enemyspawners)
-            {
-                Debug.Log("Who is: " + obj.name);
-            }
-
         }
         enemyspawners.Clear();
         survivedEnemies.Clear();

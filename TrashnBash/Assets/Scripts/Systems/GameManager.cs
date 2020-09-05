@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public float _houseHP = 50.0f;
     public float _racoonHP;
     public string sceneToLoad = "MainMenu";
-    public bool _enemySkillActived { get; set; }
 
     public Dictionary<UpgradeMenu.Upgrade, int> upgradeLevelsDictionary = new Dictionary<UpgradeMenu.Upgrade, int>();
     public Dictionary<UpgradeMenu.Upgrade, bool> upgradeEnabled = new Dictionary<UpgradeMenu.Upgrade, bool>();
@@ -84,11 +83,13 @@ public class GameManager : MonoBehaviour
                 if (ServiceLocator.Get<LevelManager>().CheckLoseCondition())
                 {
                     _GameState = GameState.GameLose;
+                    StartCoroutine(ZoomInAndOut(1.0f, true));
                     StartCoroutine(DelayEnding(3.0f));
                 }
                 else if (ServiceLocator.Get<LevelManager>().CheckWinCondition())
                 {
                     _GameState = GameState.GameWin;
+                    StartCoroutine(ZoomInAndOut(1.0f, false));
                     StartCoroutine(DelayEnding(3.0f));
                 }
                 break;
@@ -265,21 +266,6 @@ public class GameManager : MonoBehaviour
             ServiceLocator.Get<UIManager>().gameObject.SetActive(true);
             ServiceLocator.Get<UIManager>().StartCoroutine(ServiceLocator.Get<UIManager>().Reset());
             ServiceLocator.Get<LevelManager>().gameObject.SetActive(true);
-        }
-    }
-
-    public void enemySkillActived()
-    {
-        Debug.Log("Act!");
-        _enemySkillActived = true;
-        if(_enemySkillActived)
-        {
-            if (coolTime < Time.time)
-            {
-                coolTime = 10.0f + Time.time;
-                _enemySkillActived = false;
-                Debug.Log("Stop!");
-            }
         }
     }
 

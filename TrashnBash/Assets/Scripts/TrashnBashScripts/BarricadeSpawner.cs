@@ -81,7 +81,12 @@ public class BarricadeSpawner : MonoBehaviour
 
     public GameObject GetBarricade()
     {
-        if (ServiceLocator.Get<LevelManager>().isTutorial)
+        if (ServiceLocator.Get<LevelManager>().towerInstance.GetComponent<Tower>().fullHealth < baseBarricadeCost)
+        {
+            return null;
+        }
+
+            if (ServiceLocator.Get<LevelManager>().isTutorial)
         {
             if (totalBarricades < 1)
             {

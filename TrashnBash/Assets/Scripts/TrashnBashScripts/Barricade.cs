@@ -203,7 +203,7 @@ public class Barricade : MonoBehaviour/*, IDragHandler , IDropHandler */, IDragg
             }
             else
             {
-                ServiceLocator.Get<GameManager>().barricadeSpawner.ResetBarricade();
+                ServiceLocator.Get<GameManager>().barricadeSpawner?.ResetBarricade();
                 Destroy(gameObject);
                 return false;
             }

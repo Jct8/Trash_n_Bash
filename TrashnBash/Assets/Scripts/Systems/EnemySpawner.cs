@@ -59,6 +59,8 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(_secondStartDelay);
         while (_currentWave < _numberOfWave)
         {
+            GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+            if (boss && boss.GetComponent<Boss>().IsDead) break;
             SpawnWave(_currentWave);
             _currentWave++;
             yield return new WaitForSeconds(_secondBetweenWave);

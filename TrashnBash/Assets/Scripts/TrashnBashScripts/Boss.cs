@@ -73,12 +73,9 @@ public class Boss : MonoBehaviour, ICharacterAction
     [SerializeField] private float _stunSkillRange = 3.0f;
     [SerializeField] private float _stunSkillTime = 3.0f;
 
-    [Header("Summoning Enemy")]
-    [SerializeField] private string GroupOfWaveSpawnerName = string.Empty;
-    [SerializeField] private string FirstWaveSpawnerName = string.Empty;
-    [SerializeField] private string SecondWaveSpawnerName = string.Empty;
     private int _HowManySpawn = 0;
-    private int _NextTimetoSummon = 0;
+    private int _Next = 0;
+    private List<GameObject> Allspawners = new List<GameObject>();
 
     private float _currentPoisonAttackCooltime = 0.0f;
     private float _currentStunAttackCooltime = 0.0f;
@@ -206,7 +203,7 @@ public class Boss : MonoBehaviour, ICharacterAction
                 {
                     if(!_startSummon)
                     {
-                        StartCoroutine(beginSummon_InSecond());
+                        StartCoroutine(beginSummon());
                         _startSummon = true;
                     }
                 }
@@ -420,9 +417,8 @@ public class Boss : MonoBehaviour, ICharacterAction
 
     private IEnumerator AttackCoolDown()
     {
-        yield return new WaitForSeconds(_AttackCoolTime);
         CooltimeBar.fillAmount += 1 / _AttackCoolTime * Time.deltaTime;
-
+        yield return new WaitForSeconds(_AttackCoolTime);
     }
 
     public void SwitchOnTargetIndicator(bool turnOn)
@@ -638,51 +634,60 @@ public class Boss : MonoBehaviour, ICharacterAction
 
     private IEnumerator beginSummon()
     {
-        GameObject spawners = GameObject.Find(GroupOfWaveSpawnerName).gameObject;
-        GameObject spawner = spawners.transform.Find(FirstWaveSpawnerName).gameObject;
-        if (spawner == null)
+        Allspawners.Clear();
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        if (spawners == null)
         {
             Debug.Log("Couldn't find");
             yield return null;
         }
-        Debug.Log("Summoning");
-        spawner.GetComponent<EnemySpawner>().ResetSpawner();
-        _NextTimetoSummon = spawner.GetComponent<EnemySpawner>()._secondBetweenWave;
-        _HowManySpawn = spawner.GetComponent<EnemySpawner>()._numberOfWave;
-        
-        while (spawner.GetComponent<EnemySpawner>()._currentWave < _HowManySpawn)
+        foreach (GameObject obj in spawners)
         {
-            spawner.GetComponent<EnemySpawner>().SpawnWave(current);
-            spawner.GetComponent<EnemySpawner>()._currentWave++;
-            yield return new WaitForSeconds(_NextTimetoSummon);
+            Allspawners.Add(obj);
         }
+        GameObject BossSpawner = GameObject.Find("BigRaccoon");
+        Allspawners.Remove(BossSpawner);
+
+        if (_Next > 0)
+        {
+            foreach (GameObject obj in Allspawners)
+            {
+                obj.GetComponent<EnemySpawner>().ResetSpawner();
+                obj.GetComponent<EnemySpawner>().StartSpawner();
+            }
+        }
+        else
+        {
+            foreach (GameObject obj in Allspawners)
+            {
+                obj.GetComponent<EnemySpawner>().ResetSpawner();
+                obj.GetComponent<EnemySpawner>().StartSpawner();
+                _HowManySpawn += obj.GetComponent<EnemySpawner>()._numberOfWave;
+            }
+
+            while (current < _HowManySpawn)
+            {
+                current = 0;
+                foreach (var s in Allspawners)
+                {
+                    current += s.GetComponent<EnemySpawner>()._currentWave;
+                }
+                if (current == _HowManySpawn) break;
+                yield return new WaitForSeconds(1.0f);
+            }
+            Activate();
+        }
+        yield return null;
+    }
+
+    public void Activate()
+    {
+        current = 0;
         _Agent.isStopped = true;
         _Order = Boss_Order.Move;
         _startSummon = false;
         gameObject.GetComponent<CapsuleCollider>().enabled = true;
-
-    }
-
-    private IEnumerator beginSummon_InSecond()
-    {
-        GameObject spawners = GameObject.Find(GroupOfWaveSpawnerName).gameObject;
-        GameObject spawner = spawners.transform.Find(SecondWaveSpawnerName).gameObject;
-        if (spawner == null)
-        {
-            Debug.Log("Couldn't find");
-            yield return null;
-        }
-        Debug.Log("Summoning");
-        current = 0;
-        spawner.GetComponent<EnemySpawner>().ResetSpawner();
-        _NextTimetoSummon = spawner.GetComponent<EnemySpawner>()._secondBetweenWave;
-        _HowManySpawn = spawner.GetComponent<EnemySpawner>()._numberOfWave;
-        while (spawner.GetComponent<EnemySpawner>()._currentWave < _HowManySpawn)
-        {
-            spawner.GetComponent<EnemySpawner>().SpawnWave(current);
-            spawner.GetComponent<EnemySpawner>()._currentWave++;
-            yield return new WaitForSeconds(_NextTimetoSummon);
-        }
+        _Next++;
     }
 
     public void Recycle(GameObject obj)

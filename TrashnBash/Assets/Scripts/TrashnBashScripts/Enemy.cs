@@ -77,8 +77,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
     private float _FireTickTime = 0.0f;
     private float _FireCurrentDuration = 0.0f;
 
-    private int numOfRats = 0;
-
     [Header("Etc")]
     public Rigidbody rigid;
     public Action killed;
@@ -117,7 +115,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
-        numOfRats = ServiceLocator.Get<ObjectPoolManager>().GetActiveObjects(_Name).Count;
+
         Transform _Desination = _Path.WayPoints[_CurrentWayPoint];
         if (player == null || _IsDead)
         {
@@ -285,11 +283,6 @@ public class Enemy : MonoBehaviour, ICharacterAction
                 enemyAbilities.Flying(_Desination);
                 if (isInRangeOfWayPoint(_Desination, _EndDistance))
                     killed?.Invoke();
-            }
-
-            if (_IsAttacked)
-            {
-                ChargingCoolDown();
             }
         }
     }
@@ -492,10 +485,7 @@ public class Enemy : MonoBehaviour, ICharacterAction
 
         if (isHero)
         {
-            if (_Name == "Rats" && numOfRats <= 3)
-            {
-                enemyAbilities.GroupAttack();
-            }
+            enemyAbilities.GroupAttack();
 
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in list)

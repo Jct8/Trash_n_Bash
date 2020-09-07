@@ -485,12 +485,11 @@ public class Player : MonoBehaviour, ICharacterAction
                     {
                         Instantiate(Lighting, go.transform.position, Quaternion.identity);
                         if (go.GetComponent<Boss>().IsDead) continue;
-                        if(go.GetComponent<Boss>()._Order != Boss_Order.Back || go.GetComponent<Boss>()._Order != Boss_Order.Waiting)
-                        {
-                            go.GetComponent<Boss>()._Order = Boss_Order.Stunned;
-                            go.GetComponent<Boss>().stunParticle.Play();
-                            go.GetComponent<Boss>().stunTime = Time.time + intimdateStunTime;
-                        }
+                        if (go.GetComponent<Boss>()._Order == Boss_Order.Back) continue;
+                        if (go.GetComponent<Boss>()._Order == Boss_Order.Waiting) continue;
+                        go.GetComponent<Boss>()._Order = Boss_Order.Stunned;
+                        go.GetComponent<Boss>().stunParticle.Play();
+                        go.GetComponent<Boss>().stunTime = Time.time + intimdateStunTime;
                     }
                 }
 

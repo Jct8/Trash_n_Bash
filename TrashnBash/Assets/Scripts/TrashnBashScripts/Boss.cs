@@ -74,13 +74,13 @@ public class Boss : MonoBehaviour, ICharacterAction
     [SerializeField] private float _stunSkillTime = 3.0f;
 
     private int _HowManySpawn = 0;
-    private int _Next = 0;
     private List<GameObject> Allspawners = new List<GameObject>();
 
     private float _currentPoisonAttackCooltime = 0.0f;
     private float _currentStunAttackCooltime = 0.0f;
 
     private bool _waitingBehaviour = false;
+    private bool _waitingBehaviour2 = false;
     private bool _isRunning = false;
     private int current = 0;
     private float timer = 0.0f;
@@ -132,7 +132,6 @@ public class Boss : MonoBehaviour, ICharacterAction
     {
         healthBarGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
         CoolTimeGO.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
-
         if (player == null || _IsDead)
         {
             _Agent.isStopped = true;
@@ -151,6 +150,13 @@ public class Boss : MonoBehaviour, ICharacterAction
                 if (healthBar.fillAmount <= 0.666f && !_waitingBehaviour)
                 {
                     _Order = Boss_Order.Back;
+                    _isRunning = false;
+                    return;
+                }
+                if (healthBar.fillAmount <= 0.333f && !_waitingBehaviour2)
+                {
+                    _Order = Boss_Order.Back;
+                    _isRunning = false;
                     return;
                 }
                 CooltimeBar.fillAmount = 0;
@@ -170,6 +176,18 @@ public class Boss : MonoBehaviour, ICharacterAction
             else if(_Order == Boss_Order.Move)
             {
                 LookAt(player.transform.position, player);
+                if (healthBar.fillAmount <= 0.666f && !_waitingBehaviour)
+                {
+                    _Order = Boss_Order.Back;
+                    _isRunning = false;
+                    return;
+                }
+                if (healthBar.fillAmount <= 0.333f && !_waitingBehaviour2)
+                {
+                    _Order = Boss_Order.Back;
+                    _isRunning = false;
+                    return;
+                }
                 if (animator)
                 {
                     if(!_isRunning)
@@ -199,13 +217,11 @@ public class Boss : MonoBehaviour, ICharacterAction
                     _isRunning = false;
                     return;
                 }
-                else if(healthBar.fillAmount <= 0.333f)
+                if(healthBar.fillAmount <= 0.333f && !_waitingBehaviour2)
                 {
-                    if(!_startSummon)
-                    {
-                        StartCoroutine(beginSummon());
-                        _startSummon = true;
-                    }
+                    _Order = Boss_Order.Back;
+                    _isRunning = false;
+                    return;
                 }
 
                 int random = UnityEngine.Random.Range(1, 100);
@@ -290,6 +306,10 @@ public class Boss : MonoBehaviour, ICharacterAction
             }
             else if (_Order == Boss_Order.Back)
             {
+                _stunIndicator.SetActive(false);
+                _poisonIndicator.SetActive(false);
+                stunParticle.Stop();
+                animator.speed = 1.0f;
                 _Agent.isStopped = false;
 
                 if(!_isRunning)
@@ -312,13 +332,36 @@ public class Boss : MonoBehaviour, ICharacterAction
             }
             else if(_Order == Boss_Order.Waiting)
             {
-                gameObject.GetComponent<CapsuleCollider>().enabled = false;
-                _waitingBehaviour = true;
-                if(!_startSummon)
+                stunParticle.Stop();
+                if (!_waitingBehaviour)
                 {
-                    StartCoroutine(beginSummon());
-                    _startSummon = true;
+                    gameObject.GetComponent<CapsuleCollider>().enabled = false;
+                    _waitingBehaviour = true;
+                    if (!_startSummon)
+                    {
+                        ServiceLocator.Get<UIManager>().LockTimer(false);
+                        ServiceLocator.Get<UIManager>().StartTimer();
+                        StartCoroutine(beginSummon());
+                        _startSummon = true;
+                    }
                 }
+                else
+                {
+                    if (!_waitingBehaviour2 && !_startSummon)
+                    {
+                        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+                        _waitingBehaviour2 = true;
+                        _startSummon = false;
+                        if (!_startSummon)
+                        {
+                            ServiceLocator.Get<UIManager>().LockTimer(false);
+                            ServiceLocator.Get<UIManager>().StartTimer();
+                            StartCoroutine(beginSummon());
+                            _startSummon = true;
+                        }
+                    }
+                }
+
             }
 
             timer += Time.deltaTime;
@@ -648,46 +691,43 @@ public class Boss : MonoBehaviour, ICharacterAction
         GameObject BossSpawner = GameObject.Find("BigRaccoon");
         Allspawners.Remove(BossSpawner);
 
-        if (_Next > 0)
+        foreach (GameObject obj in Allspawners)
         {
-            foreach (GameObject obj in Allspawners)
-            {
-                obj.GetComponent<EnemySpawner>().ResetSpawner();
-                obj.GetComponent<EnemySpawner>().StartSpawner();
-            }
+            obj.GetComponent<EnemySpawner>().ResetSpawner();
+            obj.GetComponent<EnemySpawner>().StartSpawner();
+            _HowManySpawn += obj.GetComponent<EnemySpawner>()._numberOfWave;
         }
-        else
+        int ani = 0;
+        while (current < _HowManySpawn)
         {
-            foreach (GameObject obj in Allspawners)
+            current = 0;
+            foreach (var s in Allspawners)
             {
-                obj.GetComponent<EnemySpawner>().ResetSpawner();
-                obj.GetComponent<EnemySpawner>().StartSpawner();
-                _HowManySpawn += obj.GetComponent<EnemySpawner>()._numberOfWave;
+                current += s.GetComponent<EnemySpawner>()._currentWave;
             }
-
-            while (current < _HowManySpawn)
+            if (animator && ani < 10)
+                animator.SetTrigger("Ultimate");
+            else
             {
-                current = 0;
-                foreach (var s in Allspawners)
+                if(!_isRunning)
                 {
-                    current += s.GetComponent<EnemySpawner>()._currentWave;
+                    _isRunning = true;
+                    animator.SetTrigger("Idle");
                 }
-                if (current == _HowManySpawn) break;
-                yield return new WaitForSeconds(1.0f);
             }
-            Activate();
+            ani++;
+            if (current == _HowManySpawn) break;
+            yield return new WaitForSeconds(1.0f);
         }
-        yield return null;
-    }
-
-    public void Activate()
-    {
         current = 0;
-        _Agent.isStopped = true;
+        _Agent.isStopped = false;
+        _isRunning = false;
         _Order = Boss_Order.Move;
         _startSummon = false;
+        _HowManySpawn = 0;
+        ServiceLocator.Get<UIManager>().LockTimer(true);
         gameObject.GetComponent<CapsuleCollider>().enabled = true;
-        _Next++;
+        yield return null;
     }
 
     public void Recycle(GameObject obj)

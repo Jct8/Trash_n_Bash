@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
     Image image;
 
     private float _TowerHP;
-    private bool IsPower = false;
+    private bool _IsBoss = false;
     public float maximumTimer;
     public float currentTimer = 0.0f;
 
@@ -215,8 +215,8 @@ public class UIManager : MonoBehaviour
             UpdateTowerHealth(tower.GetComponent<Tower>().fullHealth);
         }
 
-
-        StartTimer();
+        if(SceneManager.GetSceneByName("Level5").isLoaded == false)
+            StartTimer();
         yield return null;
     }
 
@@ -233,12 +233,21 @@ public class UIManager : MonoBehaviour
                 break;
             if (ServiceLocator.Get<LevelManager>().CheckWinCondition() || ServiceLocator.Get<LevelManager>().CheckLoseCondition())
                 break;
+            if (_IsBoss)
+                break;
             yield return new WaitForSeconds(1.0f);
             currentTimer += 1.0f;
             waveTimerBar.fillAmount = currentTimer / maximumTimer;
 
         }
         currentTimer = 0.0f;
+    }
+
+    public void LockTimer(bool locks)
+    {
+        _IsBoss = locks;
+        currentTimer = 0;
+        waveTimerBar.fillAmount = 0;
     }
 
     public void UpdatePlayerHealth(float curr, float max)

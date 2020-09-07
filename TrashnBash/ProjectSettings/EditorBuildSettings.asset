@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CutScene.unity
     guid: 953ee55d5dfbe734f892e1c35c285755
+  - enabled: 1
+    path: Assets/Scenes/TopTen.unity
+    guid: 4305513a988c1914087edf6a1a93d6ec
+  - enabled: 1
+    path: Assets/Scenes/PlayerInfo.unity
+    guid: f0e32b18416379847b6be4f9d8fb73aa
   m_configObjects: {}

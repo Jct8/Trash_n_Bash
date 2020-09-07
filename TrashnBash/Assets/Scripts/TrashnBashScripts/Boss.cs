@@ -103,6 +103,7 @@ public class Boss : MonoBehaviour, ICharacterAction
     public Rigidbody rigid;
     public Action killed;
     private Action OnRecycle;
+    public int score = 0;
     IEnemyAbilities enemyAbilities;
     ICharacterSound characterSound;
 
@@ -708,6 +709,7 @@ public class Boss : MonoBehaviour, ICharacterAction
         _Agent.isStopped = true;
         healthBarGO.SetActive(false);
         ServiceLocator.Get<LevelManager>().IncreaseEnemyDeathCount(1);
+        ServiceLocator.Get<LevelManager>().IncreaseScore(score);
         yield return new WaitForSeconds(3.0f);
         killed?.Invoke();
         yield return null;

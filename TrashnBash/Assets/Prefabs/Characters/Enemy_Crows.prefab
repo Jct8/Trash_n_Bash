@@ -1044,6 +1044,7 @@ MonoBehaviour:
   _waitForsecondOfCrows: 1
   _AmountofTrash: 1
   rigid: {fileID: 0}
+  score: 300
 --- !u!114 &-8864193881277896758
 MonoBehaviour:
   m_ObjectHideFlags: 0

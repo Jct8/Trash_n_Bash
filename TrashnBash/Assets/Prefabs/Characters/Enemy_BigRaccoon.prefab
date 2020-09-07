@@ -920,10 +920,8 @@ MonoBehaviour:
   _TotalPoisonSkillTime: 3
   _stunSkillRange: 3
   _stunSkillTime: 2
-  GroupOfWaveSpawnerName: EnemiesWave1
-  FirstWaveSpawnerName: 1
-  SecondWaveSpawnerName: 2
   rigid: {fileID: 2115016952094743300}
+  score: 5000
 --- !u!136 &4648773549935324169
 CapsuleCollider:
   m_ObjectHideFlags: 0

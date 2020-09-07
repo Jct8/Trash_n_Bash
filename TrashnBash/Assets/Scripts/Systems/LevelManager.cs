@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     public int levelNumber;
     public int enemyDeathCount;
+    public int score = 0;
 
     public float playerHealth = 100.0f;
     public float towerHealth = 100.0f;
@@ -75,7 +76,12 @@ public class LevelManager : MonoBehaviour
     public void IncreaseEnemyDeathCount(int increment)
     {
         enemyDeathCount += increment;
-        //Debug.Log("Enemy Death Count:" + enemyDeathCount);
+    }
+
+    public void IncreaseScore(int increment)
+    {
+        score += increment;
+        ServiceLocator.Get<UIManager>().UpdateScoreBar(score);
     }
 
     public bool CheckLoseCondition()

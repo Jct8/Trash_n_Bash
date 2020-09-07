@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     public GameObject repairButton;
     public GameObject placeButton;
     public GameObject timerObject;
+    public GameObject scoreBar;
 
     public EndScreen endPanel;
 
@@ -251,4 +252,8 @@ public class UIManager : MonoBehaviour
         towerHealthPercentage.text = curr.ToString();
     }
 
+    public void UpdateScoreBar(int score)
+    {
+        scoreBar.transform.Find("Text").gameObject.GetComponent<Text>().text = score.ToString();
+    }
 }

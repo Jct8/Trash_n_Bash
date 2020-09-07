@@ -950,6 +950,7 @@ MonoBehaviour:
   _waitForsecondOfCrows: 1
   _AmountofTrash: 1
   rigid: {fileID: 0}
+  score: 250
 --- !u!114 &1772315475092756036
 MonoBehaviour:
   m_ObjectHideFlags: 0

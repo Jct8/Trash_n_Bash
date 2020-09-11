@@ -277,6 +277,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 683832743309785042, guid: 8a6385b1c4110e544a2794d6c3a5b243,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 0ed8740462304214380f6e71422e4f91,
+        type: 3}
+    - target: {fileID: 683832743309785042, guid: 8a6385b1c4110e544a2794d6c3a5b243,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144081727453185014, guid: 8a6385b1c4110e544a2794d6c3a5b243,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 0ed8740462304214380f6e71422e4f91,
+        type: 3}
     - target: {fileID: 3941574931967863278, guid: 8a6385b1c4110e544a2794d6c3a5b243,
         type: 3}
       propertyPath: objectsToPool.Array.data[6].prefab

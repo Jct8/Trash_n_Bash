@@ -2765,7 +2765,7 @@ PrefabInstance:
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: _enemiesPerWave
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -6561,7 +6561,7 @@ PrefabInstance:
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: _secondBetweenWave
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -7226,7 +7226,7 @@ PrefabInstance:
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: _enemiesPerWave
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -7696,7 +7696,7 @@ PrefabInstance:
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: _enemiesPerWave
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
@@ -9153,7 +9153,7 @@ PrefabInstance:
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}
       propertyPath: _enemiesPerWave
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874883553848340576, guid: b299041bea6e7d446951287b352d9ba5,
         type: 3}

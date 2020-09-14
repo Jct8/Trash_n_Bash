@@ -13,18 +13,18 @@ public class ButtonSound : MonoBehaviour
     void PlaySound()
     {
         AudioManager audioManager = ServiceLocator.Get<AudioManager>();
-        audioManager.PlaySfx(sound);
+        audioManager?.PlaySfx(sound);
     }
 
     public void ButtonUP()
     {
         AudioManager audioManager = ServiceLocator.Get<AudioManager>();
-        audioManager.PlaySfx(buttonUp);
+        audioManager?.PlaySfx(buttonUp);
     }
 
     public void ButtonDown()
     {
         AudioManager audioManager = ServiceLocator.Get<AudioManager>();
-        audioManager.PlaySfx(buttonDown);
+        audioManager?.PlaySfx(buttonDown);
     }
 }

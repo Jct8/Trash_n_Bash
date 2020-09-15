@@ -44,8 +44,19 @@ public class PlayerMongo
     public List<MatchMongo> matches;
 }
 
+[Serializable]
 public class MatchDuration
 {
     public DateTime FromDate;
     public DateTime ToDate;
 }
+
+[Serializable]
+public class TopTenMatch
+{
+    public string player_nickname;
+    public int level_number;
+    public double score;
+    public DateTime date;
+}
+

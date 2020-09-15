@@ -51,7 +51,7 @@ public class DatabaseConnection : MonoBehaviour
         return null;
     }
 
-    public string GetCurretPlayerMatches<T>(T playerId)
+    public string GetCurrentPlayerMatches<T>(T playerId)
     {
         string uri = matchConnection + playerId;
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
@@ -59,11 +59,12 @@ public class DatabaseConnection : MonoBehaviour
             webRequest.SendWebRequest();
             while (!webRequest.isDone) { }
             if (webRequest.error != null)
+            {
                 Debug.Log(uri + " Error: " + webRequest.error);
+            }
             else
             {
                 //Debug.Log(uri + " Received: " + webRequest.downloadHandler.text);
-                //Debug.Log(jsonResponse);
                 string jsonResponse = webRequest.downloadHandler.text;
                 return jsonResponse;
             }
@@ -94,29 +95,47 @@ public class DatabaseConnection : MonoBehaviour
 
     }
 
-    public void DeletePlayer<T>(T playerId)
+    public void DeleteAllMatches(int playerId)
     {
-        string uri = playerConnection + playerId;
+        string uri = matchConnection + playerId;
+
         UnityWebRequest webRequest = UnityWebRequest.Delete(uri);
         webRequest.SendWebRequest();
         while (!webRequest.isDone) { }
+
         if (webRequest.isNetworkError)
-        {
             Debug.Log(uri + " Error: " + webRequest.error);
-        }
         else
-        {
             Debug.Log(uri + " Deleted");
-        }
     }
 
-    public string GetTopTenMatches<T>(MatchDuration matchDuration)
+    public void DeletePlayer<T>(T playerId)
     {
-        string uri = playerConnection + "FromDate=" + matchDuration.FromDate + "ToData=" + matchDuration.ToDate;
+        string uri = playerConnection + playerId;
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        UnityWebRequest webRequest = UnityWebRequest.Delete(uri);
+        webRequest.SendWebRequest();
+        while (!webRequest.isDone) { }
+
+        if (webRequest.isNetworkError)
+            Debug.Log(uri + " Error: " + webRequest.error);
+        else
+            Debug.Log(uri + " Deleted");
+    }
+
+    public string GetTopTenMatches(MatchDuration matchDuration)
+    {
+        string uri = matchConnection+"10";
+        string jsonData = JsonConvert.SerializeObject(matchDuration);
+
+        using (UnityWebRequest webRequest = new UnityWebRequest(uri, "PUT"))
         {
+            byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+            webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+            webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            webRequest.SetRequestHeader("Content-Type", "application/json");
             webRequest.SendWebRequest();
+
             while (!webRequest.isDone) { }
             if(webRequest.isNetworkError)
             {
@@ -125,17 +144,31 @@ public class DatabaseConnection : MonoBehaviour
             else
             {
                 Debug.Log(uri + " Received: " + webRequest.downloadHandler.text);
-
-                MatchMongo matchesMongo = JsonUtility.FromJson<MatchMongo>("{\"matches\":" + webRequest.downloadHandler.text + "}");
-                MatchSQL matchesSQL = JsonUtility.FromJson<MatchSQL>("{\"matches\":" + webRequest.downloadHandler.text + "}");
-
-                foreach(var match in matchesMongo)
-                {
-
-                }
+                return webRequest.downloadHandler.text;
             }
         }
+        return null;
+    }
 
-            return null;
+    public void CreateMatch(string jsonData, string playerId = "")
+    {
+        string uri = matchConnection + playerId;
+        using (UnityWebRequest webRequest = new UnityWebRequest(uri, "POST"))
+        {
+            byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+            webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+            webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            webRequest.SetRequestHeader("Content-Type", "application/json");
+            webRequest.SendWebRequest();
+            while (!webRequest.isDone) { }
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log(uri + " Error: " + webRequest.error);
+            }
+            else
+            {
+                Debug.Log(uri + " Received: " + webRequest.downloadHandler.text);
+            }
+        }
     }
 }

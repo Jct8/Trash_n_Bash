@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,10 +26,11 @@ public class PlayerInfoMenuMongo : MonoBehaviour
     public GameObject matchContent;
     public GameObject matchTextPrefab;
 
-    private PlayerMongo currentPlayer;
+    public PlayerMongo currentPlayer;
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         loginHolder.SetActive(true);
         infoHolder.SetActive(false);
         loginButton.onClick.AddListener(LogIn);
@@ -61,16 +63,30 @@ public class PlayerInfoMenuMongo : MonoBehaviour
 
     public void DeletePlayer()
     {
-        // delete currentPlayer
-        string jsonData = JsonUtility.ToJson(currentPlayer);
-        DatabaseConnection.Instance.DeletePlayer(jsonData);
+        DatabaseConnection.Instance.DeletePlayer(currentPlayer.Id);
+        currentPlayer = null;
+        loginHolder.SetActive(true);
+        infoHolder.SetActive(false);
+        DisplayPlayerInfo();
+        DisplayMatches();
+        playerLoginName.text = "";
     }
 
     public void UpdatePlayer()
     {
-        // Update currentPlayer with currentPlayer.Id from textfields
-        string jsonData = JsonUtility.ToJson(currentPlayer);
-        DatabaseConnection.Instance.UpdatePlayer(jsonData, currentPlayer.player_id);
+        string[] myDOB = dobText.text.Split('-');
+        int year = int.Parse(myDOB[0]);
+        int month = int.Parse(myDOB[1]);
+        int day = int.Parse(myDOB[2]);
+
+        currentPlayer.first_name = firstNameText.text;
+        currentPlayer.last_name = lastNameText.text;
+        currentPlayer.date_of_birth = new DateTime(year, month,day);
+        currentPlayer.email= email.text;
+        currentPlayer.nickname= nickName.text;
+        currentPlayer.opt_in = optInDropDown.value == 1 ? true : false;
+        string jsonData = JsonConvert.SerializeObject(currentPlayer);
+        DatabaseConnection.Instance.UpdatePlayer(jsonData, currentPlayer.Id);
     }
 
     void DisplayPlayerInfo()
@@ -107,6 +123,11 @@ public class PlayerInfoMenuMongo : MonoBehaviour
                 counter += 1.0f;
                 go.GetComponent<Text>().text = "level: "+ match.level_number.ToString() +" score:"+ match.score.ToString() +" date: "+ match.date.ToShortDateString();
             }
+        }
+        else
+        {
+            foreach (Transform child in matchContent.transform)
+                GameObject.Destroy(child.gameObject);
         }
     }
 }

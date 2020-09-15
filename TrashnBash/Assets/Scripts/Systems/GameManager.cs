@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -202,9 +203,52 @@ public class GameManager : MonoBehaviour
         ServiceLocator.Get<UIManager>().endPanel.gameObject.SetActive(true);
         yield return null;
     }
+    int GetLevelNumber()
+    {
+        string current = SceneManager.GetActiveScene().name;
+        switch (current)
+        {
+            case "Level1":
+                return 1;
+            case "Level2":
+                return 2;
+            case "Level3":
+                return 3;
+            case "Level4":
+                return 4;
+            case "Level5":
+                return 5;
+            default:
+                return 1;
+        }
+    }
+
+    public void SaveScore()
+    {
+        var mongoInstance = FindObjectOfType<PlayerInfoMenuMongo>()?.GetComponent<PlayerInfoMenuMongo>();
+        var mySqlInstance = FindObjectOfType<PlayerInfoMenuSQL>()?.GetComponent<PlayerInfoMenuSQL>();
+        var levelManager = ServiceLocator.Get<LevelManager>();
+        if (mongoInstance)
+        {
+            if (mongoInstance.currentPlayer == null)
+                return;
+            MatchMongo match = new MatchMongo(GetLevelNumber(), levelManager.score,System.DateTime.Now);
+            string jsonData = JsonConvert.SerializeObject(match);
+            DatabaseConnection.Instance.CreateMatch(jsonData, mongoInstance.currentPlayer.Id);
+        }
+        else if(mySqlInstance)
+        {
+            if (mySqlInstance.currentPlayer == null)
+                return;
+            MatchSQL match = new MatchSQL(1,mySqlInstance.currentPlayer.player_id,GetLevelNumber(), levelManager.score, System.DateTime.Now);
+            string jsonData = JsonConvert.SerializeObject(match);
+            DatabaseConnection.Instance.CreateMatch(jsonData, "");
+        }
+    }
 
     public void SetGameOver()
     {
+        SaveScore();
         Time.timeScale = 1.0f;
         ServiceLocator.Get<UIManager>().endPanel.gameObject.SetActive(false);
         _GameState = GameState.MainMenu;
@@ -213,6 +257,7 @@ public class GameManager : MonoBehaviour
 
     public void SetGameWin()
     {
+        SaveScore();
         Time.timeScale = 1.0f;
         ServiceLocator.Get<UIManager>().endPanel.gameObject.SetActive(false);
 

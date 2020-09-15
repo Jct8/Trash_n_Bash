@@ -654,6 +654,15 @@ MonoBehaviour:
   matchContent: {fileID: 401891807}
   matchTextPrefab: {fileID: 9008580252726189988, guid: 78a859119e188ba41a578b37d04f1ec4,
     type: 3}
+  currentPlayer:
+    Id: 
+    player_id: 0
+    first_name: 
+    last_name: 
+    email: 
+    nickname: 
+    opt_in: 0
+    matches: []
 --- !u!4 &107661292
 Transform:
   m_ObjectHideFlags: 0
@@ -1412,7 +1421,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 151399256}
   m_HandleRect: {fileID: 151399255}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4124,6 +4133,13 @@ MonoBehaviour:
   matchContent: {fileID: 401891807}
   matchTextPrefab: {fileID: 9008580252726189988, guid: 78a859119e188ba41a578b37d04f1ec4,
     type: 3}
+  currentPlayer:
+    player_id: 0
+    first_name: 
+    last_name: 
+    email: 
+    nickname: 
+    opt_in: 0
 --- !u!4 &1376055800
 Transform:
   m_ObjectHideFlags: 0
@@ -5007,8 +5023,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 151399256}
   m_HandleRect: {fileID: 151399255}
   m_Direction: 2
-  m_Value: 1.0000007
-  m_Size: 0.9046418
+  m_Value: 1
+  m_Size: 0.90464175
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

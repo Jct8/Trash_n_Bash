@@ -62,6 +62,9 @@ public class PlayerInfoMenuSQL : MonoBehaviour
     public void DeletePlayer()
     {
         // delete currentPlayer matches first then currentPlayer
+        string jsonData = JsonUtility.ToJson(currentPlayer);
+        
+        DatabaseConnection.Instance.DeletePlayer(currentPlayer.player_id);
     }
 
     public void UpdatePlayer()

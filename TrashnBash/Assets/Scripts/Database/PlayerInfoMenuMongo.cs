@@ -62,6 +62,8 @@ public class PlayerInfoMenuMongo : MonoBehaviour
     public void DeletePlayer()
     {
         // delete currentPlayer
+        string jsonData = JsonUtility.ToJson(currentPlayer);
+        DatabaseConnection.Instance.DeletePlayer(jsonData);
     }
 
     public void UpdatePlayer()

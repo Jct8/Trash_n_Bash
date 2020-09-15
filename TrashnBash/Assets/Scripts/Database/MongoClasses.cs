@@ -5,29 +5,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class MatchSQL
+public class MatchMongo
 {
-    public MatchSQL(int match_id, int player_id, int level_number, double score, DateTime date)
+    public MatchMongo(int level_number, double score, DateTime date)
     {
-        this.match_id = match_id;
-        this.player_id = player_id;
         this.level_number = level_number;
         this.score = score;
         this.date = date;
     }
-
-    public int match_id;
-    public int player_id;
     public int level_number;
     public double score;
     public DateTime date;
 }
 
 [Serializable]
-public class PlayerSQL
+public class PlayerMongo
 {
-    public PlayerSQL(int playerId, string firstName, string lastName, DateTime dob, string email,string nickname,bool optIn)
+    public PlayerMongo(string id,int playerId, string firstName, string lastName, DateTime dob, string email, string nickname, bool optIn, List<MatchMongo> matches)
     {
+        Id = id;
         player_id = playerId;
         first_name = firstName;
         last_name = lastName;
@@ -35,8 +31,9 @@ public class PlayerSQL
         this.email = email;
         this.nickname = nickname;
         opt_in = optIn;
+        this.matches = matches;
     }
-
+    public string Id;
     public int player_id;
     public string first_name;
     public string last_name;
@@ -44,5 +41,11 @@ public class PlayerSQL
     public string email;
     public string nickname;
     public bool opt_in;
+    public List<MatchMongo> matches;
 }
 
+public class MatchDuration
+{
+    public DateTime FromDate;
+    public DateTime ToDate;
+}

@@ -31,9 +31,7 @@ public class DatabaseConnection : MonoBehaviour
     private string playerConnection = "http://localhost:5000/api/Player/";
     private string matchConnection = "http://localhost:5000/api/Match/";
 
-    public PlayerSQL currentPlayer;
-
-    public bool Login(string playerNickName)
+    public string GetAllPlayers()
     {
         string uri = playerConnection;
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
@@ -47,25 +45,15 @@ public class DatabaseConnection : MonoBehaviour
                 //Debug.Log(uri + " Received: " + webRequest.downloadHandler.text);
                 //Debug.Log(jsonResponse);
                 string jsonResponse = webRequest.downloadHandler.text;
-                List<PlayerSQL> players = JsonConvert.DeserializeObject<List<PlayerSQL>>(jsonResponse);
-                foreach (var player in players)
-                {
-                    if (player.nickname == playerNickName)
-                    {
-                        currentPlayer = player;
-                        return true;
-                    }
-                }
+                return jsonResponse;
             }
         }
-        return false;
+        return null;
     }
 
-    public List<MatchSQL> GetCurretPlayerMatches()
+    public string GetCurretPlayerMatches<T>(T playerId)
     {
-        if (currentPlayer == null)
-            return null;
-        string uri = matchConnection + currentPlayer.player_id;
+        string uri = matchConnection + playerId;
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
             webRequest.SendWebRequest();
@@ -77,11 +65,24 @@ public class DatabaseConnection : MonoBehaviour
                 //Debug.Log(uri + " Received: " + webRequest.downloadHandler.text);
                 //Debug.Log(jsonResponse);
                 string jsonResponse = webRequest.downloadHandler.text;
-                List<MatchSQL> matches = JsonConvert.DeserializeObject<List<MatchSQL>>(jsonResponse);
-                return matches;
+                return jsonResponse;
             }
         }
         return null;
     }
 
+    public void UpdatePlayer<T>(string jsonData, T playerId)
+    {
+        
+    }
+
+    public void DeletePlayer<T>(T playerId)
+    {
+
+    }
+
+    public string GetTopTenMatches<T>(MatchDuration matchDuration)
+    {
+        return null;
+    }
 }

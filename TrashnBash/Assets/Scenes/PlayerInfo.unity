@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 35825410}
   - component: {fileID: 35825409}
   m_Layer: 5
-  m_Name: DeleteInfo
+  m_Name: DeleteInfoBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 39542235}
   - component: {fileID: 39542234}
   m_Layer: 5
-  m_Name: UpdateInfo
+  m_Name: UpdateInfoBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -610,6 +610,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!1 &107661290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 107661292}
+  - component: {fileID: 107661291}
+  m_Layer: 0
+  m_Name: MongoDB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &107661291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107661290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77a56aa0b2079945ac42b3bc6c279f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginButton: {fileID: 1145101330}
+  updateButton: {fileID: 39542231}
+  deleteButton: {fileID: 35825412}
+  playerLoginName: {fileID: 1787016157}
+  loginHolder: {fileID: 466505288}
+  infoHolder: {fileID: 1790548578}
+  firstNameText: {fileID: 2035577924}
+  lastNameText: {fileID: 1988868796}
+  dobText: {fileID: 1259006746}
+  email: {fileID: 1991210167}
+  nickName: {fileID: 2071311617}
+  optInDropDown: {fileID: 2100461301}
+  matchContent: {fileID: 401891807}
+  matchTextPrefab: {fileID: 9008580252726189988, guid: 78a859119e188ba41a578b37d04f1ec4,
+    type: 3}
+--- !u!4 &107661292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107661290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 538.7552, y: 253.50443, z: -1990.9584}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &116524713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,7 +2845,7 @@ GameObject:
   - component: {fileID: 1145101328}
   - component: {fileID: 1145101327}
   m_Layer: 5
-  m_Name: DeleteInfo (1)
+  m_Name: LogIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2932,18 +2990,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1145101331}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1603047152}
-        m_MethodName: LogIn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1145101331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3350,7 +3397,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1603047152}
+      - m_Target: {fileID: 107661291}
+        m_MethodName: BackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1376055799}
         m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
@@ -4022,6 +4080,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316191395}
   m_CullTransparentMesh: 0
+--- !u!1 &1376055798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1376055800}
+  - component: {fileID: 1376055799}
+  m_Layer: 0
+  m_Name: SqlDB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1376055799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376055798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3671883093b77fa43812053cbd15412d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginButton: {fileID: 1145101330}
+  updateButton: {fileID: 39542231}
+  deleteButton: {fileID: 35825412}
+  playerLoginName: {fileID: 1787016157}
+  loginHolder: {fileID: 466505288}
+  infoHolder: {fileID: 1790548578}
+  firstNameText: {fileID: 2035577924}
+  lastNameText: {fileID: 1988868796}
+  dobText: {fileID: 1259006746}
+  email: {fileID: 1991210167}
+  nickName: {fileID: 2071311617}
+  optInDropDown: {fileID: 2100461301}
+  matchContent: {fileID: 401891807}
+  matchTextPrefab: {fileID: 9008580252726189988, guid: 78a859119e188ba41a578b37d04f1ec4,
+    type: 3}
+--- !u!4 &1376055800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376055798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 538.7552, y: 253.50443, z: -1990.9584}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387920487
 GameObject:
   m_ObjectHideFlags: 0
@@ -4564,7 +4680,6 @@ GameObject:
   - component: {fileID: 1603047150}
   - component: {fileID: 1603047149}
   - component: {fileID: 1603047148}
-  - component: {fileID: 1603047152}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4655,30 +4770,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1603047152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603047147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3671883093b77fa43812053cbd15412d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLoginName: {fileID: 1787016157}
-  loginHolder: {fileID: 466505288}
-  infoHolder: {fileID: 1790548578}
-  firstNameText: {fileID: 2035577924}
-  lastNameText: {fileID: 1988868796}
-  dobText: {fileID: 1259006746}
-  email: {fileID: 1991210167}
-  nickName: {fileID: 2071311617}
-  optInDropDown: {fileID: 2100461301}
-  matchContent: {fileID: 401891807}
-  matchTextPrefab: {fileID: 9008580252726189988, guid: 78a859119e188ba41a578b37d04f1ec4,
-    type: 3}
 --- !u!1 &1686404323
 GameObject:
   m_ObjectHideFlags: 0

@@ -197,8 +197,8 @@ public class UIManager : MonoBehaviour
             float barHeight = waveTimerBar.GetComponent<RectTransform>().rect.height;
             float xPos = Mathf.Lerp(rectTransform.localPosition.x- barWidth / 2.0f, rectTransform.localPosition.x + barWidth/2.0f, registerSpawnTime.StartSpawnTime / maximumTimer);
             waveTimes.Add(registerSpawnTime.StartSpawnTime / maximumTimer); // used for tutorial
-            float yPos = rectTransform.anchoredPosition.y + 120.0f + (barHeight * canvas.scaleFactor);
-
+            //float yPos = rectTransform.anchoredPosition.y + 120.0f + (barHeight * canvas.scaleFactor);
+            float yPos = waveTimerBar.transform.parent.localPosition.y;
 
             signifier.transform.localPosition = new Vector3(xPos, yPos);
         }

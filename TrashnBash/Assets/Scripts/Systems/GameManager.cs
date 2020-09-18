@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
 
             }
 
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSecondsRealtime(delay);
 
             _camera.gameObject.transform.localPosition = Vector3.MoveTowards
             (_camera.gameObject.transform.localPosition,
@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
             {
                 _camera.transform.localPosition = originPos + Random.insideUnitSphere * shakeAmount;
                 current += Time.deltaTime * decreaseFactor;
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSecondsRealtime(0.01f);
             }
 
             _camera.transform.localPosition = originPos;

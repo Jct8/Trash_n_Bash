@@ -793,7 +793,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1555620793}
-  - component: {fileID: 1555620792}
   - component: {fileID: 1555620794}
   m_Layer: 0
   m_Name: Credits
@@ -802,20 +801,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1555620792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555620791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c5c40e1ddb82f04990936bdb439c256, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loseMusic: {fileID: 8300000, guid: d50e718144c76ea4482d56a5dd0491ba, type: 3}
-  returnButton: {fileID: 440794400}
 --- !u!4 &1555620793
 Transform:
   m_ObjectHideFlags: 0

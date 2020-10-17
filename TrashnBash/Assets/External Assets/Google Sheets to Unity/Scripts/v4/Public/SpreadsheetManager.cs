@@ -4,6 +4,7 @@ using GoogleSheetsToUnity;
 using GoogleSheetsToUnity.ThirdPary;
 using TinyJSON;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public delegate void OnSpreedSheetLoaded(GstuSpreadSheet sheet);
 namespace GoogleSheetsToUnity

@@ -5,7 +5,9 @@ using GoogleSheetsToUnity.Utils;
 using GreenerGames;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Scripting;
 
+[assembly: Preserve]
 namespace GoogleSheetsToUnity
 {
     /// <summary>

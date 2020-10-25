@@ -219,21 +219,21 @@ MonoBehaviour:
   rangeAfterUpgrade: 2
   damage: 5
   bulletSpeed: 15
-  MaxHealth: 100
+  MaxHealth: 50
   attackRate: 0.6
-  fullHealth: 0
+  fullHealth: 50
   shotTime: 0
   isShooting: 1
   specificEnemy: No Target
   shotSound: {fileID: 8300000, guid: 9e18503f0c21d2e4885d81e6be7970b2, type: 3}
   shotSound2: {fileID: 8300000, guid: 70b5c5caced98fc4385ee5ec7aebb93e, type: 3}
   takedamage: {fileID: 8300000, guid: 40c1dab2635d5584592d229c0a8b646d, type: 3}
-  towerHealCostValue: 30
+  towerHealCostValue: 5
   towerHealBeforeUpgrade: 30
   towerHealAfterUpgrade: 30
-  towerLostCostValue: 15
+  towerLostCostValue: 1
   minimumPlayerHealth: 70
-  lowPlayerHealthPulse: 40
+  lowPlayerHealthForPulse: 45
   minimumTowerHealth: 20
   enablePlayerRegainHealth: 1
 --- !u!82 &3174509829108607209

@@ -905,13 +905,13 @@ MonoBehaviour:
   stunTime: 0
   _DataSource: BigRaccoon
   attackEffect: {fileID: 8300000, guid: 7dcb85b534bdd41429fd985075943ec1, type: 3}
-  MaxHealth: 400
+  MaxHealth: 150
   _Name: 
-  _Attack: 2
+  _Attack: 4
   _Money: 0
-  _Speed: 1
-  _AttackCoolTime: 3
-  _enemyAttackRange: 4
+  _Speed: 2
+  _AttackCoolTime: 2
+  _enemyAttackRange: 2.5
   _totalPoisonAttackCooltime: 15
   _totalStunAttackCooltime: 30
   _PoisonSkillDamage: 2

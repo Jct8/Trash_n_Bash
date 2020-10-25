@@ -163,7 +163,7 @@ MonoBehaviour:
   spawnCoolDownTime: 15
   spawnCoolDownBeforeUpgrade: 2
   spawnCoolDownAfterUpgrade: 2
-  baseBarricadeCost: 10
+  baseBarricadeCost: 15
   costBeforeUpgrade: 2
   costAfterUpgrade: 2
 --- !u!114 &-417836177001679498

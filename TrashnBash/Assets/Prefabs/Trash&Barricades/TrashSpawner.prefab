@@ -44,7 +44,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: 1acaaf86318fa854d91d6b1aab1551cb, type: 3}
   - {fileID: 103030, guid: 8b342121ff2be5a45b964062c2ec412f, type: 3}
   healValue: 10
-  totalCoolTime: 15
+  totalCoolTime: 10
   coolTimeBeforeUpgrade: 15
   coolTimeAfterUpgrade: 15
   limit: 3

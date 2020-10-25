@@ -1101,15 +1101,15 @@ MonoBehaviour:
   stunParticle: {fileID: 8281287735616099894}
   _targetIndicator: {fileID: 0}
   _Agent: {fileID: 460433491431228598}
-  health: 0
+  health: 12
   stunTime: 0
   _DataSource: Rats
-  MaxHealth: 18
+  MaxHealth: 12
   _Name: 
-  _Attack: 2
+  _Attack: 1
   _Money: 10
-  _Speed: 4
-  _AttackCoolTime: 3
+  _Speed: 3
+  _AttackCoolTime: 1
   _ObjectDetectionRange: 3
   _DropRate: 0.5
   _enemyAttackRange: 2.5

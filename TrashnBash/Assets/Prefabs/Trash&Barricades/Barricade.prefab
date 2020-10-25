@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Defence: 100
-  health: 20
+  health: 40
   _PercentFromTower: 5
   repairTime: 3
   repairRange: 1

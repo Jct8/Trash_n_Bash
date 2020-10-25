@@ -28,6 +28,9 @@ public class VariableLoader : MonoBehaviour
         if (!_hasInternetConnection)
             useGoogleSheets = false;
 
+        //For google play store release
+        useGoogleSheets = false;
+
         if (!useGoogleSheets) return;
 
         SpreadsheetManager.ReadPublicSpreadsheet(new GSTU_Search(associatedSheet, "Enemies"), UpdateEnemies);

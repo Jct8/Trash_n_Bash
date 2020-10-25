@@ -1161,14 +1161,14 @@ MonoBehaviour:
   stunParticle: {fileID: 7517734541485582640}
   _targetIndicator: {fileID: 0}
   _Agent: {fileID: 460433491431228598}
-  health: 0
+  health: 24
   stunTime: 0
   _DataSource: Opossums
-  MaxHealth: 18
+  MaxHealth: 24
   _Name: 
-  _Attack: 2
+  _Attack: 5
   _Money: 10
-  _Speed: 3
+  _Speed: 2
   _AttackCoolTime: 3
   _ObjectDetectionRange: 3
   _DropRate: 0.5

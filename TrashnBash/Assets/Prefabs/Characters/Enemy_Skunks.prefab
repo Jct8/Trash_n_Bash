@@ -935,18 +935,18 @@ MonoBehaviour:
   stunParticle: {fileID: 2619033251014319518}
   _targetIndicator: {fileID: 0}
   _Agent: {fileID: 2790082317436283629}
-  health: 0
+  health: 34
   stunTime: 0
   _DataSource: Skunks
-  MaxHealth: 18
+  MaxHealth: 34
   _Name: 
-  _Attack: 1
+  _Attack: 9
   _Money: 12
   _Speed: 2
   _AttackCoolTime: 3
   _ObjectDetectionRange: 3
   _DropRate: 0.5
-  _enemyAttackRange: 2
+  _enemyAttackRange: 2.5
   _waitForsecondOfCrows: 1
   _AmountofTrash: 1
   rigid: {fileID: 0}
@@ -963,8 +963,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skunksPoisonTickTime: 3
-  _skunksPoisonDamage: 3
-  _skunksPoisonRange: 5
+  _skunksPoisonDamage: 9
+  _skunksPoisonRange: 2.5
   _skunksPoisonTotaltime: 3
   poisonArea: {fileID: 1623258127465319001}
   poisonParticle: {fileID: 1992569768157271540}

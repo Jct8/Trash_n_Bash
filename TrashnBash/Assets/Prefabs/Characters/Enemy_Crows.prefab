@@ -1029,15 +1029,15 @@ MonoBehaviour:
   stunParticle: {fileID: 5215711920036318263}
   _targetIndicator: {fileID: 0}
   _Agent: {fileID: 7794960624073784991}
-  health: 0
+  health: 18
   stunTime: 0
   _DataSource: Crows
   MaxHealth: 18
   _Name: 
-  _Attack: 2
+  _Attack: 3
   _Money: 10
-  _Speed: 5
-  _AttackCoolTime: 3
+  _Speed: 4
+  _AttackCoolTime: 2
   _ObjectDetectionRange: 3
   _DropRate: 0.5
   _enemyAttackRange: 2.5

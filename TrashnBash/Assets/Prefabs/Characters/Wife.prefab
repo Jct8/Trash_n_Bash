@@ -92,6 +92,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -103,6 +104,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -155,20 +157,23 @@ MonoBehaviour:
   rangeAfterUpgrade: 2
   damage: 5
   bulletSpeed: 20
-  MaxHealth: 100
+  MaxHealth: 50
   attackRate: 1
   fullHealth: 0
   shotTime: 0
   isShooting: 0
   specificEnemy: No Target
   shotSound: {fileID: 8300000, guid: f1df4a14307925f44b248c7e6ecbeadd, type: 3}
-  towerHealCostValue: 30
+  shotSound2: {fileID: 0}
+  takedamage: {fileID: 0}
+  towerHealCostValue: 5
   towerHealBeforeUpgrade: 30
   towerHealAfterUpgrade: 30
-  towerLostCostValue: 15
-  totalRegainCoolTime: 25
+  towerLostCostValue: 1
   minimumPlayerHealth: 70
+  lowPlayerHealthForPulse: 45
   minimumTowerHealth: 20
+  enablePlayerRegainHealth: 1
 --- !u!82 &8698512147066097747
 AudioSource:
   m_ObjectHideFlags: 0
@@ -586,6 +591,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -597,6 +603,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1443,6 +1450,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1454,6 +1462,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1517,16 +1526,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7018695448647599297}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 8a0c973c3dab90a469a51d2db47650f7,
-        type: 3}
-      propertyPath: m_Name
-      value: Raccoon (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 8a0c973c3dab90a469a51d2db47650f7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8a0c973c3dab90a469a51d2db47650f7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1602,6 +1601,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 44c3c6c73d3fb8c4fa0bfe8a908984d8, type: 2}
+    - target: {fileID: -927199367670048503, guid: 8a0c973c3dab90a469a51d2db47650f7,
+        type: 3}
+      propertyPath: m_Name
+      value: Raccoon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 8a0c973c3dab90a469a51d2db47650f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a0c973c3dab90a469a51d2db47650f7, type: 3}
 --- !u!4 &1491843950822020208 stripped

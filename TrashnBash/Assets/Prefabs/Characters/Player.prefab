@@ -761,7 +761,7 @@ MonoBehaviour:
   poisonDamage: 3
   poisonTotalTime: 3
   poisonTickTime: 1
-  initialPoisonAttackDamage: 3
+  initialPoisonAttackDamage: 12
   ultimateRange: 20
   ultimateDamage: 25
   ultimateTickDamage: 5
@@ -821,7 +821,7 @@ MonoBehaviour:
   moveSpeed: 7
   minMoveSpeed: 5
   maxMoveSpeed: 10
-  turnSpeed: 8
+  turnSpeed: 20.88
   acceleration: 6
   deacceleration: 100
   gravity: 1
